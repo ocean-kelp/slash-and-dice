@@ -22,3 +22,7 @@ deno task dev
 ### Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests on the GitHub repository.
+
+### Support or other requests
+
+You can reach me at my discord: `xiayunn`.
