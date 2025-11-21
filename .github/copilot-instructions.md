@@ -1,0 +1,3 @@
+- use @ for root level imports
+- use relative imports for same-folder imports
+- every route must as server side as possible unless it needs to run on client
