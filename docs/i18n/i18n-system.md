@@ -13,6 +13,7 @@ This document explains how i18n (internationalization) is implemented in this pr
 - For client-side / interactive components (islands), we maintain translation data using Preact **signals** (`useSignal`) rather than using `@elsoul/fresh-atom` as shown in the original library README.  
 - When the user switches language, we perform a full page reload to render with the new locale rather than managing reactive locale switching. This simplifies state and avoids adding unnecessary global state complexity.
 - We store the user's language preference in cookies for persistence across sessions.
+- The import name is aliased as `@i18n` in `deno.json` for easier imports.
 
 ---
 

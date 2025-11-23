@@ -4,6 +4,7 @@
     "jsr:@deno/esbuild-plugin@^1.2.0": "1.2.0",
     "jsr:@deno/loader@~0.3.2": "0.3.9",
     "jsr:@deno/loader@~0.3.3": "0.3.9",
+    "jsr:@elsoul/fresh-i18n@^1.2.0": "1.2.0",
     "jsr:@fresh/build-id@1": "1.0.1",
     "jsr:@fresh/core@2": "2.2.0",
     "jsr:@fresh/core@^2.2.0": "2.2.0",
@@ -21,6 +22,7 @@
     "jsr:@std/jsonc@^1.0.2": "1.0.2",
     "jsr:@std/media-types@^1.1.0": "1.1.0",
     "jsr:@std/path@1": "1.1.3",
+    "jsr:@std/path@1.0.6": "1.0.6",
     "jsr:@std/path@^1.1.1": "1.1.3",
     "jsr:@std/path@^1.1.2": "1.1.3",
     "jsr:@std/semver@^1.0.6": "1.0.7",
@@ -56,6 +58,12 @@
     },
     "@deno/loader@0.3.9": {
       "integrity": "703d44656f7da0fa4a4a7f8a5105b5b41320821286508c2967b4252a00a2506f"
+    },
+    "@elsoul/fresh-i18n@1.2.0": {
+      "integrity": "fe34767c245a716d7888ff46a6e2b06c70e5dd188963f51409b322f9ffa36a24",
+      "dependencies": [
+        "jsr:@std/path@1.0.6"
+      ]
     },
     "@fresh/build-id@1.0.1": {
       "integrity": "12a2ec25fd52ae9ec68c26848a5696cd1c9b537f7c983c7e56e4fb1e7e816c20",
@@ -145,6 +153,9 @@
     },
     "@std/media-types@1.1.0": {
       "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
+    },
+    "@std/path@1.0.6": {
+      "integrity": "ab2c55f902b380cf28e0eec501b4906e4c1960d13f00e11cfbcd21de15f18fed"
     },
     "@std/path@1.1.3": {
       "integrity": "b015962d82a5e6daea980c32b82d2c40142149639968549c649031a230b1afb3",
@@ -659,18 +670,6 @@
     "@prefresh/utils@1.2.1": {
       "integrity": "sha512-vq/sIuN5nYfYzvyayXI4C2QkprfNaHUQ9ZX+3xLD8nL3rWyzpxOm1+K7RtMbhd+66QcaISViK7amjnheQ/4WZw=="
     },
-    "@prefresh/vite@2.4.11_preact@10.27.2_vite@7.2.2__picomatch@4.0.3": {
-      "integrity": "sha512-/XjURQqdRiCG3NpMmWqE9kJwrg9IchIOWHzulCfqg2sRe/8oQ1g5De7xrk9lbqPIQLn7ntBkKdqWXIj4E9YXyg==",
-      "dependencies": [
-        "@babel/core",
-        "@prefresh/babel-plugin",
-        "@prefresh/core",
-        "@prefresh/utils",
-        "@rollup/pluginutils",
-        "preact",
-        "vite@7.2.2_picomatch@4.0.3"
-      ]
-    },
     "@prefresh/vite@2.4.11_preact@10.27.2_vite@7.2.2__picomatch@4.0.3_@types+node@24.2.0": {
       "integrity": "sha512-/XjURQqdRiCG3NpMmWqE9kJwrg9IchIOWHzulCfqg2sRe/8oQ1g5De7xrk9lbqPIQLn7ntBkKdqWXIj4E9YXyg==",
       "dependencies": [
@@ -680,7 +679,7 @@
         "@prefresh/utils",
         "@rollup/pluginutils",
         "preact",
-        "vite@7.2.2_picomatch@4.0.3_@types+node@24.2.0"
+        "vite"
       ]
     },
     "@rollup/pluginutils@4.2.1": {
@@ -888,22 +887,13 @@
         "@tailwindcss/oxide-win32-x64-msvc"
       ]
     },
-    "@tailwindcss/vite@4.1.17_vite@7.2.2__picomatch@4.0.3": {
-      "integrity": "sha512-4+9w8ZHOiGnpcGI6z1TVVfWaX/koK7fKeSYF3qlYg2xpBtbteP2ddBxiarL+HVgfSJGeK5RIxRQmKm4rTJJAwA==",
-      "dependencies": [
-        "@tailwindcss/node",
-        "@tailwindcss/oxide",
-        "tailwindcss",
-        "vite@7.2.2_picomatch@4.0.3"
-      ]
-    },
     "@tailwindcss/vite@4.1.17_vite@7.2.2__picomatch@4.0.3_@types+node@24.2.0": {
       "integrity": "sha512-4+9w8ZHOiGnpcGI6z1TVVfWaX/koK7fKeSYF3qlYg2xpBtbteP2ddBxiarL+HVgfSJGeK5RIxRQmKm4rTJJAwA==",
       "dependencies": [
         "@tailwindcss/node",
         "@tailwindcss/oxide",
         "tailwindcss",
-        "vite@7.2.2_picomatch@4.0.3_@types+node@24.2.0"
+        "vite"
       ]
     },
     "@types/estree@1.0.8": {
@@ -1252,21 +1242,6 @@
       ],
       "bin": true
     },
-    "vite@7.2.2_picomatch@4.0.3": {
-      "integrity": "sha512-BxAKBWmIbrDgrokdGZH1IgkIk/5mMHDreLDmCJ0qpyJaAteP8NvMhkwr/ZCQNqNH97bw/dANTE9PDzqwJghfMQ==",
-      "dependencies": [
-        "esbuild@0.25.12",
-        "fdir",
-        "picomatch@4.0.3",
-        "postcss",
-        "rollup",
-        "tinyglobby"
-      ],
-      "optionalDependencies": [
-        "fsevents"
-      ],
-      "bin": true
-    },
     "vite@7.2.2_picomatch@4.0.3_@types+node@24.2.0": {
       "integrity": "sha512-BxAKBWmIbrDgrokdGZH1IgkIk/5mMHDreLDmCJ0qpyJaAteP8NvMhkwr/ZCQNqNH97bw/dANTE9PDzqwJghfMQ==",
       "dependencies": [
@@ -1292,6 +1267,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@elsoul/fresh-i18n@^1.2.0",
       "jsr:@fresh/core@^2.2.0",
       "jsr:@fresh/plugin-vite@^1.0.8",
       "npm:@preact/signals@^2.5.0",
