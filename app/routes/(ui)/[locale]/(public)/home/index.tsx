@@ -1,6 +1,7 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/utilities/languages.ts";
+import Header from "@/components/header/Header.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
@@ -19,7 +20,6 @@ type Props = {
 };
 
 export default function Home({ data }: PageProps<Props>) {
-  
   const t = translate(data.translationData ?? {});
 
   const title = t("common.home.title");
@@ -34,12 +34,14 @@ export default function Home({ data }: PageProps<Props>) {
         <meta name="description" content={subtitle} />
       </head>
 
-      <main class="min-h-screen bg-linear-to-br from-ocean-deep-50 via-ocean-deep-100 to-white flex items-center justify-center p-6">
+      <Header />
+
+      <main class="min-h-screen pt-20 bg-linear-to-br from-ocean-deep-50 via-ocean-deep-100 to-white flex items-center justify-center p-6">
         <section class="max-w-2xl w-full bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">
-          <header class="mb-6">
+          <div class="mb-4">
             <h1 class="text-3xl font-extrabold text-ocean-deep-700">{title}</h1>
             <p class="mt-2 text-gray-600">{subtitle}</p>
-          </header>
+          </div>
 
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <p class="text-sm text-gray-500">{notice}</p>

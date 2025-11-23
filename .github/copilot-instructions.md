@@ -172,3 +172,17 @@ export default function Home({ data }: PageProps<{ translationData?: Record<stri
 #### Accessing translation data
 
 - The translations are stored at /locale, there is a folder per locale and under each locale folder there jsons, the base ones: `common.json`, `metadata.json`, and `error.json` and other namespace jsons that match route or component names. If the translated text is not being shown on the page then check that the code is calling the correct key, for example `t("common.title")` to get the title from `common.json`, do not use `t("title")` as it will not find the key.
+
+### Static assets
+
+- Files placed under `app/static/` are served by the Fresh static handler and should be referenced from templates as if they live at the site root (for example `/logos/DS-logo.webp`), not with a `/static/` prefix. Copilot and contributors should assume the static folder is already mounted at the expected public path when writing HTML/JSX. Example:
+
+```tsx
+// ✅ correct
+<img src="/logos/DS-logo.webp" alt="DS logo" />
+
+// ❌ avoid
+<img src="/static/logos/DS-logo.webp" alt="DS logo" />
+```
+
+- If your project customizes the static mount point, follow that configuration; otherwise default to root paths. If you need to reference files via special query-mounts (for example `?logos` in some environments), prefer the project's convention — but don't hardcode `/static/...` paths in components or routes.
