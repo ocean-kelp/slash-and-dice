@@ -1,4 +1,5 @@
 import { define as defineRoute } from "@/utils.ts";
+import { PageProps } from "fresh";
 import { translate } from "@/utilities/languages.ts";
 
 export const handler = defineRoute.handlers({
@@ -17,14 +18,14 @@ type Props = {
   translationData?: Record<string, unknown>;
 };
 
-export default function Home(props: Props) {
-  const data = props.translationData ?? {};
-  const t = translate(data);
+export default function Home({ data }: PageProps<Props>) {
+  console.log(data);
+  const t = translate(data.translationData ?? {});
 
-  const title = t("home.title") || "Welcome";
-  const subtitle = t("home.subtitle") || "A small playground";
-  const cta = t("home.cta") || "Get started";
-  const notice = t("home.notice") || "Temporary page";
+  const title = t("common.home.title");
+  const subtitle = t("common.home.subtitle");
+  const cta = t("common.home.cta");
+  const notice = t("common.home.notice");
 
   return (
     <>

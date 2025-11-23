@@ -151,10 +151,6 @@ Example:
   and islands.
 - Check the `islands/layouts/StateShareLayer.tsx` for the shape of the shared
   state and how translation data flows to islands.
- - Note: this project stores translation state under `state.i18n` (see
-   `app/utils.ts` — `i18n: TranslationState`). Use `state.i18n.translationData`
-   and `state.i18n.locale` when you need to access translation data in server
-   or island code.
 
 ## Troubleshooting
 

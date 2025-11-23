@@ -8,12 +8,14 @@ export const app = new App<State>();
 // static files
 app.use(staticFiles());
 
-// Include file-system based routes here
-app.fsRoutes();
-
-// i18n plugin
+// i18n plugin - register before loading fsRoutes so it can attach translation
+// data to `ctx.state` for all routes. The plugin needs to be in the middleware
+// chain prior to route registration.
 app.use(i18nPlugin({
     languages: LANGUAGES,
-    defaultLanguage: 'en',
-    localesDir: './locales',
+    defaultLanguage: "en",
+    localesDir: "./locales",
 }));
+
+// Include file-system based routes here (after plugins/middleware)
+app.fsRoutes();

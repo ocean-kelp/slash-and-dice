@@ -86,8 +86,13 @@ export const handler = define.handlers({
   },
 });
 
-export default function Home(props) {
-  const t = translate(props.translationData);
+// Prefer using Fresh's `PageProps<T>` typing and destructuring `data` for
+// route components. This ensures TypeScript knows the shape of `data` that
+// the handler returned and keeps server/handler contract explicit.
+import { PageProps } from "fresh";
+
+export default function Home({ data }: PageProps<{ translationData?: Record<string, unknown> }>) {
+  const t = translate(data?.translationData ?? {});
   return (
     <div>
       {t("common.title")} // Home or ホーム
@@ -116,7 +121,7 @@ export default function MyIsland({ translationData }) {
 
 ### Errors to avoid
 
-- Relative redirects without a base (Fresh / new URL)
+#### Relative redirects without a base (Fresh / new URL)
 
   - The problem: calling `Response.redirect` with a path-only string can trigger
     Fresh (or internal code) to call `new URL("/es/error")` with no base URL,
@@ -147,3 +152,23 @@ export default function MyIsland({ translationData }) {
 
   - Short rationale: `new URL(path, base)` ensures the URL constructor has a base
     and prevents runtime failures when the platform calls `new URL()` internally.
+
+#### PageProps in route components
+
+- Prefer using Fresh's `PageProps<T>` typing and destructuring `{ data }` in route components to avoid reading the wrong props shape. Handlers return values under `data` (for example `{ data: { translationData } }`) and components should use the typed signature below to avoid missing translation data at runtime:
+
+```tsx
+import { PageProps } from "fresh";
+
+export default function Home({ data }: PageProps<{ translationData?: Record<string, unknown> }>) {
+  const t = translate(data?.translationData ?? {});
+  return <div>{t("common.title")}</div>;
+}
+```
+
+  - Rationale: Destructuring `data` with `PageProps<T>` makes the handler/component contract explicit and prevents subtle bugs where `props.translationData` is undefined while `props.data.translationData` contains the translations.
+
+
+#### Accessing translation data
+
+- The translations are stored at /locale, there is a folder per locale and under each locale folder there jsons, the base ones: `common.json`, `metadata.json`, and `error.json` and other namespace jsons that match route or component names. If the translated text is not being shown on the page then check that the code is calling the correct key, for example `t("common.title")` to get the title from `common.json`, do not use `t("title")` as it will not find the key.
