@@ -19,7 +19,7 @@ type Props = {
 };
 
 export default function Home({ data }: PageProps<Props>) {
-  console.log(data);
+  
   const t = translate(data.translationData ?? {});
 
   const title = t("common.home.title");
