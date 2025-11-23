@@ -1,1 +1,1 @@
-export { default } from "./(ui)/(home)/home.tsx";
+export { default } from "./(ui)/[locale]/(protected)/(home)/home.tsx";
