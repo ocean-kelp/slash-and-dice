@@ -1,6 +1,7 @@
 import HomeButton from "./HomeButton.tsx";
 import UserProfile from "./UserProfile.tsx";
 import Logo from "./Logo.tsx";
+import SearchBar from "@/islands/header/SearchBar.tsx";
 
 type Props = {
   user?: {
@@ -12,68 +13,39 @@ type Props = {
 export default function Header({ user }: Props) {
   return (
     <>
-        <div class="fixed top-0 left-0 right-0 z-50 bg-white">
-            <div class="relative w-full mx-auto px-4 sm:px-6 lg:px-8">
-
-            <header class="flex items-center gap-4 h-20">
-                {/* left: logo */}
-                <div class="flex items-center shrink-0">
-                <Logo />
-                </div>
-
-                {/* middle: search (mock) - grows to take available space */}
-                <div class="flex-1">
-                <div class="max-w-[40vw]">
-                    <label class="sr-only">Search</label>
-                    <div class="relative">
-                    <input
-                        type="text"
-                        placeholder="Search (mock)"
-                        class="w-full border border-gray-200 rounded-[99999px] py-2 px-3 pl-10 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-ocean-deep-200"
-                    />
-                    <div class="absolute left-3 top-0 bottom-0 flex items-center pointer-events-none text-gray-400">
-                        <svg
-                        class="w-4 h-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden
-                        >
-                        <path
-                            d="M21 21l-4.35-4.35"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                        <circle
-                            cx="11"
-                            cy="11"
-                            r="6"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                        />
-                        </svg>
-                    </div>
-                    </div>
-                </div>
-                </div>
-
-                {/* small gap then HomeButton and finally user profile at right */}
-                <div class="flex items-center gap-4 ml-4">
-
-                <HomeButton />
-
-                <div class="pr-2">
-                    <UserProfile user={user} />
-                </div>
-
-                </div>
-
-            </header>
-
+      <div class="fixed top-0 left-0 right-0 z-50 bg-white">
+        <div class="relative w-full mx-auto px-6 sm:px-8 lg:px-10">
+          <header class="flex items-center gap-4 h-20">
+            {/* left: logo */}
+            <div class="flex items-center shrink-0">
+              <Logo />
             </div>
+
+            {/* spacer: let logo and right-side items align naturally. The search is positioned absolutely below so it stays centered on screen. */}
+            <div class="flex-1" />
+
+            {/* small gap then HomeButton and finally user profile at right */}
+            <div class="flex items-center gap-10 ml-8">
+              <HomeButton />
+
+              <div class="pr-2">
+                <UserProfile user={user} />
+              </div>
+            </div>
+          </header>
+
+          {
+            /* Centered search overlay: absolutely center within the relative container above.
+              Use pointer-events-none on the overlay so it doesn't block clicks to header elements,
+              and enable pointer-events-auto on the search wrapper so the input remains interactive. */
+          }
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-full max-w-[90%] md:max-w-[40vw] pointer-events-auto">
+              <SearchBar />
+            </div>
+          </div>
         </div>
+      </div>
     </>
   );
 }

@@ -3,7 +3,7 @@ export default function HomeButton() {
     <a
       href="/"
       aria-label="Home"
-      class="w-10 h-10 md:w-11 md:h-11 rounded-full border border-gray-800 bg-transparent flex items-center justify-center text-gray-800 hover:bg-gray-900/10 transition transform duration-200 hover:scale-105 focus:outline-none"
+      class="w-10 h-10 md:w-11 md:h-11 rounded-full border border-gray-300 bg-transparent flex items-center justify-center text-gray-700 hover:bg-gray-100 transition transform duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ocean-deep-100"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
