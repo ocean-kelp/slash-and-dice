@@ -1,7 +1,6 @@
-import { define } from "../../../utils.ts";
+import { define } from "@/utils.ts";
 
-export default define.page(function Home(ctx) {
-  console.log("Shared value " + ctx.state.shared);
+export default define.page(function Home(_ctx) {
 
   return (
     <div class="px-4 py-8 mx-auto fresh-gradient min-h-screen">

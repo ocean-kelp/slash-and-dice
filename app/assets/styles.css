@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+@theme {
+  --color-grey-olive-50:   #f3f2f1;
+  --color-grey-olive-100:  #e7e5e4;
+  --color-grey-olive-200:  #cfcbc9;
+  --color-grey-olive-300:  #b7b1ae;
+  --color-grey-olive-400:  #9f9793;
+  --color-grey-olive-500:  #877d78;
+  --color-grey-olive-600:  #6c6460;
+  --color-grey-olive-700:  #514b48;
+  --color-grey-olive-800:  #363230;
+  --color-grey-olive-900:  #1b1918;
+  --color-grey-olive-950:  #131211;
+
+  --color-alice-blue-50:   #e7f4fd;
+  --color-alice-blue-100:  #cfe9fc;
+  --color-alice-blue-200:  #a0d3f8;
+  --color-alice-blue-300:  #70bef5;
+  --color-alice-blue-400:  #40a8f2;
+  --color-alice-blue-500:  #1192ee;
+  --color-alice-blue-600:  #0d75bf;
+  --color-alice-blue-700:  #0a588f;
+  --color-alice-blue-800:  #073a5f;
+  --color-alice-blue-900:  #031d30;
+  --color-alice-blue-950:  #021421;
+
+  --color-ocean-deep-50:   #e6f3ff;
+  --color-ocean-deep-100:  #cde7fe;
+  --color-ocean-deep-200:  #9acffe;
+  --color-ocean-deep-300:  #68b7fd;
+  --color-ocean-deep-400:  #35a0fd;
+  --color-ocean-deep-500:  #0388fc;
+  --color-ocean-deep-600:  #026dca;
+  --color-ocean-deep-700:  #025197;
+  --color-ocean-deep-800:  #013665;
+  --color-ocean-deep-900:  #011b32;
+  --color-ocean-deep-950:  #001323;
+
+  --color-vintage-grape-50:  #f5eff4;
+  --color-vintage-grape-100: #ebe0ea;
+  --color-vintage-grape-200: #d7c1d4;
+  --color-vintage-grape-300: #c3a2bf;
+  --color-vintage-grape-400: #af83a9;
+  --color-vintage-grape-500: #9c6394;
+  --color-vintage-grape-600: #7c5076;
+  --color-vintage-grape-700: #5d3c59;
+  --color-vintage-grape-800: #3e283b;
+  --color-vintage-grape-900: #1f141e;
+  --color-vintage-grape-950: #160e15;
+
+  --color-carbon-black-50:  #f1f3f4;
+  --color-carbon-black-100: #e3e7e8;
+  --color-carbon-black-200: #c7cfd1;
+  --color-carbon-black-300: #abb8ba;
+  --color-carbon-black-400: #8fa0a3;
+  --color-carbon-black-500: #73888c;
+  --color-carbon-black-600: #5c6d70;
+  --color-carbon-black-700: #455254;
+  --color-carbon-black-800: #2e3638;
+  --color-carbon-black-900: #171b1c;
+  --color-carbon-black-950: #101314;
+}
