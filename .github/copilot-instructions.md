@@ -33,3 +33,5 @@
 - When updating the `i18nPlugin` languages list in `main.ts` you must add the locale slug to the `languages` array to enable detection and routing for that locale.
 - If translations are used inside islands (client-interactive components), ensure translation data is shared via the `StateShareLayer` or follow the pattern in `docs/i18n/i18n-system.md`.
 - Keep changes small
+
+- This project stores translation state under `state.i18n` (see `app/utils.ts` for the canonical `State` with `i18n: TranslationState`). Access translations via `state.i18n.translationData` and the current locale via `state.i18n.locale`. Ensure islands and server routes use the `StateShareLayer`/shared State that includes `i18n`.

@@ -2,17 +2,27 @@
 
 ## Purpose
 
-This document explains how i18n (internationalization) is implemented in this project using `@elsoul/fresh-i18n`, and describes our custom adjustments. It serves as a guide for developers on how translation files, locale detection, and language switching work in our app.
+This document explains how i18n (internationalization) is implemented in this
+project using `@elsoul/fresh-i18n`, and describes our custom adjustments. It
+serves as a guide for developers on how translation files, locale detection, and
+language switching work in our app.
 
 ---
 
 ## Overview of Approach
 
-- We use `@elsoul/fresh-i18n` as our core i18n plugin for Fresh v2. :contentReference[oaicite:0]{index=0}  
-- We support locale detection based on URL prefix, falling back to default language when necessary.  
-- For client-side / interactive components (islands), we maintain translation data using Preact **signals** (`useSignal`) rather than using `@elsoul/fresh-atom` as shown in the original library README.  
-- When the user switches language, we perform a full page reload to render with the new locale rather than managing reactive locale switching. This simplifies state and avoids adding unnecessary global state complexity.
-- We store the user's language preference in cookies for persistence across sessions.
+- We use `@elsoul/fresh-i18n` as our core i18n plugin for Fresh v2.
+  :contentReference[oaicite:0]{index=0}
+- We support locale detection based on URL prefix, falling back to default
+  language when necessary.
+- For client-side / interactive components (islands), we maintain translation
+  data using Preact **signals** (`useSignal`) rather than using
+  `@elsoul/fresh-atom` as shown in the original library README.
+- When the user switches language, we perform a full page reload to render with
+  the new locale rather than managing reactive locale switching. This simplifies
+  state and avoids adding unnecessary global state complexity.
+- We store the user's language preference in cookies for persistence across
+  sessions.
 - The import name is aliased as `@i18n` in `deno.json` for easier imports.
 
 ---
@@ -45,13 +55,13 @@ experience.
 ##### Install via JSR
 
 ```typescript
-import { i18nPlugin } from 'jsr:@elsoul/fresh-i18n'
+import { i18nPlugin } from "jsr:@elsoul/fresh-i18n";
 ```
 
 ##### Install via Deno Land
 
 ```typescript
-import { i18nPlugin } from 'https://deno.land/x/fresh_i18n/mod.ts'
+import { i18nPlugin } from "https://deno.land/x/fresh_i18n/mod.ts";
 ```
 
 #### Usage
@@ -63,29 +73,50 @@ locale, and translation directory. This setup automatically detects the
 preferred locale based on the URL.
 
 ```typescript
-import { App, fsRoutes, staticFiles, trailingSlashes } from 'fresh'
-import { i18nPlugin } from 'fresh-i18n'
-import type { ExtendedState } from '@/utils/state.ts'
+import { App, fsRoutes, staticFiles, trailingSlashes } from "fresh";
+import { i18nPlugin } from "fresh-i18n";
+import type { ExtendedState } from "@/utils/state.ts";
 
 export const app = new App<ExtendedState>({
   root: import.meta.url,
 })
   .use(staticFiles())
-  .use(trailingSlashes('never'))
+  .use(trailingSlashes("never"))
   .use(i18nPlugin({
-    languages: ['en', 'ja'],
-    defaultLanguage: 'en',
-    localesDir: './locales',
-  }))
+    languages: ["en", "ja"],
+    defaultLanguage: "en",
+    localesDir: "./locales",
+  }));
 
 await fsRoutes(app, {
   loadIsland: (path) => import(`./islands/${path}`),
   loadRoute: (path) => import(`./routes/${path}`),
-})
+});
 
 if (import.meta.main) {
-  await app.listen()
+  await app.listen();
 }
+```
+
+###### Project-specific App setup (with `i18n` namespacing)
+
+If you prefer to keep translation state inside a namespace `i18n` on
+`ctx.state`, then use the `State` interface exported from `app/utils.ts` and
+initialize `App` with it like:
+
+```typescript
+import type { State } from "@/utils/state.ts";
+
+export const app = new App<State>({
+  root: import.meta.url,
+})
+  .use(staticFiles())
+  .use(trailingSlashes("never"))
+  .use(i18nPlugin({
+    languages: ["en", "ja"],
+    defaultLanguage: "en",
+    localesDir: "./locales",
+  }));
 ```
 
 ###### Define an Extended State with TranslationState
@@ -107,22 +138,50 @@ ExtendedState can then be used in request handlers to access translation data
 directly via ctx.state.t, enabling SSR with localized data.
 
 ```typescript
-import { createDefine } from 'fresh'
-import type { TranslationState } from 'fresh-i18n'
+import { createDefine } from "fresh";
+import type { TranslationState } from "fresh-i18n";
 
 interface State {
-  title?: string
-  theme?: string
-  description?: string
-  ogImage?: string
-  noIndex?: boolean
+  title?: string;
+  theme?: string;
+  description?: string;
+  ogImage?: string;
+  noIndex?: boolean;
 }
 
-export type ExtendedState = State & TranslationState
+export type ExtendedState = State & TranslationState;
 
-export const define = createDefine<ExtendedState>()
+export const define = createDefine<ExtendedState>();
 ```
 
+###### Project-specific approach: namespace translation state under `i18n`
+
+In this repository, we prefer to namespace translation-related state under a
+single `i18n` property on `ctx.state`. This helps avoid accidental property name
+collisions and keeps translation data grouped and easily identifiable in the
+shared state.
+
+Add the translation state into your `State` interface like this:
+
+```typescript
+import { createDefine } from "fresh";
+import type { TranslationState } from "@i18n";
+
+// This example matches the approach used in `app/utils.ts`.
+interface State {
+  shared?: string;
+  // i18n namespace contains fields from TranslationState
+  i18n: TranslationState;
+}
+
+export const define = createDefine<State>();
+```
+
+With this approach the translation data lives under
+`ctx.state.i18n.translationData`, and the current locale is
+`ctx.state.i18n.locale`.
+
+```
 ###### Create [locale] Directory on routes
 
 Update Routing Structure to Include [locale] Folder Important: The [locale]
@@ -131,16 +190,12 @@ be placed inside the [locale] directory to handle language prefixes in URLs
 effectively.
 
 Directory Structure Your routes directory should look like this:
-
-```
-routes/
-├── [locale]/
-│   ├── index.tsx
-│   ├── about.tsx
-│   ├── contact.tsx
-│   └── ...other routes
 ```
 
+routes/ ├── [locale]/ │ ├── index.tsx │ ├── about.tsx │ ├── contact.tsx │ └──
+...other routes
+
+````
 ##### Step 2: Create Locale JSON Files
 
 Inside the `locales` directory, create subfolders for each locale and organize
@@ -166,7 +221,7 @@ file does not exist, it is skipped without an error, ensuring flexibility.
   "welcome": "Welcome",
   "title": "Home"
 }
-```
+````
 
 ###### Example: `locales/ja/common.json`
 
@@ -180,24 +235,32 @@ file does not exist, it is skipped without an error, ensuring flexibility.
 ##### Step 3: Use Translations in Routes
 
 ```tsx
-import { define } from '@/utils/state.ts'
-import { createTranslator } from 'jsr:@elsoul/fresh-i18n'
+import { define } from "@/utils/state.ts";
+import { createTranslator } from "jsr:@elsoul/fresh-i18n";
 
 export const handler = define.handlers({
   GET(ctx) {
-    console.log('ctx', ctx.state.translationData) // Access translation data directly
-    return page()
+    // If using the default ExtendedState approach:
+    // console.log('ctx', ctx.state.translationData)
+
+    // In this project we namespace translation state under ctx.state.i18n:
+    console.log("ctx", ctx.state.i18n.translationData); // Access translation data under i18n
+    return page();
   },
-})
+});
 
 export default define.page<typeof handler>(function Home(props) {
-  const t = createTranslator(props.state.translationData)
+  // If using the default `ExtendedState` approach:
+  // const t = createTranslator(props.state.translationData)
+
+  // With project-specific `i18n` namespacing:
+  const t = createTranslator(props.state.i18n.translationData);
   return (
     <div>
-      {t('common.title')} // Home or ホーム
+      {t("common.title")} // Home or ホーム
     </div>
-  )
-})
+  );
+});
 ```
 
 ##### Step 4: Use Translation in Islands
@@ -222,22 +285,21 @@ export default function RootLayout(
 ```
 
 ```tsx:./islands/layouts/StateShareLayer.tsx
-import { type ExtendedState } from '@/utils/state.ts'
+import { type State } from '@/utils/state.ts'
 import { atom, useAtom } from 'fresh-atom'
 import { useEffect } from 'preact/hooks'
 
 type Props = {
-  state: ExtendedState
+  state: State
 }
 
-export const stateAtom = atom<ExtendedState>({
-  title: '',
-  theme: 'dark',
-  description: '',
-  ogImage: '',
-  noIndex: false,
-  locale: 'en',
-  translationData: {},
+export const stateAtom = atom<State>({
+  shared: '',
+  // i18n contains translation fields from TranslationState
+  i18n: {
+    locale: 'en',
+    translationData: {},
+  },
   path: '/',
 })
 
@@ -245,6 +307,7 @@ export default function StateShareLayer({ state }: Props) {
   const [, setState] = useAtom(stateAtom)
 
   useEffect(() => {
+    // Update the atom with the full shared state; note translations are available under state.i18n
     setState(state)
   }, [state])
 
@@ -272,7 +335,8 @@ export function useTranslation() {
    */
   const t = (key: string): string => {
     const keys = key.split('.')
-    let result: Record<string, unknown> | string = state.translationData
+    // Access nested translation data from state.i18n
+    let result: Record<string, unknown> | string = state.i18n?.translationData ?? {}
 
     for (const k of keys) {
       if (typeof result === 'object' && result !== null && k in result) {
@@ -317,13 +381,14 @@ export function useLocale() {
    * @param locale - The new locale string (e.g., 'en', 'ja').
    */
   const setLocale = (locale: string) => {
-    setState((prevState) => ({ ...prevState, locale }))
+    // Set locale inside the i18n namespace
+    setState((prevState) => ({ ...prevState, i18n: { ...(prevState.i18n ?? {}), locale } }))
 
     const newPath = `/${locale}${state.path}`
     globalThis.location.href = newPath
   }
 
-  return { locale: state.locale, setLocale }
+  return { locale: state.i18n?.locale, setLocale }
 }
 ```
 
@@ -352,21 +417,21 @@ export default function Link({ href, children, ...props }: LinkProps) {
 ###### Usage
 
 ```tsx
-import { useTranslation } from '@/hooks/i18n/useTranslation.ts'
-import { usePathname } from '@/hooks/i18n/usePathname.ts'
-import { useLocale } from '@/hooks/i18n/useLocale.ts'
+import { useTranslation } from "@/hooks/i18n/useTranslation.ts";
+import { usePathname } from "@/hooks/i18n/usePathname.ts";
+import { useLocale } from "@/hooks/i18n/useLocale.ts";
 
 export default function IslandsComponent() {
-  const t = useTranslation()
-  const path = usePathname()
-  const { locale } = useLocale()
+  const t = useTranslation();
+  const path = usePathname();
+  const { locale } = useLocale();
 
-  console.log('path', path)
-  console.log('locale', locale)
+  console.log("path", path);
+  console.log("locale", locale);
   return (
     <div>
-      {t('common.title')} // Home or ホーム
+      {t("common.title")} // Home or ホーム
     </div>
-  )
+  );
 }
 ```
