@@ -1,0 +1,20 @@
+{
+  "home": {
+    "title": "Bienvenido a Slash & Dice",
+    "subtitle": "Un espacio sencillo y lúdico — próximamente.",
+    "cta": "Comenzar",
+    "notice": "Esta es una página temporal de marcador de posición."
+  },
+  "errors": {
+    "404": {
+      "title": "Página no encontrada",
+      "message": "No pudimos encontrar esa página. Puede que haya sido movida o eliminada.",
+      "actionText": "Ir al inicio"
+    },
+    "500": {
+      "title": "Error del servidor",
+      "message": "Algo salió mal en nuestro servidor. Por favor, inténtalo de nuevo más tarde.",
+      "actionText": "Ir al inicio"
+    }
+  }
+}

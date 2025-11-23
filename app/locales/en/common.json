@@ -1,0 +1,20 @@
+{
+  "home": {
+    "title": "Welcome to Slash & Dice",
+    "subtitle": "A simple, playful playground — coming soon.",
+    "cta": "Get Started",
+    "notice": "This is a temporary placeholder page."
+  },
+  "errors": {
+    "404": {
+      "title": "Page not found",
+      "message": "We couldn't find that page. It may have been moved or removed.",
+      "actionText": "Go home"
+    },
+    "500": {
+      "title": "Server error",
+      "message": "Something went wrong on our side. Please try again later.",
+      "actionText": "Go home"
+    }
+  }
+}
