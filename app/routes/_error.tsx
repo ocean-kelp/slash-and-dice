@@ -12,6 +12,7 @@ export default function ErrorPage(props: PageProps) {
   // Log the full error details for debugging. Guard values so logs are
   // deterministic and easy to grep.
   console.error("=== ERROR PAGE CAUGHT AN ERROR ===");
+  console.error("Request URL:", props.req?.url ?? "unknown");
   console.error("Error type:", error?.constructor?.name ?? "(none)");
   console.error("Error message:", (error as Error)?.message ?? "(none)");
   console.error("Error stack:", (error as Error)?.stack ?? "(none)");

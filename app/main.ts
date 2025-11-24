@@ -1,4 +1,4 @@
-import { App, staticFiles } from "fresh";
+import { App, staticFiles, trailingSlashes } from "fresh";
 import { type State } from "./utils.ts";
 import { i18nPlugin } from '@i18n'
 import { LANGUAGES } from "./utilities/languages.ts";
@@ -19,3 +19,6 @@ app.use(i18nPlugin({
 
 // Include file-system based routes here (after plugins/middleware)
 app.fsRoutes();
+
+// Never allow trailing slashes in routes
+app.use(trailingSlashes("never"));
