@@ -1,14 +1,11 @@
 /**
- * Recursively searches for a "locales" directory starting from the current working directory
- * and moving up the directory tree.
- * @param maxDepth - Maximum depth to search up the directory tree (default: 5)
+ * Searches for a "locales" directory using multiple strategies:
+ * 1. Check common relative paths from current directory
+ * 2. Move up the directory tree and check from there
  * @returns The absolute path to the locales directory if found, null otherwise
  */
-export async function findLocalesDirectory(
-  maxDepth: number = 5,
-): Promise<string | null> {
+export async function findLocalesDirectory(): Promise<string | null> {
   let currentDir = Deno.cwd();
-  let depth = 0;
 
   console.log(`🔍 Starting locales directory search from: ${currentDir}`);
 
@@ -22,22 +19,44 @@ export async function findLocalesDirectory(
     console.log(`❌ Could not read current directory: ${error}`);
   }
 
-  while (depth < maxDepth) {
-    try {
-      const localesPath = `${currentDir}/locales`;
-      console.log(`🔍 Checking path: ${localesPath}`);
+  // Common paths to check from current directory
+  const commonPaths = [
+    "./locales", // Same directory
+    "./app/locales", // app subdirectory (most common)
+    "./src/locales", // src subdirectory
+    "../locales", // Parent directory
+    "../app/locales", // Parent's app directory
+    "../../locales", // Grandparent directory
+    "../../app/locales", // Grandparent's app directory
+    "/app/locales", // Absolute path (Docker)
+    "/app/src/app/locales", // Docker with src structure
+  ];
 
-      const stat = await Deno.stat(localesPath);
+  console.log(`🔍 Testing ${commonPaths.length} common paths...`);
+
+  for (const testPath of commonPaths) {
+    try {
+      console.log(`🔍 Checking path: ${testPath}`);
+
+      const stat = await Deno.stat(testPath);
       if (stat.isDirectory) {
-        console.log(`✅ Found locales directory at: ${localesPath}`);
-        return localesPath;
+        console.log(`✅ Found locales directory at: ${testPath}`);
+        return testPath;
       } else {
-        console.log(`❌ Path exists but is not a directory: ${localesPath}`);
+        console.log(`❌ Path exists but is not a directory: ${testPath}`);
       }
     } catch (error) {
-      console.log(`❌ Path not found: ${currentDir}/locales (${error})`);
+      console.log(`❌ Path not found: ${testPath} (${error})`);
     }
+  }
 
+  // If not found in common paths, try moving up directory tree
+  console.log(`🔍 Common paths not found, trying directory tree traversal...`);
+
+  let depth = 0;
+  const maxDepth = 3;
+
+  while (depth < maxDepth) {
     const parentDir = `${currentDir}/..`;
     if (parentDir === currentDir) {
       console.log(`📁 Reached filesystem root at: ${currentDir}`);
@@ -52,6 +71,26 @@ export async function findLocalesDirectory(
       for await (const entry of Deno.readDir(parentDir)) {
         console.log(`   ${entry.isDirectory ? "📂" : "📄"} ${entry.name}`);
       }
+
+      // Check for locales in parent and common subdirectories
+      const parentPaths = [
+        `${parentDir}/locales`,
+        `${parentDir}/app/locales`,
+        `${parentDir}/src/locales`,
+      ];
+
+      for (const testPath of parentPaths) {
+        try {
+          console.log(`🔍 Checking parent path: ${testPath}`);
+          const stat = await Deno.stat(testPath);
+          if (stat.isDirectory) {
+            console.log(`✅ Found locales directory at: ${testPath}`);
+            return testPath;
+          }
+        } catch {
+          // Not found, continue
+        }
+      }
     } catch (error) {
       console.log(`❌ Could not read parent directory: ${error}`);
     }
@@ -60,7 +99,7 @@ export async function findLocalesDirectory(
     depth++;
   }
 
-  console.log(`❌ Locales directory not found after searching ${depth} levels`);
+  console.log(`❌ Locales directory not found after exhaustive search`);
   return null; // Not found
 } /**
  * Gets the effective locales directory path, trying multiple strategies:
