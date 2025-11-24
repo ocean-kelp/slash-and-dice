@@ -1,6 +1,6 @@
 import { App, staticFiles, trailingSlashes } from "fresh";
 import { type State } from "./utils.ts";
-import { i18nPlugin } from '@i18n'
+import { i18nPlugin } from "@i18n";
 import { LANGUAGES } from "./utilities/languages.ts";
 
 export const app = new App<State>();
@@ -12,13 +12,13 @@ app.use(staticFiles());
 // data to `ctx.state` for all routes. The plugin needs to be in the middleware
 // chain prior to route registration.
 app.use(i18nPlugin({
-    languages: LANGUAGES,
-    defaultLanguage: "en",
-    localesDir: "./locales",
+  languages: LANGUAGES,
+  defaultLanguage: "en",
+  localesDir: "./locales",
 }));
+
+// Never allow trailing slashes in routes - must be before fsRoutes
+app.use(trailingSlashes("never"));
 
 // Include file-system based routes here (after plugins/middleware)
 app.fsRoutes();
-
-// Never allow trailing slashes in routes
-app.use(trailingSlashes("never"));

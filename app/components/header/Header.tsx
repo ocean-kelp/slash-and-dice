@@ -16,7 +16,19 @@ type Props = {
 export default function Header({ user, translationData }: Props) {
   const t = translate(translationData ?? {});
 
+  // Debug logging for production translation issues
+  console.log("🔤 Header component - Translation data check:");
+  console.log("Translation data received:", !!translationData);
+  console.log(
+    "Translation data keys:",
+    translationData ? Object.keys(translationData) : "none",
+  );
+  if (translationData?.common) {
+    console.log("Common keys:", Object.keys(translationData.common));
+  }
+
   const ariaLabel = t("common.header.ariaLabel");
+  console.log("🔤 Header ariaLabel result:", ariaLabel);
 
   return (
     <>

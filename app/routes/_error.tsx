@@ -9,15 +9,6 @@ export default function ErrorPage(props: PageProps) {
   // The framework will pass the thrown Error (or HttpError) in `props.error`.
   const error = props.error as Error | HttpError | undefined;
 
-  // Log the full error details for debugging. Guard values so logs are
-  // deterministic and easy to grep.
-  console.error("=== ERROR PAGE CAUGHT AN ERROR ===");
-  console.error("Request URL:", props.req?.url ?? "unknown");
-  console.error("Error type:", error?.constructor?.name ?? "(none)");
-  console.error("Error message:", (error as Error)?.message ?? "(none)");
-  console.error("Error stack:", (error as Error)?.stack ?? "(none)");
-  console.error("===================================");
-
   // If it's an HTTP error (Fresh `HttpError`) or an object with a numeric
   // `status` property, render by status code.
   const hasNumericStatus = !!(
