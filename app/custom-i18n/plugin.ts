@@ -10,7 +10,9 @@ export interface I18nOptions {
 
 async function readJsonFile(filePath: string): Promise<Record<string, string>> {
   try {
+    const absolutePath = join(Deno.cwd(), filePath);
     console.log(`🔍 Attempting to read JSON file: ${filePath}`);
+    console.log(`🔍 Absolute path: ${absolutePath}`);
     const fileInfo = await Deno.stat(filePath);
     console.log(`📁 File exists, size: ${fileInfo.size} bytes`);
 
@@ -71,16 +73,98 @@ export const i18nPlugin = (
     console.log(`🌐 i18nPlugin: Processing request for URL: ${ctx.req.url}`);
     console.log(`📍 Current working directory: ${Deno.cwd()}`);
 
+    // Test multiple possible paths for the locales directory
+    const possiblePaths = [
+      localesDir,
+      "../locales",
+      "../../locales",
+      "./app/locales",
+      "../app/locales",
+      "../../app/locales",
+      "/app/locales", // Absolute path for Docker/container environments
+      "/app/src/app/locales",
+    ];
+
+    let effectiveLocalesDir = localesDir;
+    console.log(`📂 Testing possible locales directory paths:`, possiblePaths);
+
+    for (const testPath of possiblePaths) {
+      try {
+        console.log(`🔍 Testing path: ${testPath}`);
+
+        // Check if directory exists
+        const testStat = await Deno.stat(testPath);
+        if (testStat.isDirectory) {
+          console.log(`✅ Found locales directory at: ${testPath}`);
+          effectiveLocalesDir = testPath;
+          break;
+        }
+      } catch (error) {
+        console.log(`❌ Path ${testPath} not found: ${error}`);
+      }
+    }
+
+    // If none of the paths worked, try to find it by searching up the directory tree
+    if (effectiveLocalesDir === localesDir) {
+      console.log(`🔍 Searching up directory tree for locales directory...`);
+      let searchDir = Deno.cwd();
+      let searchDepth = 0;
+      const maxSearchDepth = 5;
+
+      while (searchDepth < maxSearchDepth) {
+        const searchLocalesPath = join(searchDir, "locales");
+        console.log(`   Searching at: ${searchLocalesPath}`);
+
+        try {
+          const searchStat = await Deno.stat(searchLocalesPath);
+          if (searchStat.isDirectory) {
+            console.log(
+              `✅ Found locales directory by search at: ${searchLocalesPath}`,
+            );
+            effectiveLocalesDir = searchLocalesPath;
+            break;
+          }
+        } catch (_searchError) {
+          // Go up one level
+          const parentDir = join(searchDir, "..");
+          if (parentDir === searchDir) break; // Reached root
+          searchDir = parentDir;
+          searchDepth++;
+        }
+      }
+    }
+
+    console.log(`📁 Final effective locales directory: ${effectiveLocalesDir}`);
+
+    // Final verification
+    try {
+      const finalStat = await Deno.stat(effectiveLocalesDir);
+      if (!finalStat.isDirectory) {
+        throw new Error(`Final path is not a directory`);
+      }
+      console.log(
+        `✅ Final locales directory verified: ${effectiveLocalesDir}`,
+      );
+    } catch (finalError) {
+      console.log(
+        `❌ Final locales directory verification failed: ${finalError}`,
+      );
+      console.log(
+        `⚠️  Will attempt to load translations anyway with path: ${effectiveLocalesDir}`,
+      );
+    }
+
+    console.log(`📁 Using effective locales directory: ${effectiveLocalesDir}`);
+
     // Test the locales directory path
     try {
-      const fullLocalesPath = join(Deno.cwd(), localesDir);
+      const fullLocalesPath = join(Deno.cwd(), effectiveLocalesDir);
       console.log(`📁 Full locales path: ${fullLocalesPath}`);
       const localesStat = await Deno.stat(fullLocalesPath);
       console.log(`📁 Locales directory exists: ${localesStat.isDirectory}`);
     } catch (error) {
       console.log(`❌ Locales directory issue: ${error}`);
     }
-
     const url = new URL(ctx.req.url);
     const pathSegments = url.pathname.split("/").filter(Boolean);
     console.log(`📄 Path segments: [${pathSegments.join(", ")}]`);
@@ -116,12 +200,14 @@ export const i18nPlugin = (
 
     const loadTranslation = async (namespace: string) => {
       const filePath = join(
-        localesDir,
+        effectiveLocalesDir,
         lang || defaultLanguage,
         `${namespace}.json`,
       );
+      const absoluteFilePath = join(Deno.cwd(), filePath);
       console.log(`📚 Loading translation namespace: "${namespace}"`);
       console.log(`📄 File path: ${filePath}`);
+      console.log(`📄 Absolute file path: ${absoluteFilePath}`);
 
       const data = await readJsonFile(filePath);
       if (Object.keys(data).length > 0) {

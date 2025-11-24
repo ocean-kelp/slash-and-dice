@@ -30,6 +30,37 @@ console.log(`🌍 Environment detection:`, {
   localesDir,
 });
 
+// Test directory structure
+async function logDirectoryStructure(dir: string, depth = 0): Promise<void> {
+  if (depth > 2) return; // Limit depth to avoid too much output
+
+  try {
+    const entries = [];
+    for await (const entry of Deno.readDir(dir)) {
+      entries.push(entry);
+    }
+
+    console.log(`${"  ".repeat(depth)}📁 ${dir}/`);
+    for (const entry of entries) {
+      const indent = "  ".repeat(depth + 1);
+      if (entry.isDirectory) {
+        console.log(`${indent}📂 ${entry.name}/`);
+        if (depth < 2) {
+          await logDirectoryStructure(`${dir}/${entry.name}`, depth + 1);
+        }
+      } else {
+        console.log(`${indent}📄 ${entry.name}`);
+      }
+    }
+  } catch (error) {
+    console.log(`❌ Cannot read directory ${dir}: ${error}`);
+  }
+}
+
+// Log the current directory structure
+console.log(`\n🔍 Current directory structure:`);
+logDirectoryStructure(currentDir).catch(console.error);
+
 app.use(i18nPlugin({
   languages: LANGUAGES,
   defaultLanguage: "en",
