@@ -2,6 +2,7 @@ import { App, staticFiles, trailingSlashes } from "fresh";
 import { type State } from "./utils.ts";
 import { i18nPlugin } from "./custom-i18n/plugin.ts";
 import { LANGUAGES } from "./utilities/languages.ts";
+import { getEffectiveLocalesDir } from "./custom-i18n/locales-finder.ts";
 
 export const app = new App<State>();
 
@@ -12,13 +13,17 @@ app.use(staticFiles());
 // data to `ctx.state` for all routes. The plugin needs to be in the middleware
 // chain prior to route registration.
 
-// Find the effective locales directory path
-// The app runs from /app/src in production, so we need to go up one level
+// Find the effective locales directory path dynamically
 let effectiveLocalesDir = "./locales";
-const currentDir = Deno.cwd();
-const isProduction = currentDir.includes("/app/src");
-if (isProduction) {
-  effectiveLocalesDir = "../locales";
+
+// Try to find the locales directory using the utility function
+try {
+  const foundPath = await getEffectiveLocalesDir();
+  if (foundPath) {
+    effectiveLocalesDir = foundPath;
+  }
+} catch {
+  // Use default path if directory finding fails
 }
 
 app.use(i18nPlugin({
