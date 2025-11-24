@@ -11,6 +11,12 @@ app.use(staticFiles());
 // i18n plugin - register before loading fsRoutes so it can attach translation
 // data to `ctx.state` for all routes. The plugin needs to be in the middleware
 // chain prior to route registration.
+console.log(`🔧 Initializing i18n plugin with config:`, {
+  languages: LANGUAGES,
+  defaultLanguage: "en",
+  localesDir: "./locales",
+  currentWorkingDir: Deno.cwd(),
+});
 app.use(i18nPlugin({
   languages: LANGUAGES,
   defaultLanguage: "en",

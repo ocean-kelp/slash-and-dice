@@ -1,5 +1,5 @@
 export interface TranslationState extends Record<string, unknown> {
-  translationData: Record<string, Record<string, string>>;
+  translationData: Record<string, unknown>;
   path: string;
   locale: string;
 }
