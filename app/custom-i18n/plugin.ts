@@ -17,6 +17,13 @@ async function readJsonFile(filePath: string): Promise<Record<string, string>> {
     console.log(`📁 File exists, size: ${fileInfo.size} bytes`);
 
     const content = await Deno.readTextFile(filePath);
+
+    // Skip empty files
+    if (content.trim() === "") {
+      console.log(`⚠️  File is empty, skipping: ${filePath}`);
+      return {};
+    }
+
     console.log(`📄 File content preview: ${content.substring(0, 200)}...`);
 
     const data = JSON.parse(content) as Record<string, string>;
@@ -154,23 +161,12 @@ export const i18nPlugin = (
       );
     }
 
-    console.log(`📁 Using effective locales directory: ${effectiveLocalesDir}`);
-
-    // Test the locales directory path
-    try {
-      const fullLocalesPath = join(Deno.cwd(), effectiveLocalesDir);
-      console.log(`📁 Full locales path: ${fullLocalesPath}`);
-      const localesStat = await Deno.stat(fullLocalesPath);
-      console.log(`📁 Locales directory exists: ${localesStat.isDirectory}`);
-    } catch (error) {
-      console.log(`❌ Locales directory issue: ${error}`);
-    }
     const url = new URL(ctx.req.url);
     const pathSegments = url.pathname.split("/").filter(Boolean);
     console.log(`📄 Path segments: [${pathSegments.join(", ")}]`);
     console.log(`🌍 Supported languages: [${languages.join(", ")}]`);
     console.log(`🌍 Default language: ${defaultLanguage}`);
-    console.log(`📁 Locales directory: ${localesDir}`);
+    console.log(`📁 Effective locales directory: ${effectiveLocalesDir}`);
 
     // Detect the language from the first path segment
     let lang = languages.includes(pathSegments[0]) ? pathSegments[0] : null;
@@ -198,6 +194,33 @@ export const i18nPlugin = (
     // Use a flat structure for translation data to match what the translate function expects
     const translationData: Record<string, unknown> = {};
 
+    // Helper function to flatten nested objects
+    function flattenObject(
+      obj: Record<string, unknown>,
+      prefix = "",
+    ): Record<string, unknown> {
+      const flattened: Record<string, unknown> = {};
+
+      for (const key in obj) {
+        if (
+          obj[key] !== null && typeof obj[key] === "object" &&
+          !Array.isArray(obj[key])
+        ) {
+          Object.assign(
+            flattened,
+            flattenObject(
+              obj[key] as Record<string, unknown>,
+              `${prefix}${key}.`,
+            ),
+          );
+        } else if (typeof obj[key] === "string") {
+          flattened[`${prefix}${key}`] = obj[key];
+        }
+      }
+
+      return flattened;
+    }
+
     const loadTranslation = async (namespace: string) => {
       const filePath = join(
         effectiveLocalesDir,
@@ -211,20 +234,27 @@ export const i18nPlugin = (
 
       const data = await readJsonFile(filePath);
       if (Object.keys(data).length > 0) {
+        const flattenedData = flattenObject(data);
         console.log(
           `✅ Successfully loaded namespace "${namespace}" with ${
-            Object.keys(data).length
-          } keys`,
+            Object.keys(flattenedData).length
+          } flattened keys`,
         );
 
-        // Flatten the namespace data and prefix with namespace
-        for (const [key, value] of Object.entries(data)) {
-          const fullKey = `${namespace}.${key}`;
-          translationData[fullKey] = value;
+        // Add namespace prefix to all flattened keys
+        for (const [key, value] of Object.entries(flattenedData)) {
+          translationData[`${namespace}.${key}`] = value;
         }
 
         console.log(
-          `✅ Flattened ${Object.keys(data).length} keys into translationData`,
+          `✅ Added ${
+            Object.keys(flattenedData).length
+          } flattened keys to translationData`,
+        );
+        console.log(
+          `🔑 Sample flattened keys: [${
+            Object.keys(flattenedData).slice(0, 3).join(", ")
+          }${Object.keys(flattenedData).length > 3 ? "..." : ""}]`,
         );
       } else {
         console.log(
