@@ -96,7 +96,7 @@ export default function Home({ data }: PageProps<{ translationData?: Record<stri
   const t = translate(data?.translationData ?? {});
   return (
     <div>
-      {t("common.title")} // Home or ホーム
+      {t("common.home.title")} // Use full namespace.path format
     </div>
   );
 }
@@ -114,11 +114,41 @@ export default function MyIsland({ translationData }) {
   const t = translate(translationData);
   return (
     <div>
-      {t("common.title")} // Home or ホーム
+      {t("common.header.userOptions.openMenu")} // Always use full path with namespace
     </div>
   );
 }
 ```
+
+**Translation Key Format:**
+All translation keys must include the namespace prefix (`common.`, `error.`, etc.) followed by the full path to the translation. The translation data structure mirrors the JSON files:
+
+```json
+{
+  "common": {
+    "home": {
+      "title": "Welcome to Slash & Dice"
+    },
+    "header": {
+      "userOptions": {
+        "openMenu": "Open menu"
+      }
+    }
+  },
+  "error": {
+    "title": "Something went wrong"
+  }
+}
+```
+
+**Correct usage:**
+- ✅ `t("common.home.title")` 
+- ✅ `t("common.header.userOptions.openMenu")`
+- ✅ `t("error.title")`
+
+**Incorrect usage:**
+- ❌ `t("home.title")` (missing namespace)
+- ❌ `t("header.userOptions.openMenu")` (missing namespace)
 
 ### Errors to avoid
 
@@ -168,6 +198,13 @@ export default function Home({ data }: PageProps<{ translationData?: Record<stri
 ```
 
   - Rationale: Destructuring `data` with `PageProps<T>` makes the handler/component contract explicit and prevents subtle bugs where `props.translationData` is undefined while `props.data.translationData` contains the translations.
+
+#### Translation key validation
+
+- The `translate()` function includes built-in validation that helps identify missing translation keys during development
+- In development mode, missing keys will show as `[key.name]` in the UI and log detailed warnings to the console
+- In production, missing keys return empty strings for a clean user experience
+- Always use the full namespace path (e.g., `common.header.userOptions.openMenu`) to avoid validation errors
 
 
 #### Accessing translation data

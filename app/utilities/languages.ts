@@ -48,27 +48,20 @@ export function translate(
   return (key: string): string => {
     const keys = key.split(".");
 
-    // Special handling for zh locale keys - resolve to appropriate variant
-    if (keys[0] === "zh") {
-      const resolvedLocale = resolveChineseLocale("zh");
-      if (resolvedLocale) {
-        keys[0] = resolvedLocale;
-      }
-    }
-
     let result: Record<string, unknown> | string = translationData;
 
     for (const k of keys) {
       if (typeof result === "object" && result !== null && k in result) {
         result = result[k] as Record<string, unknown> | string;
       } else {
-        // Log warning for missing translation key
-        if (typeof window !== "undefined") {
+        // Show warnings in development (both server and client side)
+        if (import.meta.env?.DEV) {
           console.warn(`❌ Missing translation key: "${key}"`);
           console.warn(
             `   Expected structure: ${keys.join(" → ")} (missing at "${k}")`,
           );
           console.warn(`   Available keys at this level:`, Object.keys(result));
+          console.warn(`   📁 Root keys in translation data:`, Object.keys(translationData));
         }
 
         // Development: show key in UI, Production: return empty string
@@ -83,12 +76,13 @@ export function translate(
     if (typeof result === "string") {
       return result;
     } else {
-      // Log warning for non-string result
-      if (typeof window !== "undefined") {
+      // Show warnings in development (both server and client side)
+      if (import.meta.env?.DEV) {
         console.warn(
           `❌ Translation key "${key}" exists but is not a string value`,
         );
         console.warn(`   Expected: string, Got:`, typeof result, result);
+        console.warn(`   📁 Root keys in translation data:`, Object.keys(translationData));
       }
 
       // Development: show key in UI, Production: return empty string

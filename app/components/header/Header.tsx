@@ -38,7 +38,7 @@ export default function Header({ user, translationData }: Props) {
             <div class="flex items-center gap-10 ml-8">
               <HomeButton />
 
-              <div class="pr-2 flex items-center gap-2">
+              <div class="flex items-center gap-6">
                 <UserProfile user={user} translationData={translationData} />
                 <UserOptionsDropdown
                   user={user}
