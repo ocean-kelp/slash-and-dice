@@ -15,7 +15,14 @@ export const handler = defineRoute.handlers({
     );
     if (state.translationData?.common) {
       console.log("Common keys:", Object.keys(state.translationData.common));
+    } else {
+      console.log("No 'common' key found in translation data");
+      console.log(
+        "Translation data content:",
+        JSON.stringify(state.translationData, null, 2),
+      );
     }
+    console.log("Full state object keys:", Object.keys(state));
     console.log("Locale:", state.locale);
     console.log("Current path:", state.path);
 
