@@ -12,6 +12,16 @@ export async function findLocalesDirectory(
 
   console.log(`🔍 Starting locales directory search from: ${currentDir}`);
 
+  // Show current directory structure
+  try {
+    console.log(`📂 Contents of current directory (${currentDir}):`);
+    for await (const entry of Deno.readDir(currentDir)) {
+      console.log(`   ${entry.isDirectory ? "📂" : "📄"} ${entry.name}`);
+    }
+  } catch (error) {
+    console.log(`❌ Could not read current directory: ${error}`);
+  }
+
   while (depth < maxDepth) {
     try {
       const localesPath = `${currentDir}/locales`;
@@ -35,21 +45,31 @@ export async function findLocalesDirectory(
     }
 
     console.log(`📁 Moving up to parent: ${parentDir}`);
+
+    // Show parent directory structure
+    try {
+      console.log(`📂 Contents of parent directory (${parentDir}):`);
+      for await (const entry of Deno.readDir(parentDir)) {
+        console.log(`   ${entry.isDirectory ? "📂" : "📄"} ${entry.name}`);
+      }
+    } catch (error) {
+      console.log(`❌ Could not read parent directory: ${error}`);
+    }
+
     currentDir = parentDir;
     depth++;
   }
 
   console.log(`❌ Locales directory not found after searching ${depth} levels`);
   return null; // Not found
-}
-
-/**
+} /**
  * Gets the effective locales directory path, trying multiple strategies:
  * 1. Use the provided path if it exists
  * 2. Search recursively for a "locales" directory
  * @param preferredPath - The preferred path to try first
  * @returns The effective locales directory path, or null if none found
  */
+
 export async function getEffectiveLocalesDir(
   preferredPath: string = "./locales",
 ): Promise<string | null> {
