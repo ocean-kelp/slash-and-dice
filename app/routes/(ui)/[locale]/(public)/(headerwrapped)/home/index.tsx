@@ -1,6 +1,6 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/utilities/languages.ts";
+import { translate } from "@/custom-i18n/translator.ts";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {

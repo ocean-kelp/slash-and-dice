@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { translate } from "@/utilities/languages.ts";
+import { translate } from "@/custom-i18n/translator.ts";
 
 type Props = {
   user?: {

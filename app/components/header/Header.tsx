@@ -3,7 +3,7 @@ import UserProfile from "./UserProfile.tsx";
 import UserOptionsDropdown from "@/islands/header/UserOptionsDropdown.tsx";
 import Logo from "./Logo.tsx";
 import SearchBar from "@/islands/header/SearchBar.tsx";
-import { translate } from "@/utilities/languages.ts";
+import { translate } from "@/custom-i18n/translator.ts";
 
 type Props = {
   user?: {
