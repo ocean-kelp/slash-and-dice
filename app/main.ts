@@ -1,6 +1,6 @@
 import { App, staticFiles, trailingSlashes } from "fresh";
 import { type State } from "./utils.ts";
-import { i18nPlugin } from "@i18n";
+import { i18nPlugin } from "./custom-i18n/plugin.ts";
 import { LANGUAGES } from "./utilities/languages.ts";
 
 export const app = new App<State>();
