@@ -46,9 +46,8 @@ export function translate(
   translationData: Record<string, unknown>,
 ): (key: string) => string {
   return (key: string): string => {
-    
     const keys = key.split(".");
-    
+
     // Special handling for zh locale keys - resolve to appropriate variant
     if (keys[0] === "zh") {
       const resolvedLocale = resolveChineseLocale("zh");
@@ -56,17 +55,48 @@ export function translate(
         keys[0] = resolvedLocale;
       }
     }
-    
+
     let result: Record<string, unknown> | string = translationData;
 
     for (const k of keys) {
       if (typeof result === "object" && result !== null && k in result) {
         result = result[k] as Record<string, unknown> | string;
       } else {
-        return ""; // Key not found, return empty string
+        // Log warning for missing translation key
+        if (typeof window !== "undefined") {
+          console.warn(`❌ Missing translation key: "${key}"`);
+          console.warn(
+            `   Expected structure: ${keys.join(" → ")} (missing at "${k}")`,
+          );
+          console.warn(`   Available keys at this level:`, Object.keys(result));
+        }
+
+        // Development: show key in UI, Production: return empty string
+        if (import.meta.env?.DEV) {
+          return `[${key}]`;
+        } else {
+          return ""; // Clean production experience
+        }
       }
     }
 
-    return typeof result === "string" ? result : ""; // Return the result if it's a string
+    if (typeof result === "string") {
+      return result;
+    } else {
+      // Log warning for non-string result
+      if (typeof window !== "undefined") {
+        console.warn(
+          `❌ Translation key "${key}" exists but is not a string value`,
+        );
+        console.warn(`   Expected: string, Got:`, typeof result, result);
+      }
+
+      // Development: show key in UI, Production: return empty string
+      if (import.meta.env?.DEV) {
+        return `[${key}]`;
+      } else {
+        return "";
+      }
+    }
   };
 }

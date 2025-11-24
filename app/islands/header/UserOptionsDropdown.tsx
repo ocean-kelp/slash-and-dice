@@ -232,8 +232,7 @@ export default function UserOptionsDropdown({ user, translationData }: Props) {
           {!isGuest && (
             <div class="px-3 py-2 border-t border-gray-100 bg-gray-50/50 rounded-b-xl">
               <div class="text-xs text-gray-500 text-center">
-                {t("header.userOptions.signedInAs")}{" "}
-                {user?.username}
+                {t("header.userOptions.signedInAs")} {user?.username}
               </div>
             </div>
           )}

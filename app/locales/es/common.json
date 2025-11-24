@@ -5,6 +5,25 @@
     "cta": "Comenzar",
     "notice": "Esta es una página temporal de marcador de posición."
   },
+  "header": {
+    "ariaLabel": "Encabezado del sitio",
+    "userOptions": {
+      "ariaLabel": "Menú de opciones de usuario",
+      "openMenu": "Abrir menú",
+      "closeMenu": "Cerrar menú",
+      "guestTitle": "Unirse a la Comunidad",
+      "guestSubtitle": "Inicia sesión para acceder a tu perfil, guardar preferencias y conectar con otros jugadores.",
+      "welcome": "Bienvenido de nuevo",
+      "username": "Nombre de usuario",
+      "signInGoogle": "Iniciar sesión con Google",
+      "signInDiscord": "Iniciar sesión con Discord",
+      "logout": "Cerrar sesión",
+      "changeUsername": "Cambiar nombre de usuario",
+      "changeAvatar": "Cambiar avatar",
+      "help": "Ayuda y soporte",
+      "signedInAs": "Sesión iniciada como"
+    }
+  },
   "errors": {
     "404": {
       "title": "Página no encontrada",

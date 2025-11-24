@@ -26,7 +26,6 @@ export default function Header({ user, translationData }: Props) {
       >
         <div class="relative w-full mx-auto px-6 sm:px-8 lg:px-10">
           <header class="flex items-center gap-4 h-20">
-
             {/* left: logo */}
             <div class="flex items-center shrink-0">
               <Logo />

@@ -1,18 +1,13 @@
-import { PageProps } from "fresh";
 import Header from "@/components/header/Header.tsx";
+import { LayoutProps } from "@/utilities/layout.ts";
 
-import { State } from "@/utils.ts";
+export default function Layout(props: LayoutProps) {
+  // Extract essential data from layout props
+  const {
+    Component,
+    state: { translationData }
+  } = props;
 
-type Props = {
-  translationData?: Record<string, unknown>;
-};
-
-export default function Layout(
-  { Component, state }: PageProps<Props, State>,
-) {
-  // Layout provides the header once for all child routes under this folder.
-  // Pass translation data (if any) to the Header so it can render translated labels.
-  const translationData = state?.translationData;
   return (
     <>
       <Header translationData={translationData} />
@@ -22,3 +17,5 @@ export default function Layout(
     </>
   );
 }
+
+
