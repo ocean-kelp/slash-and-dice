@@ -10,39 +10,16 @@ export interface I18nOptions {
 
 async function readJsonFile(filePath: string): Promise<Record<string, string>> {
   try {
-    const absolutePath = join(Deno.cwd(), filePath);
-    console.log(`🔍 Attempting to read JSON file: ${filePath}`);
-    console.log(`🔍 Absolute path: ${absolutePath}`);
-    const fileInfo = await Deno.stat(filePath);
-    console.log(`📁 File exists, size: ${fileInfo.size} bytes`);
-
     const content = await Deno.readTextFile(filePath);
 
     // Skip empty files
     if (content.trim() === "") {
-      console.log(`⚠️  File is empty, skipping: ${filePath}`);
       return {};
     }
 
-    console.log(`📄 File content preview: ${content.substring(0, 200)}...`);
-
     const data = JSON.parse(content) as Record<string, string>;
-    console.log(
-      `✅ Successfully parsed JSON with ${Object.keys(data).length} keys`,
-    );
     return data;
-  } catch (error) {
-    console.log(`❌ Failed to read/parse JSON file: ${filePath}`);
-    console.log(`Error details: ${error}`);
-
-    // Check if file exists
-    try {
-      await Deno.stat(filePath);
-      console.log(`⚠️  File exists but parsing failed`);
-    } catch (_statError) {
-      console.log(`⚠️  File does not exist: ${filePath}`);
-    }
-
+  } catch {
     return {};
   }
 }
@@ -227,39 +204,15 @@ export const i18nPlugin = (
         lang || defaultLanguage,
         `${namespace}.json`,
       );
-      const absoluteFilePath = join(Deno.cwd(), filePath);
-      console.log(`📚 Loading translation namespace: "${namespace}"`);
-      console.log(`📄 File path: ${filePath}`);
-      console.log(`📄 Absolute file path: ${absoluteFilePath}`);
 
       const data = await readJsonFile(filePath);
       if (Object.keys(data).length > 0) {
         const flattenedData = flattenObject(data);
-        console.log(
-          `✅ Successfully loaded namespace "${namespace}" with ${
-            Object.keys(flattenedData).length
-          } flattened keys`,
-        );
 
         // Add namespace prefix to all flattened keys
         for (const [key, value] of Object.entries(flattenedData)) {
           translationData[`${namespace}.${key}`] = value;
         }
-
-        console.log(
-          `✅ Added ${
-            Object.keys(flattenedData).length
-          } flattened keys to translationData`,
-        );
-        console.log(
-          `🔑 Sample flattened keys: [${
-            Object.keys(flattenedData).slice(0, 3).join(", ")
-          }${Object.keys(flattenedData).length > 3 ? "..." : ""}]`,
-        );
-      } else {
-        console.log(
-          `❌ Failed to load namespace "${namespace}" or file was empty`,
-        );
       }
     };
 
@@ -278,26 +231,12 @@ export const i18nPlugin = (
       await loadTranslation(segment);
     }
 
-    console.log(`📊 Translation data summary:`);
-    console.log(
-      `   - Total flattened keys: ${Object.keys(translationData).length}`,
-    );
-    console.log(
-      `   - Keys preview: [${
-        Object.keys(translationData).slice(0, 5).join(", ")
-      }${Object.keys(translationData).length > 5 ? "..." : ""}]`,
-    );
-    console.log(
-      `   - Common.home.title exists: ${!!translationData[
-        "common.home.title"
-      ]}`,
-    );
-    if (translationData["common.home.title"]) {
+    // Only log if there are issues
+    if (!translationData["common.home.title"]) {
       console.log(
-        `   - Common.home.title value: "${
-          translationData["common.home.title"]
-        }"`,
+        "⚠️  Translation data loaded but common.home.title is missing",
       );
+      console.log("Available keys:", Object.keys(translationData).slice(0, 10));
     }
 
     ctx.state.translationData = translationData;

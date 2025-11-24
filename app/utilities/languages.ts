@@ -61,7 +61,22 @@ export function translate(
             `   Expected structure: ${keys.join(" → ")} (missing at "${k}")`,
           );
           console.warn(`   Available keys at this level:`, Object.keys(result));
-          console.warn(`   📁 Root keys in translation data:`, Object.keys(translationData));
+          console.warn(
+            `   📁 Root keys in translation data:`,
+            Object.keys(translationData),
+          );
+        } else {
+          // Production debugging - only for missing keys that should exist
+          if (
+            key === "common.home.title" || key === "common.header.ariaLabel"
+          ) {
+            console.log(`🔍 Production debug - Missing key: "${key}"`);
+            console.log(
+              `🔍 Available keys:`,
+              Object.keys(translationData).slice(0, 10),
+            );
+            console.log(`🔍 Key structure expected: ${keys.join(" → ")}`);
+          }
         }
 
         // Development: show key in UI, Production: return empty string
@@ -82,7 +97,17 @@ export function translate(
           `❌ Translation key "${key}" exists but is not a string value`,
         );
         console.warn(`   Expected: string, Got:`, typeof result, result);
-        console.warn(`   📁 Root keys in translation data:`, Object.keys(translationData));
+        console.warn(
+          `   📁 Root keys in translation data:`,
+          Object.keys(translationData),
+        );
+      } else if (
+        key === "common.home.title" || key === "common.header.ariaLabel"
+      ) {
+        console.log(
+          `🔍 Production debug - Key exists but not string: "${key}"`,
+        );
+        console.log(`🔍 Value type:`, typeof result, result);
       }
 
       // Development: show key in UI, Production: return empty string
