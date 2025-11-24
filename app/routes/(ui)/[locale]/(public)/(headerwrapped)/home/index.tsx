@@ -6,26 +6,6 @@ export const handler = defineRoute.handlers({
   GET(ctx) {
     const state = ctx.state;
 
-    // Debug logging for production translation issues
-    console.log("🏠 Home route handler - Translation data check:");
-    console.log("Translation data exists:", !!state.translationData);
-    console.log(
-      "Translation data keys:",
-      state.translationData ? Object.keys(state.translationData) : "none",
-    );
-    if (state.translationData?.common) {
-      console.log("Common keys:", Object.keys(state.translationData.common));
-    } else {
-      console.log("No 'common' key found in translation data");
-      console.log(
-        "Translation data content:",
-        JSON.stringify(state.translationData, null, 2),
-      );
-    }
-    console.log("Full state object keys:", Object.keys(state));
-    console.log("Locale:", state.locale);
-    console.log("Current path:", state.path);
-
     return {
       data: {
         translationData: state.translationData ?? {},

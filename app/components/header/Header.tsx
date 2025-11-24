@@ -16,29 +16,7 @@ type Props = {
 export default function Header({ user, translationData }: Props) {
   const t = translate(translationData ?? {});
 
-  // Debug logging for production translation issues
-  console.log("🔤 Header component - Translation data check:");
-  console.log("Translation data received:", !!translationData);
-  console.log(
-    "Translation data keys:",
-    translationData ? Object.keys(translationData) : "none",
-  );
-  if (translationData?.common) {
-    console.log("Common keys:", Object.keys(translationData.common));
-  } else {
-    console.log("No 'common' key found in translation data");
-    console.log(
-      "Translation data content:",
-      JSON.stringify(translationData, null, 2),
-    );
-  }
-
   const ariaLabel = t("common.header.ariaLabel");
-  console.log("🔤 Header ariaLabel result:", ariaLabel);
-  console.log(
-    "🔤 Header translation function test - common.home.title:",
-    t("common.home.title"),
-  );
 
   return (
     <>

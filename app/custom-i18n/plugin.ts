@@ -1,5 +1,5 @@
 import { join } from "@std/path";
-import { type MiddlewareFn } from "fresh";
+import { type Middleware } from "fresh";
 import type { State } from "../utils.ts";
 
 export interface I18nOptions {
@@ -20,7 +20,7 @@ async function readJsonFile(filePath: string): Promise<Record<string, string>> {
     const data = JSON.parse(content) as Record<string, string>;
     return data;
   } catch {
-    return {};
+    return {}; // Silently fail for missing files
   }
 }
 
@@ -52,121 +52,36 @@ function getPreferredLanguage(
 
 export const i18nPlugin = (
   { languages, defaultLanguage, localesDir }: I18nOptions,
-): MiddlewareFn<State> => {
+): Middleware<State> => {
   return async (ctx) => {
-    console.log(`🌐 i18nPlugin: Processing request for URL: ${ctx.req.url}`);
-    console.log(`📍 Current working directory: ${Deno.cwd()}`);
-
-    // Test multiple possible paths for the locales directory
-    const possiblePaths = [
-      localesDir,
-      "../locales",
-      "../../locales",
-      "./app/locales",
-      "../app/locales",
-      "../../app/locales",
-      "/app/locales", // Absolute path for Docker/container environments
-      "/app/src/app/locales",
-    ];
-
-    let effectiveLocalesDir = localesDir;
-    console.log(`📂 Testing possible locales directory paths:`, possiblePaths);
-
-    for (const testPath of possiblePaths) {
-      try {
-        console.log(`🔍 Testing path: ${testPath}`);
-
-        // Check if directory exists
-        const testStat = await Deno.stat(testPath);
-        if (testStat.isDirectory) {
-          console.log(`✅ Found locales directory at: ${testPath}`);
-          effectiveLocalesDir = testPath;
-          break;
-        }
-      } catch (error) {
-        console.log(`❌ Path ${testPath} not found: ${error}`);
-      }
-    }
-
-    // If none of the paths worked, try to find it by searching up the directory tree
-    if (effectiveLocalesDir === localesDir) {
-      console.log(`🔍 Searching up directory tree for locales directory...`);
-      let searchDir = Deno.cwd();
-      let searchDepth = 0;
-      const maxSearchDepth = 5;
-
-      while (searchDepth < maxSearchDepth) {
-        const searchLocalesPath = join(searchDir, "locales");
-        console.log(`   Searching at: ${searchLocalesPath}`);
-
-        try {
-          const searchStat = await Deno.stat(searchLocalesPath);
-          if (searchStat.isDirectory) {
-            console.log(
-              `✅ Found locales directory by search at: ${searchLocalesPath}`,
-            );
-            effectiveLocalesDir = searchLocalesPath;
-            break;
-          }
-        } catch (_searchError) {
-          // Go up one level
-          const parentDir = join(searchDir, "..");
-          if (parentDir === searchDir) break; // Reached root
-          searchDir = parentDir;
-          searchDepth++;
-        }
-      }
-    }
-
-    console.log(`📁 Final effective locales directory: ${effectiveLocalesDir}`);
-
     // Final verification
     try {
-      const finalStat = await Deno.stat(effectiveLocalesDir);
+      const finalStat = await Deno.stat(localesDir);
       if (!finalStat.isDirectory) {
-        throw new Error(`Final path is not a directory`);
+        throw new Error("Locales directory not found");
       }
-      console.log(
-        `✅ Final locales directory verified: ${effectiveLocalesDir}`,
-      );
-    } catch (finalError) {
-      console.log(
-        `❌ Final locales directory verification failed: ${finalError}`,
-      );
-      console.log(
-        `⚠️  Will attempt to load translations anyway with path: ${effectiveLocalesDir}`,
-      );
+    } catch {
+      console.error("❌ Could not find locales directory at:", localesDir);
+      return await ctx.next() as Response; // Skip i18n if locales not found
     }
 
     const url = new URL(ctx.req.url);
     const pathSegments = url.pathname.split("/").filter(Boolean);
-    console.log(`📄 Path segments: [${pathSegments.join(", ")}]`);
-    console.log(`🌍 Supported languages: [${languages.join(", ")}]`);
-    console.log(`🌍 Default language: ${defaultLanguage}`);
-    console.log(`📁 Effective locales directory: ${effectiveLocalesDir}`);
 
     // Detect the language from the first path segment
     let lang = languages.includes(pathSegments[0]) ? pathSegments[0] : null;
-    console.log(`🗣️  Language from URL: ${lang || "none"}`);
 
     // If no language is detected in the URL, determine the user's preferred language
     if (!lang) {
       const acceptLanguage = ctx.req.headers.get("Accept-Language") || "";
-      console.log(`🌐 Accept-Language header: ${acceptLanguage}`);
       lang = getPreferredLanguage(acceptLanguage, languages, defaultLanguage);
-      console.log(`🗣️  Detected preferred language: ${lang}`);
-
-      // NOTE: Removed redirect logic - just set the locale and continue
-      // This allows routes to work without forced language prefixes
     }
 
     // Continue processing with the detected language
     const rootPath = "/" + pathSegments.slice(1).join("/");
-    console.log(`🏠 Root path: ${rootPath}`);
 
     ctx.state.path = rootPath;
     ctx.state.locale = lang || defaultLanguage;
-    console.log(`✅ Final locale: ${ctx.state.locale}`);
 
     // Use a flat structure for translation data to match what the translate function expects
     const translationData: Record<string, unknown> = {};
@@ -200,7 +115,7 @@ export const i18nPlugin = (
 
     const loadTranslation = async (namespace: string) => {
       const filePath = join(
-        effectiveLocalesDir,
+        localesDir,
         lang || defaultLanguage,
         `${namespace}.json`,
       );
@@ -217,26 +132,12 @@ export const i18nPlugin = (
     };
 
     // Load common translations and other namespaces
-    console.log(`🔄 Starting translation loading...`);
     await loadTranslation("common");
     await loadTranslation("error");
     await loadTranslation("metadata");
 
-    console.log(
-      `🔄 Loading route-specific translations for segments: [${
-        pathSegments.slice(1).join(", ")
-      }]`,
-    );
     for (const segment of pathSegments.slice(1)) {
       await loadTranslation(segment);
-    }
-
-    // Only log if there are issues
-    if (!translationData["common.home.title"]) {
-      console.log(
-        "⚠️  Translation data loaded but common.home.title is missing",
-      );
-      console.log("Available keys:", Object.keys(translationData).slice(0, 10));
     }
 
     ctx.state.translationData = translationData;

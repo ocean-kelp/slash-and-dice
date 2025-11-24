@@ -24,13 +24,6 @@ export function translate(
             `   📁 Root keys in translation data:`,
             Object.keys(translationData),
           );
-        } else if (
-          key === "common.home.title" || key === "common.header.ariaLabel"
-        ) {
-          console.log(
-            `🔍 Production debug - Key exists but not string: "${key}"`,
-          );
-          console.log(`🔍 Value type:`, typeof value, value);
         }
 
         // Development: show key in UI, Production: return empty string
@@ -50,17 +43,6 @@ export function translate(
         `   Available keys:`,
         Object.keys(translationData),
       );
-    } else {
-      // Production debugging - only for missing keys that should exist
-      if (
-        key === "common.home.title" || key === "common.header.ariaLabel"
-      ) {
-        console.log(`🔍 Production debug - Missing key: "${key}"`);
-        console.log(
-          `🔍 Available keys:`,
-          Object.keys(translationData).slice(0, 10),
-        );
-      }
     }
 
     // Development: show key in UI, Production: return empty string
