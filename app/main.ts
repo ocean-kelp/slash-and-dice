@@ -17,10 +17,23 @@ console.log(`🔧 Initializing i18n plugin with config:`, {
   localesDir: "./locales",
   currentWorkingDir: Deno.cwd(),
 });
+
+// Determine the correct path to locales directory
+// The app runs from /app/src in production, so we need to go up one level
+const currentDir = Deno.cwd();
+const isProduction = currentDir.includes("/app/src");
+const localesDir = isProduction ? "../locales" : "./locales";
+
+console.log(`🌍 Environment detection:`, {
+  isProduction,
+  currentDir,
+  localesDir,
+});
+
 app.use(i18nPlugin({
   languages: LANGUAGES,
   defaultLanguage: "en",
-  localesDir: "./locales",
+  localesDir: localesDir,
 }));
 
 // Never allow trailing slashes in routes - must be before fsRoutes
