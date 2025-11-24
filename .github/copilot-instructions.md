@@ -44,6 +44,7 @@ export const handler = define.middleware(async (ctx) => {
 ### I18N
 
 - For now only entires for en language should be added/modified in the translation files. Other languages will be added later.
+- **Always use `t()` function calls for internationalization without fallback values** - this helps identify missing translation keys and ensures the i18n system is working properly. Never use fallback values like `t("key") || "fallback"` as this masks issues with missing translations.
 
 ### Utilities
 

@@ -6,7 +6,7 @@ export default function SearchBar() {
         <input
           type="text"
           placeholder="Search (mock)"
-          class="w-full border border-gray-200 rounded-[99999px] py-2 px-3 pl-10 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-ocean-deep-200"
+          class="w-full border border-gray-300 rounded-[99999px] py-2 px-3 pl-10 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-ocean-deep-200"
         />
         <div class="absolute left-3 top-0 bottom-0 flex items-center pointer-events-none text-gray-400">
           <svg

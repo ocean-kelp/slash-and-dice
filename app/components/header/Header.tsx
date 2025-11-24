@@ -1,21 +1,32 @@
 import HomeButton from "./HomeButton.tsx";
 import UserProfile from "./UserProfile.tsx";
+import UserOptionsDropdown from "@/islands/header/UserOptionsDropdown.tsx";
 import Logo from "./Logo.tsx";
 import SearchBar from "@/islands/header/SearchBar.tsx";
+import { translate } from "@/utilities/languages.ts";
 
 type Props = {
   user?: {
     username?: string;
     iconUrl?: string;
   };
+  translationData?: Record<string, unknown>;
 };
 
-export default function Header({ user }: Props) {
+export default function Header({ user, translationData }: Props) {
+  const t = translate(translationData ?? {});
+
+  const ariaLabel = t("common.header.ariaLabel");
+
   return (
     <>
-      <div class="fixed top-0 left-0 right-0 z-50 bg-white">
+      <div
+        class="fixed top-0 left-0 right-0 z-50 bg-white"
+        aria-label={ariaLabel}
+      >
         <div class="relative w-full mx-auto px-6 sm:px-8 lg:px-10">
           <header class="flex items-center gap-4 h-20">
+
             {/* left: logo */}
             <div class="flex items-center shrink-0">
               <Logo />
@@ -28,8 +39,12 @@ export default function Header({ user }: Props) {
             <div class="flex items-center gap-10 ml-8">
               <HomeButton />
 
-              <div class="pr-2">
-                <UserProfile user={user} />
+              <div class="pr-2 flex items-center gap-2">
+                <UserProfile user={user} translationData={translationData} />
+                <UserOptionsDropdown
+                  user={user}
+                  translationData={translationData}
+                />
               </div>
             </div>
           </header>

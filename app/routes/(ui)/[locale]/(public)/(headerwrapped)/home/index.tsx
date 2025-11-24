@@ -1,7 +1,6 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/utilities/languages.ts";
-import Header from "@/components/header/Header.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
@@ -34,9 +33,7 @@ export default function Home({ data }: PageProps<Props>) {
         <meta name="description" content={subtitle} />
       </head>
 
-      <Header />
-
-      <main class="min-h-screen pt-20 bg-linear-to-br from-ocean-deep-50 via-ocean-deep-100 to-white flex items-center justify-center p-6">
+      <main class="min-h-screen bg-linear-to-br from-ocean-deep-50 via-ocean-deep-100 to-white flex items-center justify-center p-6">
         <section class="max-w-2xl w-full bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">
           <div class="mb-4">
             <h1 class="text-3xl font-extrabold text-ocean-deep-700">{title}</h1>

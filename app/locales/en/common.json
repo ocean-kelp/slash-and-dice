@@ -5,6 +5,25 @@
     "cta": "Get Started",
     "notice": "This is a temporary placeholder page."
   },
+  "header": {
+    "ariaLabel": "Site header",
+    "userOptions": {
+      "ariaLabel": "User options menu",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "guestTitle": "Join the Community",
+      "guestSubtitle": "Sign in to access your profile, save preferences, and connect with other players.",
+      "welcome": "Welcome back",
+      "username": "Username",
+      "signInGoogle": "Sign in with Google",
+      "signInDiscord": "Sign in with Discord",
+      "logout": "Sign Out",
+      "changeUsername": "Change Username",
+      "changeAvatar": "Change Avatar",
+      "help": "Help & Support",
+      "signedInAs": "Signed in as"
+    }
+  },
   "errors": {
     "404": {
       "title": "Page not found",

@@ -1,11 +1,26 @@
+import dicebearUrl from "@/services/dicebear/dicebear.ts";
+
 type User = {
   username?: string;
   iconUrl?: string;
 };
 
-export default function UserProfile({ user }: { user?: User }) {
+type Props = {
+  user?: User;
+  translationData?: Record<string, unknown>;
+};
+
+export default function UserProfile({ user, translationData }: Props) {
+  // translationData is available for future use if needed for localized tooltips or labels
   const name = user?.username ?? "Guest";
-  const iconUrl = user?.iconUrl;
+
+  // If the user has an explicit iconUrl, use it. Otherwise, build a Dicebear
+  // avatar URL. Use the username as a stable seed when available so avatars
+  // remain consistent for known users; fall back to a short random seed for
+  // anonymous users.
+  const seed = user?.username ??
+    `anon-${Math.random().toString(36).slice(2, 9)}`;
+  const avatarUrl = user?.iconUrl ?? dicebearUrl(seed);
 
   const initials = name
     .split(" ")
@@ -16,11 +31,11 @@ export default function UserProfile({ user }: { user?: User }) {
 
   return (
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center">
-        {iconUrl
+      <div class="w-14 h-14 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center border-2 border-ocean-deep-500 shadow-sm">
+        {avatarUrl
           ? (
             <img
-              src={iconUrl}
+              src={avatarUrl}
               alt={`${name} avatar`}
               class="w-full h-full object-cover"
             />
