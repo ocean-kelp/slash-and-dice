@@ -1,5 +1,6 @@
 import { PageProps } from "fresh";
 import { State } from "@/utils.ts";
+import type { AuthProviderId } from "@/models/AuthProvider.ts";
 
 /**
  * LayoutProps - Clean interface for Fresh layout components.
@@ -8,10 +9,10 @@ import { State } from "@/utils.ts";
  * Example usage:
  * ```tsx
  * export default function Layout(props: LayoutProps) {
- *   const { Component, state: { translationData } } = props;
+ *   const { Component, state: { translationData, availableAuthProviders } } = props;
  *   return (
  *     <>
- *       <Header translationData={translationData} />
+ *       <Header translationData={translationData} availableProviders={availableAuthProviders} />
  *       <Component />
  *     </>
  *   );
@@ -102,4 +103,6 @@ export interface LayoutProps<TData = unknown> {
   currentPath?: string;
   /** State object containing app state */
   state: State;
+  /** Available auth providers based on server configuration */
+  availableAuthProviders?: AuthProviderId[];
 }

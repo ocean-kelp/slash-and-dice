@@ -1,33 +1,50 @@
 import { useState } from "preact/hooks";
 import { translate } from "@/custom-i18n/translator.ts";
-import type { AuthProvider } from "@/models/User.ts";
+import type { AuthProviderId } from "@/models/AuthProvider.ts";
 
 /** Auth provider display configuration */
 const AUTH_PROVIDER_CONFIG: Record<
-  AuthProvider,
-  { icon: string; labelKey: string }
+  AuthProviderId,
+  { icon: string; labelKey: string; bgColor: string; hoverColor: string }
 > = {
   discord: {
     icon: "/svg/discord.svg",
     labelKey: "common.header.userOptions.signInDiscord",
+    bgColor: "bg-[#5865F2]",
+    hoverColor: "hover:bg-[#4752C4]",
   },
   google: {
     icon: "/svg/google.svg",
     labelKey: "common.header.userOptions.signInGoogle",
+    bgColor: "bg-white border border-gray-300",
+    hoverColor: "hover:bg-gray-50",
   },
   kakao: {
     icon: "/svg/kakao.svg",
     labelKey: "common.header.userOptions.signInKakao",
+    bgColor: "bg-[#FEE500]",
+    hoverColor: "hover:bg-[#E6CF00]",
   },
   line: {
     icon: "/svg/line.svg",
     labelKey: "common.header.userOptions.signInLine",
+    bgColor: "bg-[#06C755]",
+    hoverColor: "hover:bg-[#05B04C]",
   },
   wechat: {
     icon: "/svg/wechat.svg",
     labelKey: "common.header.userOptions.signInWechat",
+    bgColor: "bg-[#07C160]",
+    hoverColor: "hover:bg-[#06AD56]",
   },
 };
+
+/** Get text color based on provider */
+function getTextColor(provider: AuthProviderId): string {
+  return provider === "google" || provider === "kakao"
+    ? "text-gray-800"
+    : "text-white";
+}
 
 type Props = {
   user?: {
@@ -36,7 +53,7 @@ type Props = {
   };
   translationData?: Record<string, unknown>;
   /** List of available auth providers (configured on server) */
-  availableProviders?: AuthProvider[];
+  availableProviders?: AuthProviderId[];
 };
 
 export default function UserOptionsDropdown({
@@ -50,7 +67,7 @@ export default function UserOptionsDropdown({
 
   const toggleDropdown = () => setOpen(!open);
 
-  const handleSignIn = (provider: AuthProvider) => {
+  const handleSignIn = (provider: AuthProviderId) => {
     // TODO: Integrate with Better Auth client
     // For now, redirect to the auth endpoint
     globalThis.location.href = `/api/auth/signin/${provider}`;
@@ -63,225 +80,275 @@ export default function UserOptionsDropdown({
 
   return (
     <div class="relative">
+      {/* Trigger Button */}
       <button
         type="button"
-        class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-ocean-deep-50 hover:bg-ocean-deep-100 focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2 transition-all duration-200 text-ocean-deep-700 font-medium text-sm"
+        class={`
+          inline-flex items-center gap-2 px-4 py-2.5 rounded-full
+          ${isGuest 
+            ? "bg-linear-to-r from-ocean-deep-500 to-ocean-deep-600 text-white shadow-lg shadow-ocean-deep-500/25" 
+            : "bg-ocean-deep-50 text-ocean-deep-700 border border-ocean-deep-200"
+          }
+          hover:shadow-xl hover:scale-[1.02]
+          focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2
+          transition-all duration-300 ease-out
+          font-medium text-sm
+        `}
         onClick={toggleDropdown}
         aria-expanded={open}
         aria-haspopup="menu"
         aria-label={t("common.header.userOptions.ariaLabel")}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-chevron-down"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-        <span>
-          {open
-            ? t("common.header.userOptions.closeMenu")
-            : isGuest
-            ? t("common.header.userOptions.guestTitle")
-            : t("common.header.userOptions.openMenu")}
-        </span>
+        {isGuest ? (
+          <>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </svg>
+            <span>{t("common.header.userOptions.guestTitle")}</span>
+          </>
+        ) : (
+          <>
+            {user?.iconUrl ? (
+              <img
+                src={user.iconUrl}
+                alt={user.username}
+                class="w-6 h-6 rounded-full object-cover ring-2 ring-white"
+              />
+            ) : (
+              <div class="w-6 h-6 rounded-full bg-linear-to-br from-ocean-deep-400 to-ocean-deep-600 flex items-center justify-center text-white text-xs font-bold">
+                {user?.username?.charAt(0).toUpperCase()}
+              </div>
+            )}
+            <span class="max-w-[100px] truncate">{user?.username}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </>
+        )}
       </button>
 
+      {/* Dropdown Menu */}
       {open && (
-        <div
-          class="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
-          role="menu"
-          aria-orientation="vertical"
-        >
-          <div class="p-3 border-b border-gray-100">
-            {isGuest
-              ? (
-                <div class="space-y-3">
-                  <div class="text-sm font-medium text-gray-900">
-                    {t("common.header.userOptions.guestTitle")}
+        <>
+          {/* Backdrop */}
+          <div
+            class="fixed inset-0 z-40"
+            onClick={() => setOpen(false)}
+          />
+
+          {/* Menu */}
+          <div
+            class="absolute right-0 mt-3 w-72 bg-white/95 backdrop-blur-xl border border-gray-200/50 rounded-2xl shadow-2xl shadow-gray-900/10 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200"
+            role="menu"
+            aria-orientation="vertical"
+          >
+            {isGuest ? (
+              /* Guest View - Sign In Options */
+              <div class="p-5">
+                <div class="text-center mb-5">
+                  <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-linear-to-br from-ocean-deep-100 to-ocean-deep-200 flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="text-ocean-deep-600"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
                   </div>
-                  <p class="text-xs text-gray-600 leading-relaxed">
+                  <h3 class="text-lg font-semibold text-gray-900">
+                    {t("common.header.userOptions.guestTitle")}
+                  </h3>
+                  <p class="text-sm text-gray-500 mt-1">
                     {t("common.header.userOptions.guestSubtitle")}
                   </p>
                 </div>
-              )
-              : (
-                <div class="space-y-2">
-                  <div class="text-sm font-medium text-gray-900">
-                    {t("common.header.userOptions.welcome")}
+
+                {availableProviders.length === 0 ? (
+                  <div class="text-sm text-gray-400 text-center py-4 bg-gray-50 rounded-xl">
+                    {t("common.header.userOptions.noProvidersAvailable")}
                   </div>
-                  <div class="text-xs text-gray-600">
-                    {t("common.header.userOptions.username")} {user?.username}
+                ) : (
+                  <div class="space-y-2.5">
+                    {availableProviders.map((provider) => {
+                      const config = AUTH_PROVIDER_CONFIG[provider];
+                      return (
+                        <button
+                          key={provider}
+                          type="button"
+                          class={`
+                            w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl
+                            text-sm font-semibold
+                            ${config.bgColor} ${config.hoverColor} ${getTextColor(provider)}
+                            transform active:scale-[0.98]
+                            transition-all duration-200
+                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ocean-deep-500
+                            shadow-sm hover:shadow-md
+                          `}
+                          onClick={() => handleSignIn(provider)}
+                        >
+                          <img
+                            src={config.icon}
+                            alt={provider}
+                            width="20"
+                            height="20"
+                            class="shrink-0"
+                          />
+                          <span>{t(config.labelKey)}</span>
+                        </button>
+                      );
+                    })}
                   </div>
-                </div>
-              )}
-          </div>
-
-          <div class="p-2">
-            {isGuest
-              ? (
-                <div class="space-y-2">
-                  {availableProviders.length === 0
-                    ? (
-                      <div class="text-sm text-gray-500 text-center py-2">
-                        {t("common.header.userOptions.noProvidersAvailable")}
-                      </div>
-                    )
-                    : (
-                      availableProviders.map((provider) => {
-                        const config = AUTH_PROVIDER_CONFIG[provider];
-                        return (
-                          <button
-                            key={provider}
-                            type="button"
-                            class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2"
-                            onClick={() => handleSignIn(provider)}
-                          >
-                            <img
-                              src={config.icon}
-                              alt={provider}
-                              width="16"
-                              height="16"
-                              class="shrink-0"
-                            />
-                            <span>{t(config.labelKey)}</span>
-                          </button>
-                        );
-                      })
-                    )}
-                </div>
-              )
-              : (
-                <div class="space-y-1">
-                  <button
-                    type="button"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2"
-                    onClick={handleSignOut}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="shrink-0"
-                    >
-                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                      <polyline points="16,17 21,12 16,7" />
-                      <line x1="21" y1="12" x2="9" y2="12" />
-                    </svg>
-                    <span>{t("common.header.userOptions.logout")}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="shrink-0"
-                    >
-                      <path d="M20 21v-2a4 4 0 0 0-3-3.87M4 4a4 4 0 0 1 8 0v6a4 4 0 0 1-3 3.87" />
-                      <path d="M12 18v0a7 7 0 0 1 7-7V7a7 7 0 0 0-7-7" />
-                    </svg>
-                    <span>
-                      {t("common.header.userOptions.changeUsername")}
-                    </span>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="shrink-0"
-                    >
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                      <path d="M9 11a4 4 0 1 0 8 0" />
-                      <path d="M7 19.5v.5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.5" />
-                    </svg>
-                    <span>
-                      {t("common.header.userOptions.changeAvatar")}
-                    </span>
-                  </button>
-
-                  <div class="border-t border-gray-100 my-2"></div>
-
-                  <button
-                    type="button"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="shrink-0"
-                    >
-                      <path d="M12 20h9" />
-                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-                    </svg>
-                    <span>
-                      {t("common.header.userOptions.help")}
-                    </span>
-                  </button>
-                </div>
-              )}
-          </div>
-
-          {!isGuest && (
-            <div class="px-3 py-2 border-t border-gray-100 bg-gray-50/50 rounded-b-xl">
-              <div class="text-xs text-gray-500 text-center">
-                {t("common.header.userOptions.signedInAs")} {user?.username}
+                )}
               </div>
-            </div>
-          )}
-        </div>
-      )}
+            ) : (
+              /* Logged In View */
+              <>
+                {/* User Header */}
+                <div class="p-5 bg-linear-to-br from-ocean-deep-50 to-ocean-deep-100/50">
+                  <div class="flex items-center gap-4">
+                    {user?.iconUrl ? (
+                      <img
+                        src={user.iconUrl}
+                        alt={user.username}
+                        class="w-14 h-14 rounded-full object-cover ring-4 ring-white shadow-lg"
+                      />
+                    ) : (
+                      <div class="w-14 h-14 rounded-full bg-linear-to-br from-ocean-deep-400 to-ocean-deep-600 flex items-center justify-center text-white text-xl font-bold ring-4 ring-white shadow-lg">
+                        {user?.username?.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                    <div class="flex-1 min-w-0">
+                      <p class="text-base font-semibold text-gray-900 truncate">
+                        {user?.username}
+                      </p>
+                      <p class="text-sm text-ocean-deep-600">
+                        {t("common.header.userOptions.welcome")}
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
-      {/* Overlay to close dropdown when clicking outside */}
-      {open && (
-        <div
-          class="fixed inset-0 z-40"
-          onClick={() => setOpen(false)}
-        />
+                {/* Menu Items */}
+                <div class="p-2">
+                  <MenuItem
+                    icon={
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    }
+                    label={t("common.header.userOptions.changeUsername")}
+                    onClick={(e) => e.preventDefault()}
+                  />
+                  <MenuItem
+                    icon={
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                        <circle cx="9" cy="9" r="2" />
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                      </svg>
+                    }
+                    label={t("common.header.userOptions.changeAvatar")}
+                    onClick={(e) => e.preventDefault()}
+                  />
+                  <MenuItem
+                    icon={
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                        <path d="M12 17h.01" />
+                      </svg>
+                    }
+                    label={t("common.header.userOptions.help")}
+                    onClick={(e) => e.preventDefault()}
+                  />
+
+                  <div class="my-2 mx-2 border-t border-gray-100" />
+
+                  <MenuItem
+                    icon={
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                      </svg>
+                    }
+                    label={t("common.header.userOptions.logout")}
+                    onClick={handleSignOut}
+                    variant="danger"
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </>
       )}
     </div>
+  );
+}
+
+/** Reusable menu item component */
+function MenuItem({
+  icon,
+  label,
+  onClick,
+  variant = "default",
+}: {
+  icon: preact.JSX.Element;
+  label: string;
+  onClick: (e: Event) => void;
+  variant?: "default" | "danger";
+}) {
+  return (
+    <button
+      type="button"
+      class={`
+        w-full flex items-center gap-3 px-4 py-3 rounded-xl
+        text-sm font-medium
+        transition-all duration-200
+        focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-1
+        ${variant === "danger"
+          ? "text-red-600 hover:bg-red-50 hover:text-red-700"
+          : "text-gray-700 hover:bg-gray-100"
+        }
+      `}
+      onClick={onClick}
+    >
+      <span class={variant === "danger" ? "text-red-500" : "text-gray-400"}>
+        {icon}
+      </span>
+      <span>{label}</span>
+    </button>
   );
 }

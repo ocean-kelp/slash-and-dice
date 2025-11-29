@@ -3,6 +3,7 @@ import { type State } from "./utils.ts";
 import { i18nPlugin } from "./custom-i18n/plugin.ts";
 import { LANGUAGES } from "./utilities/languages.ts";
 import { getEffectiveLocalesDir } from "./custom-i18n/locales-finder.ts";
+import { authProvidersMiddleware } from "./middlewares/auth/authProviders.ts";
 
 export const app = new App<State>();
 
@@ -31,6 +32,9 @@ app.use(i18nPlugin({
   defaultLanguage: "en",
   localesDir: effectiveLocalesDir,
 }));
+
+// Auth providers middleware - populates available OAuth providers in state
+app.use(authProvidersMiddleware);
 
 // Never allow trailing slashes in routes - must be before fsRoutes
 app.use(trailingSlashes("never"));

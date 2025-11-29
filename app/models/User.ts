@@ -1,33 +1,9 @@
-// Supported social platforms
-export type SocialPlatform =
-  | "twitter"
-  | "discord"
-  | "youtube"
-  | "twitch"
-  | "instagram"
-  | "tiktok"
-  | "github"
-  | "bluesky";
+import type { SocialAccount } from "./SocialPlatform.ts";
+import type { AuthProviderId } from "./AuthProvider.ts";
 
-// Supported OAuth providers for authentication
-export type AuthProvider =
-  | "discord"
-  | "kakao"
-  | "line"
-  | "google"
-  | "wechat";
-
-// Unified social account structure
-export interface SocialAccount {
-  /** Social platform identifier */
-  platform: SocialPlatform;
-  /** Display handle (e.g., "@john", "john#1234") */
-  username: string;
-  /** Full profile URL (optional, can be generated from platform + username) */
-  url?: string;
-  /** True if user authenticated with this provider */
-  verified?: boolean;
-}
+// Re-export for convenience
+export type { SocialAccount } from "./SocialPlatform.ts";
+export type { AuthProviderId } from "./AuthProvider.ts";
 
 // Basic User model used across the app.
 export interface User {
@@ -43,8 +19,10 @@ export interface User {
   email: string;
   /** Linked social accounts */
   socialAccounts: SocialAccount[];
-  /** OAuth provider used for signup */
-  authProvider?: AuthProvider;
+  /** OAuth provider used for signup (e.g., "line") */
+  authProviderId?: AuthProviderId;
+  /** OAuth channel used for signup (e.g., "line-jp") */
+  authChannelId?: string;
   /** Account creation timestamp */
   createdAt: Date;
   /** Last update timestamp */
@@ -71,7 +49,8 @@ export function createUser(data: {
   email: string;
   iconUrl?: string;
   socialAccounts?: SocialAccount[];
-  authProvider?: AuthProvider;
+  authProviderId?: AuthProviderId;
+  authChannelId?: string;
 }): User {
   if (!validateEmail(data.email)) {
     throw new Error("Invalid email");
@@ -86,7 +65,8 @@ export function createUser(data: {
     email: data.email,
     iconUrl: data.iconUrl,
     socialAccounts: data.socialAccounts ?? [],
-    authProvider: data.authProvider,
+    authProviderId: data.authProviderId,
+    authChannelId: data.authChannelId,
     createdAt: now,
     updatedAt: now,
   };

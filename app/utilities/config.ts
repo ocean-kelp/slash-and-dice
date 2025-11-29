@@ -1,8 +1,8 @@
 // Server-side configuration utilities
-// This file should ONLY be imported from server-side code (routes, middlewares, services)
+// This file handles environment variable access ONLY
+// For auth provider setup, see auth-providers.ts
 
 import { isClient } from "./enviroments.ts";
-import type { AuthProvider } from "@/models/User.ts";
 
 /**
  * Throws an error if called from client-side code.
@@ -44,91 +44,15 @@ export function hasEnv(key: string): boolean {
 }
 
 /**
- * Auth provider credentials - only accessible server-side
+ * Core application configuration - only env vars
  */
-export const authConfig = {
-  get secret() {
+export const appConfig = {
+  /** Better Auth secret for signing tokens */
+  get authSecret() {
     return getEnv("BETTER_AUTH_SECRET");
   },
-  get baseUrl() {
+  /** Base URL for auth callbacks */
+  get authBaseUrl() {
     return getEnv("BETTER_AUTH_URL", false) || "http://localhost:8000";
   },
-
-  discord: {
-    get clientId() {
-      return getEnv("DISCORD_CLIENT_ID");
-    },
-    get clientSecret() {
-      return getEnv("DISCORD_CLIENT_SECRET");
-    },
-    get isConfigured() {
-      return hasEnv("DISCORD_CLIENT_ID") && hasEnv("DISCORD_CLIENT_SECRET");
-    },
-  },
-
-  google: {
-    get clientId() {
-      return getEnv("GOOGLE_CLIENT_ID");
-    },
-    get clientSecret() {
-      return getEnv("GOOGLE_CLIENT_SECRET");
-    },
-    get isConfigured() {
-      return hasEnv("GOOGLE_CLIENT_ID") && hasEnv("GOOGLE_CLIENT_SECRET");
-    },
-  },
-
-  kakao: {
-    get clientId() {
-      return getEnv("KAKAO_CLIENT_ID");
-    },
-    get clientSecret() {
-      return getEnv("KAKAO_CLIENT_SECRET");
-    },
-    get isConfigured() {
-      return hasEnv("KAKAO_CLIENT_ID") && hasEnv("KAKAO_CLIENT_SECRET");
-    },
-  },
-
-  line: {
-    get clientId() {
-      return getEnv("LINE_CLIENT_ID");
-    },
-    get clientSecret() {
-      return getEnv("LINE_CLIENT_SECRET");
-    },
-    get isConfigured() {
-      return hasEnv("LINE_CLIENT_ID") && hasEnv("LINE_CLIENT_SECRET");
-    },
-  },
-
-  wechat: {
-    get clientId() {
-      return getEnv("WECHAT_CLIENT_ID");
-    },
-    get clientSecret() {
-      return getEnv("WECHAT_CLIENT_SECRET");
-    },
-    get isConfigured() {
-      return hasEnv("WECHAT_CLIENT_ID") && hasEnv("WECHAT_CLIENT_SECRET");
-    },
-  },
 };
-
-/**
- * Returns a list of configured auth providers.
- * Use this to pass to client-side components.
- */
-export function getAvailableAuthProviders(): AuthProvider[] {
-  assertServer("getAvailableAuthProviders");
-
-  const providers: AuthProvider[] = [];
-
-  if (authConfig.discord.isConfigured) providers.push("discord");
-  if (authConfig.google.isConfigured) providers.push("google");
-  if (authConfig.kakao.isConfigured) providers.push("kakao");
-  if (authConfig.line.isConfigured) providers.push("line");
-  if (authConfig.wechat.isConfigured) providers.push("wechat");
-
-  return providers;
-}
