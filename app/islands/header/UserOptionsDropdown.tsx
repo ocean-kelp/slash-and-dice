@@ -1,47 +1,43 @@
 import { useState } from "preact/hooks";
 import { translate } from "@/custom-i18n/translator.ts";
-import type { AuthProviderId } from "@/models/AuthProvider.ts";
+import type { AuthProvider, AuthProviderId } from "@/models/AuthProvider.ts";
+import { needsChannelSelection } from "@/models/AuthProvider.ts";
 
-/** Auth provider display configuration */
-const AUTH_PROVIDER_CONFIG: Record<
+/** Provider styling configuration */
+const PROVIDER_STYLES: Record<
   AuthProviderId,
-  { icon: string; labelKey: string; bgColor: string; hoverColor: string }
+  { bgColor: string; hoverColor: string; iconFilter?: string }
 > = {
   discord: {
-    icon: "/svg/discord.svg",
-    labelKey: "common.header.userOptions.signInDiscord",
     bgColor: "bg-[#5865F2]",
     hoverColor: "hover:bg-[#4752C4]",
+    iconFilter: "brightness(0) invert(1)", // Make icon white
   },
   google: {
-    icon: "/svg/google.svg",
-    labelKey: "common.header.userOptions.signInGoogle",
     bgColor: "bg-white border border-gray-300",
     hoverColor: "hover:bg-gray-50",
+    // No filter - keep original colors
   },
   kakao: {
-    icon: "/svg/kakao.svg",
-    labelKey: "common.header.userOptions.signInKakao",
     bgColor: "bg-[#FEE500]",
     hoverColor: "hover:bg-[#E6CF00]",
+    // No filter - dark icon on yellow background
   },
   line: {
-    icon: "/svg/line.svg",
-    labelKey: "common.header.userOptions.signInLine",
     bgColor: "bg-[#06C755]",
     hoverColor: "hover:bg-[#05B04C]",
+    iconFilter: "brightness(0) invert(1)", // Make icon white
   },
   wechat: {
-    icon: "/svg/wechat.svg",
-    labelKey: "common.header.userOptions.signInWechat",
     bgColor: "bg-[#07C160]",
     hoverColor: "hover:bg-[#06AD56]",
+    iconFilter: "brightness(0) invert(1)", // Make icon white
   },
 };
 
 /** Get text color based on provider */
-function getTextColor(provider: AuthProviderId): string {
-  return provider === "google" || provider === "kakao"
+function getTextColor(providerId: AuthProviderId): string {
+  return providerId === "google" || providerId === "kakao"
     ? "text-gray-800"
     : "text-white";
 }
@@ -52,8 +48,8 @@ type Props = {
     iconUrl?: string;
   };
   translationData?: Record<string, unknown>;
-  /** List of available auth providers (configured on server) */
-  availableProviders?: AuthProviderId[];
+  /** Available auth providers with their channels (from server) */
+  availableProviders?: AuthProvider[];
 };
 
 export default function UserOptionsDropdown({
@@ -62,19 +58,27 @@ export default function UserOptionsDropdown({
   availableProviders = [],
 }: Props) {
   const [open, setOpen] = useState(false);
+  const [expandedProvider, setExpandedProvider] = useState<AuthProviderId | null>(null);
   const isGuest = !user?.username;
   const t = translate(translationData ?? {});
 
   const toggleDropdown = () => setOpen(!open);
 
-  const handleSignIn = (provider: AuthProviderId) => {
-    // TODO: Integrate with Better Auth client
-    // For now, redirect to the auth endpoint
-    globalThis.location.href = `/api/auth/signin/${provider}`;
+  const handleSignIn = (provider: AuthProvider, channelId?: string) => {
+    // If provider has multiple channels and none selected, expand to show channels
+    if (needsChannelSelection(provider) && !channelId) {
+      setExpandedProvider(expandedProvider === provider.id ? null : provider.id);
+      return;
+    }
+    
+    // Redirect to auth endpoint with optional channel
+    const url = channelId 
+      ? `/api/auth/signin/${provider.id}?channel=${channelId}`
+      : `/api/auth/signin/${provider.id}`;
+    globalThis.location.href = url;
   };
 
   const handleSignOut = () => {
-    // TODO: Integrate with Better Auth client
     globalThis.location.href = "/api/auth/signout";
   };
 
@@ -201,31 +205,82 @@ export default function UserOptionsDropdown({
                 ) : (
                   <div class="space-y-2.5">
                     {availableProviders.map((provider) => {
-                      const config = AUTH_PROVIDER_CONFIG[provider];
+                      const styles = PROVIDER_STYLES[provider.id];
+                      const isExpanded = expandedProvider === provider.id;
+                      const showChannels = needsChannelSelection(provider);
+
                       return (
-                        <button
-                          key={provider}
-                          type="button"
-                          class={`
-                            w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl
-                            text-sm font-semibold
-                            ${config.bgColor} ${config.hoverColor} ${getTextColor(provider)}
-                            transform active:scale-[0.98]
-                            transition-all duration-200
-                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ocean-deep-500
-                            shadow-sm hover:shadow-md
-                          `}
-                          onClick={() => handleSignIn(provider)}
-                        >
-                          <img
-                            src={config.icon}
-                            alt={provider}
-                            width="20"
-                            height="20"
-                            class="shrink-0"
-                          />
-                          <span>{t(config.labelKey)}</span>
-                        </button>
+                        <div key={provider.id}>
+                          {/* Main provider button */}
+                          <button
+                            type="button"
+                            class={`
+                              w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl
+                              text-sm font-semibold
+                              ${styles.bgColor} ${styles.hoverColor} ${getTextColor(provider.id)}
+                              transform active:scale-[0.98]
+                              transition-all duration-200
+                              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ocean-deep-500
+                              shadow-sm hover:shadow-md
+                              ${showChannels && isExpanded ? "rounded-b-none" : ""}
+                            `}
+                            onClick={() => handleSignIn(provider)}
+                          >
+                            <img
+                              src={provider.icon}
+                              alt={provider.id}
+                              width="20"
+                              height="20"
+                              class="shrink-0"
+                              style={styles.iconFilter ? { filter: styles.iconFilter } : undefined}
+                            />
+                            <span>{t(provider.labelKey)}</span>
+                            {showChannels && (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class={`ml-auto transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                              >
+                                <path d="m6 9 6 6 6-6" />
+                              </svg>
+                            )}
+                          </button>
+
+                          {/* Channel options (expanded) */}
+                          {showChannels && isExpanded && (
+                            <div class="bg-gray-50 rounded-b-xl border-t border-gray-200 overflow-hidden">
+                              {provider.channels.map((channel) => (
+                                <button
+                                  key={channel.id}
+                                  type="button"
+                                  class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                                  onClick={() => handleSignIn(provider, channel.id)}
+                                >
+                                  <span class="w-5 h-5 flex items-center justify-center text-gray-400">
+                                    {channel.isDefault && (
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                      </svg>
+                                    )}
+                                  </span>
+                                  <span>{t(channel.labelKey)}</span>
+                                  {channel.isDefault && (
+                                    <span class="ml-auto text-xs text-gray-400">
+                                      {t("common.auth.channels.defaultLabel")}
+                                    </span>
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       );
                     })}
                   </div>

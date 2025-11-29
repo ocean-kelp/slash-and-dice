@@ -29,6 +29,22 @@
       "signedInAs": "Sesión iniciada como"
     }
   },
+  "auth": {
+    "channels": {
+      "default": "Global",
+      "defaultLabel": "Global",
+      "line": {
+        "jp": "Japón",
+        "th": "Tailandia",
+        "tw": "Taiwán",
+        "id": "Indonesia"
+      },
+      "wechat": {
+        "default": "Global",
+        "cn": "China"
+      }
+    }
+  },
   "errors": {
     "404": {
       "title": "Página no encontrada",

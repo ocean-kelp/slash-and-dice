@@ -1,6 +1,6 @@
 import { PageProps } from "fresh";
 import { State } from "@/utils.ts";
-import type { AuthProviderId } from "@/models/AuthProvider.ts";
+import type { AuthProvider } from "@/models/AuthProvider.ts";
 
 /**
  * LayoutProps - Clean interface for Fresh layout components.
@@ -103,6 +103,6 @@ export interface LayoutProps<TData = unknown> {
   currentPath?: string;
   /** State object containing app state */
   state: State;
-  /** Available auth providers based on server configuration */
-  availableAuthProviders?: AuthProviderId[];
+  /** Available auth providers with their channels */
+  availableAuthProviders?: AuthProvider[];
 }

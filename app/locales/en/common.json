@@ -29,6 +29,22 @@
       "signedInAs": "Signed in as"
     }
   },
+  "auth": {
+    "channels": {
+      "default": "Default",
+      "defaultLabel": "Global",
+      "line": {
+        "jp": "Japan",
+        "th": "Thailand",
+        "tw": "Taiwan",
+        "id": "Indonesia"
+      },
+      "wechat": {
+        "default": "Global",
+        "cn": "China"
+      }
+    }
+  },
   "errors": {
     "404": {
       "title": "Page not found",
