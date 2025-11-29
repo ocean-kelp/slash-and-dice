@@ -3,7 +3,8 @@
     "title": "Bienvenido a Slash & Dice",
     "subtitle": "Un espacio sencillo y lúdico — próximamente.",
     "cta": "Comenzar",
-    "notice": "Esta es una página temporal de marcador de posición."
+    "notice": "Esta es una página temporal de marcador de posición.",
+    "learnMore": "Saber más"
   },
   "header": {
     "ariaLabel": "Encabezado del sitio",
@@ -17,6 +18,10 @@
       "username": "Nombre de usuario",
       "signInGoogle": "Iniciar sesión con Google",
       "signInDiscord": "Iniciar sesión con Discord",
+      "signInKakao": "Iniciar sesión con Kakao",
+      "signInLine": "Iniciar sesión con LINE",
+      "signInWechat": "Iniciar sesión con WeChat",
+      "noProvidersAvailable": "No hay métodos de inicio de sesión disponibles",
       "logout": "Cerrar sesión",
       "changeUsername": "Cambiar nombre de usuario",
       "changeAvatar": "Cambiar avatar",

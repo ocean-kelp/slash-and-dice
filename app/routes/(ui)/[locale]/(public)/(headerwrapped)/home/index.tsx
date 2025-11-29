@@ -56,7 +56,7 @@ export default function Home({ data }: PageProps<Props>) {
                 class="inline-flex items-center px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition"
                 href="#"
               >
-                {t("common.actionText") || "Learn more"}
+                {t("common.home.learnMore")}
               </a>
             </div>
           </div>

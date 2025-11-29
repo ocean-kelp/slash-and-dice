@@ -3,7 +3,8 @@
     "title": "Welcome to Slash & Dice",
     "subtitle": "A simple, playful playground — coming soon.",
     "cta": "Get Started",
-    "notice": "This is a temporary placeholder page."
+    "notice": "This is a temporary placeholder page.",
+    "learnMore": "Learn more"
   },
   "header": {
     "ariaLabel": "Site header",
@@ -17,6 +18,10 @@
       "username": "Username",
       "signInGoogle": "Sign in with Google",
       "signInDiscord": "Sign in with Discord",
+      "signInKakao": "Sign in with Kakao",
+      "signInLine": "Sign in with LINE",
+      "signInWechat": "Sign in with WeChat",
+      "noProvidersAvailable": "No sign-in methods available",
       "logout": "Sign Out",
       "changeUsername": "Change Username",
       "changeAvatar": "Change Avatar",
