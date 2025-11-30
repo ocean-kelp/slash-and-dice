@@ -6,6 +6,31 @@
     "notice": "This is a temporary placeholder page.",
     "learnMore": "Learn more"
   },
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Choose your preferred sign-in method to continue",
+    "consent": {
+      "title": "Email Permission",
+      "description": "To create your account, we need access to your email address. We use it to:",
+      "purposes": {
+        "recovery": "Enable account recovery if you lose access",
+        "updates": "Send important updates about your account",
+        "support": "Provide customer support when you need help"
+      },
+      "privacy": "Your email will never be shared with third parties.",
+      "privacyLink": "Privacy Policy",
+      "termsLink": "Terms of Service",
+      "checkbox": "I agree to share my email and accept the",
+      "andText": "and"
+    },
+    "providers": {
+      "title": "Continue with",
+      "disabled": "Please accept the email permission above to continue"
+    },
+    "back": "Back to home",
+    "alreadySignedIn": "You're already signed in",
+    "goToProfile": "Go to profile"
+  },
   "header": {
     "ariaLabel": "Site header",
     "userOptions": {

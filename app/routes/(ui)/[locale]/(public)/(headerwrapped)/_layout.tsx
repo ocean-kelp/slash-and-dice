@@ -5,14 +5,14 @@ export default function Layout(props: LayoutProps) {
   // Extract essential data from layout props
   const {
     Component,
-    state: { translationData, availableAuthProviders }
+    state: { translationData, locale },
   } = props;
 
   return (
     <>
-      <Header 
-        translationData={translationData} 
-        availableProviders={availableAuthProviders}
+      <Header
+        translationData={translationData}
+        locale={locale}
       />
       <div class="pt-20">
         <Component />
@@ -20,5 +20,3 @@ export default function Layout(props: LayoutProps) {
     </>
   );
 }
-
-

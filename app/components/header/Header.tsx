@@ -4,7 +4,6 @@ import UserOptionsDropdown from "@/islands/header/UserOptionsDropdown.tsx";
 import Logo from "./Logo.tsx";
 import SearchBar from "@/islands/header/SearchBar.tsx";
 import { translate } from "@/custom-i18n/translator.ts";
-import type { AuthProvider } from "@/models/AuthProvider.ts";
 
 type Props = {
   user?: {
@@ -12,11 +11,12 @@ type Props = {
     iconUrl?: string;
   };
   translationData?: Record<string, unknown>;
-  availableProviders?: AuthProvider[];
+  /** Current locale for navigation */
+  locale?: string;
 };
 
 export default function Header(
-  { user, translationData, availableProviders }: Props,
+  { user, translationData, locale }: Props,
 ) {
   const t = translate(translationData ?? {});
 
@@ -47,7 +47,7 @@ export default function Header(
                 <UserOptionsDropdown
                   user={user}
                   translationData={translationData}
-                  availableProviders={availableProviders}
+                  locale={locale}
                 />
               </div>
             </div>

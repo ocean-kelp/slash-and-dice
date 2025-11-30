@@ -6,6 +6,31 @@
     "notice": "Esta es una página temporal de marcador de posición.",
     "learnMore": "Saber más"
   },
+  "login": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Elige tu método de inicio de sesión preferido para continuar",
+    "consent": {
+      "title": "Permiso de Correo Electrónico",
+      "description": "Para crear tu cuenta, necesitamos acceso a tu correo electrónico. Lo usamos para:",
+      "purposes": {
+        "recovery": "Permitir la recuperación de cuenta si pierdes acceso",
+        "updates": "Enviar actualizaciones importantes sobre tu cuenta",
+        "support": "Brindarte soporte al cliente cuando lo necesites"
+      },
+      "privacy": "Tu correo electrónico nunca será compartido con terceros.",
+      "privacyLink": "Política de Privacidad",
+      "termsLink": "Términos de Servicio",
+      "checkbox": "Acepto compartir mi correo electrónico y acepto la",
+      "andText": "y los"
+    },
+    "providers": {
+      "title": "Continuar con",
+      "disabled": "Por favor acepta el permiso de correo electrónico arriba para continuar"
+    },
+    "back": "Volver al inicio",
+    "alreadySignedIn": "Ya has iniciado sesión",
+    "goToProfile": "Ir al perfil"
+  },
   "header": {
     "ariaLabel": "Encabezado del sitio",
     "userOptions": {

@@ -16,6 +16,47 @@
 - For color system guidance (palette, semantic usage, accessibility), reference the canonical file at `docs/color-guidelines.md` rather than duplicating it here. This keeps design tokens centralized and avoids needing to update multiple places.
 - For CSS custom property token names (e.g., `--color-ocean-deep-500`) and their canonical values, reference `app/assets/styles.css` rather than copying tokens here. This ensures the codebase uses one authoritative source for tokens.
 
+### Dark Theme Pages
+
+For full-page dark themed interfaces (login, authentication, onboarding, or immersive experiences), follow this pattern established in the login page:
+
+**Page Structure:**
+```tsx
+<main class="min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-ocean-deep-900 flex flex-col">
+  {/* Header */}
+  <header class="p-6">...</header>
+  
+  {/* Centered content */}
+  <div class="flex-1 flex items-center justify-center p-6">
+    <div class="w-full max-w-md">
+      {/* Title */}
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-white mb-3">{title}</h1>
+        <p class="text-lg text-gray-400">{subtitle}</p>
+      </div>
+      
+      {/* Card */}
+      <div class="bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700 overflow-hidden">
+        {/* Content */}
+      </div>
+    </div>
+  </div>
+</main>
+```
+
+**Key Classes:**
+- Page background: `bg-linear-to-br from-gray-900 via-gray-800 to-ocean-deep-900`
+- Cards: `bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700`
+- Inner sections: `bg-gray-700/50 border-gray-600`
+- Titles: `text-4xl font-bold text-white`
+- Subtitles: `text-lg text-gray-400`
+- Body text: `text-gray-300`
+- Links: `text-ocean-deep-400 hover:text-ocean-deep-300`
+- Focus rings: `focus:ring-ocean-deep-500 focus:ring-offset-gray-800`
+- Warnings: `bg-amber-500/10 border-amber-500/30 text-amber-400`
+
+**Reference implementation:** See `app/routes/(ui)/[locale]/(public)/login.tsx` and `app/islands/auth/LoginProviders.tsx`
+
 ### Fresh Framework
 
 - For handlers use this pattern:
