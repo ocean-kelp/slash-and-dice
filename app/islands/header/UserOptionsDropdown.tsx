@@ -2,6 +2,7 @@ import { useState } from "preact/hooks";
 import { translate } from "@/custom-i18n/translator.ts";
 import type { AuthProvider, AuthProviderId } from "@/models/AuthProvider.ts";
 import { needsChannelSelection } from "@/models/AuthProvider.ts";
+import { signInWithProvider, signOut } from "@/lib/auth-client.ts";
 
 /** Provider styling configuration */
 const PROVIDER_STYLES: Record<
@@ -64,22 +65,26 @@ export default function UserOptionsDropdown({
 
   const toggleDropdown = () => setOpen(!open);
 
-  const handleSignIn = (provider: AuthProvider, channelId?: string) => {
+  const handleSignIn = async (provider: AuthProvider, channelId?: string) => {
     // If provider has multiple channels and none selected, expand to show channels
     if (needsChannelSelection(provider) && !channelId) {
       setExpandedProvider(expandedProvider === provider.id ? null : provider.id);
       return;
     }
-    
-    // Redirect to auth endpoint with optional channel
-    const url = channelId 
-      ? `/api/auth/signin/${provider.id}?channel=${channelId}`
-      : `/api/auth/signin/${provider.id}`;
-    globalThis.location.href = url;
+
+    // Build the provider ID for sign in
+    // For LINE, use channel-specific ID (e.g., "line-jp", "line-th")
+    // For other providers, use the base ID
+    let providerId: string = provider.id;
+    if (provider.id === "line" && channelId) {
+      providerId = `line-${channelId}`;
+    }
+
+    await signInWithProvider(providerId);
   };
 
-  const handleSignOut = () => {
-    globalThis.location.href = "/api/auth/signout";
+  const handleSignOut = async () => {
+    await signOut();
   };
 
   return (

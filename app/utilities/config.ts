@@ -51,8 +51,20 @@ export const appConfig = {
   get authSecret() {
     return getEnv("BETTER_AUTH_SECRET");
   },
-  /** Base URL for auth callbacks */
+  /** Base URL for auth callbacks (server URL) */
   get authBaseUrl() {
     return getEnv("BETTER_AUTH_URL", false) || "http://localhost:8000";
+  },
+  /**
+   * Trusted origins for CSRF protection (comma-separated list)
+   * Includes origins that can make requests to the auth API
+   */
+  get authTrustedOrigins(): string[] {
+    const origins = getEnv("BETTER_AUTH_TRUSTED_ORIGINS", false);
+    if (!origins) {
+      // Default to common dev origins
+      return ["http://localhost:8000", "http://localhost:5173"];
+    }
+    return origins.split(",").map((origin) => origin.trim()).filter(Boolean);
   },
 };

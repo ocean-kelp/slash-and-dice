@@ -15,7 +15,9 @@ type Props = {
   availableProviders?: AuthProvider[];
 };
 
-export default function Header({ user, translationData, availableProviders }: Props) {
+export default function Header(
+  { user, translationData, availableProviders }: Props,
+) {
   const t = translate(translationData ?? {});
 
   const ariaLabel = t("common.header.ariaLabel");

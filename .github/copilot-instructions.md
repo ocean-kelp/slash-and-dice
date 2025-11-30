@@ -52,6 +52,21 @@ export const handler = define.middleware(async (ctx) => {
 
 - isClient(): boolean - Returns true if running in a browser (client-side): use this to guard any code that requires browser APIs, for example adding cookies, accessing an env var, etc.
 
+#### config.ts
+
+- **Always use `appConfig` from `@/utilities/config.ts` to access environment variables** - never call `Deno.env.get()` directly. This centralizes configuration, provides proper validation, and ensures server-side only access is enforced.
+
+```ts
+// ✅ correct
+import { appConfig } from "@/utilities/config.ts";
+const baseUrl = appConfig.authBaseUrl;
+
+// ❌ avoid
+const baseUrl = Deno.env.get("BETTER_AUTH_URL");
+```
+
+- If you need a new environment variable, add it to `config.ts` with a getter in `appConfig`.
+
 ### Internationalization (i18n)
 
 - Use `@elsoul/fresh-i18n` for localization and follow the conventions in `docs/i18n/i18n-system.md`.

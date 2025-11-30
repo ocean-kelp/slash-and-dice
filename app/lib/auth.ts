@@ -1,11 +1,59 @@
 import { betterAuth } from "better-auth";
-import { genericOAuth } from "better-auth/plugins";
+import { genericOAuth, line } from "better-auth/plugins";
 import { appConfig } from "@/utilities/config.ts";
 import { authProviders } from "@/utilities/auth-providers.ts";
+
+// Build LINE channel configs using the line() helper for multi-channel support
+const lineConfigs = [
+  // Japan channel
+  ...(authProviders.line.jp.isConfigured
+    ? [
+      line({
+        providerId: "line-jp",
+        clientId: authProviders.line.jp.clientId,
+        clientSecret: authProviders.line.jp.clientSecret,
+      }),
+    ]
+    : []),
+  // Thailand channel
+  ...(authProviders.line.th.isConfigured
+    ? [
+      line({
+        providerId: "line-th",
+        clientId: authProviders.line.th.clientId,
+        clientSecret: authProviders.line.th.clientSecret,
+      }),
+    ]
+    : []),
+  // Taiwan channel
+  ...(authProviders.line.tw.isConfigured
+    ? [
+      line({
+        providerId: "line-tw",
+        clientId: authProviders.line.tw.clientId,
+        clientSecret: authProviders.line.tw.clientSecret,
+      }),
+    ]
+    : []),
+  // Indonesia channel
+  ...(authProviders.line.id.isConfigured
+    ? [
+      line({
+        providerId: "line-id",
+        clientId: authProviders.line.id.clientId,
+        clientSecret: authProviders.line.id.clientSecret,
+      }),
+    ]
+    : []),
+];
+
+// Combine all generic OAuth configs
+const genericOAuthConfigs = [...lineConfigs];
 
 export const auth = betterAuth({
   secret: appConfig.authSecret,
   baseURL: appConfig.authBaseUrl,
+  trustedOrigins: appConfig.authTrustedOrigins,
 
   socialProviders: {
     // Discord
@@ -31,61 +79,13 @@ export const auth = betterAuth({
         clientSecret: authProviders.kakao.clientSecret,
       },
     }),
-
-    // LINE - Japan (global default)
-    ...(authProviders.line.jp.isConfigured && {
-      line: {
-        clientId: authProviders.line.jp.clientId,
-        clientSecret: authProviders.line.jp.clientSecret,
-      },
-    }),
-
-    // LINE - Thailand
-    ...(authProviders.line.th.isConfigured && {
-      "line-th": {
-        clientId: authProviders.line.th.clientId,
-        clientSecret: authProviders.line.th.clientSecret,
-      },
-    }),
-
-    // LINE - Taiwan
-    ...(authProviders.line.tw.isConfigured && {
-      "line-tw": {
-        clientId: authProviders.line.tw.clientId,
-        clientSecret: authProviders.line.tw.clientSecret,
-      },
-    }),
-
-    // LINE - Indonesia
-    ...(authProviders.line.id.isConfigured && {
-      "line-id": {
-        clientId: authProviders.line.id.clientId,
-        clientSecret: authProviders.line.id.clientSecret,
-      },
-    }),
+    // Note: LINE is now handled via genericOAuth plugin for multi-channel support
   },
 
   plugins: [
-    // WeChat via Generic OAuth (not natively supported by Better Auth)
-    ...(authProviders.wechat.isConfigured
-      ? [
-          genericOAuth({
-            config: [
-              {
-                providerId: "wechat",
-                clientId: authProviders.wechat.clientId,
-                clientSecret: authProviders.wechat.clientSecret,
-                authorizationUrl: "https://open.weixin.qq.com/connect/qrconnect",
-                tokenUrl: "https://api.weixin.qq.com/sns/oauth2/access_token",
-                scopes: ["snsapi_login"],
-                // WeChat uses 'appid' instead of 'client_id'
-                authorizationUrlParams: {
-                  appid: authProviders.wechat.clientId,
-                },
-              },
-            ],
-          }),
-        ]
+    // LINE multi-channel
+    ...(genericOAuthConfigs.length > 0
+      ? [genericOAuth({ config: genericOAuthConfigs })]
       : []),
   ],
 });
