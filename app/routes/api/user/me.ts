@@ -36,7 +36,6 @@ export const handler = define.handlers({
           id: user.id,
           email: user.email,
           name: user.name,
-          image: user.image,
           providers: user.providers, // Array of linked providers
           createdAt: user.createdAt,
           lastSeenAt: user.lastSeenAt,

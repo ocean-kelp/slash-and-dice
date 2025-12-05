@@ -2,6 +2,7 @@
 export interface LinkedProvider {
   providerId: string; // "google", "discord", "line-jp", etc.
   accountId: string; // Provider's unique ID for this user
+  imageUrl?: string; // Avatar URL from this provider
   linkedAt: Date; // When this provider was linked
 }
 
@@ -13,10 +14,14 @@ export interface User {
   email: string;
   /** User's display name */
   name: string;
-  /** Optional avatar/icon URL */
-  image?: string;
   /** List of linked OAuth providers */
   providers: LinkedProvider[];
+  /** User's chosen avatar URL (can be from provider or DiceBear) */
+  selectedAvatarUrl?: string;
+  /** DiceBear style if using generated avatar */
+  avatarStyle?: string;
+  /** DiceBear seed if using generated avatar */
+  avatarSeed?: string;
   /** Account creation timestamp */
   createdAt: Date;
   /** Last seen/active timestamp */
@@ -28,19 +33,19 @@ export function createUser(data: {
   id: string;
   email: string;
   name: string;
-  image?: string;
   providerId: string;
   providerAccountId: string;
+  providerImageUrl?: string;
 }): User {
   const now = new Date();
   return {
     id: data.id,
     email: data.email,
     name: data.name,
-    image: data.image,
     providers: [{
       providerId: data.providerId,
       accountId: data.providerAccountId,
+      imageUrl: data.providerImageUrl,
       linkedAt: now,
     }],
     createdAt: now,

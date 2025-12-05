@@ -67,4 +67,8 @@ export const appConfig = {
     }
     return origins.split(",").map((origin) => origin.trim()).filter(Boolean);
   },
+  /** Admin secret for protected operations (migrations, etc.) */
+  get adminSecret() {
+    return getEnv("ADMIN_SECRET", false) || "dev-admin-secret-change-in-prod";
+  },
 };

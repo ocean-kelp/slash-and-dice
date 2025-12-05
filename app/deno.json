@@ -5,7 +5,8 @@
     "dev": "deno run --unstable-kv -A npm:vite",
     "build": "vite build",
     "start": "deno serve --unstable-kv -A _fresh/server.js",
-    "update": "deno run -A -r jsr:@fresh/update ."
+    "update": "deno run -A -r jsr:@fresh/update .",
+    "migrate": "deno run --unstable-kv -A db/migrations/run.ts"
   },
   "lint": {
     "rules": {

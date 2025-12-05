@@ -42,9 +42,9 @@ export async function createUserFromOAuth(data: {
   id: string;
   email: string;
   name: string;
-  image?: string;
   providerId: string;
   providerAccountId: string;
+  providerImageUrl?: string;
 }): Promise<User> {
   // Check if user exists with this email
   const existingUser = await getUserByEmail(data.email);
@@ -62,6 +62,7 @@ export async function createUserFromOAuth(data: {
       existingUser.providers.push({
         providerId: data.providerId,
         accountId: data.providerAccountId,
+        imageUrl: data.providerImageUrl,
         linkedAt: new Date(),
       });
       existingUser.lastSeenAt = new Date();
@@ -75,6 +76,26 @@ export async function createUserFromOAuth(data: {
   const user = createUserModel(data);
   await saveUser(user);
   return user;
+}
+
+/**
+ * Update user's avatar selection
+ */
+export async function updateUserAvatar(
+  userId: string,
+  avatar: {
+    selectedAvatarUrl?: string;
+    avatarStyle?: string;
+    avatarSeed?: string;
+  },
+): Promise<void> {
+  const user = await getUserById(userId);
+  if (!user) return;
+
+  user.selectedAvatarUrl = avatar.selectedAvatarUrl;
+  user.avatarStyle = avatar.avatarStyle;
+  user.avatarSeed = avatar.avatarSeed;
+  await saveUser(user);
 }
 
 /**

@@ -30,6 +30,7 @@ export const handler = define.middleware(async (ctx) => {
       );
       let providerId = "unknown";
       let providerAccountId = id; // Default to user ID
+      const providerImageUrl: string | undefined = image || undefined;
 
       if (providerMatch) {
         try {
@@ -63,25 +64,33 @@ export const handler = define.middleware(async (ctx) => {
           id,
           email,
           name: name || email.split("@")[0],
-          image: image || undefined,
           providerId,
           providerAccountId,
+          providerImageUrl,
         });
       } else {
         // Check if this provider is already linked
-        const alreadyLinked = user.providers.some(
+        const existingProvider = user.providers.find(
           (p) =>
             p.providerId === providerId && p.accountId === providerAccountId,
         );
 
-        if (!alreadyLinked) {
+        if (!existingProvider) {
           // Link new provider to existing user
           user.providers.push({
             providerId,
             accountId: providerAccountId,
+            imageUrl: providerImageUrl,
             linkedAt: new Date(),
           });
           await getUserById(id); // Force reload to update reference
+          const { saveUser } = await import("@/db/repositories/userRepo.ts");
+          await saveUser(user);
+        } else if (
+          existingProvider && !existingProvider.imageUrl && providerImageUrl
+        ) {
+          // Update existing provider with imageUrl if missing
+          existingProvider.imageUrl = providerImageUrl;
           const { saveUser } = await import("@/db/repositories/userRepo.ts");
           await saveUser(user);
         }
