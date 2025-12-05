@@ -254,7 +254,7 @@ export default function LoginProviders({
                       type="button"
                       disabled={disabled}
                       class={`
-                      w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl
+                      w-full flex items-center px-4 py-3 rounded-xl
                       text-sm font-semibold
                       ${
                         disabled
@@ -274,17 +274,57 @@ export default function LoginProviders({
                     `}
                       onClick={() => handleSignIn(provider)}
                     >
-                      <img
-                        src={provider.icon}
-                        alt={provider.id}
-                        width="20"
-                        height="20"
-                        class={`shrink-0 ${disabled ? "opacity-50" : ""}`}
-                        style={styles.iconFilter
-                          ? { filter: styles.iconFilter }
-                          : undefined}
-                      />
-                      <span>{t(provider.labelKey)}</span>
+                      {/* Left spacer for alignment when chevron is present */}
+                      {showChannels && <div class="w-3.5" />}
+
+                      {/* Centered content */}
+                      <div class="flex-1 flex items-center justify-center gap-3">
+                        {isLoading
+                          ? (
+                            // Loading spinner
+                            <svg
+                              class="animate-spin h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                class="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                stroke-width="4"
+                              >
+                              </circle>
+                              <path
+                                class="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              >
+                              </path>
+                            </svg>
+                          )
+                          : (
+                            <>
+                              <img
+                                src={provider.icon}
+                                alt={provider.id}
+                                width="20"
+                                height="20"
+                                class={`shrink-0 ${
+                                  disabled ? "opacity-50" : ""
+                                }`}
+                                style={styles.iconFilter
+                                  ? { filter: styles.iconFilter }
+                                  : undefined}
+                              />
+                              <span>{t(provider.labelKey)}</span>
+                            </>
+                          )}
+                      </div>
+
+                      {/* Chevron for multi-channel providers */}
                       {showChannels && (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -296,7 +336,7 @@ export default function LoginProviders({
                           stroke-width="2.5"
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          class={`ml-auto transition-transform duration-200 ${
+                          class={`transition-transform duration-200 ${
                             isExpanded ? "rotate-180" : ""
                           }`}
                         >
