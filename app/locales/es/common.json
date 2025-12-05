@@ -6,6 +6,85 @@
     "notice": "Esta es una página temporal de marcador de posición.",
     "learnMore": "Saber más"
   },
+  "welcome": {
+    "title": "¡Bienvenido! 🎉",
+    "subtitle": "Configuremos tu perfil",
+    "accountLinking": {
+      "title": "Cuenta Encontrada",
+      "message": "Encontramos una cuenta existente con tu correo ({email}). ¿Te gustaría vincular esta cuenta de {provider} a ella?",
+      "link": "Vincular Cuentas",
+      "createNew": "Crear Nueva Cuenta",
+      "existing": "Iniciaste sesión con {provider} y encontramos una cuenta con:"
+    },
+    "avatarSelection": {
+      "title": "Elige Tu Avatar",
+      "subtitle": "Selecciona un avatar de tus cuentas conectadas o genera uno nuevo",
+      "yourAccounts": "Tus Cuentas",
+      "generateNew": "Generar Nuevo",
+      "connectedAccounts": "Selecciona un avatar de tus cuentas conectadas",
+      "tabs": {
+        "providers": "Tus Cuentas",
+        "generated": "Generar Nuevo"
+      },
+      "providers": {
+        "title": "De Cuentas Conectadas",
+        "select": "Usar Avatar de {provider}"
+      },
+      "dicebear": {
+        "title": "Avatares Generados",
+        "subtitle": "Elige un estilo y generaremos un avatar único para ti",
+        "description": "Elige un estilo y generaremos un avatar único para ti",
+        "style": "Estilo de Avatar",
+        "randomize": "Generar Aleatorio",
+        "customize": "Personaliza Tu Avatar",
+        "flip": "Dirección de Volteo",
+        "flipped": "Volteado",
+        "normal": "Normal",
+        "hairColor": "Color de Cabello",
+        "skinTone": "Tono de Piel",
+        "background": "Fondo",
+        "beard": "Barba",
+        "earrings": "Aretes",
+        "glasses": "Gafas",
+        "freckles": "Pecas",
+        "hairAccessories": "Accesorios de Cabello",
+        "eyesColor": "Color de Ojos",
+        "mouthColor": "Color de Boca",
+        "noseColor": "Color de Nariz",
+        "hairAccessoriesColor": "Color de Accesorios",
+        "featureStyles": "Estilos de Rasgos",
+        "eyesStyle": "Estilo de Ojos",
+        "hairStyle": "Estilo de Cabello",
+        "headShape": "Forma de Cabeza",
+        "mouthExpression": "Expresión de Boca",
+        "noseStyle": "Estilo de Nariz",
+        "random": "Aleatorio",
+        "happy": "Feliz",
+        "sad": "Triste",
+        "styles": {
+          "lorelei": "Lorelei",
+          "adventurer": "Aventurero",
+          "avataaars": "Avataaars",
+          "bigEars": "Orejas Grandes",
+          "bigSmile": "Gran Sonrisa",
+          "bottts": "Bottts",
+          "croodles": "Croodles",
+          "funEmoji": "Emoji Divertido",
+          "micah": "Micah",
+          "miniavs": "Miniavs",
+          "notionists": "Notionists",
+          "openPeeps": "Open Peeps",
+          "personas": "Personas",
+          "pixelArt": "Arte Pixel"
+        }
+      },
+      "preview": "Vista Previa",
+      "selected": "Seleccionado"
+    },
+    "continue": "Continuar",
+    "skip": "Saltar por ahora",
+    "saving": "Guardando..."
+  },
   "login": {
     "title": "Iniciar Sesión",
     "subtitle": "Elige tu método de inicio de sesión preferido para continuar",

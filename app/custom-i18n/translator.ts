@@ -40,8 +40,8 @@ export function translate(
     if (import.meta.env?.DEV) {
       console.warn(`❌ Missing translation key: "${key}"`);
       console.warn(
-        `   Available keys:`,
-        Object.keys(translationData),
+        `   Available keys (first 3):`,
+        Object.keys(translationData).slice(0, 3),
       );
     }
 

@@ -1,14 +1,35 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/custom-i18n/translator.ts";
+import { auth } from "@/lib/auth.ts";
+import type { LinkedProvider } from "@/models/User.ts";
+import AvatarSelectionModal from "@/islands/welcome/AvatarSelectionModal.tsx";
 
 export const handler = defineRoute.handlers({
-  GET(ctx) {
+  async GET(ctx) {
     const state = ctx.state;
+
+    // Check if user is logged in and needs onboarding
+    const session = await auth.api.getSession({ headers: ctx.req.headers });
+    let showOnboarding = false;
+    let providers: LinkedProvider[] = [];
+
+    if (session?.user) {
+      const { getUserById } = await import("@/db/repositories/userRepo.ts");
+      const user = await getUserById(session.user.id);
+
+      // Show onboarding modal if user hasn't selected an avatar yet
+      if (user && !user.selectedAvatarUrl) {
+        showOnboarding = true;
+        providers = user.providers || [];
+      }
+    }
 
     return {
       data: {
         translationData: state.translationData ?? {},
+        showOnboarding,
+        providers,
       },
     };
   },
@@ -16,6 +37,8 @@ export const handler = defineRoute.handlers({
 
 type Props = {
   translationData?: Record<string, unknown>;
+  showOnboarding?: boolean;
+  providers?: LinkedProvider[];
 };
 
 export default function Home({ data }: PageProps<Props>) {
@@ -32,6 +55,14 @@ export default function Home({ data }: PageProps<Props>) {
         <title>{title}</title>
         <meta name="description" content={subtitle} />
       </head>
+
+      {/* Onboarding Modal */}
+      {data.showOnboarding && (
+        <AvatarSelectionModal
+          providers={data.providers || []}
+          translationData={data.translationData}
+        />
+      )}
 
       <main class="min-h-screen bg-linear-to-br from-ocean-deep-50 via-ocean-deep-100 to-white flex items-center justify-center p-6">
         <section class="max-w-2xl w-full bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">

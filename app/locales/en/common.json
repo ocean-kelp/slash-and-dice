@@ -6,6 +6,85 @@
     "notice": "This is a temporary placeholder page.",
     "learnMore": "Learn more"
   },
+  "welcome": {
+    "title": "Welcome! 🎉",
+    "subtitle": "Let's set up your profile",
+    "accountLinking": {
+      "title": "Account Found",
+      "message": "We found an existing account with your email ({email}). Would you like to link this {provider} account to it?",
+      "link": "Link Accounts",
+      "createNew": "Create New Account",
+      "existing": "You logged in with {provider} and we found an account with:"
+    },
+    "avatarSelection": {
+      "title": "Choose Your Avatar",
+      "subtitle": "Select an avatar from your connected accounts or generate a new one",
+      "yourAccounts": "Your Accounts",
+      "generateNew": "Generate New",
+      "connectedAccounts": "Select an avatar from your connected accounts",
+      "tabs": {
+        "providers": "Your Accounts",
+        "generated": "Generate New"
+      },
+      "providers": {
+        "title": "From Connected Accounts",
+        "select": "Use {provider} Avatar"
+      },
+      "dicebear": {
+        "title": "Generated Avatars",
+        "subtitle": "Pick a style and we'll generate a unique avatar for you",
+        "description": "Pick a style and we'll generate a unique avatar for you",
+        "style": "Avatar Style",
+        "randomize": "Generate Random",
+        "customize": "Customize Your Avatar",
+        "flip": "Flip Direction",
+        "flipped": "Flipped",
+        "normal": "Normal",
+        "hairColor": "Hair Color",
+        "skinTone": "Skin Tone",
+        "background": "Background",
+        "beard": "Beard",
+        "earrings": "Earrings",
+        "glasses": "Glasses",
+        "freckles": "Freckles",
+        "hairAccessories": "Hair Accessories",
+        "eyesColor": "Eyes Color",
+        "mouthColor": "Mouth Color",
+        "noseColor": "Nose Color",
+        "hairAccessoriesColor": "Hair Accessories Color",
+        "featureStyles": "Feature Styles",
+        "eyesStyle": "Eyes Style",
+        "hairStyle": "Hair Style",
+        "headShape": "Head Shape",
+        "mouthExpression": "Mouth Expression",
+        "noseStyle": "Nose Style",
+        "random": "Random",
+        "happy": "Happy",
+        "sad": "Sad",
+        "styles": {
+          "lorelei": "Lorelei",
+          "adventurer": "Adventurer",
+          "avataaars": "Avataaars",
+          "bigEars": "Big Ears",
+          "bigSmile": "Big Smile",
+          "bottts": "Bottts",
+          "croodles": "Croodles",
+          "funEmoji": "Fun Emoji",
+          "micah": "Micah",
+          "miniavs": "Miniavs",
+          "notionists": "Notionists",
+          "openPeeps": "Open Peeps",
+          "personas": "Personas",
+          "pixelArt": "Pixel Art"
+        }
+      },
+      "preview": "Preview",
+      "selected": "Selected"
+    },
+    "continue": "Continue",
+    "skip": "Skip for now",
+    "saving": "Saving..."
+  },
   "login": {
     "title": "Sign In",
     "subtitle": "Choose your preferred sign-in method to continue",
