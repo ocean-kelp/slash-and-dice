@@ -14,7 +14,6 @@
       "description": "To create your account, we need access to your email address. We use it to:",
       "purposes": {
         "recovery": "Enable account recovery if you lose access",
-        "updates": "Send important updates about your account",
         "support": "Provide customer support when you need help"
       },
       "privacy": "Your email will never be shared with third parties.",
@@ -80,6 +79,98 @@
       "title": "Server error",
       "message": "Something went wrong on our side. Please try again later.",
       "actionText": "Go home"
+    }
+  },
+  "legal": {
+    "backToLogin": "Back to login",
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "Learn how we collect, use, and protect your personal information.",
+      "lastUpdated": "Last Updated",
+      "lastUpdatedDate": "December 4, 2025",
+      "introduction": {
+        "title": "Introduction",
+        "content": "At Slash & Dice, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your personal information when you use our service."
+      },
+      "dataCollection": {
+        "title": "Information We Collect",
+        "intro": "When you create an account with us, we collect the following information:",
+        "items": {
+          "email": "Email address - provided through your OAuth authentication provider",
+          "profile": "Basic profile information - such as your name and profile picture from your OAuth provider",
+          "usage": "Usage data - including your interactions with our service and preferences"
+        }
+      },
+      "dataUsage": {
+        "title": "How We Use Your Information",
+        "intro": "We use the information we collect for the following purposes:",
+        "purposes": {
+          "authentication": "To authenticate your identity and maintain your account",
+          "recovery": "To enable account recovery if you lose access to your account",
+          "support": "To provide customer support and respond to your inquiries"
+        }
+      },
+      "dataSharing": {
+        "title": "Data Sharing and Third Parties",
+        "content": "We do not sell, trade, or share your personal information with third parties for marketing purposes. Your email address and personal data are kept confidential and are only used for the purposes outlined in this policy."
+      },
+      "yourRights": {
+        "title": "Your Rights",
+        "intro": "You have the following rights regarding your personal data:",
+        "rights": {
+          "access": "Access - You can request a copy of the personal data we hold about you",
+          "deletion": "Deletion - You can request deletion of your account and associated data at any time",
+          "correction": "Correction - You can update or correct your personal information through your account settings"
+        }
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "If you have any questions or concerns about this Privacy Policy or our data practices, please contact us through our support channels."
+      }
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "description": "Read our terms and conditions for using Slash & Dice.",
+      "lastUpdated": "Last Updated",
+      "lastUpdatedDate": "December 4, 2025",
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": "By accessing or using Slash & Dice, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service."
+      },
+      "accountRegistration": {
+        "title": "Account Registration",
+        "intro": "To use certain features of our service, you must create an account. You agree to:",
+        "requirements": {
+          "age": "Be at least 13 years of age (or the minimum age required in your jurisdiction)",
+          "accuracy": "Provide accurate and complete information during registration",
+          "security": "Maintain the security of your account credentials"
+        }
+      },
+      "userConduct": {
+        "title": "User Conduct",
+        "intro": "You agree not to engage in any of the following prohibited activities:",
+        "prohibited": {
+          "harassment": "Harassing, threatening, or intimidating other users",
+          "illegal": "Engaging in illegal activities or violating any applicable laws",
+          "spam": "Sending spam, unsolicited messages, or engaging in fraudulent activities"
+        }
+      },
+      "termination": {
+        "title": "Account Termination",
+        "content": "We reserve the right to suspend or terminate your account at any time if you violate these Terms of Service or engage in conduct that we deem harmful to our service or other users."
+      },
+      "disclaimer": {
+        "title": "Disclaimer of Warranties",
+        "content": "Our service is provided 'as is' without warranties of any kind, either express or implied. We do not guarantee that the service will be uninterrupted, secure, or error-free."
+      },
+      "changes": {
+        "title": "Changes to Terms",
+        "content": "We may update these Terms of Service from time to time. We will notify you of any material changes by posting the new terms on this page and updating the 'Last Updated' date."
+      },
+      "contact": {
+        "title": "Contact Information",
+        "content": "If you have any questions about these Terms of Service, please contact us through our support channels."
+      }
     }
   }
 }

@@ -65,6 +65,7 @@ type Props = {
 export default function LoginProviders({
   translationData,
   availableProviders = [],
+  locale,
 }: Props) {
   const [consentGiven, setConsentGiven] = useState(false);
   const [expandedProvider, setExpandedProvider] = useState<
@@ -164,23 +165,6 @@ export default function LoginProviders({
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            {t("common.login.consent.purposes.updates")}
-          </li>
-          <li class="flex items-center gap-2 text-sm text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="text-ocean-deep-400"
-            >
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
             {t("common.login.consent.purposes.support")}
           </li>
         </ul>
@@ -220,11 +204,17 @@ export default function LoginProviders({
           </div>
           <span class="text-sm text-gray-300">
             {t("common.login.consent.checkbox")}{" "}
-            <a href="#" class="text-ocean-deep-400 hover:underline">
+            <a
+              href={`/${locale}/privacy`}
+              class="text-ocean-deep-400 hover:underline"
+            >
               {t("common.login.consent.privacyLink")}
             </a>{" "}
             {t("common.login.consent.andText")}{" "}
-            <a href="#" class="text-ocean-deep-400 hover:underline">
+            <a
+              href={`/${locale}/terms`}
+              class="text-ocean-deep-400 hover:underline"
+            >
               {t("common.login.consent.termsLink")}
             </a>
           </span>

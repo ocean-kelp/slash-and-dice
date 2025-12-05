@@ -14,7 +14,6 @@
       "description": "Para crear tu cuenta, necesitamos acceso a tu correo electrónico. Lo usamos para:",
       "purposes": {
         "recovery": "Permitir la recuperación de cuenta si pierdes acceso",
-        "updates": "Enviar actualizaciones importantes sobre tu cuenta",
         "support": "Brindarte soporte al cliente cuando lo necesites"
       },
       "privacy": "Tu correo electrónico nunca será compartido con terceros.",
@@ -80,6 +79,98 @@
       "title": "Error del servidor",
       "message": "Algo salió mal en nuestro servidor. Por favor, inténtalo de nuevo más tarde.",
       "actionText": "Ir al inicio"
+    }
+  },
+  "legal": {
+    "backToLogin": "Volver al inicio de sesión",
+    "privacy": {
+      "title": "Política de Privacidad",
+      "description": "Conoce cómo recopilamos, usamos y protegemos tu información personal.",
+      "lastUpdated": "Última actualización",
+      "lastUpdatedDate": "4 de diciembre de 2025",
+      "introduction": {
+        "title": "Introducción",
+        "content": "En Slash & Dice, tomamos tu privacidad en serio. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos tu información personal cuando utilizas nuestro servicio."
+      },
+      "dataCollection": {
+        "title": "Información que Recopilamos",
+        "intro": "Cuando creas una cuenta con nosotros, recopilamos la siguiente información:",
+        "items": {
+          "email": "Dirección de correo electrónico - proporcionada a través de tu proveedor de autenticación OAuth",
+          "profile": "Información básica del perfil - como tu nombre y foto de perfil de tu proveedor OAuth",
+          "usage": "Datos de uso - incluyendo tus interacciones con nuestro servicio y preferencias"
+        }
+      },
+      "dataUsage": {
+        "title": "Cómo Usamos Tu Información",
+        "intro": "Utilizamos la información que recopilamos para los siguientes propósitos:",
+        "purposes": {
+          "authentication": "Para autenticar tu identidad y mantener tu cuenta",
+          "recovery": "Para permitir la recuperación de cuenta si pierdes acceso a tu cuenta",
+          "support": "Para brindarte soporte al cliente y responder a tus consultas"
+        }
+      },
+      "dataSharing": {
+        "title": "Compartir Datos y Terceros",
+        "content": "No vendemos, intercambiamos ni compartimos tu información personal con terceros con fines de marketing. Tu dirección de correo electrónico y datos personales se mantienen confidenciales y solo se usan para los propósitos descritos en esta política."
+      },
+      "yourRights": {
+        "title": "Tus Derechos",
+        "intro": "Tienes los siguientes derechos con respecto a tus datos personales:",
+        "rights": {
+          "access": "Acceso - Puedes solicitar una copia de los datos personales que tenemos sobre ti",
+          "deletion": "Eliminación - Puedes solicitar la eliminación de tu cuenta y los datos asociados en cualquier momento",
+          "correction": "Corrección - Puedes actualizar o corregir tu información personal a través de la configuración de tu cuenta"
+        }
+      },
+      "contact": {
+        "title": "Contáctanos",
+        "content": "Si tienes alguna pregunta o inquietud sobre esta Política de Privacidad o nuestras prácticas de datos, contáctanos a través de nuestros canales de soporte."
+      }
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "description": "Lee nuestros términos y condiciones para usar Slash & Dice.",
+      "lastUpdated": "Última actualización",
+      "lastUpdatedDate": "4 de diciembre de 2025",
+      "acceptance": {
+        "title": "Aceptación de los Términos",
+        "content": "Al acceder o usar Slash & Dice, aceptas estar vinculado por estos Términos de Servicio. Si no estás de acuerdo con estos términos, por favor no uses nuestro servicio."
+      },
+      "accountRegistration": {
+        "title": "Registro de Cuenta",
+        "intro": "Para usar ciertas funciones de nuestro servicio, debes crear una cuenta. Aceptas:",
+        "requirements": {
+          "age": "Tener al menos 13 años de edad (o la edad mínima requerida en tu jurisdicción)",
+          "accuracy": "Proporcionar información precisa y completa durante el registro",
+          "security": "Mantener la seguridad de las credenciales de tu cuenta"
+        }
+      },
+      "userConduct": {
+        "title": "Conducta del Usuario",
+        "intro": "Aceptas no participar en ninguna de las siguientes actividades prohibidas:",
+        "prohibited": {
+          "harassment": "Acosar, amenazar o intimidar a otros usuarios",
+          "illegal": "Participar en actividades ilegales o violar cualquier ley aplicable",
+          "spam": "Enviar spam, mensajes no solicitados o participar en actividades fraudulentas"
+        }
+      },
+      "termination": {
+        "title": "Terminación de Cuenta",
+        "content": "Nos reservamos el derecho de suspender o terminar tu cuenta en cualquier momento si violas estos Términos de Servicio o participas en conductas que consideremos dañinas para nuestro servicio u otros usuarios."
+      },
+      "disclaimer": {
+        "title": "Descargo de Garantías",
+        "content": "Nuestro servicio se proporciona 'tal como está' sin garantías de ningún tipo, ya sean expresas o implícitas. No garantizamos que el servicio será ininterrumpido, seguro o libre de errores."
+      },
+      "changes": {
+        "title": "Cambios a los Términos",
+        "content": "Podemos actualizar estos Términos de Servicio de vez en cuando. Te notificaremos cualquier cambio material publicando los nuevos términos en esta página y actualizando la fecha de 'Última actualización'."
+      },
+      "contact": {
+        "title": "Información de Contacto",
+        "content": "Si tienes alguna pregunta sobre estos Términos de Servicio, contáctanos a través de nuestros canales de soporte."
+      }
     }
   }
 }

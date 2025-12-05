@@ -43,7 +43,12 @@ export default function LoginPage({ data }: PageProps<Props>) {
         {/* Header with logo and back link */}
         <header class="p-6">
           <div class="max-w-md mx-auto flex items-center justify-between">
-            <Logo />
+            <div class="flex items-center gap-3">
+              <Logo />
+              <span class="px-2 py-1 text-xs font-medium bg-ocean-deep-500/20 text-ocean-deep-400 rounded-md border border-ocean-deep-500/30">
+                Fan Community
+              </span>
+            </div>
             <a
               href={`/${locale}/home`}
               class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1"
