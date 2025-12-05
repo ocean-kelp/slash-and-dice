@@ -17,3 +17,24 @@ export const userByEmailKey = (email: string): Deno.KvKey =>
   ["user_by_email", email] as Deno.KvKey;
 
 export const userListSelector: Deno.KvListSelector = { prefix: userPrefix };
+
+// OAuth Account keys
+export const oauthAccountPrefix = ["oauth_account"] as const;
+
+export const oauthAccountKey = (id: string): Deno.KvKey =>
+  [...oauthAccountPrefix, id] as Deno.KvKey;
+
+// Index: Find user by OAuth provider + provider account ID
+export const oauthAccountByProviderKey = (
+  providerId: string,
+  providerAccountId: string,
+): Deno.KvKey =>
+  ["oauth_by_provider", providerId, providerAccountId] as Deno.KvKey;
+
+// Index: Find all OAuth accounts for a user
+export const oauthAccountsByUserKey = (userId: string): Deno.KvKey =>
+  ["oauth_by_user", userId] as Deno.KvKey;
+
+export const oauthAccountListSelector: Deno.KvListSelector = {
+  prefix: oauthAccountPrefix,
+};
