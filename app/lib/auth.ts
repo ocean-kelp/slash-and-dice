@@ -55,6 +55,21 @@ export const auth = betterAuth({
   baseURL: appConfig.authBaseUrl,
   trustedOrigins: appConfig.authTrustedOrigins,
 
+  // Session configuration - 90 days for fan community app (stateless mode)
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 90 * 24 * 60 * 60, // 90 days cache duration
+      strategy: "jwe", // Encrypted JSON Web Encryption
+      refreshCache: true, // Enable stateless refresh
+    },
+  },
+
+  account: {
+    storeStateStrategy: "cookie",
+    storeAccountCookie: true, // Store account data after OAuth flow in a cookie
+  },
+
   socialProviders: {
     // Discord
     ...(authProviders.discord.isConfigured && {
