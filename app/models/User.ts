@@ -1,6 +1,13 @@
+// Linked OAuth provider info
+export interface LinkedProvider {
+  providerId: string; // "google", "discord", "line-jp", etc.
+  accountId: string; // Provider's unique ID for this user
+  linkedAt: Date; // When this provider was linked
+}
+
 // Basic User model used across the app.
 export interface User {
-  /** Unique user identifier (from OAuth provider) */
+  /** Unique user identifier (generated on first signup) */
   id: string;
   /** Contact email */
   email: string;
@@ -8,8 +15,8 @@ export interface User {
   name: string;
   /** Optional avatar/icon URL */
   image?: string;
-  /** OAuth provider used for signup (e.g., "google", "discord") */
-  providerId: string;
+  /** List of linked OAuth providers */
+  providers: LinkedProvider[];
   /** Account creation timestamp */
   createdAt: Date;
   /** Last seen/active timestamp */
@@ -23,6 +30,7 @@ export function createUser(data: {
   name: string;
   image?: string;
   providerId: string;
+  providerAccountId: string;
 }): User {
   const now = new Date();
   return {
@@ -30,7 +38,11 @@ export function createUser(data: {
     email: data.email,
     name: data.name,
     image: data.image,
-    providerId: data.providerId,
+    providers: [{
+      providerId: data.providerId,
+      accountId: data.providerAccountId,
+      linkedAt: now,
+    }],
     createdAt: now,
     lastSeenAt: now,
   };

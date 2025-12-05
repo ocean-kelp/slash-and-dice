@@ -13,6 +13,20 @@ export async function getUserById(id: string): Promise<User | undefined> {
 }
 
 /**
+ * Get user by email (searches all users)
+ */
+export async function getUserByEmail(email: string): Promise<User | undefined> {
+  const iter = kv.list<User>({ prefix: ["user"] });
+  for await (const entry of iter) {
+    const user = entry.value;
+    if (user.email === email) {
+      return user;
+    }
+  }
+  return undefined;
+}
+
+/**
  * Save user to KV (create or update)
  */
 export async function saveUser(user: User): Promise<void> {
@@ -20,7 +34,9 @@ export async function saveUser(user: User): Promise<void> {
 }
 
 /**
- * Create user from OAuth login data
+ * Create user from OAuth login data with email-based account linking
+ * If user with same email exists, links the new provider to existing user
+ * Otherwise creates a new user
  */
 export async function createUserFromOAuth(data: {
   id: string;
@@ -28,7 +44,34 @@ export async function createUserFromOAuth(data: {
   name: string;
   image?: string;
   providerId: string;
+  providerAccountId: string;
 }): Promise<User> {
+  // Check if user exists with this email
+  const existingUser = await getUserByEmail(data.email);
+
+  if (existingUser) {
+    // Check if this provider is already linked
+    const alreadyLinked = existingUser.providers.some(
+      (p) =>
+        p.providerId === data.providerId &&
+        p.accountId === data.providerAccountId,
+    );
+
+    if (!alreadyLinked) {
+      // Link new provider to existing user
+      existingUser.providers.push({
+        providerId: data.providerId,
+        accountId: data.providerAccountId,
+        linkedAt: new Date(),
+      });
+      existingUser.lastSeenAt = new Date();
+      await saveUser(existingUser);
+    }
+
+    return existingUser;
+  }
+
+  // No existing user, create new one
   const user = createUserModel(data);
   await saveUser(user);
   return user;
