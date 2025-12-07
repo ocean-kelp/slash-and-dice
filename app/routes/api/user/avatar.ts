@@ -27,12 +27,39 @@ export const handler = define.handlers({
       const body = await ctx.req.json();
       const { selectedAvatarUrl, avatarStyle, avatarSeed } = body;
 
-      // Update avatar
-      await updateUserAvatar(session.user.id, {
+      // Get user by email since Better Auth ID might differ from KV ID
+      const { getUserByEmail } = await import("@/db/repositories/userRepo.ts");
+      const user = await getUserByEmail(session.user.email);
+
+      if (!user) {
+        return new Response(JSON.stringify({ error: "User not found" }), {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      // Update avatar in database using KV user ID
+      await updateUserAvatar(user.id, {
         selectedAvatarUrl,
         avatarStyle,
         avatarSeed,
       });
+
+      // Update the Better Auth session with new avatar
+      try {
+        await auth.api.updateUser({
+          headers: ctx.req.headers,
+          body: {
+            image: selectedAvatarUrl,
+          },
+        });
+      } catch (error) {
+        // Silently fail if session update fails
+        console.error(
+          "Failed to update Better Auth session:",
+          error,
+        );
+      }
 
       return new Response(
         JSON.stringify({ success: true }),

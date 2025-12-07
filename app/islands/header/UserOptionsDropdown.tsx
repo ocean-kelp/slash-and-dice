@@ -1,6 +1,7 @@
 import { useState } from "preact/hooks";
 import { translate } from "@/custom-i18n/translator.ts";
 import { signOut } from "@/lib/auth-client.ts";
+import { showAvatarModal } from "@/signals/avatarModal.ts";
 
 type Props = {
   user?: {
@@ -195,7 +196,10 @@ export default function UserOptionsDropdown({
                   </svg>
                 }
                 label={t("common.header.userOptions.changeAvatar")}
-                onClick={(e) => e.preventDefault()}
+                onClick={() => {
+                  setOpen(false);
+                  showAvatarModal.value = true;
+                }}
               />
               <MenuItem
                 icon={

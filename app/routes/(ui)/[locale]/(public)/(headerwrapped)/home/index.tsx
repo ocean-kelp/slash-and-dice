@@ -4,6 +4,7 @@ import { translate } from "@/custom-i18n/translator.ts";
 import { auth } from "@/lib/auth.ts";
 import type { LinkedProvider } from "@/models/User.ts";
 import AvatarSelectionModal from "@/islands/welcome/AvatarSelectionModal.tsx";
+import { showAvatarModal } from "@/signals/avatarModal.ts";
 
 export const handler = defineRoute.handlers({
   async GET(ctx) {
@@ -46,6 +47,11 @@ export default function Home({ data }: PageProps<Props>) {
 
   const title = t("common.home.title");
 
+  // Initialize modal visibility for new users
+  if (data.showOnboarding) {
+    showAvatarModal.value = true;
+  }
+
   return (
     <>
       <head>
@@ -53,13 +59,11 @@ export default function Home({ data }: PageProps<Props>) {
         <meta name="description" />
       </head>
 
-      {/* Onboarding Modal */}
-      {data.showOnboarding && (
-        <AvatarSelectionModal
-          providers={data.providers || []}
-          translationData={data.translationData}
-        />
-      )}
+      {/* Avatar Selection Modal - always rendered but controlled by signal */}
+      <AvatarSelectionModal
+        providers={data.providers || []}
+        translationData={data.translationData}
+      />
 
       <main class="h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] bg-linear-to-b from-gray-900 via-slate-900 to-gray-950 relative overflow-hidden flex flex-col">
         {/* Atmospheric Background Effects */}

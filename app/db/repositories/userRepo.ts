@@ -90,7 +90,9 @@ export async function updateUserAvatar(
   },
 ): Promise<void> {
   const user = await getUserById(userId);
-  if (!user) return;
+  if (!user) {
+    return;
+  }
 
   user.selectedAvatarUrl = avatar.selectedAvatarUrl;
   user.avatarStyle = avatar.avatarStyle;

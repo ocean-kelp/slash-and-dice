@@ -11,6 +11,7 @@ export default function Layout(props: LayoutProps) {
 
   // Transform user data for header
   const headerUser = user as User | undefined;
+
   const userForHeader = headerUser
     ? {
       username: headerUser.name,

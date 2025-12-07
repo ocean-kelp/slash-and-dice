@@ -115,6 +115,8 @@
     },
     "continue": "Continue",
     "skip": "Skip for now",
+    "save": "Save",
+    "cancel": "Cancel",
     "saving": "Saving..."
   },
   "login": {

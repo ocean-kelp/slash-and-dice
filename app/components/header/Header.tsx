@@ -28,6 +28,9 @@ export default function Header(
         class="fixed top-0 left-0 right-0 z-50 bg-white"
         aria-label={ariaLabel}
       >
+        {/* Bottom gradient fade */}
+        <div class="absolute bottom-0 left-0 right-0 h-8 bg-linear-to-b from-transparent to-gray-900/30 pointer-events-none" />
+
         <div class="w-full mx-auto px-6 sm:px-8 lg:px-10">
           <header class="flex items-center gap-4 h-20">
             {/* Left: Logo */}
