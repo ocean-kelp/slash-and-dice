@@ -28,21 +28,25 @@ export default function Header(
         class="fixed top-0 left-0 right-0 z-50 bg-white"
         aria-label={ariaLabel}
       >
-        <div class="relative w-full mx-auto px-6 sm:px-8 lg:px-10">
+        <div class="w-full mx-auto px-6 sm:px-8 lg:px-10">
           <header class="flex items-center gap-4 h-20">
-            {/* left: logo */}
+            {/* Left: Logo */}
             <div class="flex items-center shrink-0">
               <Logo />
             </div>
 
-            {/* spacer: let logo and right-side items align naturally. The search is positioned absolutely below so it stays centered on screen. */}
-            <div class="flex-1" />
+            {/* Center: Search bar - hidden on small screens, grows to fill available space on larger screens */}
+            <div class="hidden lg:flex flex-1 items-center justify-center px-4 min-w-0">
+              <div class="w-full max-w-md xl:max-w-lg">
+                <SearchBar />
+              </div>
+            </div>
 
-            {/* small gap then HomeButton and finally user profile + dropdown at right */}
-            <div class="flex items-center gap-10 ml-8">
+            {/* Right: HomeButton and user controls */}
+            <div class="flex items-center gap-4 sm:gap-6 lg:gap-10 shrink-0">
               <HomeButton />
 
-              <div class="flex items-center gap-4">
+              <div class="flex items-center gap-3 sm:gap-4">
                 <UserProfile user={user} translationData={translationData} />
                 <UserOptionsDropdown
                   user={user}
@@ -53,15 +57,9 @@ export default function Header(
             </div>
           </header>
 
-          {
-            /* Centered search overlay: absolutely center within the relative container above.
-              Use pointer-events-none on the overlay so it doesn't block clicks to header elements,
-              and enable pointer-events-auto on the search wrapper so the input remains interactive. */
-          }
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="w-full max-w-[90%] md:max-w-[40vw] pointer-events-auto">
-              <SearchBar />
-            </div>
+          {/* Mobile search: show below header on small/medium screens */}
+          <div class="lg:hidden pb-4">
+            <SearchBar />
           </div>
         </div>
       </div>
