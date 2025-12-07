@@ -61,14 +61,14 @@ export default function Home({ data }: PageProps<Props>) {
         />
       )}
 
-      <main class="min-h-screen bg-linear-to-b from-gray-900 via-slate-900 to-gray-950 relative overflow-hidden">
+      <main class="h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] bg-linear-to-b from-gray-900 via-slate-900 to-gray-950 relative overflow-hidden flex flex-col">
         {/* Atmospheric Background Effects */}
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjAzIi8+PC9nPjwvc3ZnPg==')] opacity-20" />
 
         {/* Hero Section */}
-        <section class="relative overflow-hidden">
-          <div class="relative max-w-7xl mx-auto px-6 py-20 sm:py-24 lg:py-32">
+        <section class="relative overflow-hidden shrink-0 mb-6">
+          <div class="relative max-w-7xl mx-auto px-6 pt-12 pb-0 sm:pt-16 sm:pb-0 lg:pt-20 lg:pb-0">
             <div class="text-center">
               {/* Epic Title with Glow Effect */}
               <div class="relative inline-block">
@@ -77,23 +77,19 @@ export default function Home({ data }: PageProps<Props>) {
                 </h1>
                 <div class="absolute -inset-1 bg-linear-to-r from-purple-600 to-pink-600 opacity-20 blur-2xl -z-10" />
               </div>
-
             </div>
           </div>
-
-          {/* Decorative bottom fade */}
-          <div class="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-gray-900 to-transparent" />
         </section>
 
         {/* Features Grid */}
-        <section class="relative max-w-7xl mx-auto px-6 py-16 sm:py-20">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section class="relative max-w-7xl mx-auto px-6 pb-6 flex-1 flex overflow-y-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full content-start">
             {/* Characters */}
             <FeatureCard
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-8 h-8"
+                  class="w-6 h-6"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -115,7 +111,7 @@ export default function Home({ data }: PageProps<Props>) {
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-8 h-8"
+                  class="w-6 h-6"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -137,7 +133,7 @@ export default function Home({ data }: PageProps<Props>) {
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-8 h-8"
+                  class="w-6 h-6"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -157,7 +153,7 @@ export default function Home({ data }: PageProps<Props>) {
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-8 h-8"
+                  class="w-6 h-6"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -177,7 +173,7 @@ export default function Home({ data }: PageProps<Props>) {
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-8 h-8"
+                  class="w-6 h-6"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -197,7 +193,7 @@ export default function Home({ data }: PageProps<Props>) {
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-8 h-8"
+                  class="w-6 h-6"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -217,7 +213,6 @@ export default function Home({ data }: PageProps<Props>) {
             />
           </div>
         </section>
-
       </main>
     </>
   );
@@ -236,7 +231,7 @@ function FeatureCard(
 ) {
   const content = (
     <div
-      class={`group relative bg-gray-800/50 rounded-2xl border border-purple-500/20 p-8
+      class={`group relative bg-gray-800/50 rounded-xl border border-purple-500/20 p-5
         backdrop-blur-sm
         hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]
         hover:bg-gray-800/70
@@ -244,10 +239,10 @@ function FeatureCard(
         ${comingSoon ? "opacity-60" : "cursor-pointer"}`}
     >
       {/* Card glow effect on hover */}
-      <div class="absolute inset-0 rounded-2xl bg-linear-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 transition-all duration-300" />
+      <div class="absolute inset-0 rounded-xl bg-linear-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 transition-all duration-300" />
 
-      <div class="relative flex items-center justify-between mb-4">
-        <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 group-hover:bg-purple-500/20 group-hover:text-purple-300 transition-all border border-purple-500/20">
+      <div class="relative flex items-center justify-between mb-3">
+        <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400 group-hover:bg-purple-500/20 group-hover:text-purple-300 transition-all border border-purple-500/20">
           {icon}
         </div>
         {comingSoon && (
@@ -257,15 +252,15 @@ function FeatureCard(
         )}
       </div>
 
-      <h3 class="relative text-xl font-bold text-purple-100 mb-3 group-hover:text-white transition-colors">
+      <h3 class="relative text-lg font-bold text-purple-100 mb-2 group-hover:text-white transition-colors">
         {title}
       </h3>
-      <p class="relative text-gray-400 flex-1 leading-relaxed group-hover:text-gray-300 transition-colors">
+      <p class="relative text-sm text-gray-400 flex-1 leading-relaxed group-hover:text-gray-300 transition-colors">
         {description}
       </p>
 
       {!comingSoon && (
-        <div class="relative mt-6 flex items-center text-purple-400 font-semibold group-hover:text-purple-300 group-hover:gap-2 transition-all">
+        <div class="relative mt-4 flex items-center text-sm text-purple-400 font-semibold group-hover:text-purple-300 group-hover:gap-2 transition-all">
           <span>Explore</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
