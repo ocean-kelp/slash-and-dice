@@ -18,11 +18,22 @@ export default function UserOptionsDropdown({
   locale = "en",
 }: Props) {
   const [open, setOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const isGuest = !user?.username;
   const t = translate(translationData ?? {});
 
   const handleSignOut = async () => {
-    await signOut();
+    try {
+      setIsLoggingOut(true);
+      setOpen(false); // Close the dropdown immediately
+      await signOut();
+      // Redirect to home page after successful logout
+      globalThis.location.href = `/${locale}`;
+    } catch (error) {
+      console.error("Logout failed:", error);
+      setIsLoggingOut(false);
+      // Optionally show an error message to the user
+    }
   };
 
   // For guests, render a simple link to the login page
@@ -66,6 +77,18 @@ export default function UserOptionsDropdown({
   // For logged-in users, show the dropdown menu
   return (
     <div class="relative">
+      {/* Loading overlay when logging out */}
+      {isLoggingOut && (
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div class="bg-white rounded-2xl p-6 shadow-2xl flex flex-col items-center gap-4">
+            <div class="w-12 h-12 border-4 border-ocean-deep-200 border-t-ocean-deep-600 rounded-full animate-spin" />
+            <p class="text-gray-700 font-medium">
+              {t("common.header.userOptions.loggingOut")}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Simple Dropdown Button */}
       <button
         type="button"
@@ -73,8 +96,9 @@ export default function UserOptionsDropdown({
           hover:bg-ocean-deep-50 hover:shadow-lg hover:border-ocean-deep-300
           focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2
           transition-all duration-200 ease-out
-          cursor-pointer"
+          cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         onClick={() => setOpen(!open)}
+        disabled={isLoggingOut}
         aria-expanded={open}
         aria-haspopup="menu"
         aria-label={t("common.header.userOptions.ariaLabel")}

@@ -126,6 +126,7 @@
       "signInWechat": "Iniciar sesión con WeChat",
       "noProvidersAvailable": "No hay métodos de inicio de sesión disponibles",
       "logout": "Cerrar sesión",
+      "loggingOut": "Cerrando sesión...",
       "changeUsername": "Cambiar nombre de usuario",
       "changeAvatar": "Cambiar avatar",
       "help": "Ayuda y soporte",

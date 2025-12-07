@@ -126,6 +126,7 @@
       "signInWechat": "Sign in with WeChat",
       "noProvidersAvailable": "No sign-in methods available",
       "logout": "Sign Out",
+      "loggingOut": "Signing out...",
       "changeUsername": "Change Username",
       "changeAvatar": "Change Avatar",
       "help": "Help & Support",
