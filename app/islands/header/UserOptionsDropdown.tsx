@@ -62,50 +62,53 @@ export default function UserOptionsDropdown({
   // For logged-in users, show the dropdown menu
   return (
     <div class="relative">
-      {/* Trigger Button */}
+      {/* Simple Dropdown Button */}
       <button
         type="button"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full
-          bg-ocean-deep-50 text-ocean-deep-700 border border-ocean-deep-200
-          hover:shadow-xl hover:scale-[1.02]
+        class="flex items-center justify-center w-12 h-12 rounded-[9999px] border-2 border-ocean-deep-200
+          hover:bg-ocean-deep-50 hover:shadow-lg hover:border-ocean-deep-300
           focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2
-          transition-all duration-300 ease-out
-          font-medium text-sm"
+          transition-all duration-200 ease-out
+          cursor-pointer"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="menu"
         aria-label={t("common.header.userOptions.ariaLabel")}
       >
-        {user?.iconUrl
+        {/* Dropdown Caret Icon */}
+        {open
           ? (
-            <img
-              src={user.iconUrl}
-              alt={user.username}
-              class="w-6 h-6 rounded-full object-cover ring-2 ring-white"
-            />
+            // Outline version when open (rotated)
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-ocean-deep-600 transition-transform duration-200 rotate-180"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M6 10l6 6l6 -6h-12" />
+            </svg>
           )
           : (
-            <div class="w-6 h-6 rounded-full bg-linear-to-br from-ocean-deep-400 to-ocean-deep-600 flex items-center justify-center text-white text-xs font-bold">
-              {user?.username?.charAt(0).toUpperCase()}
-            </div>
+            // Filled version when closed
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="text-ocean-deep-600 transition-transform duration-200"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" />
+            </svg>
           )}
-        <span class="max-w-[100px] truncate">{user?.username}</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class={`transition-transform duration-200 ${
-            open ? "rotate-180" : ""
-          }`}
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
       </button>
 
       {/* Dropdown Menu */}
@@ -123,33 +126,6 @@ export default function UserOptionsDropdown({
             role="menu"
             aria-orientation="vertical"
           >
-            {/* User Header */}
-            <div class="p-5 bg-linear-to-br from-ocean-deep-50 to-ocean-deep-100/50">
-              <div class="flex items-center gap-4">
-                {user?.iconUrl
-                  ? (
-                    <img
-                      src={user.iconUrl}
-                      alt={user.username}
-                      class="w-14 h-14 rounded-full object-cover ring-4 ring-white shadow-lg"
-                    />
-                  )
-                  : (
-                    <div class="w-14 h-14 rounded-full bg-linear-to-br from-ocean-deep-400 to-ocean-deep-600 flex items-center justify-center text-white text-xl font-bold ring-4 ring-white shadow-lg">
-                      {user?.username?.charAt(0).toUpperCase()}
-                    </div>
-                  )}
-                <div class="flex-1 min-w-0">
-                  <p class="text-base font-semibold text-gray-900 truncate">
-                    {user?.username}
-                  </p>
-                  <p class="text-sm text-ocean-deep-600">
-                    {t("common.header.userOptions.welcome")}
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* Menu Items */}
             <div class="p-2">
               <MenuItem

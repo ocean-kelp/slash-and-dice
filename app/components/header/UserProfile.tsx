@@ -10,7 +10,7 @@ type Props = {
   translationData?: Record<string, unknown>;
 };
 
-export default function UserProfile({ user, translationData }: Props) {
+export default function UserProfile({ user }: Props) {
   // translationData is available for future use if needed for localized tooltips or labels
   const name = user?.username ?? "Guest";
 

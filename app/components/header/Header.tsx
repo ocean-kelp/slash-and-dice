@@ -38,11 +38,11 @@ export default function Header(
             {/* spacer: let logo and right-side items align naturally. The search is positioned absolutely below so it stays centered on screen. */}
             <div class="flex-1" />
 
-            {/* small gap then HomeButton and finally user profile at right */}
+            {/* small gap then HomeButton and finally user profile + dropdown at right */}
             <div class="flex items-center gap-10 ml-8">
               <HomeButton />
 
-              <div class="flex items-center gap-6">
+              <div class="flex items-center gap-4">
                 <UserProfile user={user} translationData={translationData} />
                 <UserOptionsDropdown
                   user={user}
