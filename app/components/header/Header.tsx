@@ -43,10 +43,10 @@ export default function Header(
             </div>
 
             {/* Right: HomeButton and user controls */}
-            <div class="flex items-center gap-4 sm:gap-6 lg:gap-10 shrink-0">
+            <div class="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 shrink-0">
               <HomeButton />
 
-              <div class="flex items-center gap-3 sm:gap-4">
+              <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
                 <UserProfile user={user} translationData={translationData} />
                 <UserOptionsDropdown
                   user={user}

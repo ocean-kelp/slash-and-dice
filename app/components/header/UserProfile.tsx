@@ -30,8 +30,8 @@ export default function UserProfile({ user }: Props) {
     .join("");
 
   return (
-    <div class="flex items-center gap-3">
-      <div class="w-14 h-14 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center border-2 border-ocean-deep-500 shadow-sm">
+    <div class="flex items-center gap-2 sm:gap-3">
+      <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center border-2 border-ocean-deep-500 shadow-sm">
         {avatarUrl
           ? (
             <img
@@ -41,13 +41,14 @@ export default function UserProfile({ user }: Props) {
             />
           )
           : (
-            <span class="text-sm font-medium text-gray-600">
+            <span class="text-xs sm:text-sm font-medium text-gray-600">
               {initials || "G"}
             </span>
           )}
       </div>
 
-      <div class="text-sm text-right sm:text-left">
+      {/* Hide username text on small screens to save space */}
+      <div class="hidden sm:block text-sm text-right sm:text-left">
         <div class="font-medium text-gray-800">{name}</div>
         <div class="text-xs text-gray-500">
           @{(user?.username ?? "guest").toLowerCase()}

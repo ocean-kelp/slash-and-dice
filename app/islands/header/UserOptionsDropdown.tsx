@@ -30,31 +30,35 @@ export default function UserOptionsDropdown({
     return (
       <a
         href={`/${locale}/login`}
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full
+        class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full
           bg-linear-to-r from-ocean-deep-500 to-ocean-deep-600 text-white 
           shadow-lg shadow-ocean-deep-500/25
           hover:shadow-xl hover:scale-[1.02]
           focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2
           transition-all duration-300 ease-out
-          font-medium text-sm"
+          font-medium text-xs sm:text-sm whitespace-nowrap"
         aria-label={t("common.header.userOptions.ariaLabel")}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          class="sm:w-[18px] sm:h-[18px]"
         >
           <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
           <polyline points="10 17 15 12 10 7" />
           <line x1="15" y1="12" x2="3" y2="12" />
         </svg>
-        <span>{t("common.login.title")}</span>
+        <span class="hidden xs:inline sm:inline">
+          {t("common.login.title")}
+        </span>
+        <span class="xs:hidden sm:hidden">{t("common.login.title")}</span>
       </a>
     );
   }
@@ -65,7 +69,7 @@ export default function UserOptionsDropdown({
       {/* Simple Dropdown Button */}
       <button
         type="button"
-        class="flex items-center justify-center w-12 h-12 rounded-[9999px] border-2 border-ocean-deep-200
+        class="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-[9999px] border-2 border-ocean-deep-200
           hover:bg-ocean-deep-50 hover:shadow-lg hover:border-ocean-deep-300
           focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2
           transition-all duration-200 ease-out
@@ -81,15 +85,15 @@ export default function UserOptionsDropdown({
             // Outline version when open (rotated)
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="text-ocean-deep-600 transition-transform duration-200 rotate-180"
+              class="text-ocean-deep-600 transition-transform duration-200 rotate-180 sm:w-5 sm:h-5"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M6 10l6 6l6 -6h-12" />
@@ -99,11 +103,11 @@ export default function UserOptionsDropdown({
             // Filled version when closed
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="currentColor"
-              class="text-ocean-deep-600 transition-transform duration-200"
+              class="text-ocean-deep-600 transition-transform duration-200 sm:w-5 sm:h-5"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" />
