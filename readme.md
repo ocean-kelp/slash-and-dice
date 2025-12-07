@@ -9,7 +9,7 @@ Feel free to also visit this wiki website, it has a lot of useful info:
 [Dungeon Slasher Wiki](https://dungeonslasher.wiki/).
 
 Access this project online at:
-[slash-and-dice.deno.dev](https://slash-and-dice.xingshuu.deno.net/).
+[slash-and-dice.xingshuu.deno.net](https://slash-and-dice.xingshuu.deno.net/).
 
 ### Tech
 

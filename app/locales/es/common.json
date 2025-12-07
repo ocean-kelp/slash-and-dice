@@ -2,9 +2,41 @@
   "home": {
     "title": "Bienvenido a Slash & Dice",
     "subtitle": "Un espacio sencillo y lúdico — próximamente.",
-    "cta": "Comenzar",
     "notice": "Esta es una página temporal de marcador de posición.",
-    "learnMore": "Saber más"
+    "learnMore": "Saber más",
+    "exploreCharacters": "Explorar Personajes",
+    "browseCodex": "Explorar Códice",
+    "features": {
+      "characters": {
+        "title": "Personajes",
+        "description": "Descubre estadísticas detalladas, habilidades y estrategias para cada personaje del juego."
+      },
+      "builds": {
+        "title": "Composiciones de Equipo",
+        "description": "Crea y comparte poderosas composiciones de equipo y estrategias con la comunidad."
+      },
+      "codex": {
+        "title": "Códice del Juego",
+        "description": "Tu guía de referencia completa para habilidades, artefactos, sinergias y mecánicas del juego."
+      },
+      "community": {
+        "title": "Comunidad",
+        "description": "Únete a las discusiones, comparte consejos, haz preguntas y conéctate con otros jugadores."
+      },
+      "tierLists": {
+        "title": "Listas de Niveles",
+        "description": "Rankings impulsados por la comunidad y análisis del meta para ayudarte a tomar decisiones informadas."
+      },
+      "guides": {
+        "title": "Guías Estratégicas",
+        "description": "Aprende de jugadores expertos con guías detalladas, tutoriales y consejos de juego."
+      }
+    },
+    "cta": {
+      "title": "¿Listo para Sumergirte?",
+      "description": "Comienza a explorar personajes, construir equipos y conectarte con la comunidad hoy.",
+      "button": "Comenzar"
+    }
   },
   "welcome": {
     "title": "¡Bienvenido! 🎉",

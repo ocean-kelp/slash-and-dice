@@ -2,9 +2,41 @@
   "home": {
     "title": "Welcome to Slash & Dice",
     "subtitle": "A simple, playful playground — coming soon.",
-    "cta": "Get Started",
     "notice": "This is a temporary placeholder page.",
-    "learnMore": "Learn more"
+    "learnMore": "Learn more",
+    "exploreCharacters": "Explore Characters",
+    "browseCodex": "Browse Codex",
+    "features": {
+      "characters": {
+        "title": "Characters",
+        "description": "Discover detailed stats, abilities, and strategies for every character in the game."
+      },
+      "builds": {
+        "title": "Team Builds",
+        "description": "Create and share powerful team compositions and strategies with the community."
+      },
+      "codex": {
+        "title": "Game Codex",
+        "description": "Your complete reference guide for skills, artifacts, synergies, and game mechanics."
+      },
+      "community": {
+        "title": "Community",
+        "description": "Join discussions, share tips, ask questions, and connect with fellow players."
+      },
+      "tierLists": {
+        "title": "Tier Lists",
+        "description": "Community-driven rankings and meta analysis to help you make informed decisions."
+      },
+      "guides": {
+        "title": "Strategy Guides",
+        "description": "Learn from expert players with in-depth guides, tutorials, and gameplay tips."
+      }
+    },
+    "cta": {
+      "title": "Ready to Dive In?",
+      "description": "Start exploring characters, building teams, and connecting with the community today.",
+      "button": "Get Started"
+    }
   },
   "welcome": {
     "title": "Welcome! 🎉",
