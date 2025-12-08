@@ -66,9 +66,19 @@ export default function Home({ data }: PageProps<Props>) {
       />
 
       <main class="h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] bg-linear-to-b from-gray-900 via-slate-900 to-gray-950 relative overflow-hidden flex flex-col">
+        {/* Squiggle Pattern Background */}
+        <div 
+          class="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage: "url('/svg/squiggle-pattern.svg')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "400px 400px",
+            backgroundPosition: "center"
+          }}
+        />
+        
         {/* Atmospheric Background Effects */}
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjAzIi8+PC9nPjwvc3ZnPg==')] opacity-20" />
 
         {/* Hero Section */}
         <section class="relative overflow-hidden shrink-0 mb-6">
