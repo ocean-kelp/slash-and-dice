@@ -4,7 +4,7 @@ import { translate } from "@/custom-i18n/translator.ts";
 import {
   type CharacterListItem,
   characterService,
-} from "@/services/local/data/characterService.ts";
+} from "@/services/local/game/characterService.ts";
 import CharacterCard from "../../../../../../components/characters/CharacterCard.tsx";
 
 export const handler = defineRoute.handlers({

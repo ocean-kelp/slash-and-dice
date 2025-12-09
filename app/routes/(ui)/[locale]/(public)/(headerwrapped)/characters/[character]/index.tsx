@@ -1,6 +1,7 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { characterService } from "@/services/local/data/characterService.ts";
+import { translate } from "@/custom-i18n/translator.ts";
+import { characterService } from "@/services/local/game/characterService.ts";
 import type { Character } from "@/models/Character.ts";
 
 export const handler = defineRoute.handlers({
@@ -30,6 +31,7 @@ type Props = {
 };
 
 export default function CharacterDetailPage({ data }: PageProps<Props>) {
+  const t = translate(data.translationData ?? {});
   const { character } = data;
 
   return (
@@ -62,7 +64,7 @@ export default function CharacterDetailPage({ data }: PageProps<Props>) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Back to Characters
+            {t("common.characters.backToList")}
           </a>
 
           {/* Character Header */}
@@ -84,45 +86,74 @@ export default function CharacterDetailPage({ data }: PageProps<Props>) {
                   {character.name}
                 </h1>
 
+                {/* Gem Cost */}
+                {character.price?.gem !== undefined && (
+                  <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                    <img
+                      src="/game/data/currencies/gem.png"
+                      alt="Gems"
+                      class="w-8 h-8"
+                      style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+                    />
+                    <span class="text-2xl font-bold text-purple-200">
+                      {character.price.gem === 0
+                        ? "Free"
+                        : character.price.gem.toLocaleString()}
+                    </span>
+                  </div>
+                )}
+
                 {/* Stats Grid */}
                 <div class="grid grid-cols-2 gap-4 mt-8">
                   <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                    <div class="text-sm text-gray-400 mb-1">HP</div>
+                    <div class="text-sm text-gray-400 mb-1">
+                      {t("common.characters.stats.hp")}
+                    </div>
                     <div class="text-2xl font-bold text-purple-100">
                       {character.stats.hp}
                     </div>
                   </div>
 
                   <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                    <div class="text-sm text-gray-400 mb-1">ATK Power</div>
+                    <div class="text-sm text-gray-400 mb-1">
+                      {t("common.characters.stats.atkPower")}
+                    </div>
                     <div class="text-2xl font-bold text-purple-100">
                       {character.stats.atkPower}
                     </div>
                   </div>
 
                   <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                    <div class="text-sm text-gray-400 mb-1">Crit Rate</div>
+                    <div class="text-sm text-gray-400 mb-1">
+                      {t("common.characters.stats.critRate")}
+                    </div>
                     <div class="text-2xl font-bold text-purple-100">
                       {(character.stats.critRate * 100).toFixed(0)}%
                     </div>
                   </div>
 
                   <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                    <div class="text-sm text-gray-400 mb-1">ATK Speed</div>
+                    <div class="text-sm text-gray-400 mb-1">
+                      {t("common.characters.stats.atkSpeed")}
+                    </div>
                     <div class="text-2xl font-bold text-purple-100">
                       {(character.stats.atkSpeed * 100).toFixed(0)}%
                     </div>
                   </div>
 
                   <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                    <div class="text-sm text-gray-400 mb-1">Move Speed</div>
+                    <div class="text-sm text-gray-400 mb-1">
+                      {t("common.characters.stats.moveSpeed")}
+                    </div>
                     <div class="text-2xl font-bold text-purple-100">
                       {character.stats.moveSpeed}
                     </div>
                   </div>
 
                   <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                    <div class="text-sm text-gray-400 mb-1">Skill DMG</div>
+                    <div class="text-sm text-gray-400 mb-1">
+                      {t("common.characters.stats.skillDmg")}
+                    </div>
                     <div class="text-2xl font-bold text-purple-100">
                       {(character.stats.skillDmg * 100).toFixed(0)}%
                     </div>

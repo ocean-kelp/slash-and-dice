@@ -2,6 +2,9 @@
   {
     "id": 1,
     "name": "knight",
+    "price": {
+      "gem": 0
+    },
     "stats": {
       "id": 1,
       "hp": 6,
@@ -15,6 +18,9 @@
   {
     "id": 2,
     "name": "fighter",
+    "price": {
+      "gem": 3000
+    },
     "stats": {
       "id": 2,
       "hp": 6,
@@ -28,6 +34,9 @@
   {
     "id": 3,
     "name": "mage",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 3,
       "hp": 5,
@@ -41,6 +50,9 @@
   {
     "id": 4,
     "name": "hunter",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 4,
       "hp": 5,
@@ -54,6 +66,9 @@
   {
     "id": 5,
     "name": "slayer",
+    "price": {
+      "gem": 3000
+    },
     "stats": {
       "id": 5,
       "hp": 5,
@@ -67,6 +82,9 @@
   {
     "id": 6,
     "name": "ronin",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 6,
       "hp": 5,
@@ -80,6 +98,9 @@
   {
     "id": 7,
     "name": "gunner",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 7,
       "hp": 5,
@@ -93,6 +114,9 @@
   {
     "id": 8,
     "name": "mercenary",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 8,
       "hp": 6,
@@ -106,6 +130,9 @@
   {
     "id": 9,
     "name": "vampire",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 9,
       "hp": 8,
@@ -119,6 +146,9 @@
   {
     "id": 10,
     "name": "shaman",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 10,
       "hp": 4,
@@ -132,6 +162,9 @@
   {
     "id": 11,
     "name": "guardian",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 11,
       "hp": 3,
@@ -145,6 +178,9 @@
   {
     "id": 12,
     "name": "summoner",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 12,
       "hp": 6,
@@ -158,6 +194,9 @@
   {
     "id": 13,
     "name": "dragonian",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 13,
       "hp": 6,
@@ -171,6 +210,9 @@
   {
     "id": 14,
     "name": "predator",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 14,
       "hp": 5,
@@ -184,6 +226,9 @@
   {
     "id": 15,
     "name": "werewolf",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 15,
       "hp": 7,
@@ -197,6 +242,9 @@
   {
     "id": 16,
     "name": "doppelganger",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 16,
       "hp": 6,
@@ -210,6 +258,9 @@
   {
     "id": 17,
     "name": "assasin",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 17,
       "hp": 8,
@@ -223,6 +274,9 @@
   {
     "id": 18,
     "name": "bjorn-yandel",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 18,
       "hp": 8,
@@ -236,6 +290,9 @@
   {
     "id": 19,
     "name": "soul-eater",
+    "price": {
+      "gem": 4000
+    },
     "stats": {
       "id": 19,
       "hp": 6,

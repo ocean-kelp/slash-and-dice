@@ -1,4 +1,4 @@
-import type { CharacterListItem } from "@/services/local/data/characterService.ts";
+import type { CharacterListItem } from "@/services/local/game/characterService.ts";
 
 type CharacterCardProps = {
   character: CharacterListItem;
@@ -27,11 +27,28 @@ export default function CharacterCard(
         />
       </div>
 
-      {/* Character Name */}
+      {/* Character Name and Cost */}
       <div class="relative p-4 bg-gray-800/90 backdrop-blur-sm">
         <h3 class="text-lg font-bold text-purple-100 group-hover:text-white transition-colors capitalize text-center">
           {character.name}
         </h3>
+
+        {/* Gem Cost */}
+        {character.gemCost !== undefined && (
+          <div class="flex items-center justify-center gap-1 mt-2">
+            <img
+              src="/game/data/currencies/gem.png"
+              alt="Gems"
+              class="w-5 h-5"
+              style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+            />
+            <span class="text-sm font-semibold text-purple-200">
+              {character.gemCost === 0
+                ? "Free"
+                : character.gemCost.toLocaleString()}
+            </span>
+          </div>
+        )}
       </div>
     </a>
   );

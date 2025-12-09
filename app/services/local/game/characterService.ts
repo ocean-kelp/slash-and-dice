@@ -6,19 +6,21 @@ import charactersData from "@/data/characters/characters.json" with {
 export interface CharacterListItem {
   name: string;
   thumbnail: string;
+  gemCost?: number;
 }
 
 class CharacterService {
   private characters: Character[] = charactersData as Character[];
 
   /**
-   * Get all characters (lightweight - only name and thumbnail)
-   * @returns Array of character names with thumbnails
+   * Get all characters (lightweight - only name, thumbnail, and gem cost)
+   * @returns Array of character names with thumbnails and gem costs
    */
   getAllCharacters(): CharacterListItem[] {
     return this.characters.map((c) => ({
       name: c.name,
       thumbnail: this.getThumbnail(c.name),
+      gemCost: c.price?.gem,
     }));
   }
 
@@ -37,7 +39,7 @@ class CharacterService {
    * @returns Path to character thumbnail
    */
   getThumbnail(name: string): string {
-    return `/characters/${name}/thumbnail.png`;
+    return `/game/characters/${name}/thumbnail.png`;
   }
 }
 

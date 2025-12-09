@@ -40,7 +40,16 @@
   },
   "characters": {
     "title": "Characters",
-    "description": "Discover all the heroes and their unique abilities. Click on any character to view detailed stats and information."
+    "description": "Discover all the heroes and their unique abilities. Click on any character to view detailed stats and information.",
+    "backToList": "Back to Characters",
+    "stats": {
+      "hp": "HP",
+      "atkPower": "ATK Power",
+      "critRate": "Crit Rate",
+      "atkSpeed": "ATK Speed",
+      "moveSpeed": "Move Speed",
+      "skillDmg": "Skill DMG"
+    }
   },
   "welcome": {
     "title": "Welcome! 🎉",
