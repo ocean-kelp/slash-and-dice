@@ -3,6 +3,7 @@ import UserProfile from "./UserProfile.tsx";
 import UserOptionsDropdown from "@/islands/header/UserOptionsDropdown.tsx";
 import Logo from "./Logo.tsx";
 import SearchBar from "@/islands/header/SearchBar.tsx";
+import LanguageSelector from "@/islands/header/LanguageSelector.tsx";
 import { translate } from "@/custom-i18n/translator.ts";
 
 type Props = {
@@ -50,6 +51,10 @@ export default function Header(
               <HomeButton />
 
               <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+                <LanguageSelector
+                  currentLocale={locale || "en"}
+                  translationData={translationData}
+                />
                 <UserProfile user={user} translationData={translationData} />
                 <UserOptionsDropdown
                   user={user}

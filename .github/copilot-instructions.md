@@ -15,6 +15,28 @@
 - every route must as server side as possible unless it needs to run on client
 - For color system guidance (palette, semantic usage, accessibility), reference the canonical file at `docs/color-guidelines.md` rather than duplicating it here. This keeps design tokens centralized and avoids needing to update multiple places.
 - For CSS custom property token names (e.g., `--color-ocean-deep-500`) and their canonical values, reference `app/assets/styles.css` rather than copying tokens here. This ensures the codebase uses one authoritative source for tokens.
+- **JSX/TSX Formatting**: Add a blank line before comments that introduce a new logical block of JSX elements to improve readability. Note that auto-formatters like `deno fmt` may remove these, which is acceptable.
+
+```tsx
+// ✅ Preferred style
+<div>
+  {/* First section */}
+  <svg>...</svg>
+  <span>Text</span>
+
+  {/* Second section */}
+  <button>Click</button>
+</div>
+
+// ❌ Avoid
+<div>
+  {/* First section */}
+  <svg>...</svg>
+  <span>Text</span>
+  {/* Second section */}
+  <button>Click</button>
+</div>
+```
 
 ### Dark Theme Pages
 

@@ -45,6 +45,27 @@ export function deleteCookieClient(alias: string, name: string) {
   setCookieClient(alias, name, "", -1);
 }
 
+// SERVER-SIDE: Read cookie from request headers
+// Usage: getCookieServer(headers, alias, name)
+export function getCookieServer(
+  headers: Headers,
+  alias: string,
+  name: string,
+): string | null {
+  const cookieName = getCookieName(alias, name);
+  const cookieHeader = headers.get("cookie");
+  if (!cookieHeader) return null;
+
+  const cookies = cookieHeader.split("; ");
+  for (const cookie of cookies) {
+    const [key, val] = cookie.split("=");
+    if (key === cookieName) {
+      return decodeURIComponent(val);
+    }
+  }
+  return null;
+}
+
 // SERVER-SIDE: Generate Set-Cookie header string
 // Usage: getSetCookieHeader(alias, name, value, days?)
 export function getSetCookieHeader(
