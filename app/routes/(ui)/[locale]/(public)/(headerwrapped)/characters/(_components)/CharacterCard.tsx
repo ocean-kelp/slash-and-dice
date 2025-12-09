@@ -22,6 +22,7 @@ export default function CharacterCard(
           src={character.thumbnail}
           alt={character.name}
           class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+          style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
           loading="lazy"
         />
       </div>
