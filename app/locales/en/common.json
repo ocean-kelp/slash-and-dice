@@ -38,6 +38,10 @@
       "button": "Get Started"
     }
   },
+  "characters": {
+    "title": "Characters",
+    "description": "Discover all the heroes and their unique abilities. Click on any character to view detailed stats and information."
+  },
   "welcome": {
     "title": "Welcome! 🎉",
     "subtitle": "Let's set up your profile",

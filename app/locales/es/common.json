@@ -38,6 +38,10 @@
       "button": "Comenzar"
     }
   },
+  "characters": {
+    "title": "Personajes",
+    "description": "Descubre todos los héroes y sus habilidades únicas. Haz clic en cualquier personaje para ver estadísticas e información detallada."
+  },
   "welcome": {
     "title": "¡Bienvenido! 🎉",
     "subtitle": "Configuremos tu perfil",
