@@ -1,36 +1,14 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/custom-i18n/translator.ts";
-import { auth } from "@/lib/auth.ts";
-import type { LinkedProvider } from "@/models/User.ts";
-import AvatarSelectionModal from "@/islands/welcome/AvatarSelectionModal.tsx";
-import { showAvatarModal } from "@/signals/avatarModal.ts";
 
 export const handler = defineRoute.handlers({
-  async GET(ctx) {
+  GET(ctx) {
     const state = ctx.state;
-
-    // Check if user is logged in and needs onboarding
-    const session = await auth.api.getSession({ headers: ctx.req.headers });
-    let showOnboarding = false;
-    let providers: LinkedProvider[] = [];
-
-    if (session?.user) {
-      const { getUserById } = await import("@/db/repositories/userRepo.ts");
-      const user = await getUserById(session.user.id);
-
-      // Show onboarding modal if user hasn't selected an avatar yet
-      if (user && !user.selectedAvatarUrl) {
-        showOnboarding = true;
-        providers = user.providers || [];
-      }
-    }
 
     return {
       data: {
         translationData: state.translationData ?? {},
-        showOnboarding,
-        providers,
       },
     };
   },
@@ -38,8 +16,6 @@ export const handler = defineRoute.handlers({
 
 type Props = {
   translationData?: Record<string, unknown>;
-  showOnboarding?: boolean;
-  providers?: LinkedProvider[];
 };
 
 export default function Home({ data }: PageProps<Props>) {
@@ -47,23 +23,12 @@ export default function Home({ data }: PageProps<Props>) {
 
   const title = t("common.home.title");
 
-  // Initialize modal visibility for new users
-  if (data.showOnboarding) {
-    showAvatarModal.value = true;
-  }
-
   return (
     <>
       <head>
         <title>{title}</title>
         <meta name="description" />
       </head>
-
-      {/* Avatar Selection Modal - always rendered but controlled by signal */}
-      <AvatarSelectionModal
-        providers={data.providers || []}
-        translationData={data.translationData}
-      />
 
       <main class="flex flex-col">
         {/* Hero Section */}

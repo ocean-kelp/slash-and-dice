@@ -1,13 +1,15 @@
-import { useSignal } from "@preact/signals";
+import { useSignal, useSignalEffect } from "@preact/signals";
 import { translate } from "@/custom-i18n/translator.ts";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock.ts";
 import type { LinkedProvider } from "@/models/User.ts";
 import { showAvatarModal } from "@/signals/avatarModal.ts";
 
 interface Props {
-  providers: LinkedProvider[];
   translationData?: Record<string, unknown>;
 }
+
+// Note: Modal is triggered manually via showAvatarModal signal
+// Users can open it from the UserOptionsDropdown "Change Avatar" option
 
 // Lorelei avatar customization options
 interface LoreleiOptions {
@@ -115,12 +117,34 @@ const NOSE_VARIANTS = Array.from(
 );
 
 export default function AvatarSelectionModal(
-  { providers, translationData }: Props,
+  { translationData }: Props,
 ) {
   const t = translate(translationData ?? {});
 
+  // State for providers - will be populated when modal is opened manually
+  const providers = useSignal<LinkedProvider[]>([]);
+
+  // Fetch providers when modal opens
+  useSignalEffect(() => {
+    const fetchProviders = async () => {
+      if (!showAvatarModal.value || providers.value.length > 0) return;
+
+      try {
+        const response = await fetch("/api/user/onboarding-status");
+        if (response.ok) {
+          const data = await response.json();
+          providers.value = data.providers || [];
+        }
+      } catch (error) {
+        console.error("Failed to fetch providers:", error);
+      }
+    };
+
+    fetchProviders();
+  });
+
   // Filter providers that have images
-  const providersWithImages = providers.filter((p) => p.imageUrl);
+  const providersWithImages = providers.value.filter((p) => p.imageUrl);
 
   // State - use global signal for modal visibility
   const isOpen = showAvatarModal;
@@ -162,7 +186,7 @@ export default function AvatarSelectionModal(
   >("eyes");
 
   // Lock body scroll when modal is open
-  useBodyScrollLock();
+  useBodyScrollLock(isOpen.value);
 
   const buildAvatarUrl = () => {
     const params = new URLSearchParams({
@@ -265,7 +289,7 @@ export default function AvatarSelectionModal(
 
   return (
     <div
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+      class="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
       onClick={() => {
         isOpen.value = false;
       }}

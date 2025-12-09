@@ -4,6 +4,7 @@ import UserOptionsDropdown from "@/islands/header/UserOptionsDropdown.tsx";
 import Logo from "./Logo.tsx";
 import SearchBar from "@/islands/header/SearchBar.tsx";
 import LanguageSelector from "@/islands/header/LanguageSelector.tsx";
+import AvatarSelectionModal from "@/islands/welcome/AvatarSelectionModal.tsx";
 import { translate } from "@/custom-i18n/translator.ts";
 
 type Props = {
@@ -25,6 +26,9 @@ export default function Header(
 
   return (
     <>
+      {/* Avatar Onboarding Modal - checks and shows automatically if needed */}
+      <AvatarSelectionModal translationData={translationData} />
+
       <div
         class="fixed top-0 left-0 right-0 z-50 bg-white"
         aria-label={ariaLabel}
