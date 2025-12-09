@@ -5,7 +5,7 @@ import {
   type CharacterListItem,
   characterService,
 } from "@/services/local/data/characterService.ts";
-import CharacterCard from "./(_components)/CharacterCard.tsx";
+import CharacterCard from "../../../../../../components/characters/CharacterCard.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
