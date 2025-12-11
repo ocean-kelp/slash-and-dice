@@ -2,7 +2,7 @@ import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/custom-i18n/translator.ts";
 import { characterService } from "@/services/local/game/characterService.ts";
-import type { Character } from "@/models/Character.ts";
+import type { Character } from "@/data/characters/types.ts";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {

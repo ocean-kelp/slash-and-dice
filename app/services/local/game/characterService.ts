@@ -1,7 +1,5 @@
-import type { Character } from "@/models/Character.ts";
-import charactersData from "@/data/characters/characters.json" with {
-  type: "json",
-};
+import type { Character } from "@/data/characters/types.ts";
+import { allCharacters } from "@/data/characters/index.ts";
 
 export interface CharacterListItem {
   name: string;
@@ -10,7 +8,7 @@ export interface CharacterListItem {
 }
 
 class CharacterService {
-  private characters: Character[] = charactersData as Character[];
+  private characters: Character[] = Object.values(allCharacters) as Character[];
 
   /**
    * Get all characters (lightweight - only name, thumbnail, and gem cost)

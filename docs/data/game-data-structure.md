@@ -20,8 +20,12 @@ app/
   data/
     characters/
       characters.json       # All character data
-  models/
-    Character.ts           # TypeScript interfaces
+  data/
+    characters/
+      types.ts             # Canonical TypeScript interfaces (source of truth)
+      index.ts             # Exports `allCharacters` collection
+      {character-name}/
+        index.ts           # Per-character module (exports character object)
   services/
     local/
       data/
@@ -43,19 +47,19 @@ Location: `app/data/characters/characters.json`
 
 ```json
 [
-    {
-        "id": 1,
-        "name": "knight",
-        "stats": {
-            "id": 1,
-            "hp": 6,
-            "critRate": 0.15,
-            "atkSpeed": 1.3,
-            "moveSpeed": 8.5,
-            "skillDmg": 0.23,
-            "atkPower": 31
-        }
+  {
+    "id": 1,
+    "name": "knight",
+    "stats": {
+      "id": 1,
+      "hp": 6,
+      "critRate": 0.15,
+      "atkSpeed": 1.3,
+      "moveSpeed": 8.5,
+      "skillDmg": 0.23,
+      "atkPower": 31
     }
+  }
 ]
 ```
 
@@ -65,26 +69,37 @@ Location: `app/data/characters/characters.json`
 - All property names use **camelCase** (not kebab-case or snake_case)
 - Character names should be lowercase for consistency
 
-### TypeScript Models
+### TypeScript Models (canonical)
 
-Location: `app/models/Character.ts`
+Location: `app/data/characters/types.ts`
 
 ```typescript
 export interface CharacterStats {
-    id: number;
-    hp: number;
-    critRate: number;
-    atkSpeed: number;
-    moveSpeed: number;
-    skillDmg: number;
-    atkPower: number;
+  id: number;
+  hp: number;
+  critRate: number;
+  atkSpeed: number;
+  moveSpeed: number;
+  skillDmg: number;
+  atkPower: number;
+}
+
+export interface CharacterPrice {
+  gem?: number;
+  riftstone?: number;
+  soulstone?: number;
 }
 
 export interface Character {
-    id: number;
-    name: string;
-    stats: CharacterStats;
+  id?: number; // optional in code modules
+  name: string;
+  price?: CharacterPrice;
+  stats: CharacterStats;
 }
+
+// The `types.ts` file is the single source of truth for character shapes.
+// Individual characters live under `app/data/characters/{name}/index.ts` and
+// the collection `allCharacters` is exported from `app/data/characters/index.ts`.
 ```
 
 ## Asset Organization
@@ -117,25 +132,26 @@ All character assets follow a consistent naming pattern:
 
 ### Character Service
 
-Location: `app/services/local/data/characterService.ts`
+Location: `app/services/local/game/characterService.ts`
 
 The character service provides a clean API for accessing character data and
-assets:
+assets. It now consumes the TypeScript `allCharacters` collection and the
+canonical `Character` type from `app/data/characters`.
 
 ```typescript
-import { characterService } from "@/services/local/data/characterService.ts";
+import { characterService } from "@/services/local/game/characterService.ts";
+import type { Character } from "@/data/characters/types.ts";
 
 // Get all characters (lightweight - only name + thumbnail)
 const characters = characterService.getAllCharacters();
-// Returns: CharacterListItem[] = [{ name: "knight", thumbnail: "/characters/knight/thumbnail.png" }]
+// Returns: CharacterListItem[] = [{ name: "knight", thumbnail: "/game/characters/knight/thumbnail.png" }]
 
 // Get full character data by name
-const knight = characterService.getByName("knight");
-// Returns: Character | undefined
+const knight: Character | undefined = characterService.getByName("knight");
 
 // Get asset path for a character
 const thumbnail = characterService.getThumbnail("knight");
-// Returns: "/characters/knight/thumbnail.png"
+// Returns: "/game/characters/knight/thumbnail.png"
 ```
 
 **Key Methods:**
@@ -150,8 +166,10 @@ const thumbnail = characterService.getThumbnail("knight");
    - Use for character detail pages
 
 3. **`getThumbnail(name: string): string`**
-   - Returns thumbnail path for a character
-   - Follows convention: `/characters/{name}/thumbnail.png`
+
+- Returns thumbnail path for a character
+- Follows convention: `/game/characters/{name}/thumbnail.png` (service generates
+  this)
 
 ## Why This Structure?
 
@@ -164,11 +182,11 @@ pattern:
 
 ```json
 {
-    "name": "knight",
-    "assets": {
-        "thumbnail": "/characters/knight/thumbnail.png",
-        "idle": "/characters/knight/idle.gif"
-    }
+  "name": "knight",
+  "assets": {
+    "thumbnail": "/characters/knight/thumbnail.png",
+    "idle": "/characters/knight/idle.gif"
+  }
 }
 ```
 
@@ -256,12 +274,12 @@ Character names in the UI should be translated:
 ```json
 // locales/en/characters.json
 {
-    "characters": {
-        "knight": {
-            "name": "Knight",
-            "description": "A brave warrior..."
-        }
+  "characters": {
+    "knight": {
+      "name": "Knight",
+      "description": "A brave warrior..."
     }
+  }
 }
 ```
 
