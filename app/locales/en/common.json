@@ -11,9 +11,9 @@
         "title": "Characters",
         "description": "Discover detailed stats, abilities, and strategies for every character in the game."
       },
-      "builds": {
-        "title": "Team Builds",
-        "description": "Create and share powerful team compositions and strategies with the community."
+      "skills": {
+        "title": "Skills",
+        "description": "Master the abilities and skills of every character. Learn optimal builds and strategies."
       },
       "codex": {
         "title": "Game Codex",
@@ -50,6 +50,10 @@
       "moveSpeed": "Move Speed",
       "skillDmg": "Skill DMG"
     }
+  },
+  "skills": {
+    "title": "Skills",
+    "description": "Master the abilities and skills of every character. Learn optimal builds and strategies."
   },
   "welcome": {
     "title": "Welcome! 🎉",

@@ -2,3 +2,7 @@
 
 @import "./fonts.css";
 @import "./theme.css";
+
+/* animations */
+
+@import "./animations/bow-animations.css";

@@ -49,6 +49,7 @@ export default function Home({ data }: PageProps<Props>) {
         {/* Features Grid */}
         <section class="relative max-w-7xl mx-auto px-6 pb-6 flex-1 flex overflow-y-auto">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full content-start">
+            
             {/* Characters */}
             <FeatureCard
               icon={
@@ -71,111 +72,31 @@ export default function Home({ data }: PageProps<Props>) {
               href="characters"
             />
 
-            {/* Builds */}
+            {/* Skills */}
             <FeatureCard
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6"
+                  class="w-6 h-6 bow-icon"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 >
-                  <rect width="18" height="18" x="3" y="3" rx="2" />
-                  <path d="M3 9h18" />
-                  <path d="M9 21V9" />
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M17 3h4v4" />
+                  <path d="M21 3l-15 15" />
+                  <path d="M3 18h3v3" />
+                  <path d="M16.5 20c1.576 -1.576 2.5 -4.095 2.5 -6.5c0 -4.81 -3.69 -8.5 -8.5 -8.5c-2.415 0 -4.922 .913 -6.5 2.5l12.5 12.5z" />
                 </svg>
               }
-              title={t("common.home.features.builds.title")}
-              description={t("common.home.features.builds.description")}
-              href="/builds"
-              comingSoon
+              title={t("common.home.features.skills.title")}
+              description={t("common.home.features.skills.description")}
+              href="skills"
             />
 
-            {/* Codex */}
-            <FeatureCard
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-                </svg>
-              }
-              title={t("common.home.features.codex.title")}
-              description={t("common.home.features.codex.description")}
-              href="/codex"
-              comingSoon
-            />
-
-            {/* Community */}
-            <FeatureCard
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-              }
-              title={t("common.home.features.community.title")}
-              description={t("common.home.features.community.description")}
-              href="/community"
-              comingSoon
-            />
-
-            {/* Tier Lists */}
-            <FeatureCard
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                </svg>
-              }
-              title={t("common.home.features.tierLists.title")}
-              description={t("common.home.features.tierLists.description")}
-              href="/tier-lists"
-              comingSoon
-            />
-
-            {/* Guides */}
-            <FeatureCard
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <line x1="16" y1="13" x2="8" y2="13" />
-                  <line x1="16" y1="17" x2="8" y2="17" />
-                  <line x1="10" y1="9" x2="8" y2="9" />
-                </svg>
-              }
-              title={t("common.home.features.guides.title")}
-              description={t("common.home.features.guides.description")}
-              href="/guides"
-              comingSoon
-            />
           </div>
         </section>
       </main>
