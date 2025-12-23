@@ -1,8 +1,8 @@
-import type { MultiLangText, Skill } from "../types.ts";
-import { ActivationType, ElementType, SkillType } from "../types.ts";
+import type { MultiLangText, Skill } from "../../types.ts";
+import { ActivationType, ElementType, SkillType } from "../../types.ts";
 
 const name: MultiLangText = {
-  en: "Successive Strike",
+  en: "Ice Spear",
   es: "",
   kr: "",
   jp: "",
@@ -10,30 +10,30 @@ const name: MultiLangText = {
   "zh-Hant": "",
 };
 
-export const successiveStrike: Skill = {
-  id: "successive-strike",
+export const iceSpear: Skill = {
+  id: "ice-spear",
   name,
-  imageFilename: "Successive Strike.png",
+  imageFilename: "Ice Spear.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
-  skillType: SkillType.MELEE,
-  elementType: ElementType.BLEED,
+  skillType: [SkillType.MAGIC, SkillType.MELEE],
+  elementType: ElementType.FROST,
   description: {
     en:
-      "Summons a sword that slashes and deals damage to the front. 2 hits. 60% chance to inflict Bleed.",
+      "Summons an Ice Spear that spikes up at the front. Fires 5 times. 15% chance to inflict Freeze.",
     es: "",
     kr: "",
     jp: "",
     "zh-Hans": "",
     "zh-Hant": "",
   },
-  chapterUnlock: 1,
-  damage: 1.2,
+  chapterUnlock: 2,
+  damage: 1.15,
   activationChance: 0.15,
   modifications: {
     I: {
       name: {
-        en: "Rapid Slash",
+        en: "Ice Path",
         es: "",
         kr: "",
         jp: "",
@@ -41,7 +41,7 @@ export const successiveStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Count +1; Skill Casting Speed +15",
+        en: "Skill Activation Chance +10%; Skill Count +2",
         es: "",
         kr: "",
         jp: "",
@@ -51,7 +51,7 @@ export const successiveStrike: Skill = {
     },
     II: {
       name: {
-        en: "Cross Slash",
+        en: "Sharp Speartip",
         es: "",
         kr: "",
         jp: "",
@@ -59,7 +59,7 @@ export const successiveStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +40%; Skill Size +15%",
+        en: "Skill Damage +60%",
         es: "",
         kr: "",
         jp: "",
@@ -69,7 +69,7 @@ export const successiveStrike: Skill = {
     },
     III: {
       name: {
-        en: "Charging Slash",
+        en: "Permanent Snow",
         es: "",
         kr: "",
         jp: "",
@@ -77,7 +77,8 @@ export const successiveStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Advances slightly with each cast; Skill Size +15%; Skill Count +1",
+        en:
+          "Skill Damage +25%; Skill Activation Chance +5%; Skill Count +1; Frozen Chance +5%",
         es: "",
         kr: "",
         jp: "",
@@ -95,7 +96,7 @@ export const successiveStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +15%; Skill Count +3; Skill Casting Speed +50",
+        en: "Ice Spear spikes up at enemies in back as well; Skill Count +10",
         es: "",
         kr: "",
         jp: "",
@@ -105,7 +106,7 @@ export const successiveStrike: Skill = {
     },
   },
   excludedCharacters: [],
-  chapterId: "prison-camp",
+  chapterId: "toxic-swamp",
 };
 
-export default successiveStrike;
+export default iceSpear;

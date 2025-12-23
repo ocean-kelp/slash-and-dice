@@ -36,7 +36,7 @@ export enum ElementType {
   FROST = "frost",
   TOXIN = "toxin",
   LIGHTNING = "lightning",
-  BLEED = "bleeed",
+  BLEED = "bleed",
   DIVINITY = "divinity",
   DARKNESS = "darkness",
 }
@@ -88,7 +88,8 @@ export interface Skill {
   activationType: ActivationType;
 
   // Optional classification fields
-  skillType?: SkillType;
+  // `skillType` is always an array of `SkillType` values (even if single)
+  skillType?: SkillType[];
   elementType?: ElementType;
 
   description: MultiLangText;
