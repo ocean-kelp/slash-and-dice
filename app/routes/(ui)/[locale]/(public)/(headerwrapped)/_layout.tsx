@@ -28,9 +28,8 @@ export default function Layout(props: LayoutProps) {
         translationData={translationData}
         locale={locale}
       />
-      
-      <div class="pt-20 min-h-screen bg-linear-to-b from-gray-900 via-slate-900 to-gray-950 relative overflow-hidden">
 
+      <div class="pt-32 lg:pt-20 min-h-screen bg-linear-to-b from-gray-900 via-slate-900 to-gray-950 relative overflow-hidden">
         {/* Squiggle Pattern Background */}
         <div
           class="absolute inset-0 opacity-[0.08]"
@@ -52,7 +51,6 @@ export default function Layout(props: LayoutProps) {
         <div class="relative">
           <Component />
         </div>
-
       </div>
     </>
   );

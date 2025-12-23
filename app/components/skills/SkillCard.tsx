@@ -49,6 +49,39 @@ export default function SkillCard({ skill, locale = "en" }: SkillCardProps) {
         <p class="text-sm text-gray-400 text-center mb-3">
           {description}
         </p>
+
+        {/* Skill Type Badges */}
+        {skill.skillType && skill.skillType.length > 0 && (
+          <div class="flex flex-wrap gap-1.5 justify-center mb-3">
+            {skill.skillType.filter(Boolean).map((type) => (
+              <span
+                key={type}
+                class="px-2 py-1 bg-blue-600/30 text-blue-300 text-xs rounded"
+              >
+                {type
+                  .split("_")
+                  .map(
+                    (word) =>
+                      word.charAt(0).toUpperCase() +
+                      word.slice(1).toLowerCase(),
+                  )
+                  .join(" ")}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Element Type Badge */}
+        {skill.elementType && (
+          <div class="flex justify-center mb-3">
+            <span class="px-2 py-1 bg-cyan-600/30 text-cyan-300 text-xs rounded">
+              {skill.elementType
+                .charAt(0)
+                .toUpperCase() + skill.elementType.slice(1).toLowerCase()}
+            </span>
+          </div>
+        )}
+
         <div class="flex items-center justify-center gap-2 text-sm">
           <span class="px-2 py-0.5 bg-purple-600/30 text-purple-200 rounded">
             {activationTypeLabel}

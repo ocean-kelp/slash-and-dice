@@ -4,14 +4,51 @@ import { translate } from "@/custom-i18n/translator.ts";
 import { skillService } from "@/services/local/game/skillService.ts";
 import SkillCard from "@/components/skills/SkillCard.tsx";
 import type { Skill } from "@/data/skills/types.ts";
+import { SkillType } from "@/data/skills/types.ts";
+import SkillsFilter from "./(_islands)/SkillsFilter.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
-    const skills = skillService.getAllSkills();
+    const allSkills = skillService.getAllSkills();
+    const url = new URL(ctx.req.url);
+    const activationType = url.searchParams.get("activation");
+    const elementType = url.searchParams.get("element");
+    const skillType = url.searchParams.get("type");
+    const chapterId = url.searchParams.get("chapter");
+
+    // Filter skills based on query parameters
+    let filteredSkills = allSkills;
+
+    if (activationType) {
+      filteredSkills = filteredSkills.filter(
+        (s) => s.activationType === activationType,
+      );
+    }
+
+    if (elementType) {
+      filteredSkills = filteredSkills.filter(
+        (s) => s.elementType === elementType,
+      );
+    }
+
+    if (skillType) {
+      filteredSkills = filteredSkills.filter(
+        (s) => s.skillType?.includes(skillType as SkillType),
+      );
+    }
+
+    if (chapterId) {
+      filteredSkills = filteredSkills.filter(
+        (s) => s.chapterId === chapterId,
+      );
+    }
+
     return {
       data: {
         translationData: ctx.state.translationData ?? {},
-        skills,
+        skills: filteredSkills,
+        allSkills,
+        searchParams: url.searchParams.toString(),
       },
     };
   },
@@ -20,11 +57,15 @@ export const handler = defineRoute.handlers({
 type Props = {
   translationData?: Record<string, unknown>;
   skills?: Skill[];
+  allSkills?: Skill[];
+  searchParams?: string;
 };
 
 export default function SkillsPage({ data, url }: PageProps<Props>) {
   const t = translate(data.translationData ?? {});
   const skills = data.skills ?? [];
+  const allSkills = data.allSkills ?? [];
+  const searchParams = data.searchParams ?? "";
   const locale = url.pathname.split("/")[1] || "en";
 
   return (
@@ -52,7 +93,11 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
                 <div class="text-3xl font-bold text-purple-300">
                   {skills.length}
                 </div>
-                <div class="text-sm text-gray-500">Total Skills</div>
+                <div class="text-sm text-gray-500">
+                  {skills.length === allSkills.length
+                    ? "Total Skills"
+                    : "Filtered Skills"}
+                </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-orange-300">
@@ -76,8 +121,11 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
             </div>
           </div>
 
+          {/* Filter Component */}
+          <SkillsFilter currentParams={searchParams} />
+
           {/* Skills Grid - Masonry Layout */}
-          <div class="columns-3 sm:columns-4 md:columns-6 lg:columns-8 xl:columns-8 gap-4">
+          <div class="columns-2 xs:columns-3 sm:columns-4 md:columns-6 lg:columns-8 xl:columns-8 gap-4">
             {skills.map((skill) => (
               <SkillCard key={skill.id} skill={skill} locale={locale} />
             ))}
