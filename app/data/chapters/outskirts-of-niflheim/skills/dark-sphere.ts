@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const darkSphere: Skill = {
   id: "dark-sphere",
   name,
-  imageFilename: "Dark Sphere.png",
+  imageFilename: "dark-sphere.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.PROJECTILE],

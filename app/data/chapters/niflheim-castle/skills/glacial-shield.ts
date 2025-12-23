@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const glacialShield: Skill = {
   id: "glacial-shield",
   name,
-  imageFilename: "Glacial Shield.png",
+  imageFilename: "glacial-shield.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.PROTECTION],

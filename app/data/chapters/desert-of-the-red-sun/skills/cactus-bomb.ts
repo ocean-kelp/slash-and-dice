@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const cactusBomb: Skill = {
   id: "cactus-bomb",
   name,
-  imageFilename: "Cactus Bomb.png",
+  imageFilename: "cactus-bomb.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.PHYSICAL, SkillType.BOMB, SkillType.BLEED],

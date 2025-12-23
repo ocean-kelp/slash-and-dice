@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const flameZone: Skill = {
   id: "flame-zone",
   name,
-  imageFilename: "Flame Zone.png",
+  imageFilename: "flame-zone.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

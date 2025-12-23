@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const chainOfDeath: Skill = {
   id: "chain-of-death",
   name,
-  imageFilename: "Chain of Death.png",
+  imageFilename: "chain-of-death.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.CHAIN],

@@ -1,12 +1,17 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/custom-i18n/translator.ts";
+import { skillService } from "@/services/local/game/skillService.ts";
+import SkillCard from "@/components/skills/SkillCard.tsx";
+import type { Skill } from "@/data/skills/types.ts";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
+    const skills = skillService.getAllSkills();
     return {
       data: {
         translationData: ctx.state.translationData ?? {},
+        skills,
       },
     };
   },
@@ -14,10 +19,13 @@ export const handler = defineRoute.handlers({
 
 type Props = {
   translationData?: Record<string, unknown>;
+  skills?: Skill[];
 };
 
-export default function SkillsPage({ data }: PageProps<Props>) {
+export default function SkillsPage({ data, url }: PageProps<Props>) {
   const t = translate(data.translationData ?? {});
+  const skills = data.skills ?? [];
+  const locale = url.pathname.split("/")[1] || "en";
 
   return (
     <>
@@ -37,55 +45,67 @@ export default function SkillsPage({ data }: PageProps<Props>) {
             </p>
           </div>
 
-          {/* Coming Soon Section */}
-          <div class="bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-purple-500/20 p-8 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 bg-purple-500/20 rounded-full border border-purple-500/30 flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-8 h-8 text-purple-300"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <path d="M9.5 9h5L12 4 9.5 9z" />
-              </svg>
-            </div>
-            <h2 class="text-2xl font-bold text-purple-100 mb-2">
-              Coming Soon
-            </h2>
-            <p class="text-gray-400 mb-6">
-              We're gathering skill data and images for all characters. Stay
-              tuned!
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-              <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                <div class="text-purple-300 font-semibold mb-2">
-                  Character Skills
+          {/* Stats Bar */}
+          <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 p-4 mb-8">
+            <div class="flex flex-wrap items-center justify-center gap-8">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-purple-300">
+                  {skills.length}
                 </div>
-                <div class="text-sm text-gray-400">
-                  Detailed breakdown of all character abilities and skills
-                </div>
+                <div class="text-sm text-gray-500">Total Skills</div>
               </div>
-              <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                <div class="text-purple-300 font-semibold mb-2">
-                  Skill Trees
+              <div class="text-center">
+                <div class="text-3xl font-bold text-orange-300">
+                  {skills.filter((s) => s.activationType === "main").length}
                 </div>
-                <div class="text-sm text-gray-400">
-                  Interactive skill progression and mastery paths
-                </div>
+                <div class="text-sm text-gray-500">Main Skills</div>
               </div>
-              <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
-                <div class="text-purple-300 font-semibold mb-2">
-                  Build Guides
+              <div class="text-center">
+                <div class="text-3xl font-bold text-cyan-300">
+                  {skills.filter((s) => s.activationType === "subskill")
+                    .length}
                 </div>
-                <div class="text-sm text-gray-400">
-                  Optimal skill combinations and strategies
+                <div class="text-sm text-gray-500">Subskills</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-green-300">
+                  {skills.filter((s) => s.activationType === "buff").length}
                 </div>
+                <div class="text-sm text-gray-500">Buffs</div>
               </div>
             </div>
           </div>
+
+          {/* Skills Grid - Masonry Layout */}
+          <div class="columns-3 sm:columns-4 md:columns-6 lg:columns-8 xl:columns-8 gap-4">
+            {skills.map((skill) => (
+              <SkillCard key={skill.id} skill={skill} locale={locale} />
+            ))}
+          </div>
+
+          {/* Empty State */}
+          {skills.length === 0 && (
+            <div class="bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-purple-500/20 p-8 text-center">
+              <div class="w-16 h-16 mx-auto mb-4 bg-purple-500/20 rounded-full border border-purple-500/30 flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-8 h-8 text-purple-300"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <h2 class="text-2xl font-bold text-purple-100 mb-2">
+                No Skills Found
+              </h2>
+              <p class="text-gray-400">
+                Skills data is being populated. Check back soon!
+              </p>
+            </div>
+          )}
         </div>
       </main>
     </>

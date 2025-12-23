@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const deathStigma: Skill = {
   id: "death-stigma",
   name,
-  imageFilename: "Death Stigma.png",
+  imageFilename: "death-stigma.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.CURSE],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const solarOrb: Skill = {
   id: "solar-orb",
   name,
-  imageFilename: "Solar Orb.png",
+  imageFilename: "solar-orb.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

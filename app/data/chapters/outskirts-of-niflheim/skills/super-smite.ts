@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const superSmite: Skill = {
   id: "super-smite",
   name,
-  imageFilename: "Super Smite.png",
+  imageFilename: "super-smite.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE],

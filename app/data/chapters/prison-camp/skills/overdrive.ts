@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const overdrive: Skill = {
   id: "overdrive",
   name,
-  imageFilename: "Overdrive.png",
+  imageFilename: "overdrive.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   description: {

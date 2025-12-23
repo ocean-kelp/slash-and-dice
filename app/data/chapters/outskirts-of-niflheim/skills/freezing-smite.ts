@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const freezingSmite: Skill = {
   id: "freezing-smite",
   name,
-  imageFilename: "Freezing Smite.png",
+  imageFilename: "freezing-smite.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE],

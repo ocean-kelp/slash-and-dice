@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const iceArrow: Skill = {
   id: "ice-arrow",
   name,
-  imageFilename: "Ice Arrow.png",
+  imageFilename: "ice-arrow.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.TARGETTING],

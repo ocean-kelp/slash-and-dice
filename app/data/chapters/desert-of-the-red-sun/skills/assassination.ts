@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const assassination: Skill = {
   id: "assassination",
   name,
-  imageFilename: "Assassination.png",
+  imageFilename: "assassination.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.CURSE],

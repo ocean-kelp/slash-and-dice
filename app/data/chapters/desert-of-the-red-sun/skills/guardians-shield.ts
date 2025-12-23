@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const guardiansShield: Skill = {
   id: "guardians-shield",
   name,
-  imageFilename: "Guardian's Shield.png",
+  imageFilename: "guardians-shield.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   description: {

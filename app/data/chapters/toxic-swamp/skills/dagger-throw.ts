@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const daggerThrow: Skill = {
   id: "dagger-throw",
   name,
-  imageFilename: "Dagger Throw.png",
+  imageFilename: "dagger-throw.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.PHYSICAL, SkillType.CHAIN, SkillType.TOXIN],

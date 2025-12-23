@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const chainLightning: Skill = {
   id: "chain-lightning",
   name,
-  imageFilename: "Chain Lightning.png",
+  imageFilename: "chain-lightning.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.CHAIN],

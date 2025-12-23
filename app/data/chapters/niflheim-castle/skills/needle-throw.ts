@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const needleThrow: Skill = {
   id: "needle-throw",
   name,
-  imageFilename: "Needle Throw.png",
+  imageFilename: "needle-throw.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.TARGETTING],

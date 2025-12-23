@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const unleashBlood: Skill = {
   id: "unleash-blood",
   name,
-  imageFilename: "Unleash Blood.png",
+  imageFilename: "unleash-blood.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

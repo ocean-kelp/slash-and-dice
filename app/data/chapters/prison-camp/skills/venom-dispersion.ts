@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const venomDispersion: Skill = {
   id: "venom-dispersion",
   name,
-  imageFilename: "Venom Dispersion.png",
+  imageFilename: "venom-dispersion.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PROJECTILE],

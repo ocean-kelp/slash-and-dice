@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const enchantment: Skill = {
   id: "enchantment",
   name,
-  imageFilename: "Enchantment.png",
+  imageFilename: "enchantment.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.PROTECTION],

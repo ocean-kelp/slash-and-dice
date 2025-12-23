@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const flameStigma: Skill = {
   id: "flame-stigma",
   name,
-  imageFilename: "Flame Stigma.png",
+  imageFilename: "flame-stigma.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.CURSE],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const shooterDrone: Skill = {
   id: "shooter-drone",
   name,
-  imageFilename: "Shooter Drone.png",
+  imageFilename: "shooter-drone.png",
   inGameId: "",
   activationType: ActivationType.SUMMON,
   skillType: [SkillType.PHYSICAL, SkillType.PROJECTILE],

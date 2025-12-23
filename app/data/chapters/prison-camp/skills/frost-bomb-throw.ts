@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const frostBombThrow: Skill = {
   id: "frost-bomb-throw",
   name,
-  imageFilename: "Frost Bomb Throw.png",
+  imageFilename: "frost-bomb-throw.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.BOMB],

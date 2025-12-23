@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const successiveStrike: Skill = {
   id: "successive-strike",
   name,
-  imageFilename: "Successive Strike.png",
+  imageFilename: "successive-strike.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MELEE],

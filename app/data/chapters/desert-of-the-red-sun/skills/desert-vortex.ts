@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const desertVortex: Skill = {
   id: "desert-vortex",
   name,
-  imageFilename: "Desert Vortex.png",
+  imageFilename: "desert-vortex.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.SPELL],

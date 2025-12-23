@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const lightningStrike: Skill = {
   id: "lightning-strike",
   name,
-  imageFilename: "Lightning Strike.png",
+  imageFilename: "lightning-strike.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE],

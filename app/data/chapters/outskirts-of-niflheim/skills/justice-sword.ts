@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const justiceSword: Skill = {
   id: "justice-sword",
   name,
-  imageFilename: "Justice Sword.png",
+  imageFilename: "justice-sword.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.PHYSICAL, SkillType.TARGETTING],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const ghostGlide: Skill = {
   id: "ghost-glide",
   name,
-  imageFilename: "Ghost Glide.png",
+  imageFilename: "ghost-glide.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.MAGIC],

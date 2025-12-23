@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const barrier: Skill = {
   id: "barrier",
   name,
-  imageFilename: "Barrier.png",
+  imageFilename: "barrier.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.PROTECTION, SkillType.MAGIC],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const crushingBite: Skill = {
   id: "crushing-bite",
   name,
-  imageFilename: "Crushing Bite.png",
+  imageFilename: "crushing-bite.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE, SkillType.BLEED],

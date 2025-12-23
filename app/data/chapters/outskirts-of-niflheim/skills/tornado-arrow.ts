@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const tornadoArrow: Skill = {
   id: "tornado-arrow",
   name,
-  imageFilename: "Tornado Arrow.png",
+  imageFilename: "tornado-arrow.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.PROJECTILE],

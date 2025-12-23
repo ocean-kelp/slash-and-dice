@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const rockShot: Skill = {
   id: "rock-shot",
   name,
-  imageFilename: "Rock Shot.png",
+  imageFilename: "rock-shot.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.PROJECTILE],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const explosiveMarble: Skill = {
   id: "explosive-marble",
   name,
-  imageFilename: "Explosive Marble.png",
+  imageFilename: "explosive-marble.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.BOMB],

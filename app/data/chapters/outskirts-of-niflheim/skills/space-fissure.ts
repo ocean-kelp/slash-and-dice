@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const spaceFissure: Skill = {
   id: "space-fissure",
   name,
-  imageFilename: "Space Fissure.png",
+  imageFilename: "space-fissure.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.PHYSICAL, SkillType.SPELL],

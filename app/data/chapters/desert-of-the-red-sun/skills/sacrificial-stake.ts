@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const sacrificialStake: Skill = {
   id: "sacrificial-stake",
   name,
-  imageFilename: "Sacrificial Stake.png",
+  imageFilename: "sacrificial-stake.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

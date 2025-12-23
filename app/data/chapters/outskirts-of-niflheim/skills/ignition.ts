@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const ignition: Skill = {
   id: "ignition",
   name,
-  imageFilename: "Ignition.png",
+  imageFilename: "ignition.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

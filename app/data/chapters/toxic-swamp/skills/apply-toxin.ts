@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const applyToxin: Skill = {
   id: "apply-toxin",
   name,
-  imageFilename: "Apply Toxin.png",
+  imageFilename: "apply-toxin.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.PHYSICAL],

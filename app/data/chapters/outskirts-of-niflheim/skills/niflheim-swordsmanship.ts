@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const niflheimSwordsmanship: Skill = {
   id: "niflheim-swordsmanship",
   name,
-  imageFilename: "Niflheim Swordsmanship.png",
+  imageFilename: "niflheim-swordsmanship.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.PHYSICAL],

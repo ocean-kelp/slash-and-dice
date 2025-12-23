@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const abyssalExecution: Skill = {
   id: "abyssal-execution",
   name,
-  imageFilename: "Abyssal Execution.png",
+  imageFilename: "abyssal-execution.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE],

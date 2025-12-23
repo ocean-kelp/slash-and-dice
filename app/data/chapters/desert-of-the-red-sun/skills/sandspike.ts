@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const sandspike: Skill = {
   id: "sandspike",
   name,
-  imageFilename: "Sandspike.png",
+  imageFilename: "sandspike.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE, SkillType.BLEED],

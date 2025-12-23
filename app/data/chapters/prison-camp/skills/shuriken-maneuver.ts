@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const shurikenManeuver: Skill = {
   id: "shuriken-maneuver",
   name,
-  imageFilename: "Shuriken Maneuver.png",
+  imageFilename: "shuriken-maneuver.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.PROJECTILE, SkillType.MELEE],

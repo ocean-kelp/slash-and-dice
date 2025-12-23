@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const toxicGasExplosion: Skill = {
   id: "toxic-gas-explosion",
   name,
-  imageFilename: "Toxic Gas Explosion.png",
+  imageFilename: "toxic-gas-explosion.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const severBlade: Skill = {
   id: "sever-blade",
   name,
-  imageFilename: "Sever Blade.png",
+  imageFilename: "sever-blade.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PROJECTILE],

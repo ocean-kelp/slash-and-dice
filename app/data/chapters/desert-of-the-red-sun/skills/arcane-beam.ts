@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const arcaneBeam: Skill = {
   id: "arcane-beam",
   name,
-  imageFilename: "Arcane Beam.png",
+  imageFilename: "arcane-beam.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.PROJECTILE],

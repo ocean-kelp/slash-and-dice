@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const flameVortex: Skill = {
   id: "flame-vortex",
   name,
-  imageFilename: "Flame Vortex.png",
+  imageFilename: "flame-vortex.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.PROJECTILE],

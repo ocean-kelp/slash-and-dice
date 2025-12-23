@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const hatredSpike: Skill = {
   id: "hatred-spike",
   name,
-  imageFilename: "Hatred Spike.png",
+  imageFilename: "hatred-spike.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MELEE],

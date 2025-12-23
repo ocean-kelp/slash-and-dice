@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const dragonsPrudence: Skill = {
   id: "dragons-prudence",
   name,
-  imageFilename: "Dragon's Prudence.png",
+  imageFilename: "dragons-prudence.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.PHYSICAL],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const meditation: Skill = {
   id: "meditation",
   name,
-  imageFilename: "Meditation.png",
+  imageFilename: "meditation.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.MAGIC],

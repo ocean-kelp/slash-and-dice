@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const blazingRay: Skill = {
   id: "blazing-ray",
   name,
-  imageFilename: "Blazing Ray.png",
+  imageFilename: "blazing-ray.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE],

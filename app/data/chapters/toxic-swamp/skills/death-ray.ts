@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const deathRay: Skill = {
   id: "death-ray",
   name,
-  imageFilename: "Death Ray.png",
+  imageFilename: "death-ray.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.TARGETTING],

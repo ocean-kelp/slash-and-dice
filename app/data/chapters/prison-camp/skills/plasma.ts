@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const plasma: Skill = {
   id: "plasma",
   name,
-  imageFilename: "Plasma.png",
+  imageFilename: "plasma.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.PROJECTILE],

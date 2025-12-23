@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const pulseBomb: Skill = {
   id: "pulse-bomb",
   name,
-  imageFilename: "Pulse Bomb.png",
+  imageFilename: "pulse-bomb.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.BOMB],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const flameDragonsTribute: Skill = {
   id: "flame-dragons-tribute",
   name,
-  imageFilename: "Flame Dragon's Tribute.png",
+  imageFilename: "flame-dragons-tribute.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   elementType: ElementType.FLAME,

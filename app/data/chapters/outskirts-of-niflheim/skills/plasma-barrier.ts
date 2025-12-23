@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const plasmaBarrier: Skill = {
   id: "plasma-barrier",
   name,
-  imageFilename: "Plasma Barrier.png",
+  imageFilename: "plasma-barrier.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   skillType: [SkillType.PROTECTION, SkillType.MAGIC, SkillType.CHAIN],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const vesselOfSouls: Skill = {
   id: "vessel-of-souls",
   name,
-  imageFilename: "Vessel of Souls.png",
+  imageFilename: "vessel-of-souls.png",
   inGameId: "",
   activationType: ActivationType.BUFF,
   description: {

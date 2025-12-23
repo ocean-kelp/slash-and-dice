@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const flash: Skill = {
   id: "flash",
   name,
-  imageFilename: "Flash.png",
+  imageFilename: "flash.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.TARGETTING],

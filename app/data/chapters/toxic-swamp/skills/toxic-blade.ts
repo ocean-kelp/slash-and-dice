@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const toxicBlade: Skill = {
   id: "toxic-blade",
   name,
-  imageFilename: "Toxic Blade.png",
+  imageFilename: "toxic-blade.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.MELEE],

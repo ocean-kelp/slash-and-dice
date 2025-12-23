@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const sandSoldier: Skill = {
   id: "sand-soldier",
   name,
-  imageFilename: "Sand Soldier.png",
+  imageFilename: "sand-soldier.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.MELEE],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const pactOfImmortality: Skill = {
   id: "pact-of-immortality",
   name,
-  imageFilename: "Pact of Immortality.png",
+  imageFilename: "pact-of-immortality.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

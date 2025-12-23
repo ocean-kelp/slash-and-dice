@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const venomCloud: Skill = {
   id: "venom-cloud",
   name,
-  imageFilename: "Venom Cloud.png",
+  imageFilename: "venom-cloud.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.SPELL],

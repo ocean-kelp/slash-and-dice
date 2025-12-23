@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const neurotoxin: Skill = {
   id: "neurotoxin",
   name,
-  imageFilename: "Neurotoxin.png",
+  imageFilename: "neurotoxin.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.TARGETTING],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const rampage: Skill = {
   id: "rampage",
   name,
-  imageFilename: "Rampage.png",
+  imageFilename: "rampage.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.PHYSICAL, SkillType.TARGETTING],

@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const flameSpear: Skill = {
   id: "flame-spear",
   name,
-  imageFilename: "Flame Spear.png",
+  imageFilename: "flame-spear.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
   skillType: [SkillType.PHYSICAL, SkillType.PROJECTILE],

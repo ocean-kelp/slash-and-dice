@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const iceFamiliar: Skill = {
   id: "ice-familiar",
   name,
-  imageFilename: "Ice Familiar.png",
+  imageFilename: "ice-familiar.png",
   inGameId: "",
   activationType: ActivationType.SUMMON,
   skillType: [SkillType.MAGIC, SkillType.MELEE],

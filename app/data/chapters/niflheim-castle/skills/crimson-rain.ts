@@ -13,7 +13,7 @@ const name: MultiLangText = {
 export const crimsonRain: Skill = {
   id: "crimson-rain",
   name,
-  imageFilename: "Crimson Rain.png",
+  imageFilename: "crimson-rain.png",
   inGameId: "",
   activationType: ActivationType.SUB,
   skillType: [SkillType.MAGIC, SkillType.SPELL],
