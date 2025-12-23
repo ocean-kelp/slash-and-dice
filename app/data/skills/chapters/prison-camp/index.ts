@@ -3,11 +3,8 @@ import { successiveStrike } from "./successive-strike.ts";
 import { severBlade } from "./sever-blade.ts";
 import { chainLightning } from "./chain-lightning.ts";
 import { venomDispersion } from "./venom-dispersion.ts";
-import { frenziedSlam } from "./frenzied-slam.ts";
 import { traumaticSmite } from "./traumatic-smite.ts";
-import { icicleSpike } from "./icicle-spike.ts";
 import { flameBombThrow } from "./flame-bomb-throw.ts";
-import { toxicBlade } from "./toxic-blade.ts";
 import { frostBombThrow } from "./frost-bomb-throw.ts";
 import { plasma } from "./plasma.ts";
 import { hatredSpike } from "./hatred-spike.ts";
@@ -31,11 +28,8 @@ export const prisonCampSkills: Record<string, Skill> = {
   [severBlade.id]: severBlade,
   [chainLightning.id]: chainLightning,
   [venomDispersion.id]: venomDispersion,
-  [frenziedSlam.id]: frenziedSlam,
   [traumaticSmite.id]: traumaticSmite,
-  [icicleSpike.id]: icicleSpike,
   [flameBombThrow.id]: flameBombThrow,
-  [toxicBlade.id]: toxicBlade,
   [frostBombThrow.id]: frostBombThrow,
   [plasma.id]: plasma,
   [hatredSpike.id]: hatredSpike,
