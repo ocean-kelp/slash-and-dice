@@ -1,8 +1,8 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, ElementType, SkillType } from "../../types.ts";
+import type { MultiLangText, Skill } from "../../../types.ts";
+import { ActivationType, ElementType, SkillType } from "../../../types.ts";
 
 const name: MultiLangText = {
-  en: "Bloody Sword Strike",
+  en: "Ignition",
   es: "",
   kr: "",
   jp: "",
@@ -10,17 +10,17 @@ const name: MultiLangText = {
   "zh-Hant": "",
 };
 
-export const bloodySwordStrike: Skill = {
-  id: "bloody-sword-strike",
+export const ignition: Skill = {
+  id: "ignition",
   name,
-  imageFilename: "Bloody Sword Strike.png",
+  imageFilename: "Ignition.png",
   inGameId: "",
-  activationType: ActivationType.BUFF,
-  skillType: [SkillType.PHYSICAL, SkillType.MELEE],
-  elementType: ElementType.BLEED,
+  activationType: ActivationType.MAIN,
+  skillType: [SkillType.MAGIC, SkillType.SPELL],
+  elementType: ElementType.FLAME,
   description: {
     en:
-      "Unleashes Bloody Sword Strike every time a basic attack hits N times; 30% chance to inflict Bleed.",
+      "Summons a wave of flames around the enemy that ignites them (DoT). 15% chance to inflict Burn.",
     es: "",
     kr: "",
     jp: "",
@@ -28,12 +28,12 @@ export const bloodySwordStrike: Skill = {
     "zh-Hant": "",
   },
   chapterUnlock: 3,
-  damage: 1.6,
+  damage: 2.0,
   activationChance: 0.30,
   modifications: {
     I: {
       name: {
-        en: "Bleed Enhancement",
+        en: "Intense Fire",
         es: "",
         kr: "",
         jp: "",
@@ -41,7 +41,7 @@ export const bloodySwordStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Bleed Stack +1; Bleed Chance +25%",
+        en: "Skill Damage +35%",
         es: "",
         kr: "",
         jp: "",
@@ -51,7 +51,7 @@ export const bloodySwordStrike: Skill = {
     },
     II: {
       name: {
-        en: "Bloody Desire",
+        en: "Flaming Soul",
         es: "",
         kr: "",
         jp: "",
@@ -59,7 +59,7 @@ export const bloodySwordStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +25%; Bleed Chance +25%",
+        en: "Skill Multi-Hit Interval -15%",
         es: "",
         kr: "",
         jp: "",
@@ -69,7 +69,7 @@ export const bloodySwordStrike: Skill = {
     },
     III: {
       name: {
-        en: "Successive Attack",
+        en: "Burst of Fire",
         es: "",
         kr: "",
         jp: "",
@@ -77,7 +77,7 @@ export const bloodySwordStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage -40%; Skill Size +15%; Skill Count +1",
+        en: "Skill Damage +15%; Skill Size +25%",
         es: "",
         kr: "",
         jp: "",
@@ -95,7 +95,7 @@ export const bloodySwordStrike: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Required Basic Attack Count for Activation -2",
+        en: "Ignition Stack Limit +3; Additional Ignite +1 when ignited",
         es: "",
         kr: "",
         jp: "",
@@ -108,4 +108,4 @@ export const bloodySwordStrike: Skill = {
   chapterId: "outskirts-of-niflheim",
 };
 
-export default bloodySwordStrike;
+export default ignition;

@@ -1,8 +1,8 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, ElementType, SkillType } from "../../types.ts";
+import type { MultiLangText, Skill } from "../../../types.ts";
+import { ActivationType, ElementType, SkillType } from "../../../types.ts";
 
 const name: MultiLangText = {
-  en: "Ignition",
+  en: "Abyssal Execution",
   es: "",
   kr: "",
   jp: "",
@@ -10,30 +10,30 @@ const name: MultiLangText = {
   "zh-Hant": "",
 };
 
-export const ignition: Skill = {
-  id: "ignition",
+export const abyssalExecution: Skill = {
+  id: "abyssal-execution",
   name,
-  imageFilename: "Ignition.png",
+  imageFilename: "Abyssal Execution.png",
   inGameId: "",
   activationType: ActivationType.MAIN,
-  skillType: [SkillType.MAGIC, SkillType.SPELL],
-  elementType: ElementType.FLAME,
+  skillType: [SkillType.PHYSICAL, SkillType.MELEE],
+  elementType: ElementType.FROST,
   description: {
     en:
-      "Summons a wave of flames around the enemy that ignites them (DoT). 15% chance to inflict Burn.",
+      "Deals Frost damage to enemies, and deals 35% additional damage when the enemy's health is below 25%. 10% chance to inflict Freeze.",
     es: "",
     kr: "",
     jp: "",
     "zh-Hans": "",
     "zh-Hant": "",
   },
-  chapterUnlock: 3,
-  damage: 2.0,
-  activationChance: 0.30,
+  chapterUnlock: 5,
+  damage: 1.5,
+  activationChance: 0.15,
   modifications: {
     I: {
       name: {
-        en: "Intense Fire",
+        en: "Ruthless",
         es: "",
         kr: "",
         jp: "",
@@ -41,7 +41,7 @@ export const ignition: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +35%",
+        en: "Low HP Threshold +10%; Skill Damage +20%",
         es: "",
         kr: "",
         jp: "",
@@ -51,7 +51,7 @@ export const ignition: Skill = {
     },
     II: {
       name: {
-        en: "Flaming Soul",
+        en: "Execution Rite",
         es: "",
         kr: "",
         jp: "",
@@ -59,7 +59,7 @@ export const ignition: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Multi-Hit Interval -15%",
+        en: "Triggers a skill on Plunging Attack hit",
         es: "",
         kr: "",
         jp: "",
@@ -69,7 +69,7 @@ export const ignition: Skill = {
     },
     III: {
       name: {
-        en: "Burst of Fire",
+        en: "Into the Abyss",
         es: "",
         kr: "",
         jp: "",
@@ -77,7 +77,8 @@ export const ignition: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +15%; Skill Size +25%",
+        en:
+          "15% increased Skill Activation Chance when attacking low HP enemies",
         es: "",
         kr: "",
         jp: "",
@@ -95,7 +96,7 @@ export const ignition: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Ignition Stack Limit +3; Additional Ignite +1 when ignited",
+        en: "Skill Damage +35% when attacking Bosses",
         es: "",
         kr: "",
         jp: "",
@@ -105,7 +106,7 @@ export const ignition: Skill = {
     },
   },
   excludedCharacters: [],
-  chapterId: "outskirts-of-niflheim",
+  chapterId: "desert-of-the-red-sun",
 };
 
-export default ignition;
+export default abyssalExecution;

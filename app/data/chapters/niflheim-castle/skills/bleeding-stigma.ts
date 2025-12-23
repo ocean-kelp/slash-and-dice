@@ -1,5 +1,5 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, ElementType, SkillType } from "../../types.ts";
+import type { MultiLangText, Skill } from "../../../types.ts";
+import { ActivationType, ElementType, SkillType } from "../../../types.ts";
 
 const name: MultiLangText = {
   en: "Bleeding Stigma",

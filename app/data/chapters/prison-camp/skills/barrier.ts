@@ -1,8 +1,8 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, ElementType, SkillType } from "../../types.ts";
+import type { MultiLangText, Skill } from "../../../types.ts";
+import { ActivationType, ElementType, SkillType } from "../../../types.ts";
 
 const name: MultiLangText = {
-  en: "Blazing Ray",
+  en: "Barrier",
   es: "",
   kr: "",
   jp: "",
@@ -10,30 +10,30 @@ const name: MultiLangText = {
   "zh-Hant": "",
 };
 
-export const blazingRay: Skill = {
-  id: "blazing-ray",
+export const barrier: Skill = {
+  id: "barrier",
   name,
-  imageFilename: "Blazing Ray.png",
+  imageFilename: "Barrier.png",
   inGameId: "",
-  activationType: ActivationType.MAIN,
-  skillType: [SkillType.PHYSICAL, SkillType.MELEE],
-  elementType: ElementType.FLAME,
+  activationType: ActivationType.BUFF,
+  skillType: [SkillType.PROTECTION, SkillType.MAGIC],
+  elementType: ElementType.DIVINITY,
   description: {
     en:
-      "Slashes forward with a blazing sword and has a 15% chance to inflict Burn.",
+      "Creates a barrier that protects against enemy attacks (provides a shield).",
     es: "",
     kr: "",
     jp: "",
     "zh-Hans": "",
     "zh-Hant": "",
   },
-  chapterUnlock: 3,
-  damage: 1.5,
-  activationChance: 0.15,
+  chapterUnlock: 1,
+  damage: 0,
+  activationChance: 0.0,
   modifications: {
     I: {
       name: {
-        en: "Rapid Slash",
+        en: "Augment Speed",
         es: "",
         kr: "",
         jp: "",
@@ -41,7 +41,7 @@ export const blazingRay: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +30%; Skill Casting Speed +15",
+        en: "MOV SPD and ATK SPD +8% while Barrier is active.",
         es: "",
         kr: "",
         jp: "",
@@ -51,7 +51,7 @@ export const blazingRay: Skill = {
     },
     II: {
       name: {
-        en: "Cross Slash",
+        en: "Barrier Smite",
         es: "",
         kr: "",
         jp: "",
@@ -59,7 +59,7 @@ export const blazingRay: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +55%; Skill Size +15%",
+        en: "+5% additional damage per hit while Barrier is active",
         es: "",
         kr: "",
         jp: "",
@@ -69,7 +69,7 @@ export const blazingRay: Skill = {
     },
     III: {
       name: {
-        en: "Charging Slash",
+        en: "Unleash",
         es: "",
         kr: "",
         jp: "",
@@ -77,7 +77,8 @@ export const blazingRay: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +25%; Skill Size +10%; Skill Activation Chance +5%",
+        en:
+          "Pushes away nearby enemies and causes an explosion that deals 200% ATK damage as the Barrier breaks.",
         es: "",
         kr: "",
         jp: "",
@@ -95,7 +96,7 @@ export const blazingRay: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +125%; Skill Size +35%",
+        en: "Max Barrier +1",
         es: "",
         kr: "",
         jp: "",
@@ -105,7 +106,7 @@ export const blazingRay: Skill = {
     },
   },
   excludedCharacters: [],
-  chapterId: "outskirts-of-niflheim",
+  chapterId: "prison-camp",
 };
 
-export default blazingRay;
+export default barrier;
