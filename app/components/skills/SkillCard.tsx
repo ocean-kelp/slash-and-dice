@@ -7,13 +7,29 @@ interface SkillCardProps {
   searchTerm?: string;
 }
 
-function highlightText(text: string, searchTerm: string): string {
-  if (!searchTerm) return text;
+function HighlightText(
+  { text, searchTerm }: { text: string; searchTerm: string },
+) {
+  if (!searchTerm) return <span>{text}</span>;
 
   const regex = new RegExp(`(${searchTerm})`, "gi");
-  return text.replace(
-    regex,
-    '<mark class="bg-yellow-300/80 text-yellow-900 rounded px-1">$1</mark>',
+  const parts = text.split(regex);
+
+  return (
+    <span>
+      {parts.map((part, index) =>
+        regex.test(part)
+          ? (
+            <mark
+              key={index}
+              class="bg-cyan-400 text-black rounded px-1"
+            >
+              {part}
+            </mark>
+          )
+          : <span key={index}>{part}</span>
+      )}
+    </span>
   );
 }
 
@@ -31,9 +47,6 @@ export default function SkillCard(
     : skill.activationType === "subskill"
     ? "Sub"
     : "Buff";
-
-  const highlightedName = highlightText(name, searchTerm);
-  const highlightedDescription = highlightText(description, searchTerm);
 
   return (
     <a
@@ -63,10 +76,10 @@ export default function SkillCard(
       {/* Skill Info */}
       <div class="mt-2 rounded-lg border-2 border-purple-500/20 bg-gray-800/90 backdrop-blur-sm p-4 hover:border-purple-500/50 transition-colors">
         <h3 class="text-xl font-bold text-purple-100 text-center mb-2">
-          <span dangerouslySetInnerHTML={{ __html: highlightedName }} />
+          <HighlightText text={name} searchTerm={searchTerm} />
         </h3>
         <p class="text-sm text-gray-400 text-center mb-3">
-          <span dangerouslySetInnerHTML={{ __html: highlightedDescription }} />
+          <HighlightText text={description} searchTerm={searchTerm} />
         </p>
 
         {/* Skill Type Badges */}
@@ -77,14 +90,7 @@ export default function SkillCard(
                 key={type}
                 class="px-2 py-1 bg-blue-600/30 text-blue-300 text-xs rounded"
               >
-                {type
-                  .split("_")
-                  .map(
-                    (word) =>
-                      word.charAt(0).toUpperCase() +
-                      word.slice(1).toLowerCase(),
-                  )
-                  .join(" ")}
+                {type}
               </span>
             ))}
           </div>
