@@ -44,9 +44,9 @@ export const chapters: Chapter[] = [
     order: 2,
   },
   {
-    id: "outskirts-of-niflheimh",
+    id: "outskirts-of-niflheim",
     name: {
-      en: "Outskirts of Niflheimh",
+      en: "Outskirts of Niflheim",
       es: "",
       kr: "",
       jp: "",
