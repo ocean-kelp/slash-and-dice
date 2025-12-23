@@ -1,8 +1,8 @@
 import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, SkillType } from "../../types.ts";
+import { ActivationType, ElementType, SkillType } from "../../types.ts";
 
 const name: MultiLangText = {
-  en: "Frenzied Slam",
+  en: "Death Ray",
   es: "",
   kr: "",
   jp: "",
@@ -10,29 +10,29 @@ const name: MultiLangText = {
   "zh-Hant": "",
 };
 
-export const frenziedSlam: Skill = {
-  id: "frenzied-slam",
+export const deathRay: Skill = {
+  id: "death-ray",
   name,
-  imageFilename: "Frenzied Slam.png",
+  imageFilename: "Death Ray.png",
   inGameId: "",
-  activationType: ActivationType.MAIN,
-  skillType: [SkillType.MELEE],
+  activationType: ActivationType.SUB,
+  skillType: [SkillType.MAGIC, SkillType.TARGETTING],
+  elementType: ElementType.DIVINITY,
   description: {
-    en:
-      "A furious overhead slam that deals area damage and briefly stuns enemies.",
+    en: "Shoots a ray that targets the enemy after one second. 3 activations.",
     es: "",
     kr: "",
     jp: "",
     "zh-Hans": "",
     "zh-Hant": "",
   },
-  chapterUnlock: 1,
-  damage: 4.5,
-  activationChance: 0.12,
+  chapterUnlock: 2,
+  damage: 0.9,
+  activationChance: 1,
   modifications: {
     I: {
       name: {
-        en: "Crushing Blow",
+        en: "Extra Ray",
         es: "",
         kr: "",
         jp: "",
@@ -40,7 +40,7 @@ export const frenziedSlam: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Skill Damage +20%",
+        en: "Skill Damage +55%",
         es: "",
         kr: "",
         jp: "",
@@ -50,7 +50,7 @@ export const frenziedSlam: Skill = {
     },
     II: {
       name: {
-        en: "Extended Stun",
+        en: "Output Enhancement",
         es: "",
         kr: "",
         jp: "",
@@ -58,7 +58,7 @@ export const frenziedSlam: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "Stun duration +0.5s",
+        en: "Skill Damage +35%; Skill Cooldown Recovery Speed +15%",
         es: "",
         kr: "",
         jp: "",
@@ -68,7 +68,7 @@ export const frenziedSlam: Skill = {
     },
     III: {
       name: {
-        en: "Rending Impact",
+        en: "Maximum Charge",
         es: "",
         kr: "",
         jp: "",
@@ -76,7 +76,7 @@ export const frenziedSlam: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "10% chance to apply Bleed (2 dmg/sec) for 4s",
+        en: "Skill Damage +25%; Skill Size +20%",
         es: "",
         kr: "",
         jp: "",
@@ -86,7 +86,7 @@ export const frenziedSlam: Skill = {
     },
     special: {
       name: {
-        en: "Berserker's Will",
+        en: "Special Mod",
         es: "",
         kr: "",
         jp: "",
@@ -94,7 +94,7 @@ export const frenziedSlam: Skill = {
         "zh-Hant": "",
       },
       description: {
-        en: "When HP <40%, Skill Damage +30%",
+        en: "Skill Count +1; Skill Cooldown Recovery Speed +35%",
         es: "",
         kr: "",
         jp: "",
@@ -104,7 +104,7 @@ export const frenziedSlam: Skill = {
     },
   },
   excludedCharacters: [],
-  chapterId: "prison-camp",
+  chapterId: "toxic-swamp",
 };
 
-export default frenziedSlam;
+export default deathRay;
