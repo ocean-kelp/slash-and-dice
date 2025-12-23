@@ -53,7 +53,20 @@
   },
   "skills": {
     "title": "Skills",
-    "description": "Master the abilities and skills of every character. Learn optimal builds and strategies."
+    "description": "Master the abilities and skills of every character. Learn optimal builds and strategies.",
+    "backLink": "Back to Skills",
+    "statistics": "Statistics",
+    "damage": "Damage",
+    "activationChance": "Activation Chance",
+    "chapterUnlock": "Chapter Unlock",
+    "inGameId": "In-Game ID",
+    "modifications": "Skill Modifications",
+    "levelI": "Level I",
+    "levelII": "Level II",
+    "levelIII": "Level III",
+    "special": "Special",
+    "restrictedCharacters": "Restricted Characters",
+    "restrictedCharactersDescription": "This skill cannot be used by:"
   },
   "welcome": {
     "title": "Welcome! 🎉",

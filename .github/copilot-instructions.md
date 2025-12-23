@@ -342,3 +342,23 @@ const thumbnail = characterService.getThumbnail("knight");
 1. Add entry to `app/data/characters/characters.json`
 2. Add assets to `app/static/characters/{name}/` folder
 3. Service automatically picks up new characters
+
+### Fresh Islands in Route Directories
+
+**Co-located Islands Pattern:**
+Fresh 2.x supports co-locating islands with routes using the `(_islands)` folder convention. Use relative imports from the route file: `import MyIsland from "./(_islands)/MyIsland.tsx";`
+
+**Island Hydration (Last Resort):**
+If an island component with event handlers is not hydrating on the client (onClick not firing, no console logs), Fresh may be treating it as a server component. As a last resort, import and use a Preact hook to force client-side hydration:
+
+```tsx
+import { useState } from "preact/hooks";
+
+export default function MyIsland() {
+  const [_mounted, _setMounted] = useState(true); // Forces hydration
+  const handleClick = () => window.history.back();
+  return <button onClick={handleClick}>Back</button>;
+}
+```
+
+Fresh uses static analysis to detect islands. Without hook imports, components are treated as server-only. This is not ideal practice but works when needed. Prefer placing islands in the main `app/islands` directory when possible.

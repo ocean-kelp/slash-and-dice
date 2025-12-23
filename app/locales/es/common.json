@@ -42,6 +42,23 @@
     "title": "Personajes",
     "description": "Descubre todos los héroes y sus habilidades únicas. Haz clic en cualquier personaje para ver estadísticas e información detallada."
   },
+  "skills": {
+    "title": "Habilidades",
+    "description": "Domina las habilidades de cada personaje. Aprende construcciones y estrategias óptimas.",
+    "backLink": "Volver a Habilidades",
+    "statistics": "Estadísticas",
+    "damage": "Daño",
+    "activationChance": "Probabilidad de Activación",
+    "chapterUnlock": "Desbloqueo de Capítulo",
+    "inGameId": "ID En Juego",
+    "modifications": "Modificaciones de Habilidad",
+    "levelI": "Nivel I",
+    "levelII": "Nivel II",
+    "levelIII": "Nivel III",
+    "special": "Especial",
+    "restrictedCharacters": "Personajes Restringidos",
+    "restrictedCharactersDescription": "Esta habilidad no puede ser usada por:"
+  },
   "welcome": {
     "title": "¡Bienvenido! 🎉",
     "subtitle": "Configuremos tu perfil",

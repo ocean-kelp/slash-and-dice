@@ -1,0 +1,19 @@
+{
+  "skills": {
+    "title": "技能",
+    "description": "掌握每个角色的所有能力和技能。了解最优的构建和策略。",
+    "backLink": "返回技能",
+    "statistics": "统计",
+    "damage": "伤害",
+    "activationChance": "激活概率",
+    "chapterUnlock": "章节解锁",
+    "inGameId": "游戏内ID",
+    "modifications": "技能修改",
+    "levelI": "等级I",
+    "levelII": "等级II",
+    "levelIII": "等级III",
+    "special": "特殊",
+    "restrictedCharacters": "受限角色",
+    "restrictedCharactersDescription": "此技能不能被以下角色使用:"
+  }
+}

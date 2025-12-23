@@ -1,0 +1,19 @@
+{
+  "skills": {
+    "title": "スキル",
+    "description": "キャラクターのすべての能力とスキルをマスターしましょう。最適なビルドと戦略を学びます。",
+    "backLink": "スキルに戻る",
+    "statistics": "統計",
+    "damage": "ダメージ",
+    "activationChance": "発動確率",
+    "chapterUnlock": "章アンロック",
+    "inGameId": "ゲーム内ID",
+    "modifications": "スキル修正",
+    "levelI": "レベルI",
+    "levelII": "レベルII",
+    "levelIII": "レベルIII",
+    "special": "スペシャル",
+    "restrictedCharacters": "制限されたキャラクター",
+    "restrictedCharactersDescription": "このスキルは次のキャラクターで使用できません:"
+  }
+}

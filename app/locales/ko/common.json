@@ -1,0 +1,19 @@
+{
+  "skills": {
+    "title": "기술",
+    "description": "모든 캐릭터의 능력과 스킬을 마스터하세요. 최적의 빌드와 전략을 배워보세요.",
+    "backLink": "기술로 돌아가기",
+    "statistics": "통계",
+    "damage": "손상",
+    "activationChance": "활성화 확률",
+    "chapterUnlock": "챕터 언록",
+    "inGameId": "게임 내 ID",
+    "modifications": "스킬 수정",
+    "levelI": "레벨 I",
+    "levelII": "레벨 II",
+    "levelIII": "레벨 III",
+    "special": "특수",
+    "restrictedCharacters": "제한된 캐릭터",
+    "restrictedCharactersDescription": "이 스킬은 다음 캐릭터에게 사용할 수 없습니다:"
+  }
+}

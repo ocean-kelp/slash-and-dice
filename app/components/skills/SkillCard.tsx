@@ -20,7 +20,10 @@ export default function SkillCard({ skill, locale = "en" }: SkillCardProps) {
     : "Buff";
 
   return (
-    <div class="group relative break-inside-avoid mb-4">
+    <a
+      href={`/${locale}/skills/${skill.id}`}
+      class="group relative break-inside-avoid mb-4 block hover:scale-[1.02] transition-transform"
+    >
       {/* Skill Image Container with Prism Box */}
       <div class="relative w-full aspect-square flex items-center justify-center pt-4">
         {/* Prism Box Container */}
@@ -91,6 +94,6 @@ export default function SkillCard({ skill, locale = "en" }: SkillCardProps) {
           </span>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
