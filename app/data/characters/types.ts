@@ -1,3 +1,5 @@
+import { CurrencyId } from "@/data/currencies/types.ts";
+
 // Character interfaces for TypeScript validation
 
 export interface CharacterStats {
@@ -10,11 +12,7 @@ export interface CharacterStats {
   atkPower: number;
 }
 
-export interface CharacterPrice {
-  gem?: number;
-  riftstone?: number;
-  soulstone?: number;
-}
+export type CharacterPrice = Partial<Record<CurrencyId, number>>;
 
 export interface Character {
   // Keep `id` optional to match existing JSON/TS entries that include it,

@@ -1,7 +1,11 @@
+import { CURRENCIES_DATA } from "./data.ts";
+
+export type CurrencyId = (typeof CURRENCIES_DATA)[number]["id"];
+
 export interface Currency {
-  id: string;
+  id: CurrencyId;
   name: string;
   icon: string;
 }
 
-export type CurrenciesCollection = Record<string, Currency>;
+export type CurrenciesCollection = Record<CurrencyId, Currency>;
