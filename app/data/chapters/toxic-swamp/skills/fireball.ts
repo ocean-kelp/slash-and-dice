@@ -1,5 +1,5 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, ElementType, SkillType } from "../../types.ts";
+import type { MultiLangText, Skill } from "@/data/skills/types.ts";
+import { ActivationType, ElementType, SkillType } from "@/data/skills/types.ts";
 
 const name: MultiLangText = {
   en: "Fireball",
@@ -110,8 +110,8 @@ export const fireball: Skill = {
 };
 
 export default fireball;
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, ElementType, SkillType } from "../../types.ts";
+import type { MultiLangText, Skill } from "@/data/skills/types.ts";
+import { ActivationType, ElementType, SkillType } from "@/data/skills/types.ts";
 
 const name: MultiLangText = {
   en: "Fireball",

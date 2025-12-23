@@ -1,5 +1,5 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, ElementType } from "../../types.ts";
+import type { MultiLangText, Skill } from "@/data/skills/types.ts";
+import { ActivationType, ElementType } from "@/data/skills/types.ts";
 
 const name: MultiLangText = {
   en: "Flame Dragon's Tribute",

@@ -1,4 +1,4 @@
-import type { Skill } from "../../types.ts";
+import type { Skill } from "@/data/skills/types.ts";
 import { iceSpear } from "./ice-spear.ts";
 import { toxicGasExplosion } from "./toxic-gas-explosion.ts";
 import { toxicBlade } from "./toxic-blade.ts";

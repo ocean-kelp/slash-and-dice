@@ -1,4 +1,4 @@
-import type { Skill } from "../../types.ts";
+import type { Skill } from "@/data/skills/types.ts";
 import { lightningStrike } from "./lightning-strike.ts";
 import { pulseBomb } from "./pulse-bomb.ts";
 import { needleThrow } from "./needle-throw.ts";

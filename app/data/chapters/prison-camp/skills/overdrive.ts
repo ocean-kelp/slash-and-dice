@@ -1,5 +1,5 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType } from "../../types.ts";
+import type { MultiLangText, Skill } from "@/data/skills/types.ts";
+import { ActivationType } from "@/data/skills/types.ts";
 
 const name: MultiLangText = {
   en: "Overdrive",

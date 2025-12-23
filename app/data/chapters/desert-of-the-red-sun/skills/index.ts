@@ -1,4 +1,4 @@
-import type { Skill } from "../../types.ts";
+import type { Skill } from "@/data/skills/types.ts";
 import { crushingBite } from "./crushing-bite.ts";
 import { abyssalExecution } from "./abyssal-execution.ts";
 import { sandspike } from "./sandspike.ts";

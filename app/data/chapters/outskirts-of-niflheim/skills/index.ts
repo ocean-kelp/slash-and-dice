@@ -1,4 +1,4 @@
-import type { Skill } from "../../types.ts";
+import type { Skill } from "@/data/skills/types.ts";
 import { rockShot } from "./rock-shot.ts";
 import { darkSphere } from "./dark-sphere.ts";
 import { freezingSmite } from "./freezing-smite.ts";

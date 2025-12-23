@@ -1,5 +1,5 @@
-import type { MultiLangText, Skill } from "../../types.ts";
-import { ActivationType, SkillType } from "../../types.ts";
+import type { MultiLangText, Skill } from "@/data/skills/types.ts";
+import { ActivationType, SkillType } from "@/data/skills/types.ts";
 
 const name: MultiLangText = {
   en: "Meditation",
