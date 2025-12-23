@@ -32,20 +32,30 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
   };
 
   const applyFilters = () => {
-    const params = new URLSearchParams();
-    if (activationType) params.set("activation", activationType);
-    if (elementType) params.set("element", elementType);
-    if (skillType) params.set("type", skillType);
-    if (chapterId) params.set("chapter", chapterId);
-    globalThis.location.search = params.toString();
+    const params = new URLSearchParams(currentParams);
+    const searchTerm = params.get("search");
+
+    const newParams = new URLSearchParams();
+    if (searchTerm) newParams.set("search", searchTerm);
+    if (activationType) newParams.set("activation", activationType);
+    if (elementType) newParams.set("element", elementType);
+    if (skillType) newParams.set("type", skillType);
+    if (chapterId) newParams.set("chapter", chapterId);
+    globalThis.location.search = newParams.toString();
   };
 
   const clearFilters = () => {
+    const params = new URLSearchParams(currentParams);
+    const searchTerm = params.get("search");
+
     setActivationType("");
     setElementType("");
     setSkillType("");
     setChapterId("");
-    globalThis.location.search = "";
+
+    const newParams = new URLSearchParams();
+    if (searchTerm) newParams.set("search", searchTerm);
+    globalThis.location.search = newParams.toString();
   };
 
   return (

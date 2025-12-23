@@ -6,6 +6,7 @@ import SkillCard from "@/components/skills/SkillCard.tsx";
 import type { Skill } from "@/data/skills/types.ts";
 import { SkillType } from "@/data/skills/types.ts";
 import SkillsFilter from "./(_islands)/SkillsFilter.tsx";
+import SearchBar from "./(_islands)/SearchBar.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
@@ -15,9 +16,18 @@ export const handler = defineRoute.handlers({
     const elementType = url.searchParams.get("element");
     const skillType = url.searchParams.get("type");
     const chapterId = url.searchParams.get("chapter");
+    const searchTerm = url.searchParams.get("search") || "";
 
     // Filter skills based on query parameters
     let filteredSkills = allSkills;
+
+    if (searchTerm) {
+      const search = searchTerm.toLowerCase();
+      filteredSkills = filteredSkills.filter((s) =>
+        s.name.en.toLowerCase().includes(search) ||
+        s.description.en.toLowerCase().includes(search)
+      );
+    }
 
     if (activationType) {
       filteredSkills = filteredSkills.filter(
@@ -49,6 +59,7 @@ export const handler = defineRoute.handlers({
         skills: filteredSkills,
         allSkills,
         searchParams: url.searchParams.toString(),
+        searchTerm,
       },
     };
   },
@@ -59,14 +70,18 @@ type Props = {
   skills?: Skill[];
   allSkills?: Skill[];
   searchParams?: string;
+  searchTerm?: string;
 };
 
 export default function SkillsPage({ data, url }: PageProps<Props>) {
   const t = translate(data.translationData ?? {});
   const skills = data.skills ?? [];
   const allSkills = data.allSkills ?? [];
+  const searchTerm = data.searchTerm ?? "";
   const searchParams = data.searchParams ?? "";
   const locale = url.pathname.split("/")[1] || "en";
+  const urlObj = new URL(url);
+  const searchValue = urlObj.searchParams.get("search") || "";
 
   return (
     <>
@@ -121,13 +136,24 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
             </div>
           </div>
 
+          {/* Search Bar */}
+          <SearchBar
+            currentValue={searchValue}
+            translationData={data.translationData}
+          />
+
           {/* Filter Component */}
           <SkillsFilter currentParams={searchParams} />
 
           {/* Skills Grid - Masonry Layout */}
           <div class="columns-2 xs:columns-3 sm:columns-4 md:columns-6 lg:columns-8 xl:columns-8 gap-4">
             {skills.map((skill) => (
-              <SkillCard key={skill.id} skill={skill} locale={locale} />
+              <SkillCard
+                key={skill.id}
+                skill={skill}
+                locale={locale}
+                searchTerm={searchTerm}
+              />
             ))}
           </div>
 

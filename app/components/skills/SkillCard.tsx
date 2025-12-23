@@ -4,9 +4,22 @@ import { skillService } from "@/services/local/game/skillService.ts";
 interface SkillCardProps {
   skill: Skill;
   locale?: string;
+  searchTerm?: string;
 }
 
-export default function SkillCard({ skill, locale = "en" }: SkillCardProps) {
+function highlightText(text: string, searchTerm: string): string {
+  if (!searchTerm) return text;
+
+  const regex = new RegExp(`(${searchTerm})`, "gi");
+  return text.replace(
+    regex,
+    '<mark class="bg-yellow-300/80 text-yellow-900 rounded px-1">$1</mark>',
+  );
+}
+
+export default function SkillCard(
+  { skill, locale = "en", searchTerm = "" }: SkillCardProps,
+) {
   const imagePath = skillService.getImagePath(skill.imageFilename);
   const name = skill.name[locale as keyof typeof skill.name] || skill.name.en;
   const description =
@@ -18,6 +31,9 @@ export default function SkillCard({ skill, locale = "en" }: SkillCardProps) {
     : skill.activationType === "subskill"
     ? "Sub"
     : "Buff";
+
+  const highlightedName = highlightText(name, searchTerm);
+  const highlightedDescription = highlightText(description, searchTerm);
 
   return (
     <a
@@ -47,10 +63,10 @@ export default function SkillCard({ skill, locale = "en" }: SkillCardProps) {
       {/* Skill Info */}
       <div class="mt-2 rounded-lg border-2 border-purple-500/20 bg-gray-800/90 backdrop-blur-sm p-4 hover:border-purple-500/50 transition-colors">
         <h3 class="text-xl font-bold text-purple-100 text-center mb-2">
-          {name}
+          <span dangerouslySetInnerHTML={{ __html: highlightedName }} />
         </h3>
         <p class="text-sm text-gray-400 text-center mb-3">
-          {description}
+          <span dangerouslySetInnerHTML={{ __html: highlightedDescription }} />
         </p>
 
         {/* Skill Type Badges */}
