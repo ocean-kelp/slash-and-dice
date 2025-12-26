@@ -14,4 +14,9 @@ export const CURRENCIES_DATA = [
     name: "Soulstone",
     icon: "/game/data/currencies/soulstone.png",
   },
+  {
+    id: "heart",
+    name: "Heart",
+    icon: "/game/data/currencies/heart.png",
+  },
 ] as const;
