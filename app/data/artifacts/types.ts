@@ -47,11 +47,14 @@ export interface Source {
   item?: string;
 }
 
-// Target types for artifact effects
+// Import skill types for proper typing
+import { ActivationType, ElementType, SkillType } from "@/data/skills/types.ts";
+
+// Target types for artifact effects - using proper enum types instead of raw strings
 export interface ArtifactTarget {
-  activationTypes?: string[]; // e.g., ["main", "subskill", "buff"]
-  elementTypes?: string[]; // e.g., ["bleed", "darkness"]
-  skillTypes?: string[]; // e.g., ["physical", "magic"]
+  activationTypes?: ActivationType[]; // e.g., [ActivationType.MAIN, ActivationType.SUB]
+  elementTypes?: ElementType[]; // e.g., [ElementType.BLEED, ElementType.DARKNESS]
+  skillTypes?: SkillType[]; // e.g., [SkillType.PHYSICAL, SkillType.MAGIC]
 }
 
 // Effect description interface

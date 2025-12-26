@@ -111,11 +111,14 @@ interface Artifact {
 
 ```typescript
 interface ArtifactTarget {
-  activationTypes?: string[]; // ["main", "subskill", "buff"]
-  elementTypes?: string[]; // ["bleed", "darkness", "flame", etc.]
-  skillTypes?: string[]; // ["physical", "magic", "curse", etc.]
+  activationTypes?: ActivationType[]; // [ActivationType.MAIN, ActivationType.SUB]
+  elementTypes?: ElementType[]; // [ElementType.BLEED, ElementType.DARKNESS]
+  skillTypes?: SkillType[]; // [SkillType.PHYSICAL, SkillType.MAGIC]
 }
 ```
+
+**Important:** Use enum values from the skills module, not raw strings. This
+ensures type safety and consistency across the codebase.
 
 **Source System:**
 
