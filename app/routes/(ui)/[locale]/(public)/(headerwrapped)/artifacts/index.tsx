@@ -7,14 +7,16 @@ import type { Artifact } from "@/data/artifacts/types.ts";
 import ArtifactsFilter from "./(_islands)/ArtifactsFilter.tsx";
 import SearchBar from "@/islands/SearchBar.tsx";
 import SortDropdown, { type SortOption } from "@/islands/SortDropdown.tsx";
+import ClearFiltersButton from "@/islands/ClearFiltersButton.tsx";
+import LayoutToggle from "@/islands/LayoutToggle.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
     const allArtifacts = artifactService.getAllArtifacts();
     const url = new URL(ctx.req.url);
-    const rarityParam = url.searchParams.get("rarity");
-    const typeParam = url.searchParams.get("type");
-    const chapterId = url.searchParams.get("chapter");
+    const rarityParams = url.searchParams.getAll("rarity");
+    const typeParams = url.searchParams.getAll("type");
+    const chapterIds = url.searchParams.getAll("chapter");
     const searchTerm = url.searchParams.get("search") || "";
     const cursedOnly = url.searchParams.get("cursed") === "true";
     const sortBy = url.searchParams.get("sort") || "";
@@ -30,18 +32,22 @@ export const handler = defineRoute.handlers({
       );
     }
 
-    if (rarityParam) {
-      const rarity = parseInt(rarityParam);
-      filteredArtifacts = filteredArtifacts.filter((a) => a.rarity === rarity);
+    if (rarityParams.length > 0) {
+      const rarities = rarityParams.map((r) => parseInt(r));
+      filteredArtifacts = filteredArtifacts.filter((a) =>
+        rarities.includes(a.rarity)
+      );
     }
 
-    if (typeParam) {
-      filteredArtifacts = filteredArtifacts.filter((a) => a.type === typeParam);
+    if (typeParams.length > 0) {
+      filteredArtifacts = filteredArtifacts.filter((a) =>
+        typeParams.includes(a.type)
+      );
     }
 
-    if (chapterId) {
+    if (chapterIds.length > 0) {
       filteredArtifacts = filteredArtifacts.filter(
-        (a) => a.chapterId === chapterId,
+        (a) => chapterIds.includes(a.chapterId),
       );
     }
 
@@ -102,6 +108,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
   const sortBy = data.sortBy ?? "";
   const locale = url.pathname.split("/")[1] || "en";
   const urlObj = new URL(url);
+  const isRowLayout = urlObj.searchParams.get("layout") === "rows";
 
   // Sort options
   const sortOptions: SortOption[] = [
@@ -155,7 +162,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
                 </div>
               </div>
               <div class="text-center">
-                <div class="text-3xl font-bold text-gray-300">
+                <div class="text-3xl font-bold text-white">
                   {rarityCount[1]}
                 </div>
                 <div class="text-sm text-gray-500">
@@ -163,7 +170,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
                 </div>
               </div>
               <div class="text-center">
-                <div class="text-3xl font-bold text-green-300">
+                <div class="text-3xl font-bold text-blue-400">
                   {rarityCount[2]}
                 </div>
                 <div class="text-sm text-gray-500">
@@ -171,7 +178,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
                 </div>
               </div>
               <div class="text-center">
-                <div class="text-3xl font-bold text-blue-300">
+                <div class="text-3xl font-bold text-purple-400">
                   {rarityCount[3]}
                 </div>
                 <div class="text-sm text-gray-500">
@@ -179,7 +186,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
                 </div>
               </div>
               <div class="text-center">
-                <div class="text-3xl font-bold text-purple-300">
+                <div class="text-3xl font-bold text-yellow-400">
                   {rarityCount[4]}
                 </div>
                 <div class="text-sm text-gray-500">
@@ -206,6 +213,15 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
             showClearButton
           />
 
+          {/* Clear Filters Button */}
+          <ClearFiltersButton
+            hasFilters={urlObj.searchParams.has("rarity") ||
+              urlObj.searchParams.has("type") ||
+              urlObj.searchParams.has("chapter") ||
+              urlObj.searchParams.has("cursed")}
+            label={t("common.artifacts.clearFilters")}
+          />
+
           {/* Filter and Sort Controls */}
           <div class="mb-6 space-y-4 sm:space-y-0 sm:flex sm:gap-4 sm:items-start">
             <div class="flex-1">
@@ -219,8 +235,21 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
             </div>
           </div>
 
-          {/* Artifacts Grid - Masonry Layout */}
-          <div class="columns-2 xs:columns-3 sm:columns-4 md:columns-5 lg:columns-6 xl:columns-7 gap-4">
+          {/* Layout Toggle */}
+          <LayoutToggle
+            label={t("common.artifacts.layoutLabel")}
+            columnLabel={t("common.artifacts.layoutColumn")}
+            rowLabel={t("common.artifacts.layoutRow")}
+            columnHint={t("common.artifacts.layoutColumnHint")}
+            rowHint={t("common.artifacts.layoutRowHint")}
+          />
+
+          {/* Artifacts Grid */}
+          <div
+            class={isRowLayout
+              ? "grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-4"
+              : "columns-2 xs:columns-3 sm:columns-4 md:columns-5 lg:columns-6 xl:columns-7 gap-4"}
+          >
             {artifacts.map((artifact) => (
               <ArtifactCard
                 key={artifact.id}

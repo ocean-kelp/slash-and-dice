@@ -4,19 +4,22 @@ import { translate } from "@/custom-i18n/translator.ts";
 import { skillService } from "@/services/local/game/skillService.ts";
 import SkillCard from "@/components/skills/SkillCard.tsx";
 import type { Skill } from "@/data/skills/types.ts";
-import { SkillType } from "@/data/skills/types.ts";
 import SkillsFilter from "./(_islands)/SkillsFilter.tsx";
 import SearchBar from "@/islands/SearchBar.tsx";
+import SortDropdown, { type SortOption } from "@/islands/SortDropdown.tsx";
+import ClearFiltersButton from "@/islands/ClearFiltersButton.tsx";
+import LayoutToggle from "@/islands/LayoutToggle.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
     const allSkills = skillService.getAllSkills();
     const url = new URL(ctx.req.url);
-    const activationType = url.searchParams.get("activation");
-    const elementType = url.searchParams.get("element");
-    const skillType = url.searchParams.get("type");
-    const chapterId = url.searchParams.get("chapter");
+    const activationTypes = url.searchParams.getAll("activation");
+    const elementTypes = url.searchParams.getAll("element");
+    const skillTypes = url.searchParams.getAll("type");
+    const chapterIds = url.searchParams.getAll("chapter");
     const searchTerm = url.searchParams.get("search") || "";
+    const sortBy = url.searchParams.get("sort") || "";
 
     // Filter skills based on query parameters
     let filteredSkills = allSkills;
@@ -29,28 +32,50 @@ export const handler = defineRoute.handlers({
       );
     }
 
-    if (activationType) {
+    if (activationTypes.length > 0) {
       filteredSkills = filteredSkills.filter(
-        (s) => s.activationType === activationType,
+        (s) => activationTypes.includes(s.activationType),
       );
     }
 
-    if (elementType) {
+    if (elementTypes.length > 0) {
       filteredSkills = filteredSkills.filter(
-        (s) => s.elementType === elementType,
+        (s) => s.elementType && elementTypes.includes(s.elementType),
       );
     }
 
-    if (skillType) {
+    if (skillTypes.length > 0) {
       filteredSkills = filteredSkills.filter(
-        (s) => s.skillType?.includes(skillType as SkillType),
+        (s) => s.skillType?.some((type) => skillTypes.includes(type)),
       );
     }
 
-    if (chapterId) {
+    if (chapterIds.length > 0) {
       filteredSkills = filteredSkills.filter(
-        (s) => s.chapterId === chapterId,
+        (s) => s.chapterId && chapterIds.includes(s.chapterId),
       );
+    }
+
+    // Sort skills
+    if (sortBy) {
+      switch (sortBy) {
+        case "nameAsc":
+          filteredSkills.sort((a, b) => a.name.en.localeCompare(b.name.en));
+          break;
+        case "nameDesc":
+          filteredSkills.sort((a, b) => b.name.en.localeCompare(a.name.en));
+          break;
+        case "activationType":
+          filteredSkills.sort((a, b) =>
+            a.activationType.localeCompare(b.activationType)
+          );
+          break;
+        case "elementType":
+          filteredSkills.sort((a, b) =>
+            (a.elementType || "").localeCompare(b.elementType || "")
+          );
+          break;
+      }
     }
 
     return {
@@ -60,6 +85,10 @@ export const handler = defineRoute.handlers({
         allSkills,
         searchParams: url.searchParams.toString(),
         searchTerm,
+        selectedActivationTypes: activationTypes.join(","),
+        selectedElementTypes: elementTypes.join(","),
+        selectedSkillTypes: skillTypes.join(","),
+        selectedChapterIds: chapterIds.join(","),
       },
     };
   },
@@ -71,6 +100,10 @@ type Props = {
   allSkills?: Skill[];
   searchParams?: string;
   searchTerm?: string;
+  selectedActivationTypes?: string;
+  selectedElementTypes?: string;
+  selectedSkillTypes?: string;
+  selectedChapterIds?: string;
 };
 
 export default function SkillsPage({ data, url }: PageProps<Props>) {
@@ -82,6 +115,18 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
   const locale = url.pathname.split("/")[1] || "en";
   const urlObj = new URL(url);
   const searchValue = urlObj.searchParams.get("search") || "";
+  const selectedActivationTypes = data.selectedActivationTypes || "";
+  const selectedElementTypes = data.selectedElementTypes || "";
+  const selectedSkillTypes = data.selectedSkillTypes || "";
+  const selectedChapterIds = data.selectedChapterIds || "";
+  const isRowLayout = urlObj.searchParams.get("layout") === "rows";
+
+  const sortOptions: SortOption[] = [
+    { value: "nameAsc", label: t("common.skills.sortNameAsc") },
+    { value: "nameDesc", label: t("common.skills.sortNameDesc") },
+    { value: "activationType", label: t("common.skills.sortActivationType") },
+    { value: "elementType", label: t("common.skills.sortElementType") },
+  ];
 
   return (
     <>
@@ -145,11 +190,41 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
             showClearButton
           />
 
-          {/* Filter Component */}
-          <SkillsFilter currentParams={searchParams} />
+          {/* Clear Filters Button */}
+          <ClearFiltersButton
+            hasFilters={!!selectedActivationTypes || !!selectedElementTypes ||
+              !!selectedSkillTypes || !!selectedChapterIds}
+            label={t("common.skills.clearFilters")}
+          />
 
-          {/* Skills Grid - Masonry Layout */}
-          <div class="columns-2 xs:columns-3 sm:columns-4 md:columns-6 lg:columns-8 xl:columns-8 gap-4">
+          {/* Filter and Sort Controls */}
+          <div class="mb-8 flex flex-col sm:flex-row gap-4">
+            <div class="flex-1">
+              <SkillsFilter currentParams={searchParams} />
+            </div>
+            <div class="w-full sm:w-auto">
+              <SortDropdown
+                options={sortOptions}
+                currentSort={urlObj.searchParams.get("sort") || ""}
+              />
+            </div>
+          </div>
+
+          {/* Layout Toggle */}
+          <LayoutToggle
+            label={t("common.skills.layoutLabel")}
+            columnLabel={t("common.skills.layoutColumn")}
+            rowLabel={t("common.skills.layoutRow")}
+            columnHint={t("common.skills.layoutColumnHint")}
+            rowHint={t("common.skills.layoutRowHint")}
+          />
+
+          {/* Skills Grid */}
+          <div
+            class={isRowLayout
+              ? "grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-8 gap-4"
+              : "columns-2 xs:columns-3 sm:columns-4 md:columns-6 lg:columns-8 xl:columns-8 gap-4"}
+          >
             {skills.map((skill) => (
               <SkillCard
                 key={skill.id}

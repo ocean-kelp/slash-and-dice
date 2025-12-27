@@ -69,7 +69,11 @@ export default function ArtifactCard(
         </div>
 
         {/* Rarity Stars - centered below image */}
-        <div class="mt-2 flex items-center justify-center gap-1">
+        <div
+          class={`mt-2 flex items-center justify-center ${
+            artifact.rarity <= 2 ? "-space-x-1" : "gap-0.5"
+          }`}
+        >
           {artifact.rarity === 4
             ? (
               <img

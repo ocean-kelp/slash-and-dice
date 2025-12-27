@@ -14,32 +14,50 @@ export default function ArtifactsFilter(
   const t = translate(translationData);
   const params = new URLSearchParams(currentParams);
   const [isOpen, setIsOpen] = useState(false);
-  const [rarity, setRarity] = useState(params.get("rarity") || "");
-  const [artifactType, setArtifactType] = useState(params.get("type") || "");
-  const [chapterId, setChapterId] = useState(params.get("chapter") || "");
+
+  // Parse multiple values from URL
+  const [rarities, setRarities] = useState<string[]>(
+    params.getAll("rarity"),
+  );
+  const [artifactTypes, setArtifactTypes] = useState<string[]>(
+    params.getAll("type"),
+  );
+  const [chapterIds, setChapterIds] = useState<string[]>(
+    params.getAll("chapter"),
+  );
   const [cursedOnly, setCursedOnly] = useState(
     params.get("cursed") === "true",
   );
 
-  const hasActiveFilters = rarity || artifactType || chapterId || cursedOnly;
+  const hasActiveFilters = rarities.length > 0 || artifactTypes.length > 0 ||
+    chapterIds.length > 0 || cursedOnly;
 
-  const toggleFilter = (
-    currentValue: string,
+  const toggleMultiSelect = (
+    currentArray: string[],
     value: string,
-    setter: (val: string) => void,
+    setter: (val: string[]) => void,
   ) => {
-    setter(currentValue === value ? "" : value);
+    if (currentArray.includes(value)) {
+      setter(currentArray.filter((v) => v !== value));
+    } else {
+      setter([...currentArray, value]);
+    }
   };
 
   const applyFilters = () => {
     const params = new URLSearchParams(currentParams);
     const searchTerm = params.get("search");
+    const sortBy = params.get("sort");
 
     const newParams = new URLSearchParams();
     if (searchTerm) newParams.set("search", searchTerm);
-    if (rarity) newParams.set("rarity", rarity);
-    if (artifactType) newParams.set("type", artifactType);
-    if (chapterId) newParams.set("chapter", chapterId);
+    if (sortBy) newParams.set("sort", sortBy);
+
+    // Add multiple values for each filter
+    rarities.forEach((r) => newParams.append("rarity", r));
+    artifactTypes.forEach((t) => newParams.append("type", t));
+    chapterIds.forEach((c) => newParams.append("chapter", c));
+
     if (cursedOnly) newParams.set("cursed", "true");
     globalThis.location.search = newParams.toString();
   };
@@ -47,14 +65,16 @@ export default function ArtifactsFilter(
   const clearFilters = () => {
     const params = new URLSearchParams(currentParams);
     const searchTerm = params.get("search");
+    const sortBy = params.get("sort");
 
-    setRarity("");
-    setArtifactType("");
-    setChapterId("");
+    setRarities([]);
+    setArtifactTypes([]);
+    setChapterIds([]);
     setCursedOnly(false);
 
     const newParams = new URLSearchParams();
     if (searchTerm) newParams.set("search", searchTerm);
+    if (sortBy) newParams.set("sort", sortBy);
     globalThis.location.search = newParams.toString();
   };
 
@@ -85,8 +105,8 @@ export default function ArtifactsFilter(
             {t("common.artifacts.filters")}
             {hasActiveFilters && (
               <span class="ml-2 text-sm text-purple-400">
-                ({[rarity, artifactType, chapterId, cursedOnly ? "cursed" : ""]
-                  .filter(Boolean).length} active)
+                ({rarities.length + artifactTypes.length + chapterIds.length +
+                  (cursedOnly ? 1 : 0)} active)
               </span>
             )}
           </span>
@@ -123,9 +143,9 @@ export default function ArtifactsFilter(
                   type="button"
                   key={chapter.id}
                   onClick={() =>
-                    toggleFilter(chapterId, chapter.id, setChapterId)}
+                    toggleMultiSelect(chapterIds, chapter.id, setChapterIds)}
                   class={`px-3 py-1.5 text-sm rounded transition-colors ${
-                    chapterId === chapter.id
+                    chapterIds.includes(chapter.id)
                       ? "bg-purple-600 text-white"
                       : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
                   }`}
@@ -146,31 +166,36 @@ export default function ArtifactsFilter(
                 {
                   value: "1",
                   label: t("common.artifacts.rarityCommon"),
-                  color: "gray",
+                  bgColor: "bg-white",
+                  textColor: "text-black",
                 },
                 {
                   value: "2",
                   label: t("common.artifacts.rarityRare"),
-                  color: "green",
+                  bgColor: "bg-blue-600",
+                  textColor: "text-white",
                 },
                 {
                   value: "3",
                   label: t("common.artifacts.rarityEpic"),
-                  color: "blue",
+                  bgColor: "bg-purple-600",
+                  textColor: "text-white",
                 },
                 {
                   value: "4",
                   label: t("common.artifacts.rarityLegendary"),
-                  color: "purple",
+                  bgColor: "bg-yellow-500",
+                  textColor: "text-black",
                 },
               ].map((r) => (
                 <button
                   type="button"
                   key={r.value}
-                  onClick={() => toggleFilter(rarity, r.value, setRarity)}
+                  onClick={() =>
+                    toggleMultiSelect(rarities, r.value, setRarities)}
                   class={`px-3 py-1.5 text-sm rounded transition-colors ${
-                    rarity === r.value
-                      ? `bg-${r.color}-600 text-white`
+                    rarities.includes(r.value)
+                      ? `${r.bgColor} ${r.textColor} font-semibold`
                       : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
                   }`}
                 >
@@ -191,9 +216,9 @@ export default function ArtifactsFilter(
                   type="button"
                   key={type}
                   onClick={() =>
-                    toggleFilter(artifactType, type, setArtifactType)}
+                    toggleMultiSelect(artifactTypes, type, setArtifactTypes)}
                   class={`px-3 py-1.5 text-sm rounded transition-colors capitalize ${
-                    artifactType === type
+                    artifactTypes.includes(type)
                       ? "bg-cyan-600 text-white"
                       : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
                   }`}

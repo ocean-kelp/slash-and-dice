@@ -72,7 +72,18 @@
     "restrictedCharacters": "Restricted Characters",
     "restrictedCharactersDescription": "This skill cannot be used by:",
     "searchPlaceholder": "Search skills by name or description...",
-    "searchHint": "Press Enter to apply search"
+    "searchHint": "Press Enter to apply search",
+    "clearFilters": "Clear Filters",
+    "sortLabel": "Sort by",
+    "sortNameAsc": "Name (A-Z)",
+    "sortNameDesc": "Name (Z-A)",
+    "sortActivationType": "Activation Type",
+    "sortElementType": "Element Type",
+    "layoutLabel": "Layout:",
+    "layoutColumn": "Columns",
+    "layoutRow": "Rows",
+    "layoutColumnHint": "Space-efficient masonry layout. Sorting applies per column (top to bottom).",
+    "layoutRowHint": "Grid layout with uniform rows. Sorting applies left to right across all items."
   },
   "artifacts": {
     "title": "Artifacts",
@@ -91,6 +102,7 @@
     "cursedOnly": "Cursed Only",
     "applyFilters": "Apply Filters",
     "clearAll": "Clear All",
+    "clearFilters": "Clear Filters",
     "totalArtifacts": "Total Artifacts",
     "filteredArtifacts": "Filtered Artifacts",
     "cursed": "Cursed",
@@ -100,7 +112,12 @@
     "sortNameDesc": "Name (Z-A)",
     "sortRarityAsc": "Rarity (Low to High)",
     "sortRarityDesc": "Rarity (High to Low)",
-    "sortType": "Type"
+    "sortType": "Type",
+    "layoutLabel": "Layout:",
+    "layoutColumn": "Columns",
+    "layoutRow": "Rows",
+    "layoutColumnHint": "Space-efficient masonry layout. Sorting applies per column (top to bottom).",
+    "layoutRowHint": "Grid layout with uniform rows. Sorting applies left to right across all items."
   },
   "welcome": {
     "title": "Welcome! 🎉",

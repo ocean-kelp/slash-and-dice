@@ -9,52 +9,63 @@ interface SkillsFilterProps {
 export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
   const params = new URLSearchParams(currentParams);
   const [isOpen, setIsOpen] = useState(false);
-  const [activationType, setActivationType] = useState(
-    params.get("activation") || "",
+  const [activationTypes, setActivationTypes] = useState<string[]>(
+    params.getAll("activation") || [],
   );
-  const [elementType, setElementType] = useState(
-    params.get("element") || "",
+  const [elementTypes, setElementTypes] = useState<string[]>(
+    params.getAll("element") || [],
   );
-  const [skillType, setSkillType] = useState(params.get("type") || "");
-  const [chapterId, setChapterId] = useState(
-    params.get("chapter") || "",
+  const [skillTypes, setSkillTypes] = useState<string[]>(
+    params.getAll("type") || [],
+  );
+  const [chapterIds, setChapterIds] = useState<string[]>(
+    params.getAll("chapter") || [],
   );
 
-  const hasActiveFilters = activationType || elementType || skillType ||
-    chapterId;
+  const hasActiveFilters = activationTypes.length > 0 ||
+    elementTypes.length > 0 || skillTypes.length > 0 ||
+    chapterIds.length > 0;
 
-  const toggleFilter = (
-    currentValue: string,
+  const toggleMultiSelect = (
+    currentArray: string[],
     value: string,
-    setter: (val: string) => void,
+    setter: (val: string[]) => void,
   ) => {
-    setter(currentValue === value ? "" : value);
+    if (currentArray.includes(value)) {
+      setter(currentArray.filter((v) => v !== value));
+    } else {
+      setter([...currentArray, value]);
+    }
   };
 
   const applyFilters = () => {
     const params = new URLSearchParams(currentParams);
     const searchTerm = params.get("search");
+    const sortTerm = params.get("sort");
 
     const newParams = new URLSearchParams();
     if (searchTerm) newParams.set("search", searchTerm);
-    if (activationType) newParams.set("activation", activationType);
-    if (elementType) newParams.set("element", elementType);
-    if (skillType) newParams.set("type", skillType);
-    if (chapterId) newParams.set("chapter", chapterId);
+    if (sortTerm) newParams.set("sort", sortTerm);
+    activationTypes.forEach((type) => newParams.append("activation", type));
+    elementTypes.forEach((type) => newParams.append("element", type));
+    skillTypes.forEach((type) => newParams.append("type", type));
+    chapterIds.forEach((id) => newParams.append("chapter", id));
     globalThis.location.search = newParams.toString();
   };
 
   const clearFilters = () => {
     const params = new URLSearchParams(currentParams);
     const searchTerm = params.get("search");
+    const sortTerm = params.get("sort");
 
-    setActivationType("");
-    setElementType("");
-    setSkillType("");
-    setChapterId("");
+    setActivationTypes([]);
+    setElementTypes([]);
+    setSkillTypes([]);
+    setChapterIds([]);
 
     const newParams = new URLSearchParams();
     if (searchTerm) newParams.set("search", searchTerm);
+    if (sortTerm) newParams.set("sort", sortTerm);
     globalThis.location.search = newParams.toString();
   };
 
@@ -85,9 +96,8 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
             Filters
             {hasActiveFilters && (
               <span class="ml-2 text-sm text-purple-400">
-                ({[activationType, elementType, skillType, chapterId].filter(
-                  Boolean,
-                ).length} active)
+                ({activationTypes.length + elementTypes.length +
+                  skillTypes.length + chapterIds.length} active)
               </span>
             )}
           </span>
@@ -122,9 +132,9 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
                   type="button"
                   key={chapter.id}
                   onClick={() =>
-                    toggleFilter(chapterId, chapter.id, setChapterId)}
+                    toggleMultiSelect(chapterIds, chapter.id, setChapterIds)}
                   class={`px-3 py-1.5 text-sm rounded transition-colors ${
-                    chapterId === chapter.id
+                    chapterIds.includes(chapter.id)
                       ? "bg-purple-600 text-white"
                       : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
                   }`}
@@ -146,9 +156,13 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
                   type="button"
                   key={type}
                   onClick={() =>
-                    toggleFilter(activationType, type, setActivationType)}
+                    toggleMultiSelect(
+                      activationTypes,
+                      type,
+                      setActivationTypes,
+                    )}
                   class={`px-3 py-1.5 text-sm rounded transition-colors ${
-                    activationType === type
+                    activationTypes.includes(type)
                       ? "bg-orange-600 text-white"
                       : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
                   }`}
@@ -174,9 +188,9 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
                   type="button"
                   key={type}
                   onClick={() =>
-                    toggleFilter(elementType, type, setElementType)}
+                    toggleMultiSelect(elementTypes, type, setElementTypes)}
                   class={`px-3 py-1.5 text-sm rounded transition-colors ${
-                    elementType === type
+                    elementTypes.includes(type)
                       ? "bg-cyan-600 text-white"
                       : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
                   }`}
@@ -197,9 +211,10 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
                 <button
                   type="button"
                   key={type}
-                  onClick={() => toggleFilter(skillType, type, setSkillType)}
+                  onClick={() =>
+                    toggleMultiSelect(skillTypes, type, setSkillTypes)}
                   class={`px-3 py-1.5 text-sm rounded transition-colors ${
-                    skillType === type
+                    skillTypes.includes(type)
                       ? "bg-blue-600 text-white"
                       : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
                   }`}
