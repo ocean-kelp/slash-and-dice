@@ -6,6 +6,7 @@ import ArtifactCard from "@/components/artifacts/ArtifactCard.tsx";
 import type { Artifact } from "@/data/artifacts/types.ts";
 import ArtifactsFilter from "./(_islands)/ArtifactsFilter.tsx";
 import SearchBar from "./(_islands)/SearchBar.tsx";
+import SortDropdown, { type SortOption } from "@/islands/SortDropdown.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
@@ -16,6 +17,7 @@ export const handler = defineRoute.handlers({
     const chapterId = url.searchParams.get("chapter");
     const searchTerm = url.searchParams.get("search") || "";
     const cursedOnly = url.searchParams.get("cursed") === "true";
+    const sortBy = url.searchParams.get("sort") || "";
 
     // Filter artifacts based on query parameters
     let filteredArtifacts = allArtifacts;
@@ -49,6 +51,26 @@ export const handler = defineRoute.handlers({
       );
     }
 
+    // Apply sorting
+    if (sortBy) {
+      filteredArtifacts = [...filteredArtifacts].sort((a, b) => {
+        switch (sortBy) {
+          case "name-asc":
+            return a.name.en.localeCompare(b.name.en);
+          case "name-desc":
+            return b.name.en.localeCompare(a.name.en);
+          case "rarity-asc":
+            return a.rarity - b.rarity;
+          case "rarity-desc":
+            return b.rarity - a.rarity;
+          case "type":
+            return a.type.localeCompare(b.type);
+          default:
+            return 0;
+        }
+      });
+    }
+
     return {
       data: {
         translationData: ctx.state.translationData ?? {},
@@ -56,6 +78,7 @@ export const handler = defineRoute.handlers({
         allArtifacts,
         searchParams: url.searchParams.toString(),
         searchTerm,
+        sortBy,
       },
     };
   },
@@ -67,16 +90,27 @@ type Props = {
   allArtifacts?: Artifact[];
   searchParams?: string;
   searchTerm?: string;
+  sortBy?: string;
 };
 
 export default function ArtifactsPage({ data, url }: PageProps<Props>) {
   const t = translate(data.translationData ?? {});
   const artifacts = data.artifacts ?? [];
   const allArtifacts = data.allArtifacts ?? [];
-  const searchTerm = data.searchTerm ?? "";
   const searchParams = data.searchParams ?? "";
+  const searchTerm = data.searchTerm ?? "";
+  const sortBy = data.sortBy ?? "";
   const locale = url.pathname.split("/")[1] || "en";
   const urlObj = new URL(url);
+
+  // Sort options
+  const sortOptions: SortOption[] = [
+    { value: "name-asc", label: "Name (A-Z)" },
+    { value: "name-desc", label: "Name (Z-A)" },
+    { value: "rarity-asc", label: "Rarity (Low to High)" },
+    { value: "rarity-desc", label: "Rarity (High to Low)" },
+    { value: "type", label: "Type" },
+  ];
   const searchValue = urlObj.searchParams.get("search") || "";
 
   // Calculate statistics
@@ -159,8 +193,11 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
             translationData={data.translationData}
           />
 
-          {/* Filter Component */}
-          <ArtifactsFilter currentParams={searchParams} />
+          {/* Filter and Sort Controls */}
+          <div class="flex flex-col sm:flex-row gap-4 mb-6 items-start sm:items-center justify-between">
+            <ArtifactsFilter currentParams={searchParams} />
+            <SortDropdown options={sortOptions} currentSort={sortBy} />
+          </div>
 
           {/* Artifacts Grid - Masonry Layout */}
           <div class="columns-2 xs:columns-3 sm:columns-4 md:columns-5 lg:columns-6 xl:columns-7 gap-4">
