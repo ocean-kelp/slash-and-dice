@@ -37,34 +37,72 @@ export default function Header(
         <div class="absolute bottom-0 left-0 right-0 h-8 bg-linear-to-b from-transparent to-gray-900/30 pointer-events-none" />
 
         <div class="w-full mx-auto px-6 sm:px-8 lg:px-10">
-          <header class="flex items-center gap-4 h-20">
-            {/* Left: Logo */}
-            <div class="flex items-center shrink-0">
-              <Logo />
-            </div>
-
-            {/* Center: Search bar - hidden on small screens, grows to fill available space on larger screens */}
-            <div class="hidden lg:flex flex-1 items-center justify-center px-4 min-w-0">
-              <div class="w-full max-w-md xl:max-w-lg">
-                <SearchBar />
+          <header class="h-20">
+            {/* Mobile Layout: Logo left, Language center, Login right */}
+            <div class="lg:hidden grid grid-cols-3 items-center h-full">
+              {/* Left: Logo */}
+              <div class="flex items-center justify-start">
+                <Logo />
               </div>
-            </div>
 
-            {/* Right: HomeButton and user controls */}
-            <div class="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 shrink-0">
-              <HomeButton />
-
-              <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+              {/* Center: Language Selector */}
+              <div class="flex items-center justify-center">
                 <LanguageSelector
                   currentLocale={locale || "en"}
                   translationData={translationData}
                 />
-                <UserProfile user={user} translationData={translationData} />
+              </div>
+
+              {/* Right: User Profile & Login/Dropdown */}
+              <div class="flex items-center justify-end gap-2">
+                <div class={user?.username ? "" : "hidden"}>
+                  <UserProfile user={user} translationData={translationData} />
+                </div>
                 <UserOptionsDropdown
                   user={user}
                   translationData={translationData}
                   locale={locale}
                 />
+              </div>
+            </div>
+
+            {/* Desktop Layout: Original flex layout */}
+            <div class="hidden lg:flex items-center gap-4 h-full">
+              {/* Left: Logo */}
+              <div class="flex items-center shrink-0">
+                <Logo />
+              </div>
+
+              {/* Center: Search bar */}
+              <div class="flex flex-1 items-center justify-center px-4 min-w-0">
+                <div class="w-full max-w-md xl:max-w-lg">
+                  <SearchBar />
+                </div>
+              </div>
+
+              {/* Right: HomeButton and user controls */}
+              <div class="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 shrink-0">
+                <div>
+                  <HomeButton />
+                </div>
+
+                <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+                  <LanguageSelector
+                    currentLocale={locale || "en"}
+                    translationData={translationData}
+                  />
+                  <div>
+                    <UserProfile
+                      user={user}
+                      translationData={translationData}
+                    />
+                  </div>
+                  <UserOptionsDropdown
+                    user={user}
+                    translationData={translationData}
+                    locale={locale}
+                  />
+                </div>
               </div>
             </div>
           </header>

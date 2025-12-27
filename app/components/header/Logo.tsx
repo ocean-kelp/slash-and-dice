@@ -1,6 +1,6 @@
 export default function Logo() {
   return (
-    <a href="/" class="inline-flex items-center gap-3 mr-4 pl-1">
+    <a href="/" class="inline-flex items-center gap-3 pl-1">
       <img
         src="/logos/DS-logo.webp"
         alt="DS logo"

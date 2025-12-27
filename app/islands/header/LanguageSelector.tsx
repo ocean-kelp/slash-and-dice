@@ -47,14 +47,14 @@ export default function LanguageSelector({ currentLocale }: Props) {
       <button
         type="button"
         onClick={() => isOpen.value = !isOpen.value}
-        class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+        class="flex items-center justify-center gap-2 px-2 sm:px-3 py-2 rounded-full sm:rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
         aria-label="Select language"
         aria-expanded={isOpen.value}
       >
         {/* Globe Icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="w-5 h-5"
+          class="w-5 h-5 shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -64,13 +64,13 @@ export default function LanguageSelector({ currentLocale }: Props) {
           <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
           <path d="M2 12h20" />
         </svg>
-        <span class="text-sm font-medium uppercase hidden sm:inline">
+        <span class="text-sm font-medium uppercase leading-none translate-y-[1.9px]">
           {currentLocale}
         </span>
-        {/* Chevron */}
+        {/* Chevron - only on desktop */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class={`w-4 h-4 transition-transform ${
+          class={`w-4 h-4 transition-transform hidden sm:block ${
             isOpen.value ? "rotate-180" : ""
           }`}
           viewBox="0 0 24 24"

@@ -42,35 +42,33 @@ export default function UserOptionsDropdown({
     return (
       <a
         href={`/${locale}/login`}
-        class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full
+        class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full
           bg-linear-to-r from-ocean-deep-500 to-ocean-deep-600 text-white 
           shadow-lg shadow-ocean-deep-500/25
           hover:shadow-xl hover:scale-[1.02]
           focus:outline-none focus:ring-2 focus:ring-ocean-deep-500 focus:ring-offset-2
           transition-all duration-300 ease-out
-          font-medium text-xs sm:text-sm whitespace-nowrap"
+          font-medium text-sm whitespace-nowrap"
         aria-label={t("common.header.userOptions.ariaLabel")}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="sm:w-[18px] sm:h-[18px]"
         >
           <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
           <polyline points="10 17 15 12 10 7" />
           <line x1="15" y1="12" x2="3" y2="12" />
         </svg>
-        <span class="hidden xs:inline sm:inline">
+        <span>
           {t("common.login.title")}
         </span>
-        <span class="xs:hidden sm:hidden">{t("common.login.title")}</span>
       </a>
     );
   }
