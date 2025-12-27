@@ -27,12 +27,13 @@ export default function SearchModal({ translationData }: Props) {
   const t = translate(translationData ?? {});
 
   // Generate smart pagination numbers (shows limited pages with ellipsis)
+  // Optimized for mobile - shows max 5 buttons
   const getPaginationPages = (
     currentPage: number,
     totalPages: number,
   ): (number | string)[] => {
-    if (totalPages <= 7) {
-      // Show all pages if 7 or fewer
+    if (totalPages <= 5) {
+      // Show all pages if 5 or fewer
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
 
@@ -41,28 +42,15 @@ export default function SearchModal({ translationData }: Props) {
     // Always show first page
     pages.push(1);
 
-    if (currentPage <= 3) {
-      // Near the beginning: 1 2 3 4 ... last
-      pages.push(2, 3, 4, "...", totalPages);
-    } else if (currentPage >= totalPages - 2) {
-      // Near the end: 1 ... (last-3) (last-2) (last-1) last
-      pages.push(
-        "...",
-        totalPages - 3,
-        totalPages - 2,
-        totalPages - 1,
-        totalPages,
-      );
+    if (currentPage <= 2) {
+      // Near the beginning: 1 2 3 ... last
+      pages.push(2, 3, "...", totalPages);
+    } else if (currentPage >= totalPages - 1) {
+      // Near the end: 1 ... (last-2) (last-1) last
+      pages.push("...", totalPages - 2, totalPages - 1, totalPages);
     } else {
-      // In the middle: 1 ... (current-1) current (current+1) ... last
-      pages.push(
-        "...",
-        currentPage - 1,
-        currentPage,
-        currentPage + 1,
-        "...",
-        totalPages,
-      );
+      // In the middle: 1 ... current ... last
+      pages.push("...", currentPage, "...", totalPages);
     }
 
     return pages;
@@ -85,10 +73,7 @@ export default function SearchModal({ translationData }: Props) {
 
   // Focus input when modal opens
   useEffect(() => {
-    console.log("Modal open state changed:", isOpen.value);
     if (isOpen.value) {
-      console.log("Modal opened, attempting to focus input");
-
       // Use requestAnimationFrame to ensure DOM is fully rendered
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -98,26 +83,8 @@ export default function SearchModal({ translationData }: Props) {
             ? mobileInputRef.current
             : desktopInputRef.current;
 
-          console.log(
-            "Screen width:",
-            globalThis.innerWidth,
-            "isMobile:",
-            isMobile,
-          );
-          console.log("Input to focus:", inputToFocus);
-
           if (inputToFocus) {
             inputToFocus.focus();
-            console.log(
-              "Focus called, document.activeElement:",
-              document.activeElement,
-            );
-            console.log(
-              "Is input focused?",
-              document.activeElement === inputToFocus,
-            );
-          } else {
-            console.log("Input ref is null!");
           }
         });
       });
@@ -232,7 +199,6 @@ export default function SearchModal({ translationData }: Props) {
             class="fixed inset-0 bg-black/20 animate-fade-in"
             style="backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 9999;"
             onClick={() => {
-              console.log("Backdrop clicked, closing modal");
               isOpen.value = false;
             }}
           />
@@ -421,6 +387,7 @@ export default function SearchModal({ translationData }: Props) {
                                 {totalCharacterPages > 1 && (
                                   <div class="mt-3 flex items-center justify-center gap-2">
                                     <button
+                                      type="button"
                                       onClick={() =>
                                         setCharacterPage(
                                           Math.max(1, characterPage - 1),
@@ -445,6 +412,7 @@ export default function SearchModal({ translationData }: Props) {
                                         )
                                         : (
                                           <button
+                                            type="button"
                                             key={page}
                                             onClick={() =>
                                               setCharacterPage(page as number)}
@@ -459,6 +427,7 @@ export default function SearchModal({ translationData }: Props) {
                                         )
                                     ))}
                                     <button
+                                      type="button"
                                       onClick={() =>
                                         setCharacterPage(
                                           Math.min(
@@ -507,6 +476,7 @@ export default function SearchModal({ translationData }: Props) {
                                 {totalSkillPages > 1 && (
                                   <div class="mt-3 flex items-center justify-center gap-2">
                                     <button
+                                      type="button"
                                       onClick={() =>
                                         setSkillPage(
                                           Math.max(1, skillPage - 1),
@@ -531,6 +501,7 @@ export default function SearchModal({ translationData }: Props) {
                                         )
                                         : (
                                           <button
+                                            type="button"
                                             key={page}
                                             onClick={() =>
                                               setSkillPage(page as number)}
@@ -545,6 +516,7 @@ export default function SearchModal({ translationData }: Props) {
                                         )
                                     ))}
                                     <button
+                                      type="button"
                                       onClick={() =>
                                         setSkillPage(
                                           Math.min(
@@ -590,6 +562,7 @@ export default function SearchModal({ translationData }: Props) {
                                 {totalArtifactPages > 1 && (
                                   <div class="mt-3 flex items-center justify-center gap-2">
                                     <button
+                                      type="button"
                                       onClick={() =>
                                         setArtifactPage(
                                           Math.max(1, artifactPage - 1),
@@ -614,6 +587,7 @@ export default function SearchModal({ translationData }: Props) {
                                         )
                                         : (
                                           <button
+                                            type="button"
                                             key={page}
                                             onClick={() =>
                                               setArtifactPage(page as number)}
@@ -628,6 +602,7 @@ export default function SearchModal({ translationData }: Props) {
                                         )
                                     ))}
                                     <button
+                                      type="button"
                                       onClick={() =>
                                         setArtifactPage(
                                           Math.min(
@@ -700,7 +675,6 @@ export default function SearchModal({ translationData }: Props) {
         <button
           type="button"
           onClick={() => {
-            console.log("Mobile search button clicked, opening modal");
             isOpen.value = true;
           }}
           class="lg:hidden flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
@@ -725,7 +699,6 @@ export default function SearchModal({ translationData }: Props) {
             <button
               type="button"
               onClick={() => {
-                console.log("Desktop search bar clicked, opening modal");
                 isOpen.value = true;
               }}
               class="hidden lg:flex w-full max-w-md xl:max-w-lg items-center gap-3 border border-gray-300 rounded-full py-2.5 px-4 text-sm bg-white hover:border-gray-400 transition-all text-left shadow-sm"
