@@ -15,6 +15,10 @@
         "title": "Skills",
         "description": "Master the abilities and skills of every character. Learn optimal builds and strategies."
       },
+      "artifacts": {
+        "title": "Artifacts",
+        "description": "Discover powerful artifacts and equipment that can enhance your abilities and change your playstyle."
+      },
       "codex": {
         "title": "Game Codex",
         "description": "Your complete reference guide for skills, artifacts, synergies, and game mechanics."
@@ -68,6 +72,12 @@
     "restrictedCharacters": "Restricted Characters",
     "restrictedCharactersDescription": "This skill cannot be used by:",
     "searchPlaceholder": "Search skills by name or description...",
+    "searchHint": "Press Enter to apply search"
+  },
+  "artifacts": {
+    "title": "Artifacts",
+    "description": "Discover powerful artifacts and equipment that enhance your abilities and change your playstyle. From common tools to legendary relics.",
+    "searchPlaceholder": "Search artifacts by name or effects...",
     "searchHint": "Press Enter to apply search"
   },
   "welcome": {

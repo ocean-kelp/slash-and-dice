@@ -49,7 +49,6 @@ export default function Home({ data }: PageProps<Props>) {
         {/* Features Grid */}
         <section class="relative max-w-7xl mx-auto px-6 pb-6 flex-1 flex overflow-y-auto">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full content-start">
-            
             {/* Characters */}
             <FeatureCard
               icon={
@@ -97,6 +96,26 @@ export default function Home({ data }: PageProps<Props>) {
               href="skills"
             />
 
+            {/* Artifacts */}
+            <FeatureCard
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              }
+              title={t("common.home.features.artifacts.title")}
+              description={t("common.home.features.artifacts.description")}
+              href="artifacts"
+            />
           </div>
         </section>
       </main>

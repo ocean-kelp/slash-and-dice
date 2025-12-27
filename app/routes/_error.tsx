@@ -9,15 +9,34 @@ export default function ErrorPage(props: PageProps) {
   // The framework will pass the thrown Error (or HttpError) in `props.error`.
   const error = props.error as Error | HttpError | undefined;
 
-  // ALWAYS log errors server-side for debugging
+  // Determine if this is a 404 for a static asset (image, font, etc.)
+  const status = error &&
+      typeof (error as unknown as { status?: unknown }).status === "number"
+    ? (error as unknown as { status: number }).status
+    : 0;
+
+  const isStaticAsset404 = status === 404 && props.url?.pathname &&
+    /\.(png|jpg|jpeg|webp|gif|svg|ico|woff|woff2|ttf|otf|css|js|json)$/i.test(
+      props.url.pathname,
+    );
+
+  // Log differently for static assets vs other errors
   if (error) {
-    console.error("❌ Error page rendered:", {
-      message: error.message,
-      stack: error.stack,
-      status: (error as unknown as { status?: number }).status,
-      url: props.url,
-      route: props.route,
-    });
+    if (isStaticAsset404) {
+      // Simple one-line log for missing static assets
+      console.warn(
+        `⚠️  Missing static asset: ${props.url?.pathname || "unknown"}`,
+      );
+    } else {
+      // Full error details for actual application errors
+      console.error("❌ Error page rendered:", {
+        message: error.message,
+        stack: error.stack,
+        status: (error as unknown as { status?: number }).status,
+        url: props.url,
+        route: props.route,
+      });
+    }
   }
 
   // If it's an HTTP error (Fresh `HttpError`) or an object with a numeric
