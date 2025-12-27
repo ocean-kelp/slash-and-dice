@@ -3370,7 +3370,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     targets: {
-      elementTypes: [ElementType.FIRE],
+      elementTypes: [ElementType.FLAME],
     },
     chapterId: "outskirts-of-niflheim",
   },
