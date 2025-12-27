@@ -23,6 +23,14 @@ export default function SearchBar(
     form.submit();
   };
 
+  const handleClear = () => {
+    setInputValue("");
+    // Navigate to URL without search parameter
+    const url = new URL(globalThis.location.href);
+    url.searchParams.delete("search");
+    globalThis.location.href = url.toString();
+  };
+
   return (
     <div class="mb-4 space-y-2">
       <form method="get" class="relative" onSubmit={handleSubmit}>
@@ -41,7 +49,7 @@ export default function SearchBar(
             );
             setInputValue(newValue);
           }}
-          class="w-full px-4 py-3 pl-12 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors"
+          class="w-full px-4 py-3 pl-12 pr-12 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,6 +65,29 @@ export default function SearchBar(
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
         </svg>
+
+        {/* Clear button - only show when there's text */}
+        {inputValue && (
+          <button
+            type="button"
+            onClick={handleClear}
+            class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 hover:text-purple-300 transition-colors"
+            aria-label="Clear search"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        )}
       </form>
 
       {hasChanges && (

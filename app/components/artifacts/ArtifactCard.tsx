@@ -87,7 +87,7 @@ export default function ArtifactCard(
           <img
             src={imagePath}
             alt={name}
-            class="w-[70%] h-[70%] object-contain drop-shadow-2xl"
+            class="max-w-[90px] max-h-[90px] w-full h-full object-contain drop-shadow-2xl"
             style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
             loading="lazy"
           />
