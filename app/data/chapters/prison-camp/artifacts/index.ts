@@ -18,7 +18,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Inscribed Stone.png",
+    imageFilename: "inscribed-stone.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -71,7 +71,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Broken Horn.png",
+    imageFilename: "broken-horn.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -125,7 +125,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blood Essence.png",
+    imageFilename: "blood-essence.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -177,7 +177,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Feather.png",
+    imageFilename: "feather.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -230,7 +230,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blood Flask.png",
+    imageFilename: "blood-flask.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -282,7 +282,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "White Mask.png",
+    imageFilename: "white-mask.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -336,7 +336,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Torn Journal I.png",
+    imageFilename: "torn-journal-i.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.USABLE,
     sources: [
@@ -386,7 +386,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Torn Journal II.png",
+    imageFilename: "torn-journal-ii.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.USABLE,
     sources: [
@@ -436,7 +436,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bandage.png",
+    imageFilename: "bandage.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -487,7 +487,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Silver Coin.png",
+    imageFilename: "silver-coin.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -538,7 +538,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Dragon Seal.png",
+    imageFilename: "dragon-seal.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -592,7 +592,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Broken Pauldron.png",
+    imageFilename: "broken-pauldron.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -646,7 +646,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blighted Soulstone.png",
+    imageFilename: "blighted-soulstone.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -698,7 +698,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Coal.png",
+    imageFilename: "coal.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -751,7 +751,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Frozen Gauntlet.png",
+    imageFilename: "frozen-gauntlet.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -805,7 +805,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Moldy Mushroom.png",
+    imageFilename: "moldy-mushroom.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -858,7 +858,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Poisonous Mushroom.png",
+    imageFilename: "poisonous-mushroom.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -912,7 +912,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Cell Nucleus.png",
+    imageFilename: "cell-nucleus.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -966,7 +966,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Worn Muffler.png",
+    imageFilename: "worn-muffler.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1020,7 +1020,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Snake Wine.png",
+    imageFilename: "snake-wine.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1074,7 +1074,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Spoon.png",
+    imageFilename: "spoon.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.USABLE,
     sources: [
@@ -1124,7 +1124,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "F' Rune.png",
+    imageFilename: "f-rune.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1178,7 +1178,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Madness Potion.png",
+    imageFilename: "madness-potion.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1232,7 +1232,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Witch's Textbook.png",
+    imageFilename: "witchs-textbook.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1286,7 +1286,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ice Cube.png",
+    imageFilename: "ice-cube.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1338,7 +1338,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mark of the Sisterhood.png",
+    imageFilename: "mark-of-the-sisterhood.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1398,7 +1398,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "8-bit Sunglasses.png",
+    imageFilename: "8-bit-sunglasses.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1452,7 +1452,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Star Fragment.png",
+    imageFilename: "star-fragment.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1506,7 +1506,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Demon Horn.png",
+    imageFilename: "demon-horn.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1560,7 +1560,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Flask.png",
+    imageFilename: "golden-flask.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1612,7 +1612,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Power Gauntlet.png",
+    imageFilename: "power-gauntlet.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1666,7 +1666,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Torn Journal III.png",
+    imageFilename: "torn-journal-iii.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.USABLE,
     sources: [
@@ -1716,7 +1716,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mechanical Arm.png",
+    imageFilename: "mechanical-arm.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1770,7 +1770,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Dragon Eye.png",
+    imageFilename: "dragon-eye.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1824,7 +1824,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Dice.png",
+    imageFilename: "dice.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1878,7 +1878,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Magical Parchment.png",
+    imageFilename: "magical-parchment.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1932,7 +1932,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Suspicious Ice Shard.png",
+    imageFilename: "suspicious-ice-shard.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1986,7 +1986,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Rugged Bodyarmor.png",
+    imageFilename: "rugged-bodyarmor.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2040,7 +2040,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Lightning Rod.png",
+    imageFilename: "lightning-rod.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2094,7 +2094,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hydra's Tooth.png",
+    imageFilename: "hydras-tooth.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2148,7 +2148,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Lizard Skewer.png",
+    imageFilename: "lizard-skewer.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2202,7 +2202,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Lava in a Cup.png",
+    imageFilename: "lava-in-a-cup.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -2256,7 +2256,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Coil.png",
+    imageFilename: "coil.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2310,7 +2310,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Pilgrim's Silver Coin.png",
+    imageFilename: "pilgrims-silver-coin.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2362,7 +2362,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Healing Shell Casing.png",
+    imageFilename: "healing-shell-casing.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -2414,7 +2414,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Star-shaped Party Glasses.png",
+    imageFilename: "star-shaped-party-glasses.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2468,7 +2468,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Black Flask.png",
+    imageFilename: "black-flask.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -2520,7 +2520,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Torn Journal IV.png",
+    imageFilename: "torn-journal-iv.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.USABLE,
     sources: [
@@ -2570,7 +2570,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Floating Stone.png",
+    imageFilename: "floating-stone.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2624,7 +2624,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "God's Dice.png",
+    imageFilename: "gods-dice.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2678,7 +2678,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Necronomicon.png",
+    imageFilename: "necronomicon.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2732,7 +2732,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Magical Backpack.png",
+    imageFilename: "magical-backpack.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2783,7 +2783,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Pilgrim's Gold Coin.png",
+    imageFilename: "pilgrims-gold-coin.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2835,7 +2835,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ruined Royal Family's Insignia.png",
+    imageFilename: "ruined-royal-familys-insignia.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2898,7 +2898,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Lucky Clover Hammer.png",
+    imageFilename: "lucky-clover-hammer.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2952,7 +2952,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Reactive Armor.png",
+    imageFilename: "reactive-armor.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3006,7 +3006,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Magic Wand.png",
+    imageFilename: "magic-wand.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3060,7 +3060,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Small Sun.png",
+    imageFilename: "small-sun.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3114,7 +3114,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Summon Scroll.png",
+    imageFilename: "summon-scroll.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3168,7 +3168,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Admiral's Eyepatch.png",
+    imageFilename: "admirals-eyepatch.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3222,7 +3222,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Strawberry Cream Cake.png",
+    imageFilename: "strawberry-cream-cake.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -3274,7 +3274,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Torn Journal V.png",
+    imageFilename: "torn-journal-v.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.USABLE,
     sources: [
@@ -3324,7 +3324,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mysterious Branch.png",
+    imageFilename: "mysterious-branch.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3378,7 +3378,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Molten Skull.png",
+    imageFilename: "molten-skull.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3432,7 +3432,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Forbidden Technique - Summon Scroll.png",
+    imageFilename: "forbidden-technique---summon-scroll.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3486,7 +3486,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Secret Mask ^q^.png",
+    imageFilename: "secret-mask-^q^.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3548,7 +3548,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Perch.png",
+    imageFilename: "perch.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [

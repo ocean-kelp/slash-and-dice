@@ -18,7 +18,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Torn Flag.png",
+    imageFilename: "torn-flag.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -82,7 +82,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Rotten Egg.png",
+    imageFilename: "rotten-egg.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -145,7 +145,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Baby Toad.png",
+    imageFilename: "baby-toad.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -197,7 +197,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Toad Fluid.png",
+    imageFilename: "toad-fluid.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -248,7 +248,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Red Jewel Fragment.png",
+    imageFilename: "red-jewel-fragment.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -323,7 +323,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Canteen.png",
+    imageFilename: "canteen.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -376,7 +376,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Wild Animal's Tooth.png",
+    imageFilename: "wild-animals-tooth.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -441,7 +441,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Tribal Mark.png",
+    imageFilename: "tribal-mark.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -506,7 +506,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Snowball.png",
+    imageFilename: "snowball.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -571,7 +571,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Stone.png",
+    imageFilename: "stone.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -624,7 +624,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Whetstone.png",
+    imageFilename: "whetstone.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -675,7 +675,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Wooden Shoes.png",
+    imageFilename: "wooden-shoes.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -726,7 +726,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Spoiled Meat.png",
+    imageFilename: "spoiled-meat.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -789,7 +789,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blade Fan.png",
+    imageFilename: "blade-fan.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -854,7 +854,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Peanut.png",
+    imageFilename: "peanut.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -905,7 +905,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Feather Pen.png",
+    imageFilename: "feather-pen.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -956,7 +956,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Feather Fan.png",
+    imageFilename: "feather-fan.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1019,7 +1019,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Broken Vambrace.png",
+    imageFilename: "broken-vambrace.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1070,7 +1070,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Frying Pan.png",
+    imageFilename: "frying-pan.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1121,7 +1121,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Icicle Tribal Mark.png",
+    imageFilename: "icicle-tribal-mark.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1184,7 +1184,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ancient Slate.png",
+    imageFilename: "ancient-slate.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1237,7 +1237,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Horseshoe Magnet.png",
+    imageFilename: "horseshoe-magnet.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1290,7 +1290,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Poisoned Arrow.png",
+    imageFilename: "poisoned-arrow.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1355,7 +1355,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Burned Insignia.png",
+    imageFilename: "burned-insignia.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1420,7 +1420,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blood Contractor.png",
+    imageFilename: "blood-contractor.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1471,7 +1471,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Simple Key.png",
+    imageFilename: "simple-key.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1522,7 +1522,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Niflheim's Coin.png",
+    imageFilename: "niflheims-coin.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1585,7 +1585,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Meteorite Fragment.png",
+    imageFilename: "meteorite-fragment.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1662,7 +1662,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bone Fragment.png",
+    imageFilename: "bone-fragment.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1725,7 +1725,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Holy Slate.png",
+    imageFilename: "holy-slate.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1776,7 +1776,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hermes Boots.png",
+    imageFilename: "hermes-boots.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1839,7 +1839,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Curse's Stigma.png",
+    imageFilename: "curses-stigma.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1902,7 +1902,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Red Devil's Contract.png",
+    imageFilename: "red-devils-contract.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1977,7 +1977,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Soul Talisman.png",
+    imageFilename: "soul-talisman.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2028,7 +2028,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Soul Whistle.png",
+    imageFilename: "soul-whistle.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2079,7 +2079,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ice Shard.png",
+    imageFilename: "ice-shard.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2157,7 +2157,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Easter Egg.png",
+    imageFilename: "easter-egg.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2232,7 +2232,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mine.png",
+    imageFilename: "mine.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2295,7 +2295,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blade Cape.png",
+    imageFilename: "blade-cape.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2372,7 +2372,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Thick Cape.png",
+    imageFilename: "thick-cape.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2437,7 +2437,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "War Flag.png",
+    imageFilename: "war-flag.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2500,7 +2500,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Spike Gloves.png",
+    imageFilename: "spike-gloves.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2554,7 +2554,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Frozen Fruit.png",
+    imageFilename: "frozen-fruit.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2617,7 +2617,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Niflheim's Silver Coin.png",
+    imageFilename: "niflheims-silver-coin.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2668,7 +2668,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Symbol of Loyalty.png",
+    imageFilename: "symbol-of-loyalty.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2733,7 +2733,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Morning Dew.png",
+    imageFilename: "morning-dew.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2798,7 +2798,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ice Flower.png",
+    imageFilename: "ice-flower.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2875,7 +2875,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Iron Chains of Protection.png",
+    imageFilename: "iron-chains-of-protection.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2964,7 +2964,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Barrier Stone.png",
+    imageFilename: "barrier-stone.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3015,7 +3015,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hidden Blade.png",
+    imageFilename: "hidden-blade.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3078,7 +3078,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Serena's Feather.png",
+    imageFilename: "serenas-feather.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3155,7 +3155,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bomber's Bag.png",
+    imageFilename: "bombers-bag.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3230,7 +3230,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Sniper's Cape.png",
+    imageFilename: "snipers-cape.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3307,7 +3307,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bonfire Sword.png",
+    imageFilename: "bonfire-sword.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3384,7 +3384,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ice Spear.png",
+    imageFilename: "ice-spear.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3461,7 +3461,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Niflheim's Gold Coin.png",
+    imageFilename: "niflheims-gold-coin.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3524,7 +3524,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Eternal Flower.png",
+    imageFilename: "eternal-flower.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3613,7 +3613,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Cursed Fingernail.png",
+    imageFilename: "cursed-fingernail.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3694,7 +3694,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Frozen Branch.png",
+    imageFilename: "frozen-branch.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3775,7 +3775,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Red Steel Vambrace.png",
+    imageFilename: "red-steel-vambrace.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3856,7 +3856,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Elixir of Immortality.png",
+    imageFilename: "elixir-of-immortality.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3919,7 +3919,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Cursed Marble.png",
+    imageFilename: "cursed-marble.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3988,7 +3988,7 @@ export const outskirtsOfNiflheimArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Cursed Immortality Sword.png",
+    imageFilename: "cursed-immortality-sword.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [

@@ -18,7 +18,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Firewood.png",
+    imageFilename: "firewood.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -95,7 +95,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Wooden Sled.png",
+    imageFilename: "wooden-sled.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -175,7 +175,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Happy Snowman.png",
+    imageFilename: "happy-snowman.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -228,7 +228,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Poison Sac.png",
+    imageFilename: "poison-sac.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -294,7 +294,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Poison Sting.png",
+    imageFilename: "poison-sting.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -373,7 +373,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Spore.png",
+    imageFilename: "spore.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -440,7 +440,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Unidentified Staff.png",
+    imageFilename: "unidentified-staff.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -492,7 +492,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Soldier's Seal.png",
+    imageFilename: "soldiers-seal.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -557,7 +557,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ominous Fragment.png",
+    imageFilename: "ominous-fragment.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -608,7 +608,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Coupon.png",
+    imageFilename: "coupon.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -659,7 +659,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Worn Poncho.png",
+    imageFilename: "worn-poncho.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -710,7 +710,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Kunai.png",
+    imageFilename: "kunai.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -761,7 +761,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Kitchen Knife.png",
+    imageFilename: "kitchen-knife.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -812,7 +812,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "The Devil Eye.png",
+    imageFilename: "the-devil-eye.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -865,7 +865,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Unstable Barrier.png",
+    imageFilename: "unstable-barrier.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -916,7 +916,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Gold Ingot.png",
+    imageFilename: "gold-ingot.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -967,7 +967,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Steel Boots.png",
+    imageFilename: "steel-boots.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1030,7 +1030,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Fortune Coin.png",
+    imageFilename: "fortune-coin.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1093,7 +1093,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ice Crystal.png",
+    imageFilename: "ice-crystal.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1158,7 +1158,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Plant Seed.png",
+    imageFilename: "plant-seed.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1210,7 +1210,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Niflheim's Symbol.png",
+    imageFilename: "niflheims-symbol.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1273,7 +1273,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Red Poncho.png",
+    imageFilename: "red-poncho.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1324,7 +1324,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mysterious Card.png",
+    imageFilename: "mysterious-card.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1375,7 +1375,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Portable Steak.png",
+    imageFilename: "portable-steak.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1426,7 +1426,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Barrier Charger.png",
+    imageFilename: "barrier-charger.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1477,7 +1477,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Scope.png",
+    imageFilename: "scope.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1532,7 +1532,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Yearning Vine.png",
+    imageFilename: "yearning-vine.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1610,7 +1610,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mysterious Egg.png",
+    imageFilename: "mysterious-egg.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1674,7 +1674,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Medicine Chest.png",
+    imageFilename: "medicine-chest.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.CONSUMABLE,
     sources: [
@@ -1725,7 +1725,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Strange God's Mask.png",
+    imageFilename: "strange-gods-mask.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1790,7 +1790,7 @@ export const toxicSwampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Phelan's Emblem.png",
+    imageFilename: "phelans-emblem.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [

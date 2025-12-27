@@ -17,7 +17,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Red Sand Fossil.png",
+    imageFilename: "red-sand-fossil.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -68,7 +68,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Stuffed Doll.png",
+    imageFilename: "stuffed-doll.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -119,7 +119,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Bandage.png",
+    imageFilename: "golden-bandage.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -170,7 +170,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Water Pouch.png",
+    imageFilename: "water-pouch.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -221,7 +221,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Aloe Vera.png",
+    imageFilename: "aloe-vera.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -273,7 +273,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Scorpion Stinger.png",
+    imageFilename: "scorpion-stinger.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -326,7 +326,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hardened Carapace.png",
+    imageFilename: "hardened-carapace.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -377,7 +377,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Nugget.png",
+    imageFilename: "golden-nugget.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -428,7 +428,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bone of a Colossal Beast.png",
+    imageFilename: "bone-of-a-colossal-beast.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -479,7 +479,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Emblem of Flame.png",
+    imageFilename: "emblem-of-flame.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -532,7 +532,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Oasis Pouch.png",
+    imageFilename: "oasis-pouch.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -595,7 +595,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Red Diamond.png",
+    imageFilename: "red-diamond.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -658,7 +658,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Cactus Flesh.png",
+    imageFilename: "cactus-flesh.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -721,7 +721,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Flower of Chaos.png",
+    imageFilename: "flower-of-chaos.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -784,7 +784,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hibiscus.png",
+    imageFilename: "hibiscus.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -847,7 +847,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Papyrus.png",
+    imageFilename: "papyrus.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -910,7 +910,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Portable Brazier.png",
+    imageFilename: "portable-brazier.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -975,7 +975,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Survivor's Tent.png",
+    imageFilename: "survivors-tent.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1038,7 +1038,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Survivor's Journal.png",
+    imageFilename: "survivors-journal.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1101,7 +1101,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Broken Stone Doll.png",
+    imageFilename: "broken-stone-doll.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1164,7 +1164,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Needle of the Merchant.png",
+    imageFilename: "golden-needle-of-the-merchant.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1227,7 +1227,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Calendar of the End.png",
+    imageFilename: "calendar-of-the-end.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1290,7 +1290,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Cursed Iron Stake.png",
+    imageFilename: "cursed-iron-stake.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1355,7 +1355,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Gorilla's Hand.png",
+    imageFilename: "gorillas-hand.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1408,7 +1408,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Steel Kopis.png",
+    imageFilename: "steel-kopis.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1473,7 +1473,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Sandstone.png",
+    imageFilename: "sandstone.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1536,7 +1536,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bottle of Typhoon.png",
+    imageFilename: "bottle-of-typhoon.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1599,7 +1599,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Gem.png",
+    imageFilename: "golden-gem.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1662,7 +1662,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Unstable Core.png",
+    imageFilename: "unstable-core.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1725,7 +1725,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Magic-infused Stone.png",
+    imageFilename: "magic-infused-stone.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1790,7 +1790,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bloodied Thorn.png",
+    imageFilename: "bloodied-thorn.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1855,7 +1855,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Shard of Sin.png",
+    imageFilename: "shard-of-sin.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1924,7 +1924,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Rune Staff.png",
+    imageFilename: "rune-staff.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1989,7 +1989,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Tear of the Oasis.png",
+    imageFilename: "tear-of-the-oasis.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2052,7 +2052,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Cube.png",
+    imageFilename: "golden-cube.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2115,7 +2115,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ankh of Eternity.png",
+    imageFilename: "ankh-of-eternity.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2178,7 +2178,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bell of Faith.png",
+    imageFilename: "bell-of-faith.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2243,7 +2243,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blade of Sacrifice.png",
+    imageFilename: "blade-of-sacrifice.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2310,7 +2310,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Poem for the Departed.png",
+    imageFilename: "poem-for-the-departed.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2375,7 +2375,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hawk Feather.png",
+    imageFilename: "hawk-feather.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2440,7 +2440,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Potato Core.png",
+    imageFilename: "potato-core.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2503,7 +2503,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Idol.png",
+    imageFilename: "golden-idol.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2566,7 +2566,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Gravedigger's Lantern.png",
+    imageFilename: "gravediggers-lantern.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2629,7 +2629,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bell of Truth.png",
+    imageFilename: "bell-of-truth.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2706,7 +2706,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bell of Deceit.png",
+    imageFilename: "bell-of-deceit.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2787,7 +2787,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Energy Core.png",
+    imageFilename: "energy-core.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2862,7 +2862,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ritual.png",
+    imageFilename: "ritual.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2937,7 +2937,7 @@ export const desertOfTheRedSunArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ancient Cube.png",
+    imageFilename: "ancient-cube.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [

@@ -17,7 +17,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Flame of Vengeance.png",
+    imageFilename: "flame-of-vengeance.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -70,7 +70,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Bottle of Blue Flames.png",
+    imageFilename: "bottle-of-blue-flames.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -135,7 +135,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mango.png",
+    imageFilename: "mango.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -187,7 +187,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Dragonkin's Horn.png",
+    imageFilename: "dragonkins-horn.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -240,7 +240,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Moss Lump.png",
+    imageFilename: "moss-lump.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -293,7 +293,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Spark.png",
+    imageFilename: "spark.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -346,7 +346,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Charcoal Powder.png",
+    imageFilename: "charcoal-powder.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -399,7 +399,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "White Powder.png",
+    imageFilename: "white-powder.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -452,7 +452,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Green Powder.png",
+    imageFilename: "green-powder.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -505,7 +505,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Meat Slab.png",
+    imageFilename: "meat-slab.png",
     rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -556,7 +556,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ruby Ring.png",
+    imageFilename: "ruby-ring.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -621,7 +621,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blue Necklace.png",
+    imageFilename: "blue-necklace.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -686,7 +686,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Broken Blade.png",
+    imageFilename: "broken-blade.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -739,7 +739,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Star Necklace.png",
+    imageFilename: "star-necklace.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -804,7 +804,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Skeleton's Silver Locket.png",
+    imageFilename: "skeletons-silver-locket.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -869,7 +869,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Shining Eyeball.png",
+    imageFilename: "shining-eyeball.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -934,7 +934,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Mummy Hand.png",
+    imageFilename: "mummy-hand.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -999,7 +999,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Silver Key.png",
+    imageFilename: "silver-key.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1062,7 +1062,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Old Key.png",
+    imageFilename: "old-key.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1125,7 +1125,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Blade Necklace.png",
+    imageFilename: "blade-necklace.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1190,7 +1190,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Beautiful Fountain Pen.png",
+    imageFilename: "beautiful-fountain-pen.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1255,7 +1255,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Coffee Bean.png",
+    imageFilename: "coffee-bean.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1318,7 +1318,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Rook.png",
+    imageFilename: "rook.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1381,7 +1381,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Engraved Mask.png",
+    imageFilename: "engraved-mask.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1446,7 +1446,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Thorny Vines.png",
+    imageFilename: "thorny-vines.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1511,7 +1511,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Veil of Fire.png",
+    imageFilename: "veil-of-fire.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1576,7 +1576,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Pot of Greed.png",
+    imageFilename: "pot-of-greed.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1627,7 +1627,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Eternal Device.png",
+    imageFilename: "eternal-device.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1690,7 +1690,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Tangerines.png",
+    imageFilename: "tangerines.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1741,7 +1741,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Golden Resin.png",
+    imageFilename: "golden-resin.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1804,7 +1804,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Charcoal Resin.png",
+    imageFilename: "charcoal-resin.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1857,7 +1857,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Pure Resin.png",
+    imageFilename: "pure-resin.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1910,7 +1910,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Rotten Resin.png",
+    imageFilename: "rotten-resin.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -1963,7 +1963,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Red Resin.png",
+    imageFilename: "red-resin.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2016,7 +2016,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Poisoned Throwing Shuriken.png",
+    imageFilename: "poisoned-throwing-shuriken.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2082,7 +2082,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Purging Stone.png",
+    imageFilename: "purging-stone.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2147,7 +2147,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Seventh Letter.png",
+    imageFilename: "seventh-letter.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2210,7 +2210,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Royal Seal.png",
+    imageFilename: "royal-seal.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2273,7 +2273,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Void Matter.png",
+    imageFilename: "void-matter.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2338,7 +2338,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Treasure of the Lake.png",
+    imageFilename: "treasure-of-the-lake.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2401,7 +2401,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Crystal Stone.png",
+    imageFilename: "crystal-stone.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2464,7 +2464,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Sharp Back Spikes.png",
+    imageFilename: "sharp-back-spikes.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2527,7 +2527,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Ward's Key.png",
+    imageFilename: "wards-key.png",
     rarity: Rarity.TWO_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2590,7 +2590,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Stone of Summoning.png",
+    imageFilename: "stone-of-summoning.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2655,7 +2655,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Pandora's Box.png",
+    imageFilename: "pandoras-box.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2718,7 +2718,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Time Fragment.png",
+    imageFilename: "time-fragment.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2781,7 +2781,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hero's Star.png",
+    imageFilename: "heros-star.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2856,7 +2856,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Assassin's Death Decree.png",
+    imageFilename: "assassins-death-decree.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2919,7 +2919,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Thornmail.png",
+    imageFilename: "thornmail.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -2994,7 +2994,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Second Chest.png",
+    imageFilename: "second-chest.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3057,7 +3057,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Devil's Left Hand.png",
+    imageFilename: "devils-left-hand.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3126,7 +3126,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Machine Part.png",
+    imageFilename: "machine-part.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3189,7 +3189,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Pouch of Hunger.png",
+    imageFilename: "pouch-of-hunger.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3252,7 +3252,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Shapeless Sword.png",
+    imageFilename: "shapeless-sword.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3321,7 +3321,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Cloak of Burning Flames.png",
+    imageFilename: "cloak-of-burning-flames.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3386,7 +3386,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Hero's Dice.png",
+    imageFilename: "heros-dice.png",
     rarity: Rarity.THREE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3453,7 +3453,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Treasure Key.png",
+    imageFilename: "treasure-key.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3528,7 +3528,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Kingdom's Prospect.png",
+    imageFilename: "kingdoms-prospect.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3603,7 +3603,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Black Star.png",
+    imageFilename: "black-star.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3672,7 +3672,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Star's Shining Treasure.png",
+    imageFilename: "stars-shining-treasure.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
@@ -3747,7 +3747,7 @@ export const niflheimCastleArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "Flame of the Fallen.png",
+    imageFilename: "flame-of-the-fallen.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
