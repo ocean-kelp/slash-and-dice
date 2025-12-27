@@ -4,10 +4,19 @@ import { translate } from "@/custom-i18n/translator.ts";
 interface SearchBarProps {
   currentValue: string;
   translationData?: Record<string, unknown>;
+  placeholderKey: string;
+  hintKey: string;
+  showClearButton?: boolean;
 }
 
 export default function SearchBar(
-  { currentValue, translationData }: SearchBarProps,
+  {
+    currentValue,
+    translationData,
+    placeholderKey,
+    hintKey,
+    showClearButton = false,
+  }: SearchBarProps,
 ) {
   const t = translate(translationData ?? {});
   const [inputValue, setInputValue] = useState(currentValue);
@@ -19,13 +28,18 @@ export default function SearchBar(
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    form.submit();
+    const url = new URL(globalThis.location.href);
+    // Set or update the search parameter
+    if (inputValue.trim()) {
+      url.searchParams.set("search", inputValue.trim());
+    } else {
+      url.searchParams.delete("search");
+    }
+    globalThis.location.href = url.toString();
   };
 
   const handleClear = () => {
     setInputValue("");
-    // Navigate to URL without search parameter
     const url = new URL(globalThis.location.href);
     url.searchParams.delete("search");
     globalThis.location.href = url.toString();
@@ -37,7 +51,7 @@ export default function SearchBar(
         <input
           type="text"
           name="search"
-          placeholder={t("common.artifacts.searchPlaceholder")}
+          placeholder={t(placeholderKey)}
           value={inputValue}
           onInput={(e) => {
             const newValue = (e.target as HTMLInputElement).value;
@@ -49,7 +63,9 @@ export default function SearchBar(
             );
             setInputValue(newValue);
           }}
-          class="w-full px-4 py-3 pl-12 pr-12 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors"
+          class={`w-full px-4 py-3 pl-12 ${
+            showClearButton ? "pr-12" : ""
+          } bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors`}
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -66,8 +82,7 @@ export default function SearchBar(
           />
         </svg>
 
-        {/* Clear button - only show when there's text */}
-        {inputValue && (
+        {showClearButton && inputValue && (
           <button
             type="button"
             onClick={handleClear}
@@ -107,7 +122,7 @@ export default function SearchBar(
             />
           </svg>
           <span class="text-sm text-amber-400">
-            {t("common.artifacts.searchHint")}
+            {t(hintKey)}
           </span>
         </div>
       )}

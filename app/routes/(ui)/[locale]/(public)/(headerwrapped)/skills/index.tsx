@@ -6,7 +6,7 @@ import SkillCard from "@/components/skills/SkillCard.tsx";
 import type { Skill } from "@/data/skills/types.ts";
 import { SkillType } from "@/data/skills/types.ts";
 import SkillsFilter from "./(_islands)/SkillsFilter.tsx";
-import SearchBar from "./(_islands)/SearchBar.tsx";
+import SearchBar from "@/islands/SearchBar.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
@@ -140,6 +140,9 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
           <SearchBar
             currentValue={searchValue}
             translationData={data.translationData}
+            placeholderKey="common.skills.searchPlaceholder"
+            hintKey="common.skills.searchHint"
+            showClearButton
           />
 
           {/* Filter Component */}

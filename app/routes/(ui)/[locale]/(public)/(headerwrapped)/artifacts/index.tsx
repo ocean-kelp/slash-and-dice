@@ -5,7 +5,7 @@ import { artifactService } from "@/services/local/game/artifactService.ts";
 import ArtifactCard from "@/components/artifacts/ArtifactCard.tsx";
 import type { Artifact } from "@/data/artifacts/types.ts";
 import ArtifactsFilter from "./(_islands)/ArtifactsFilter.tsx";
-import SearchBar from "./(_islands)/SearchBar.tsx";
+import SearchBar from "@/islands/SearchBar.tsx";
 import SortDropdown, { type SortOption } from "@/islands/SortDropdown.tsx";
 
 export const handler = defineRoute.handlers({
@@ -201,6 +201,9 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
           <SearchBar
             currentValue={searchValue}
             translationData={data.translationData}
+            placeholderKey="common.artifacts.searchPlaceholder"
+            hintKey="common.artifacts.searchHint"
+            showClearButton
           />
 
           {/* Filter and Sort Controls */}
