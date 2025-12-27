@@ -66,11 +66,8 @@ export default function ArtifactCard(
       href={`/${locale}/artifacts/${artifact.id}`}
       class="group relative break-inside-avoid mb-4 block hover:scale-[1.02] transition-transform"
     >
-      {/* Artifact Image Container */}
-      <div
-        class="relative w-full aspect-square flex items-center justify-center p-4 rounded-t-lg bg-linear-to-br from-gray-800 to-gray-900 border-2"
-        style={`border-color: ${rarity.color}; box-shadow: 0 0 20px ${rarity.glow};`}
-      >
+      {/* Artifact Image Container with Transparent Background */}
+      <div class="relative w-full aspect-square flex flex-col items-center justify-center py-6">
         {/* Cursed Indicator */}
         {artifact.cursedInfo && (
           <div class="absolute top-2 right-2 z-20 bg-red-600/90 backdrop-blur-sm rounded-full p-1.5 border border-red-400/50">
@@ -85,28 +82,40 @@ export default function ArtifactCard(
           </div>
         )}
 
-        {/* Rarity Stars */}
-        <div class="absolute top-2 left-2 z-20">
-          <span class={`text-${rarity.color}-400 text-sm font-bold`}>
+        {/* Artifact Icon - centered and larger */}
+        <div class="flex-1 flex items-center justify-center">
+          <img
+            src={imagePath}
+            alt={name}
+            class="w-[70%] h-[70%] object-contain drop-shadow-2xl"
+            style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+            loading="lazy"
+          />
+        </div>
+
+        {/* Rarity Stars - centered below image */}
+        <div class="mt-2">
+          <span class="text-yellow-400 text-lg font-bold drop-shadow-lg">
             {rarity.label}
           </span>
         </div>
-
-        {/* Artifact Icon */}
-        <img
-          src={imagePath}
-          alt={name}
-          class="relative z-10 w-[60%] h-[60%] object-contain drop-shadow-lg"
-          style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
-          loading="lazy"
-        />
       </div>
 
       {/* Artifact Info */}
-      <div class="rounded-b-lg border-2 border-t-0 bg-gray-800/90 backdrop-blur-sm p-4 hover:border-purple-500/50 transition-colors border-purple-500/20">
-        <h3 class="text-lg font-bold text-purple-100 text-center mb-2 line-clamp-2">
+      <div class="mt-2 rounded-lg border-2 border-purple-500/20 bg-gray-800/90 backdrop-blur-sm p-4 hover:border-purple-500/50 transition-colors">
+        <h3 class="text-xl font-bold text-purple-100 text-center mb-2">
           <HighlightText text={name} searchTerm={searchTerm} />
         </h3>
+
+        {/* Effects Summary */}
+        {artifact.effects.length > 0 && (
+          <p class="text-sm text-gray-400 text-center mb-3 line-clamp-2">
+            <HighlightText
+              text={artifact.effects[0].text.en}
+              searchTerm={searchTerm}
+            />
+          </p>
+        )}
 
         {/* Type Badge */}
         <div class="flex justify-center mb-3">
@@ -117,15 +126,8 @@ export default function ArtifactCard(
           </span>
         </div>
 
-        {/* Effects Summary */}
-        {artifact.effects.length > 0 && (
-          <div class="mb-3 text-xs text-gray-400 text-center line-clamp-2">
-            {artifact.effects[0].text.en}
-          </div>
-        )}
-
         {/* Chapter Badge */}
-        <div class="flex items-center justify-center gap-2 text-xs">
+        <div class="flex items-center justify-center gap-2 text-sm">
           <span class="px-2 py-0.5 bg-purple-600/30 text-purple-200 rounded capitalize">
             {artifact.chapterId.replace(/-/g, " ")}
           </span>

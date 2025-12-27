@@ -3486,7 +3486,7 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hans": "",
       "zh-Hant": "",
     },
-    imageFilename: "secret-mask-^q^.png",
+    imageFilename: "secret-mask.png",
     rarity: Rarity.FOUR_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
