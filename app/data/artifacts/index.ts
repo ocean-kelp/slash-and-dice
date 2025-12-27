@@ -1,10 +1,11 @@
 // Aggregator for all artifacts from all chapters
 import { Artifact } from "./types.ts";
-import prisonCampArtifacts from "@/data/chapters/prison-camp/artifacts/index.ts";
-import toxicSwampArtifacts from "@/data/chapters/toxic-swamp/artifacts/index.ts";
-import outskirtsOfNiflheimArtifacts from "@/data/chapters/outskirts-of-niflheim/artifacts/index.ts";
-import niflheimCastleArtifacts from "@/data/chapters/niflheim-castle/artifacts/index.ts";
-import desertOfTheRedSunArtifacts from "@/data/chapters/desert-of-the-red-sun/artifacts/index.ts";
+import { ActivationType, ElementType, SkillType } from "@/data/skills/types.ts";
+import { prisonCampArtifacts } from "@/data/chapters/prison-camp/artifacts/index.ts";
+import { toxicSwampArtifacts } from "@/data/chapters/toxic-swamp/artifacts/index.ts";
+import { outskirtsOfNiflheimArtifacts } from "@/data/chapters/outskirts-of-niflheim/artifacts/index.ts";
+import { niflheimCastleArtifacts } from "@/data/chapters/niflheim-castle/artifacts/index.ts";
+import { desertOfTheRedSunArtifacts } from "@/data/chapters/desert-of-the-red-sun/artifacts/index.ts";
 
 // Combine all chapter artifacts
 const allChapterArtifacts = [
@@ -35,22 +36,20 @@ export const artifactService = {
     artifactsList.filter((artifact) => artifact.rarity === rarity),
   getArtifactsByType: (type: string) =>
     artifactsList.filter((artifact) => artifact.type === type),
-  getArtifactsBySpecialType: (specialType: string) =>
-    artifactsList.filter((artifact) => artifact.specialType === specialType),
-  getArtifactsByElement: (elementType: string) =>
+  getArtifactsByElement: (elementType: ElementType) =>
     artifactsList.filter((artifact) =>
       artifact.targets.elementTypes?.includes(elementType)
     ),
-  getArtifactsByActivationType: (activationType: string) =>
+  getArtifactsByActivationType: (activationType: ActivationType) =>
     artifactsList.filter((artifact) =>
       artifact.targets.activationTypes?.includes(activationType)
     ),
-  getArtifactsBySkillType: (skillType: string) =>
+  getArtifactsBySkillType: (skillType: SkillType) =>
     artifactsList.filter((artifact) =>
       artifact.targets.skillTypes?.includes(skillType)
     ),
   getCursedArtifacts: () =>
-    artifactsList.filter((artifact) => artifact.isCursed),
+    artifactsList.filter((artifact) => artifact.cursedInfo !== undefined),
   getEventArtifacts: () =>
     artifactsList.filter((artifact) => artifact.persistsAfterEvent === false),
   getPersistentArtifacts: () =>
