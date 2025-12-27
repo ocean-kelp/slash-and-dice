@@ -1,6 +1,10 @@
-import { Artifact } from "@/data/artifacts/types.ts";
+import {
+  Artifact,
+  ArtifactType,
+  Rarity,
+  SourceType,
+} from "@/data/artifacts/types.ts";
 import { ActivationType, ElementType, SkillType } from "@/data/skills/types.ts";
-import { ArtifactType, SourceType } from "@/data/artifacts/types.ts";
 
 // Prison Camp artifacts
 export const prisonCampArtifacts: Artifact[] = [
@@ -15,11 +19,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Inscribed Stone.png",
-    rarity: 1,
+    rarity: Rarity.ONE_STAR,
     type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -68,11 +72,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Broken Horn.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -122,11 +126,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Blood Essence.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -174,11 +178,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Feather.png",
-    rarity: 1,
-    type: "equipment",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -227,11 +231,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Blood Flask.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -279,11 +283,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "White Mask.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -333,11 +337,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Torn Journal I.png",
-    rarity: 1,
-    type: "usable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.USABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -383,11 +387,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Torn Journal II.png",
-    rarity: 1,
-    type: "usable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.USABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -433,11 +437,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Bandage.png",
-    rarity: 1,
-    type: "consumable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -484,11 +488,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Silver Coin.png",
-    rarity: 1,
-    type: "equipment",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -535,11 +539,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Dragon Seal.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -589,11 +593,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Broken Pauldron.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -643,11 +647,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Blighted Soulstone.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -695,11 +699,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Coal.png",
-    rarity: 1,
-    type: "equipment",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -748,11 +752,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Frozen Gauntlet.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -802,11 +806,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Moldy Mushroom.png",
-    rarity: 1,
-    type: "consumable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -855,11 +859,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Poisonous Mushroom.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -909,11 +913,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Cell Nucleus.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -963,11 +967,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Worn Muffler.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1017,11 +1021,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Snake Wine.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1071,11 +1075,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Spoon.png",
-    rarity: 1,
-    type: "usable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.USABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -1121,11 +1125,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "F' Rune.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1175,11 +1179,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Madness Potion.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1229,11 +1233,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Witch's Textbook.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1283,11 +1287,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Ice Cube.png",
-    rarity: 1,
-    type: "consumable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -1335,11 +1339,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Mark of the Sisterhood.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "secret_puzzle",
+        type: SourceType.SECRET_PUZZLE,
         description: {
           en: "Complete Prison Camp secret puzzle",
           es: "",
@@ -1395,11 +1399,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "8-bit Sunglasses.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "event_npc",
+        type: SourceType.EVENT_NPC,
         description: {
           en: "Obtained from event NPC",
           es: "",
@@ -1449,11 +1453,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Star Fragment.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1503,11 +1507,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Demon Horn.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1557,11 +1561,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Golden Flask.png",
-    rarity: 3,
-    type: "consumable",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1609,11 +1613,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Power Gauntlet.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1663,11 +1667,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Torn Journal III.png",
-    rarity: 1,
-    type: "usable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.USABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -1713,11 +1717,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Mechanical Arm.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1767,11 +1771,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Dragon Eye.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1821,11 +1825,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Dice.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1875,11 +1879,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Magical Parchment.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1929,11 +1933,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Suspicious Ice Shard.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -1983,11 +1987,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Rugged Bodyarmor.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2037,11 +2041,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Lightning Rod.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2091,11 +2095,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Hydra's Tooth.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2145,11 +2149,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Lizard Skewer.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2199,11 +2203,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Lava in a Cup.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2253,11 +2257,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Coil.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2307,11 +2311,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Pilgrim's Silver Coin.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "event_npc",
+        type: SourceType.EVENT_NPC,
         description: {
           en: "Obtained from event NPC",
           es: "",
@@ -2359,11 +2363,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Healing Shell Casing.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2411,11 +2415,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Star-shaped Party Glasses.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "event_npc",
+        type: SourceType.EVENT_NPC,
         description: {
           en: "Obtained from event NPC",
           es: "",
@@ -2465,11 +2469,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Black Flask.png",
-    rarity: 3,
-    type: "consumable",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2517,11 +2521,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Torn Journal IV.png",
-    rarity: 1,
-    type: "usable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.USABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -2567,11 +2571,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Floating Stone.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2621,11 +2625,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "God's Dice.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2675,11 +2679,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Necronomicon.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2729,11 +2733,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Magical Backpack.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "event_npc",
+        type: SourceType.EVENT_NPC,
         description: {
           en: "Obtained from event NPC",
           es: "",
@@ -2780,11 +2784,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Pilgrim's Gold Coin.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "event_npc",
+        type: SourceType.EVENT_NPC,
         description: {
           en: "Obtained from event NPC",
           es: "",
@@ -2832,11 +2836,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Ruined Royal Family's Insignia.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2895,11 +2899,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Lucky Clover Hammer.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -2949,11 +2953,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Reactive Armor.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -3003,11 +3007,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Magic Wand.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -3057,11 +3061,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Small Sun.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -3111,11 +3115,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Summon Scroll.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -3165,11 +3169,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Admiral's Eyepatch.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "event_npc",
+        type: SourceType.EVENT_NPC,
         description: {
           en: "Obtained from event NPC",
           es: "",
@@ -3219,11 +3223,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Strawberry Cream Cake.png",
-    rarity: 2,
-    type: "consumable",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.CONSUMABLE,
     sources: [
       {
-        type: "event_npc",
+        type: SourceType.EVENT_NPC,
         description: {
           en: "Obtained from event NPC",
           es: "",
@@ -3271,11 +3275,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Torn Journal V.png",
-    rarity: 1,
-    type: "usable",
+    rarity: Rarity.ONE_STAR,
+    type: ArtifactType.USABLE,
     sources: [
       {
-        type: "regular_npc",
+        type: SourceType.REGULAR_NPC,
         description: {
           en: "Found in Prison Camp",
           es: "",
@@ -3321,11 +3325,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Mysterious Branch.png",
-    rarity: 3,
-    type: "equipment",
+    rarity: Rarity.THREE_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -3375,11 +3379,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Molten Skull.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -3429,11 +3433,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Forbidden Technique - Summon Scroll.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
@@ -3483,11 +3487,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Secret Mask ^q^.png",
-    rarity: 4,
-    type: "equipment",
+    rarity: Rarity.FOUR_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "secret_puzzle",
+        type: SourceType.SECRET_PUZZLE,
         description: {
           en: "Complete Prison Camp secret puzzle",
           es: "",
@@ -3545,11 +3549,11 @@ export const prisonCampArtifacts: Artifact[] = [
       "zh-Hant": "",
     },
     imageFilename: "Perch.png",
-    rarity: 2,
-    type: "equipment",
+    rarity: Rarity.TWO_STAR,
+    type: ArtifactType.EQUIPMENT,
     sources: [
       {
-        type: "boss_loot",
+        type: SourceType.BOSS_LOOT,
         description: {
           en: "Dropped by Prison Camp bosses",
           es: "",
