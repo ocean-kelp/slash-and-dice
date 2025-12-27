@@ -236,7 +236,11 @@
       "wiki": "Wiki",
       "closeHint": "Press",
       "closeKey": "Esc",
-      "toClose": "to close"
+      "toClose": "to close",
+      "noResults": "No results found",
+      "tryDifferent": "Try a different search term",
+      "showMore": "Show more",
+      "showLess": "Show less"
     },
     "userOptions": {
       "ariaLabel": "User options menu",
