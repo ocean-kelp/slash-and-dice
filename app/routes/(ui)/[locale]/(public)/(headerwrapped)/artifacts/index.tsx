@@ -207,12 +207,16 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
           />
 
           {/* Filter and Sort Controls */}
-          <div class="flex flex-col sm:flex-row gap-4 mb-6 items-start sm:items-center justify-between">
-            <ArtifactsFilter
-              currentParams={searchParams}
-              translationData={data.translationData}
-            />
-            <SortDropdown options={sortOptions} currentSort={sortBy} />
+          <div class="mb-6 space-y-4 sm:space-y-0 sm:flex sm:gap-4 sm:items-start">
+            <div class="flex-1">
+              <ArtifactsFilter
+                currentParams={searchParams}
+                translationData={data.translationData}
+              />
+            </div>
+            <div class="sm:w-auto">
+              <SortDropdown options={sortOptions} currentSort={sortBy} />
+            </div>
           </div>
 
           {/* Artifacts Grid - Masonry Layout */}

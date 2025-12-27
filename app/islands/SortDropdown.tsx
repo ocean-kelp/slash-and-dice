@@ -32,11 +32,11 @@ export default function SortDropdown(
   const displayLabel = currentOption?.label || "Sort by...";
 
   return (
-    <div class="relative inline-block text-left">
+    <div class="relative inline-block text-left w-full sm:w-auto">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        class="inline-flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-white bg-gray-800/50 backdrop-blur-sm border border-purple-500/20 rounded-lg hover:border-purple-500/50 focus:outline-none focus:border-purple-500/50 transition-colors min-w-[180px]"
+        class="w-full inline-flex items-center justify-between px-4 py-5 text-sm font-medium text-white bg-gray-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl hover:border-purple-500/40 focus:outline-none focus:border-purple-500/50 transition-colors min-w-[180px]"
       >
         <span>{displayLabel}</span>
         <svg
