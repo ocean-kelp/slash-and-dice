@@ -217,6 +217,7 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
             rowLabel={t("common.skills.layoutRow")}
             columnHint={t("common.skills.layoutColumnHint")}
             rowHint={t("common.skills.layoutRowHint")}
+            cookieAlias="skills"
           />
 
           {/* Skills Grid */}

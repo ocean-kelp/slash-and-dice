@@ -242,6 +242,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
             rowLabel={t("common.artifacts.layoutRow")}
             columnHint={t("common.artifacts.layoutColumnHint")}
             rowHint={t("common.artifacts.layoutRowHint")}
+            cookieAlias="artifacts"
           />
 
           {/* Artifacts Grid */}

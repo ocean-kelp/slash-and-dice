@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import { translate } from "@/custom-i18n/translator.ts";
 
 interface SearchBarProps {
@@ -21,10 +21,6 @@ export default function SearchBar(
   const t = translate(translationData ?? {});
   const [inputValue, setInputValue] = useState(currentValue);
   const hasChanges = inputValue !== currentValue;
-
-  useEffect(() => {
-    console.log("SearchBar mounted on client");
-  }, []);
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
@@ -54,14 +50,7 @@ export default function SearchBar(
           placeholder={t(placeholderKey)}
           value={inputValue}
           onInput={(e) => {
-            const newValue = (e.target as HTMLInputElement).value;
-            console.log(
-              "Input changed:",
-              newValue,
-              "hasChanges will be:",
-              newValue !== currentValue,
-            );
-            setInputValue(newValue);
+            setInputValue((e.target as HTMLInputElement).value);
           }}
           class={`w-full px-4 py-3 pl-12 ${
             showClearButton ? "pr-12" : ""
