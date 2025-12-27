@@ -1,14 +1,17 @@
 import { ArtifactType } from "@/data/artifacts/types.ts";
 import { chapters } from "@/data/chapters/index.ts";
 import { useState } from "preact/hooks";
+import { translate } from "@/custom-i18n/translator.ts";
 
 interface ArtifactsFilterProps {
   currentParams: string;
+  translationData?: Record<string, unknown>;
 }
 
 export default function ArtifactsFilter(
-  { currentParams }: ArtifactsFilterProps,
+  { currentParams, translationData = {} }: ArtifactsFilterProps,
 ) {
+  const t = translate(translationData);
   const params = new URLSearchParams(currentParams);
   const [isOpen, setIsOpen] = useState(false);
   const [rarity, setRarity] = useState(params.get("rarity") || "");
@@ -79,7 +82,7 @@ export default function ArtifactsFilter(
             />
           </svg>
           <span class="text-lg font-semibold text-amber-100">
-            Filters
+            {t("common.artifacts.filters")}
             {hasActiveFilters && (
               <span class="ml-2 text-sm text-purple-400">
                 ({[rarity, artifactType, chapterId, cursedOnly ? "cursed" : ""]
@@ -111,7 +114,9 @@ export default function ArtifactsFilter(
         <div class="mt-2 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 p-6 space-y-4 animate-fade-in">
           {/* Chapter Filter */}
           <div>
-            <h3 class="text-sm font-semibold text-gray-400 mb-2">Chapter</h3>
+            <h3 class="text-sm font-semibold text-gray-400 mb-2">
+              {t("common.artifacts.chapter")}
+            </h3>
             <div class="flex flex-wrap gap-2">
               {chapters.map((chapter) => (
                 <button
@@ -133,13 +138,31 @@ export default function ArtifactsFilter(
 
           {/* Rarity Filter */}
           <div>
-            <h3 class="text-sm font-semibold text-gray-400 mb-2">Rarity</h3>
+            <h3 class="text-sm font-semibold text-gray-400 mb-2">
+              {t("common.artifacts.rarity")}
+            </h3>
             <div class="flex flex-wrap gap-2">
               {[
-                { value: "1", label: "★ Common", color: "gray" },
-                { value: "2", label: "★★ Rare", color: "green" },
-                { value: "3", label: "★★★ Epic", color: "blue" },
-                { value: "4", label: "★★★★ Legendary", color: "purple" },
+                {
+                  value: "1",
+                  label: t("common.artifacts.rarityCommon"),
+                  color: "gray",
+                },
+                {
+                  value: "2",
+                  label: t("common.artifacts.rarityRare"),
+                  color: "green",
+                },
+                {
+                  value: "3",
+                  label: t("common.artifacts.rarityEpic"),
+                  color: "blue",
+                },
+                {
+                  value: "4",
+                  label: t("common.artifacts.rarityLegendary"),
+                  color: "purple",
+                },
               ].map((r) => (
                 <button
                   type="button"
@@ -159,7 +182,9 @@ export default function ArtifactsFilter(
 
           {/* Artifact Type Filter */}
           <div>
-            <h3 class="text-sm font-semibold text-gray-400 mb-2">Type</h3>
+            <h3 class="text-sm font-semibold text-gray-400 mb-2">
+              {t("common.artifacts.type")}
+            </h3>
             <div class="flex flex-wrap gap-2">
               {Object.values(ArtifactType).map((type) => (
                 <button
@@ -181,17 +206,25 @@ export default function ArtifactsFilter(
 
           {/* Cursed Filter */}
           <div>
-            <h3 class="text-sm font-semibold text-gray-400 mb-2">Special</h3>
+            <h3 class="text-sm font-semibold text-gray-400 mb-2">
+              {t("common.artifacts.special")}
+            </h3>
             <button
               type="button"
               onClick={() => setCursedOnly(!cursedOnly)}
-              class={`px-3 py-1.5 text-sm rounded transition-colors ${
+              class={`px-3 py-1.5 text-sm rounded transition-colors flex items-center gap-2 ${
                 cursedOnly
                   ? "bg-red-600 text-white"
                   : "bg-gray-700/50 text-gray-300 hover:bg-gray-700"
               }`}
             >
-              💀 Cursed Only
+              <img
+                src="/game/data/other/rarity-1-star-red.png"
+                alt="cursed"
+                class="h-4 w-auto"
+                style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+              />
+              {t("common.artifacts.cursedOnly")}
             </button>
           </div>
 
@@ -202,7 +235,7 @@ export default function ArtifactsFilter(
               onClick={applyFilters}
               class="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
             >
-              Apply Filters
+              {t("common.artifacts.applyFilters")}
             </button>
             {hasActiveFilters && (
               <button
@@ -210,7 +243,7 @@ export default function ArtifactsFilter(
                 onClick={clearFilters}
                 class="px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-300 font-semibold rounded-lg transition-colors"
               >
-                Clear All
+                {t("common.artifacts.clearAll")}
               </button>
             )}
           </div>

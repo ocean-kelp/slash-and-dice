@@ -105,11 +105,11 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
 
   // Sort options
   const sortOptions: SortOption[] = [
-    { value: "name-asc", label: "Name (A-Z)" },
-    { value: "name-desc", label: "Name (Z-A)" },
-    { value: "rarity-asc", label: "Rarity (Low to High)" },
-    { value: "rarity-desc", label: "Rarity (High to Low)" },
-    { value: "type", label: "Type" },
+    { value: "name-asc", label: t("common.artifacts.sortNameAsc") },
+    { value: "name-desc", label: t("common.artifacts.sortNameDesc") },
+    { value: "rarity-asc", label: t("common.artifacts.sortRarityAsc") },
+    { value: "rarity-desc", label: t("common.artifacts.sortRarityDesc") },
+    { value: "type", label: t("common.artifacts.sortType") },
   ];
   const searchValue = urlObj.searchParams.get("search") || "";
 
@@ -150,39 +150,49 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
                 </div>
                 <div class="text-sm text-gray-500">
                   {artifacts.length === allArtifacts.length
-                    ? "Total Artifacts"
-                    : "Filtered Artifacts"}
+                    ? t("common.artifacts.totalArtifacts")
+                    : t("common.artifacts.filteredArtifacts")}
                 </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-gray-300">
                   {rarityCount[1]}
                 </div>
-                <div class="text-sm text-gray-500">★ Common</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.artifacts.rarityCommon")}
+                </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-green-300">
                   {rarityCount[2]}
                 </div>
-                <div class="text-sm text-gray-500">★★ Rare</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.artifacts.rarityRare")}
+                </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-blue-300">
                   {rarityCount[3]}
                 </div>
-                <div class="text-sm text-gray-500">★★★ Epic</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.artifacts.rarityEpic")}
+                </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-purple-300">
                   {rarityCount[4]}
                 </div>
-                <div class="text-sm text-gray-500">★★★★ Legendary</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.artifacts.rarityLegendary")}
+                </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-red-300">
                   {cursedCount}
                 </div>
-                <div class="text-sm text-gray-500">💀 Cursed</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.artifacts.cursed")}
+                </div>
               </div>
             </div>
           </div>
@@ -195,7 +205,10 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
 
           {/* Filter and Sort Controls */}
           <div class="flex flex-col sm:flex-row gap-4 mb-6 items-start sm:items-center justify-between">
-            <ArtifactsFilter currentParams={searchParams} />
+            <ArtifactsFilter
+              currentParams={searchParams}
+              translationData={data.translationData}
+            />
             <SortDropdown options={sortOptions} currentSort={sortBy} />
           </div>
 
@@ -227,10 +240,10 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
                 </svg>
               </div>
               <h2 class="text-2xl font-bold text-purple-100 mb-2">
-                No Artifacts Found
+                {t("common.artifacts.noArtifactsFound")}
               </h2>
               <p class="text-gray-400">
-                Try adjusting your filters or search terms.
+                {t("common.artifacts.noArtifactsDescription")}
               </p>
             </div>
           )}

@@ -40,17 +40,6 @@ export default function ArtifactCard(
   const name = artifact.name[locale as keyof typeof artifact.name] ||
     artifact.name.en;
 
-  // Determine rarity color and label
-  const rarityConfig = {
-    1: { color: "gray", label: "★", glow: "rgba(156,163,175,0.3)" },
-    2: { color: "green", label: "★★", glow: "rgba(34,197,94,0.3)" },
-    3: { color: "blue", label: "★★★", glow: "rgba(59,130,246,0.3)" },
-    4: { color: "purple", label: "★★★★", glow: "rgba(168,85,247,0.3)" },
-  };
-
-  const rarity = rarityConfig[artifact.rarity as keyof typeof rarityConfig] ||
-    rarityConfig[1];
-
   // Type badge styling
   const typeConfig = {
     usable: { bg: "bg-yellow-600/30", text: "text-yellow-300" },
@@ -94,10 +83,31 @@ export default function ArtifactCard(
         </div>
 
         {/* Rarity Stars - centered below image */}
-        <div class="mt-2">
-          <span class="text-yellow-400 text-lg font-bold drop-shadow-lg">
-            {rarity.label}
-          </span>
+        <div class="mt-2 flex items-center justify-center gap-1">
+          {artifact.rarity === 4
+            ? (
+              <img
+                src={artifact.cursedInfo
+                  ? "/game/data/other/rarity-4-star-red.png"
+                  : "/game/data/other/rarity-4-star.png"}
+                alt="4 stars"
+                class="h-10 w-auto"
+                style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+              />
+            )
+            : (
+              Array.from({ length: artifact.rarity }).map((_, i) => (
+                <img
+                  key={i}
+                  src={artifact.cursedInfo
+                    ? "/game/data/other/rarity-1-star-red.png"
+                    : "/game/data/other/rarity-1-star.png"}
+                  alt="star"
+                  class="h-8 w-auto"
+                  style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+                />
+              ))
+            )}
         </div>
       </div>
 
