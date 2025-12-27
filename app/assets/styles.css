@@ -6,3 +6,5 @@
 /* animations */
 
 @import "./animations/bow-animations.css";
+
+@import "./animations/global-animations.css";

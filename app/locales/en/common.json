@@ -226,6 +226,18 @@
   },
   "header": {
     "ariaLabel": "Site header",
+    "search": {
+      "placeholder": "Search characters, skills, artifacts...",
+      "openSearch": "Open search",
+      "quickAccess": "Quick Access",
+      "characters": "Characters",
+      "skills": "Skills",
+      "artifacts": "Artifacts",
+      "wiki": "Wiki",
+      "closeHint": "Press",
+      "closeKey": "Esc",
+      "toClose": "to close"
+    },
     "userOptions": {
       "ariaLabel": "User options menu",
       "openMenu": "Open menu",
