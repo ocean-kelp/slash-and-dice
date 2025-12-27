@@ -57,20 +57,6 @@ export default function ArtifactCard(
     >
       {/* Artifact Image Container with Transparent Background */}
       <div class="relative w-full aspect-square flex flex-col items-center justify-center py-6">
-        {/* Cursed Indicator */}
-        {artifact.cursedInfo && (
-          <div class="absolute top-2 right-2 z-20 bg-red-600/90 backdrop-blur-sm rounded-full p-1.5 border border-red-400/50">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-4 h-4 text-red-100"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-          </div>
-        )}
-
         {/* Artifact Icon - centered and larger */}
         <div class="flex-1 flex items-center justify-center">
           <img
@@ -128,12 +114,17 @@ export default function ArtifactCard(
         )}
 
         {/* Type Badge */}
-        <div class="flex justify-center mb-3">
+        <div class="flex justify-center mb-3 gap-2">
           <span
             class={`px-2 py-1 ${typeStyle.bg} ${typeStyle.text} text-xs rounded capitalize`}
           >
             {artifact.type}
           </span>
+          {artifact.cursedInfo && (
+            <span class="px-2 py-1 bg-red-600/30 text-red-300 text-xs rounded capitalize font-semibold">
+              Cursed
+            </span>
+          )}
         </div>
 
         {/* Chapter Badge */}
@@ -142,6 +133,21 @@ export default function ArtifactCard(
             {artifact.chapterId.replace(/-/g, " ")}
           </span>
         </div>
+
+        {/* Cursed Cost Badge */}
+        {artifact.cursedInfo && (
+          <div class="mt-3 flex items-center justify-center gap-0.5">
+            {Array.from({ length: artifact.cursedInfo.amount }).map((_, i) => (
+              <img
+                key={i}
+                src="/game/data/currencies/heart.png"
+                alt="heart"
+                class="w-4 h-4"
+                style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </a>
   );
