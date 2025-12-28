@@ -1,11 +1,10 @@
 import { define } from "@/utils.ts";
-import { appConfig } from "@/utilities/config.ts";
 
 /**
  * POST /api/admin/migrate
  *
  * Run database migrations via HTTP endpoint.
- * Protected by ADMIN_SECRET environment variable.
+ * Protected by /api/admin/_middleware.ts
  *
  * Usage:
  *   curl -X POST https://your-app.deno.dev/api/admin/migrate \
@@ -15,17 +14,6 @@ import { appConfig } from "@/utilities/config.ts";
  */
 export const handler = define.handlers({
   async POST(ctx) {
-    // Check authorization
-    const authHeader = ctx.req.headers.get("Authorization");
-    const token = authHeader?.replace("Bearer ", "");
-
-    if (!token || token !== appConfig.adminSecret) {
-      return new Response(
-        JSON.stringify({ error: "Unauthorized" }),
-        { status: 401, headers: { "Content-Type": "application/json" } },
-      );
-    }
-
     try {
       const body = await ctx.req.json().catch(() => ({}));
       const targetMigration = body.migration;
@@ -64,17 +52,7 @@ export const handler = define.handlers({
   },
 
   // GET to check migration status
-  async GET(ctx) {
-    const authHeader = ctx.req.headers.get("Authorization");
-    const token = authHeader?.replace("Bearer ", "");
-
-    if (!token || token !== appConfig.adminSecret) {
-      return new Response(
-        JSON.stringify({ error: "Unauthorized" }),
-        { status: 401, headers: { "Content-Type": "application/json" } },
-      );
-    }
-
+  async GET(_ctx) {
     try {
       const { getMigrationStatus } = await import("@/db/migrations/run.ts");
       const status = await getMigrationStatus();
