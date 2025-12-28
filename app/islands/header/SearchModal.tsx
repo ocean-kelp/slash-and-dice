@@ -1,4 +1,3 @@
-import { useSignal } from "@preact/signals";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { createPortal } from "preact/compat";
 import { translate } from "@/custom-i18n/translator.ts";
@@ -13,15 +12,24 @@ import CharacterSearchCard from "@/components/search/CharacterSearchCard.tsx";
 import SkillSearchCard from "@/components/search/SkillSearchCard.tsx";
 import ArtifactSearchCard from "@/components/search/ArtifactSearchCard.tsx";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock.ts";
+import { isSearchModalOpen } from "@/signals/searchModal.ts";
 
 type CharacterWithKey = Character & { key: string };
 
 type Props = {
   translationData?: Record<string, unknown>;
+  /**
+   * If true, only renders the button (not the modal portal).
+   * Use this to avoid duplicate modals when you have multiple button instances.
+   * One instance should have this as false to render the actual modal.
+   */
+  buttonOnly?: boolean;
 };
 
-export default function SearchModal({ translationData }: Props) {
-  const isOpen = useSignal(false);
+export default function SearchModal(
+  { translationData, buttonOnly = false }: Props,
+) {
+  const isOpen = isSearchModalOpen;
   const desktopInputRef = useRef<HTMLInputElement>(null);
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const [isMac, setIsMac] = useState(false);
@@ -30,7 +38,11 @@ export default function SearchModal({ translationData }: Props) {
   const [skillPage, setSkillPage] = useState(1);
   const [artifactPage, setArtifactPage] = useState(1);
   const [searchResults, setSearchResults] = useState<{
-    characters: { items: CharacterWithKey[]; total: number; totalPages: number };
+    characters: {
+      items: CharacterWithKey[];
+      total: number;
+      totalPages: number;
+    };
     skills: { items: Skill[]; total: number; totalPages: number };
     artifacts: { items: Artifact[]; total: number; totalPages: number };
   }>({
@@ -193,7 +205,8 @@ export default function SearchModal({ translationData }: Props) {
   const displayedArtifacts = searchResults.artifacts.items;
   const totalArtifactPages = searchResults.artifacts.totalPages;
 
-  const totalResults = searchResults.characters.total + searchResults.skills.total +
+  const totalResults = searchResults.characters.total +
+    searchResults.skills.total +
     searchResults.artifacts.total;
 
   const handleSearch = (e: Event) => {
@@ -205,7 +218,7 @@ export default function SearchModal({ translationData }: Props) {
   return (
     <>
       {/* Modal Overlay - Rendered via portal at document body level */}
-      {isOpen.value && createPortal(
+      {!buttonOnly && isOpen.value && createPortal(
         <>
           {/* Backdrop with blur */}
           <div

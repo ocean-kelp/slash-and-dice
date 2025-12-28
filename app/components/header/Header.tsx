@@ -53,8 +53,11 @@ export default function Header(
 
               {/* Right: Search + Language + Auth (grouped utility controls) */}
               <div class="flex items-center gap-2">
-                {/* Search Modal Button */}
-                <SearchModal translationData={translationData} />
+                {/* Search Modal Button - Mobile instance (button only, modal rendered by desktop instance) */}
+                <SearchModal
+                  translationData={translationData}
+                  buttonOnly={true}
+                />
 
                 {/* Language Selector */}
                 <LanguageSelector
