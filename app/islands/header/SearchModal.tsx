@@ -3,13 +3,18 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { createPortal } from "preact/compat";
 import { translate } from "@/custom-i18n/translator.ts";
 import { getFeatures } from "@/data/config/features.tsx";
-import { allCharacters } from "@/data/characters/index.ts";
-import { allSkills } from "@/data/skills/index.ts";
-import { allArtifacts } from "@/data/artifacts/index.ts";
+import { skillService } from "@/services/local/game/skillService.ts";
+import { artifactService } from "@/services/local/game/artifactService.ts";
+import { characterService } from "@/services/local/game/characterService.ts";
+import type { Character } from "@/data/characters/types.ts";
+import type { Skill } from "@/data/skills/types.ts";
+import type { Artifact } from "@/data/artifacts/types.ts";
 import CharacterSearchCard from "@/components/search/CharacterSearchCard.tsx";
 import SkillSearchCard from "@/components/search/SkillSearchCard.tsx";
 import ArtifactSearchCard from "@/components/search/ArtifactSearchCard.tsx";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock.ts";
+
+type CharacterWithKey = Character & { key: string };
 
 type Props = {
   translationData?: Record<string, unknown>;
@@ -24,6 +29,15 @@ export default function SearchModal({ translationData }: Props) {
   const [characterPage, setCharacterPage] = useState(1);
   const [skillPage, setSkillPage] = useState(1);
   const [artifactPage, setArtifactPage] = useState(1);
+  const [searchResults, setSearchResults] = useState<{
+    characters: { items: CharacterWithKey[]; total: number; totalPages: number };
+    skills: { items: Skill[]; total: number; totalPages: number };
+    artifacts: { items: Artifact[]; total: number; totalPages: number };
+  }>({
+    characters: { items: [], total: 0, totalPages: 0 },
+    skills: { items: [], total: 0, totalPages: 0 },
+    artifacts: { items: [], total: 0, totalPages: 0 },
+  });
   const t = translate(translationData ?? {});
 
   // Generate smart pagination numbers (shows limited pages with ellipsis)
@@ -118,76 +132,75 @@ export default function SearchModal({ translationData }: Props) {
       });
   }, []);
 
+  // Perform search using services (async)
+  useEffect(() => {
+    const performSearch = async () => {
+      const query = searchQuery.toLowerCase().trim();
+      const hasQuery = query.length > 0;
+
+      if (!hasQuery) {
+        setSearchResults({
+          characters: { items: [], total: 0, totalPages: 0 },
+          skills: { items: [], total: 0, totalPages: 0 },
+          artifacts: { items: [], total: 0, totalPages: 0 },
+        });
+        return;
+      }
+
+      const RESULTS_PER_PAGE = 4;
+
+      // Search characters using paginated method
+      const characterSearchResult = await characterService.getPaginated({
+        page: characterPage,
+        pageSize: RESULTS_PER_PAGE,
+        searchTerm: query,
+      });
+
+      // Search skills
+      const skillSearchResult = await skillService.getPaginated({
+        page: skillPage,
+        pageSize: RESULTS_PER_PAGE,
+        filters: { searchTerm: query },
+      });
+
+      // Search artifacts
+      const artifactSearchResult = await artifactService.getPaginated({
+        page: artifactPage,
+        pageSize: RESULTS_PER_PAGE,
+        filters: { searchTerm: query },
+      });
+
+      setSearchResults({
+        characters: characterSearchResult,
+        skills: skillSearchResult,
+        artifacts: artifactSearchResult,
+      });
+    };
+
+    performSearch();
+  }, [searchQuery, characterPage, skillPage, artifactPage]);
+
+  // Extract results from state
+  const query = searchQuery.toLowerCase().trim();
+  const hasQuery = query.length > 0;
+
+  const displayedCharacters = searchResults.characters.items;
+  const totalCharacterPages = searchResults.characters.totalPages;
+
+  const displayedSkills = searchResults.skills.items;
+  const totalSkillPages = searchResults.skills.totalPages;
+
+  const displayedArtifacts = searchResults.artifacts.items;
+  const totalArtifactPages = searchResults.artifacts.totalPages;
+
+  const totalResults = searchResults.characters.total + searchResults.skills.total +
+    searchResults.artifacts.total;
+
   const handleSearch = (e: Event) => {
     e.preventDefault();
     // Search is now live, form submission not needed
     // But keep this for potential future use or Enter key behavior
   };
-
-  // Perform search
-  const query = searchQuery.toLowerCase().trim();
-  const hasQuery = query.length > 0;
-
-  const characterResults = hasQuery
-    ? Object.entries(allCharacters)
-      .filter(([key, char]) =>
-        key.toLowerCase().includes(query) ||
-        char.name.toLowerCase().includes(query)
-      )
-      .map(([key, char]) => ({ key, ...char }))
-    : [];
-
-  const skillResults = hasQuery
-    ? Object.entries(allSkills)
-      .filter(([_, skill]) =>
-        skill.name.en.toLowerCase().includes(query) ||
-        skill.id.toLowerCase().includes(query)
-      )
-      .map(([_, skill]) => skill)
-    : [];
-
-  const artifactResults = hasQuery
-    ? Object.entries(allArtifacts)
-      .filter(([_, artifact]) =>
-        artifact.name.en.toLowerCase().includes(query) ||
-        artifact.id.toLowerCase().includes(query)
-      )
-      .map(([_, artifact]) => artifact)
-    : [];
-
-  // Pagination
-  const RESULTS_PER_PAGE = 4;
-
-  // Calculate pagination for characters
-  const totalCharacterPages = Math.ceil(
-    characterResults.length / RESULTS_PER_PAGE,
-  );
-  const characterStartIndex = (characterPage - 1) * RESULTS_PER_PAGE;
-  const displayedCharacters = characterResults.slice(
-    characterStartIndex,
-    characterStartIndex + RESULTS_PER_PAGE,
-  );
-
-  // Calculate pagination for skills
-  const totalSkillPages = Math.ceil(skillResults.length / RESULTS_PER_PAGE);
-  const skillStartIndex = (skillPage - 1) * RESULTS_PER_PAGE;
-  const displayedSkills = skillResults.slice(
-    skillStartIndex,
-    skillStartIndex + RESULTS_PER_PAGE,
-  );
-
-  // Calculate pagination for artifacts
-  const totalArtifactPages = Math.ceil(
-    artifactResults.length / RESULTS_PER_PAGE,
-  );
-  const artifactStartIndex = (artifactPage - 1) * RESULTS_PER_PAGE;
-  const displayedArtifacts = artifactResults.slice(
-    artifactStartIndex,
-    artifactStartIndex + RESULTS_PER_PAGE,
-  );
-
-  const totalResults = characterResults.length + skillResults.length +
-    artifactResults.length;
 
   return (
     <>
@@ -358,7 +371,7 @@ export default function SearchModal({ translationData }: Props) {
                         : (
                           <div class="space-y-6">
                             {/* Characters */}
-                            {characterResults.length > 0 && (
+                            {searchResults.characters.total > 0 && (
                               <div>
                                 <h3 class="text-sm font-semibold text-purple-300 uppercase tracking-wide mb-3 flex items-center gap-2">
                                   <svg
@@ -373,7 +386,7 @@ export default function SearchModal({ translationData }: Props) {
                                     <circle cx="9" cy="7" r="4" />
                                   </svg>
                                   {t("common.header.search.characters")}{" "}
-                                  ({characterResults.length})
+                                  ({searchResults.characters.total})
                                 </h3>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
                                   {displayedCharacters.map((character) => (
@@ -447,7 +460,7 @@ export default function SearchModal({ translationData }: Props) {
                             )}
 
                             {/* Skills */}
-                            {skillResults.length > 0 && (
+                            {searchResults.skills.total > 0 && (
                               <div>
                                 <h3 class="text-sm font-semibold text-purple-300 uppercase tracking-wide mb-3 flex items-center gap-2">
                                   <svg
@@ -463,7 +476,7 @@ export default function SearchModal({ translationData }: Props) {
                                     <path d="M3 18h3v3" />
                                   </svg>
                                   {t("common.header.search.skills")}{" "}
-                                  ({skillResults.length})
+                                  ({searchResults.skills.total})
                                 </h3>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
                                   {displayedSkills.map((skill) => (
@@ -535,7 +548,7 @@ export default function SearchModal({ translationData }: Props) {
                             )}
 
                             {/* Artifacts */}
-                            {artifactResults.length > 0 && (
+                            {searchResults.artifacts.total > 0 && (
                               <div>
                                 <h3 class="text-sm font-semibold text-purple-300 uppercase tracking-wide mb-3 flex items-center gap-2">
                                   <svg
@@ -549,7 +562,7 @@ export default function SearchModal({ translationData }: Props) {
                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                                   </svg>
                                   {t("common.header.search.artifacts")}{" "}
-                                  ({artifactResults.length})
+                                  ({searchResults.artifacts.total})
                                 </h3>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
                                   {displayedArtifacts.map((artifact) => (

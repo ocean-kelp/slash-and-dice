@@ -65,6 +65,7 @@ export default function ArtifactCard(
             class="max-w-[90px] max-h-[90px] w-full h-full object-contain drop-shadow-2xl"
             style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
             loading="lazy"
+            decoding="async"
           />
         </div>
 

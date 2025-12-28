@@ -13,8 +13,7 @@ import LayoutToggle from "@/islands/LayoutToggle.tsx";
 import DescriptionToggle from "@/islands/DescriptionToggle.tsx";
 
 export const handler = defineRoute.handlers({
-  GET(ctx) {
-    const allSkills = skillService.getAllSkills();
+  async GET(ctx) {
     const url = new URL(ctx.req.url);
     const activationTypes = url.searchParams.getAll("activation");
     const elementTypes = url.searchParams.getAll("element");
@@ -22,6 +21,8 @@ export const handler = defineRoute.handlers({
     const chapterIds = url.searchParams.getAll("chapter");
     const searchTerm = url.searchParams.get("search") || "";
     const sortBy = url.searchParams.get("sort") || "";
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const itemsPerPage = 24; // Reduced for better performance
 
     // Read layout preference: URL > Cookie > Default (false)
     const urlLayout = url.searchParams.get("layout");
@@ -40,68 +41,28 @@ export const handler = defineRoute.handlers({
       ? false
       : (urlDesc === null && cookieDesc === "hide" ? false : true);
 
-    // Filter skills based on query parameters
-    let filteredSkills = allSkills;
-
-    if (searchTerm) {
-      const search = searchTerm.toLowerCase();
-      filteredSkills = filteredSkills.filter((s) =>
-        s.name.en.toLowerCase().includes(search) ||
-        s.description.en.toLowerCase().includes(search)
-      );
-    }
-
-    if (activationTypes.length > 0) {
-      filteredSkills = filteredSkills.filter(
-        (s) => activationTypes.includes(s.activationType),
-      );
-    }
-
-    if (elementTypes.length > 0) {
-      filteredSkills = filteredSkills.filter(
-        (s) => s.elementType && elementTypes.includes(s.elementType),
-      );
-    }
-
-    if (skillTypes.length > 0) {
-      filteredSkills = filteredSkills.filter(
-        (s) => s.skillType?.some((type) => skillTypes.includes(type)),
-      );
-    }
-
-    if (chapterIds.length > 0) {
-      filteredSkills = filteredSkills.filter(
-        (s) => s.chapterId && chapterIds.includes(s.chapterId),
-      );
-    }
-
-    // Sort skills
-    if (sortBy) {
-      switch (sortBy) {
-        case "nameAsc":
-          filteredSkills.sort((a, b) => a.name.en.localeCompare(b.name.en));
-          break;
-        case "nameDesc":
-          filteredSkills.sort((a, b) => b.name.en.localeCompare(a.name.en));
-          break;
-        case "activationType":
-          filteredSkills.sort((a, b) =>
-            a.activationType.localeCompare(b.activationType)
-          );
-          break;
-        case "elementType":
-          filteredSkills.sort((a, b) =>
-            (a.elementType || "").localeCompare(b.elementType || "")
-          );
-          break;
-      }
-    }
+    // Use paginated service method
+    const result = await skillService.getPaginated({
+      page,
+      pageSize: itemsPerPage,
+      filters: {
+        activationTypes,
+        elementTypes,
+        skillTypes,
+        chapterIds,
+        searchTerm,
+      },
+      sortBy,
+    });
 
     return {
       data: {
         translationData: ctx.state.translationData ?? {},
-        skills: filteredSkills,
-        allSkills,
+        skills: result.items,
+        totalAllSkills: await skillService.getTotalCount(),
+        totalSkills: result.total,
+        currentPage: result.page,
+        totalPages: result.totalPages,
         searchParams: url.searchParams.toString(),
         searchTerm,
         selectedActivationTypes: activationTypes.join(","),
@@ -118,7 +79,10 @@ export const handler = defineRoute.handlers({
 type Props = {
   translationData?: Record<string, unknown>;
   skills?: Skill[];
-  allSkills?: Skill[];
+  totalAllSkills?: number;
+  totalSkills?: number;
+  currentPage?: number;
+  totalPages?: number;
   searchParams?: string;
   searchTerm?: string;
   selectedActivationTypes?: string;
@@ -132,7 +96,10 @@ type Props = {
 export default function SkillsPage({ data, url }: PageProps<Props>) {
   const t = translate(data.translationData ?? {});
   const skills = data.skills ?? [];
-  const allSkills = data.allSkills ?? [];
+  const totalAllSkills = data.totalAllSkills ?? 0;
+  const totalSkills = data.totalSkills ?? 0;
+  const currentPage = data.currentPage ?? 1;
+  const totalPages = data.totalPages ?? 1;
   const searchTerm = data.searchTerm ?? "";
   const searchParams = data.searchParams ?? "";
   const locale = url.pathname.split("/")[1] || "en";
@@ -175,32 +142,37 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
             <div class="flex flex-wrap items-center justify-center gap-8">
               <div class="text-center">
                 <div class="text-3xl font-bold text-purple-300">
-                  {skills.length}
+                  {totalSkills}
                 </div>
                 <div class="text-sm text-gray-500">
-                  {skills.length === allSkills.length
+                  {totalSkills === totalAllSkills
                     ? "Total Skills"
                     : "Filtered Skills"}
+                </div>
+              </div>
+              <div class="text-center">
+                <div class="text-sm text-gray-500">
+                  Page {currentPage} of {totalPages}
                 </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-orange-300">
                   {skills.filter((s) => s.activationType === "main").length}
                 </div>
-                <div class="text-sm text-gray-500">Main Skills</div>
+                <div class="text-sm text-gray-500">Main Skills (this page)</div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-cyan-300">
                   {skills.filter((s) => s.activationType === "subskill")
                     .length}
                 </div>
-                <div class="text-sm text-gray-500">Subskills</div>
+                <div class="text-sm text-gray-500">Subskills (this page)</div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-green-300">
                   {skills.filter((s) => s.activationType === "buff").length}
                 </div>
-                <div class="text-sm text-gray-500">Buffs</div>
+                <div class="text-sm text-gray-500">Buffs (this page)</div>
               </div>
             </div>
           </div>
@@ -270,6 +242,47 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
               />
             ))}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div class="mt-8 flex justify-center items-center gap-2">
+              <a
+                href={`?${
+                  new URLSearchParams({
+                    ...Object.fromEntries(urlObj.searchParams),
+                    page: String(Math.max(1, currentPage - 1)),
+                  }).toString()
+                }`}
+                class={`px-4 py-2 rounded-lg border transition-colors ${
+                  currentPage === 1
+                    ? "border-gray-700 text-gray-600 cursor-not-allowed"
+                    : "border-purple-500/20 text-purple-300 hover:bg-purple-500/10"
+                }`}
+                aria-disabled={currentPage === 1}
+              >
+                Previous
+              </a>
+              <span class="px-4 py-2 text-gray-400">
+                Page {currentPage} of {totalPages}
+              </span>
+              <a
+                href={`?${
+                  new URLSearchParams({
+                    ...Object.fromEntries(urlObj.searchParams),
+                    page: String(Math.min(totalPages, currentPage + 1)),
+                  }).toString()
+                }`}
+                class={`px-4 py-2 rounded-lg border transition-colors ${
+                  currentPage === totalPages
+                    ? "border-gray-700 text-gray-600 cursor-not-allowed"
+                    : "border-purple-500/20 text-purple-300 hover:bg-purple-500/10"
+                }`}
+                aria-disabled={currentPage === totalPages}
+              >
+                Next
+              </a>
+            </div>
+          )}
 
           {/* Empty State */}
           {skills.length === 0 && (

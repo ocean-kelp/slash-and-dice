@@ -63,6 +63,8 @@ export default function SkillCard(
           alt=""
           class="absolute inset-0 w-full h-full object-contain"
           style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Skill Icon - scales relative to container */}
@@ -72,6 +74,7 @@ export default function SkillCard(
           class="relative z-10 w-[35%] h-[35%] object-contain"
           style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"
           loading="lazy"
+          decoding="async"
         />
       </div>
 

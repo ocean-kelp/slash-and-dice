@@ -12,15 +12,18 @@ import ClearFiltersButton from "@/islands/ClearFiltersButton.tsx";
 import LayoutToggle from "@/islands/LayoutToggle.tsx";
 
 export const handler = defineRoute.handlers({
-  GET(ctx) {
-    const allArtifacts = artifactService.getAllArtifacts();
+  async GET(ctx) {
     const url = new URL(ctx.req.url);
-    const rarityParams = url.searchParams.getAll("rarity");
+    const rarityParams = url.searchParams.getAll("rarity").map((r) =>
+      parseInt(r)
+    );
     const typeParams = url.searchParams.getAll("type");
     const chapterIds = url.searchParams.getAll("chapter");
     const searchTerm = url.searchParams.get("search") || "";
     const cursedOnly = url.searchParams.get("cursed") === "true";
     const sortBy = url.searchParams.get("sort") || "";
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const itemsPerPage = 24; // Reduced for better performance
 
     // Read layout preference: URL > Cookie > Default (false)
     const urlLayout = url.searchParams.get("layout");
@@ -32,67 +35,28 @@ export const handler = defineRoute.handlers({
     const isRowLayout = urlLayout === "rows" ||
       (urlLayout === null && cookieLayout === "rows");
 
-    // Filter artifacts based on query parameters
-    let filteredArtifacts = allArtifacts;
-
-    if (searchTerm) {
-      const search = searchTerm.toLowerCase();
-      filteredArtifacts = filteredArtifacts.filter((a) =>
-        a.name.en.toLowerCase().includes(search) ||
-        a.effects.some((e) => e.text.en.toLowerCase().includes(search))
-      );
-    }
-
-    if (rarityParams.length > 0) {
-      const rarities = rarityParams.map((r) => parseInt(r));
-      filteredArtifacts = filteredArtifacts.filter((a) =>
-        rarities.includes(a.rarity)
-      );
-    }
-
-    if (typeParams.length > 0) {
-      filteredArtifacts = filteredArtifacts.filter((a) =>
-        typeParams.includes(a.type)
-      );
-    }
-
-    if (chapterIds.length > 0) {
-      filteredArtifacts = filteredArtifacts.filter(
-        (a) => chapterIds.includes(a.chapterId),
-      );
-    }
-
-    if (cursedOnly) {
-      filteredArtifacts = filteredArtifacts.filter(
-        (a) => a.cursedInfo !== undefined,
-      );
-    }
-
-    // Apply sorting
-    if (sortBy) {
-      filteredArtifacts = [...filteredArtifacts].sort((a, b) => {
-        switch (sortBy) {
-          case "name-asc":
-            return a.name.en.localeCompare(b.name.en);
-          case "name-desc":
-            return b.name.en.localeCompare(a.name.en);
-          case "rarity-asc":
-            return a.rarity - b.rarity;
-          case "rarity-desc":
-            return b.rarity - a.rarity;
-          case "type":
-            return a.type.localeCompare(b.type);
-          default:
-            return 0;
-        }
-      });
-    }
+    // Use paginated service method
+    const result = await artifactService.getPaginated({
+      page,
+      pageSize: itemsPerPage,
+      filters: {
+        rarityParams,
+        typeParams,
+        chapterIds,
+        searchTerm,
+        cursedOnly,
+      },
+      sortBy,
+    });
 
     return {
       data: {
         translationData: ctx.state.translationData ?? {},
-        artifacts: filteredArtifacts,
-        allArtifacts,
+        artifacts: result.items,
+        totalAllArtifacts: await artifactService.getTotalCount(),
+        totalArtifacts: result.total,
+        currentPage: result.page,
+        totalPages: result.totalPages,
         searchParams: url.searchParams.toString(),
         searchTerm,
         sortBy,
@@ -105,7 +69,10 @@ export const handler = defineRoute.handlers({
 type Props = {
   translationData?: Record<string, unknown>;
   artifacts?: Artifact[];
-  allArtifacts?: Artifact[];
+  totalAllArtifacts?: number;
+  totalArtifacts?: number;
+  currentPage?: number;
+  totalPages?: number;
   searchParams?: string;
   searchTerm?: string;
   sortBy?: string;
@@ -115,7 +82,10 @@ type Props = {
 export default function ArtifactsPage({ data, url }: PageProps<Props>) {
   const t = translate(data.translationData ?? {});
   const artifacts = data.artifacts ?? [];
-  const allArtifacts = data.allArtifacts ?? [];
+  const totalAllArtifacts = data.totalAllArtifacts ?? 0;
+  const totalArtifacts = data.totalArtifacts ?? 0;
+  const currentPage = data.currentPage ?? 1;
+  const totalPages = data.totalPages ?? 1;
   const searchParams = data.searchParams ?? "";
   const searchTerm = data.searchTerm ?? "";
   const sortBy = data.sortBy ?? "";
@@ -166,12 +136,17 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
             <div class="flex flex-wrap items-center justify-center gap-8">
               <div class="text-center">
                 <div class="text-3xl font-bold text-purple-300">
-                  {artifacts.length}
+                  {totalArtifacts}
                 </div>
                 <div class="text-sm text-gray-500">
-                  {artifacts.length === allArtifacts.length
+                  {totalArtifacts === totalAllArtifacts
                     ? t("common.artifacts.totalArtifacts")
                     : t("common.artifacts.filteredArtifacts")}
+                </div>
+              </div>
+              <div class="text-center">
+                <div class="text-sm text-gray-500">
+                  Page {currentPage} of {totalPages}
                 </div>
               </div>
               <div class="text-center">
@@ -179,7 +154,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
                   {rarityCount[1]}
                 </div>
                 <div class="text-sm text-gray-500">
-                  {t("common.artifacts.rarityCommon")}
+                  {t("common.artifacts.rarityCommon")} (page)
                 </div>
               </div>
               <div class="text-center">
@@ -274,6 +249,47 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
               />
             ))}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div class="mt-8 flex justify-center items-center gap-2">
+              <a
+                href={`?${
+                  new URLSearchParams({
+                    ...Object.fromEntries(urlObj.searchParams),
+                    page: String(Math.max(1, currentPage - 1)),
+                  }).toString()
+                }`}
+                class={`px-4 py-2 rounded-lg border transition-colors ${
+                  currentPage === 1
+                    ? "border-gray-700 text-gray-600 cursor-not-allowed"
+                    : "border-purple-500/20 text-purple-300 hover:bg-purple-500/10"
+                }`}
+                aria-disabled={currentPage === 1}
+              >
+                Previous
+              </a>
+              <span class="px-4 py-2 text-gray-400">
+                Page {currentPage} of {totalPages}
+              </span>
+              <a
+                href={`?${
+                  new URLSearchParams({
+                    ...Object.fromEntries(urlObj.searchParams),
+                    page: String(Math.min(totalPages, currentPage + 1)),
+                  }).toString()
+                }`}
+                class={`px-4 py-2 rounded-lg border transition-colors ${
+                  currentPage === totalPages
+                    ? "border-gray-700 text-gray-600 cursor-not-allowed"
+                    : "border-purple-500/20 text-purple-300 hover:bg-purple-500/10"
+                }`}
+                aria-disabled={currentPage === totalPages}
+              >
+                Next
+              </a>
+            </div>
+          )}
 
           {/* Empty State */}
           {artifacts.length === 0 && (
