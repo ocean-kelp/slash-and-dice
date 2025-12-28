@@ -1,6 +1,7 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/custom-i18n/translator.ts";
+import { getCookieServer } from "@/services/local/storage/cookies.ts";
 import { artifactService } from "@/services/local/game/artifactService.ts";
 import ArtifactCard from "@/components/artifacts/ArtifactCard.tsx";
 import type { Artifact } from "@/data/artifacts/types.ts";
@@ -20,6 +21,16 @@ export const handler = defineRoute.handlers({
     const searchTerm = url.searchParams.get("search") || "";
     const cursedOnly = url.searchParams.get("cursed") === "true";
     const sortBy = url.searchParams.get("sort") || "";
+
+    // Read layout preference: URL > Cookie > Default (false)
+    const urlLayout = url.searchParams.get("layout");
+    const cookieLayout = getCookieServer(
+      ctx.req.headers,
+      "artifacts",
+      "layout",
+    );
+    const isRowLayout = urlLayout === "rows" ||
+      (urlLayout === null && cookieLayout === "rows");
 
     // Filter artifacts based on query parameters
     let filteredArtifacts = allArtifacts;
@@ -85,6 +96,7 @@ export const handler = defineRoute.handlers({
         searchParams: url.searchParams.toString(),
         searchTerm,
         sortBy,
+        isRowLayout,
       },
     };
   },
@@ -97,6 +109,7 @@ type Props = {
   searchParams?: string;
   searchTerm?: string;
   sortBy?: string;
+  isRowLayout?: boolean;
 };
 
 export default function ArtifactsPage({ data, url }: PageProps<Props>) {
@@ -108,7 +121,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
   const sortBy = data.sortBy ?? "";
   const locale = url.pathname.split("/")[1] || "en";
   const urlObj = new URL(url);
-  const isRowLayout = urlObj.searchParams.get("layout") === "rows";
+  const isRowLayout = data.isRowLayout ?? false;
 
   // Sort options
   const sortOptions: SortOption[] = [
@@ -243,6 +256,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
             columnHint={t("common.artifacts.layoutColumnHint")}
             rowHint={t("common.artifacts.layoutRowHint")}
             cookieAlias="artifacts"
+            currentState={isRowLayout}
           />
 
           {/* Artifacts Grid */}

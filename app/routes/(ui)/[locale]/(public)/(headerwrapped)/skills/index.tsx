@@ -1,6 +1,7 @@
 import { define as defineRoute } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { translate } from "@/custom-i18n/translator.ts";
+import { getCookieServer } from "@/services/local/storage/cookies.ts";
 import { skillService } from "@/services/local/game/skillService.ts";
 import SkillCard from "@/components/skills/SkillCard.tsx";
 import type { Skill } from "@/data/skills/types.ts";
@@ -9,6 +10,7 @@ import SearchBar from "@/islands/SearchBar.tsx";
 import SortDropdown, { type SortOption } from "@/islands/SortDropdown.tsx";
 import ClearFiltersButton from "@/islands/ClearFiltersButton.tsx";
 import LayoutToggle from "@/islands/LayoutToggle.tsx";
+import DescriptionToggle from "@/islands/DescriptionToggle.tsx";
 
 export const handler = defineRoute.handlers({
   GET(ctx) {
@@ -20,6 +22,23 @@ export const handler = defineRoute.handlers({
     const chapterIds = url.searchParams.getAll("chapter");
     const searchTerm = url.searchParams.get("search") || "";
     const sortBy = url.searchParams.get("sort") || "";
+
+    // Read layout preference: URL > Cookie > Default (false)
+    const urlLayout = url.searchParams.get("layout");
+    const cookieLayout = getCookieServer(ctx.req.headers, "skills", "layout");
+    const isRowLayout = urlLayout === "rows" ||
+      (urlLayout === null && cookieLayout === "rows");
+
+    // Read description preference: URL > Cookie > Default (true)
+    const urlDesc = url.searchParams.get("desc");
+    const cookieDesc = getCookieServer(
+      ctx.req.headers,
+      "skills",
+      "descriptions",
+    );
+    const showDescriptions = urlDesc === "hide"
+      ? false
+      : (urlDesc === null && cookieDesc === "hide" ? false : true);
 
     // Filter skills based on query parameters
     let filteredSkills = allSkills;
@@ -89,6 +108,8 @@ export const handler = defineRoute.handlers({
         selectedElementTypes: elementTypes.join(","),
         selectedSkillTypes: skillTypes.join(","),
         selectedChapterIds: chapterIds.join(","),
+        isRowLayout,
+        showDescriptions,
       },
     };
   },
@@ -104,6 +125,8 @@ type Props = {
   selectedElementTypes?: string;
   selectedSkillTypes?: string;
   selectedChapterIds?: string;
+  isRowLayout?: boolean;
+  showDescriptions?: boolean;
 };
 
 export default function SkillsPage({ data, url }: PageProps<Props>) {
@@ -119,7 +142,8 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
   const selectedElementTypes = data.selectedElementTypes || "";
   const selectedSkillTypes = data.selectedSkillTypes || "";
   const selectedChapterIds = data.selectedChapterIds || "";
-  const isRowLayout = urlObj.searchParams.get("layout") === "rows";
+  const isRowLayout = data.isRowLayout ?? false;
+  const showDescriptions = data.showDescriptions ?? true;
 
   const sortOptions: SortOption[] = [
     { value: "nameAsc", label: t("common.skills.sortNameAsc") },
@@ -210,15 +234,25 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
             </div>
           </div>
 
-          {/* Layout Toggle */}
-          <LayoutToggle
-            label={t("common.skills.layoutLabel")}
-            columnLabel={t("common.skills.layoutColumn")}
-            rowLabel={t("common.skills.layoutRow")}
-            columnHint={t("common.skills.layoutColumnHint")}
-            rowHint={t("common.skills.layoutRowHint")}
-            cookieAlias="skills"
-          />
+          {/* Layout and Description Toggles */}
+          <div class="flex flex-col sm:flex-row gap-4 mb-4">
+            <LayoutToggle
+              label={t("common.skills.layoutLabel")}
+              columnLabel={t("common.skills.layoutColumn")}
+              rowLabel={t("common.skills.layoutRow")}
+              columnHint={t("common.skills.layoutColumnHint")}
+              rowHint={t("common.skills.layoutRowHint")}
+              cookieAlias="skills"
+              currentState={isRowLayout}
+            />
+            <DescriptionToggle
+              label="Descriptions"
+              showLabel="Show"
+              hideLabel="Hide"
+              cookieAlias="skills"
+              currentState={showDescriptions}
+            />
+          </div>
 
           {/* Skills Grid */}
           <div
@@ -232,6 +266,7 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
                 skill={skill}
                 locale={locale}
                 searchTerm={searchTerm}
+                showDescription={showDescriptions}
               />
             ))}
           </div>

@@ -5,6 +5,7 @@ interface SkillCardProps {
   skill: Skill;
   locale?: string;
   searchTerm?: string;
+  showDescription?: boolean;
 }
 
 function HighlightText(
@@ -34,7 +35,8 @@ function HighlightText(
 }
 
 export default function SkillCard(
-  { skill, locale = "en", searchTerm = "" }: SkillCardProps,
+  { skill, locale = "en", searchTerm = "", showDescription = true }:
+    SkillCardProps,
 ) {
   const imagePath = skillService.getImagePath(skill.imageFilename);
   const name = skill.name[locale as keyof typeof skill.name] || skill.name.en;
@@ -78,9 +80,11 @@ export default function SkillCard(
         <h3 class="text-xl font-bold text-purple-100 text-center mb-2">
           <HighlightText text={name} searchTerm={searchTerm} />
         </h3>
-        <p class="text-sm text-gray-400 text-center mb-3">
-          <HighlightText text={description} searchTerm={searchTerm} />
-        </p>
+        {showDescription && (
+          <p class="text-sm text-gray-400 text-center mb-3">
+            <HighlightText text={description} searchTerm={searchTerm} />
+          </p>
+        )}
 
         {/* Skill Type Badges */}
         {skill.skillType && skill.skillType.length > 0 && (

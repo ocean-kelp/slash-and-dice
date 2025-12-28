@@ -1,8 +1,5 @@
-import { useEffect, useState } from "preact/hooks";
-import {
-  getCookieClient,
-  setCookieClient,
-} from "@/services/local/storage/cookies.ts";
+import { useState } from "preact/hooks";
+import { setCookieClient } from "@/services/local/storage/cookies.ts";
 
 interface LayoutToggleProps {
   label: string;
@@ -11,37 +8,15 @@ interface LayoutToggleProps {
   columnHint: string;
   rowHint: string;
   cookieAlias: string; // e.g., "skills" or "artifacts"
+  currentState: boolean; // Server-computed state
 }
 
 export default function LayoutToggle(
-  { label, columnLabel, rowLabel, columnHint, rowHint, cookieAlias }:
+  { label, columnLabel, rowLabel, columnHint, rowHint, cookieAlias, currentState }:
     LayoutToggleProps,
 ) {
-  const [isRowLayout, setIsRowLayout] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-
-  // Read from URL or cookie on mount
-  useEffect(() => {
-    const params = new URLSearchParams(globalThis.location.search);
-    const urlLayout = params.get("layout");
-
-    if (urlLayout) {
-      // URL takes precedence
-      setIsRowLayout(urlLayout === "rows");
-    } else {
-      // Fall back to cookie
-      const savedLayout = getCookieClient(cookieAlias, "layout");
-      if (savedLayout) {
-        setIsRowLayout(savedLayout === "rows");
-        // Update URL to reflect cookie value
-        if (savedLayout === "rows") {
-          const url = new URL(globalThis.location.href);
-          url.searchParams.set("layout", "rows");
-          globalThis.history.replaceState({}, "", url.toString());
-        }
-      }
-    }
-  }, [cookieAlias]);
+  const isRowLayout = currentState;
 
   const toggleLayout = () => {
     const url = new URL(globalThis.location.href);
