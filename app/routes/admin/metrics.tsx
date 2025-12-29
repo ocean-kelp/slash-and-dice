@@ -4,6 +4,7 @@ import {
   getMetricsSummary,
   getRecentRequests,
 } from "@/middlewares/monitoring.ts";
+import { appConfig } from "@/utilities/config.ts";
 
 /**
  * Admin metrics dashboard - shows resource consumption and performance data
@@ -14,9 +15,10 @@ export const handler = define.handlers({
   GET(_ctx) {
     const summary = getMetricsSummary(100);
     const recentRequests = getRecentRequests(20);
+    const maxStoredRequests = appConfig.metricsMaxRequests;
 
     return {
-      data: { summary, recentRequests },
+      data: { summary, recentRequests, maxStoredRequests },
     };
   },
 });
@@ -25,6 +27,7 @@ export default function MetricsPage(
   { data }: PageProps<{
     summary: ReturnType<typeof getMetricsSummary>;
     recentRequests: ReturnType<typeof getRecentRequests>;
+    maxStoredRequests: number;
   }>,
 ) {
   const { summary, recentRequests } = data;
@@ -73,6 +76,49 @@ export default function MetricsPage(
             </div>
           </div>
         </div>
+
+        {/* Lifetime Summary (since process start) */}
+        {summary.lifetimeSummary && (
+          <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 mb-8">
+            <h2 class="text-xl font-bold text-white mb-4">Lifetime Summary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+              <div class="p-4 bg-gray-900/40 rounded">
+                <div class="text-sm text-gray-400">Total Requests</div>
+                <div class="text-2xl font-bold text-white">
+                  {summary.lifetimeSummary.totalRequests}
+                </div>
+              </div>
+
+              <div class="p-4 bg-gray-900/40 rounded">
+                <div class="text-sm text-gray-400">Avg Duration</div>
+                <div class="text-2xl font-bold text-blue-400">
+                  {summary.lifetimeSummary.avgDuration}ms
+                </div>
+              </div>
+
+              <div class="p-4 bg-gray-900/40 rounded">
+                <div class="text-sm text-gray-400">Std Dev</div>
+                <div class="text-2xl font-bold text-blue-300">
+                  {summary.lifetimeSummary.stddevDuration}ms
+                </div>
+              </div>
+
+              <div class="p-4 bg-gray-900/40 rounded">
+                <div class="text-sm text-gray-400">Max Duration</div>
+                <div class="text-2xl font-bold text-yellow-400">
+                  {summary.lifetimeSummary.maxDuration}ms
+                </div>
+              </div>
+
+              <div class="p-4 bg-gray-900/40 rounded">
+                <div class="text-sm text-gray-400">Error Rate</div>
+                <div class="text-2xl font-bold text-red-400">
+                  {summary.lifetimeSummary.errorRate}%
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Memory Details */}
         {summary.memoryUsage && (
@@ -227,8 +273,8 @@ export default function MetricsPage(
         {/* Footer */}
         <div class="mt-8 text-center text-gray-500 text-sm">
           <p>
-            Metrics are stored in-memory (last 100 requests). Refresh page for
-            latest data.
+            Metrics are stored in-memory (last {data.maxStoredRequests}{" "}
+            requests). Refresh page for latest data.
           </p>
         </div>
       </div>

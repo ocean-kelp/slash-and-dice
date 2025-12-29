@@ -2,6 +2,7 @@ import { Context } from "fresh";
 import { isClient } from "@/utilities/enviroments.ts";
 import { isDev } from "@/utilities/enviroments.ts";
 import { logger } from "@/utilities/logger.ts";
+import { appConfig } from "@/utilities/config.ts";
 
 interface RequestMetrics {
   method: string;
@@ -16,9 +17,20 @@ interface RequestMetrics {
   };
 }
 
-// In-memory metrics store (last 100 requests)
+// In-memory metrics store (last N requests)
 const recentRequests: RequestMetrics[] = [];
-const MAX_STORED_REQUESTS = 100;
+
+// Configure maximum stored requests from `appConfig` (server-side)
+const MAX_STORED_REQUESTS = appConfig.metricsMaxRequests;
+
+// Running aggregates (lifetime since process start)
+let aggCount = 0;
+let aggMean = 0; // Welford mean
+let aggM2 = 0; // Welford sum of squares of differences
+let aggMaxDuration = 0;
+let aggTotalRequests = 0;
+let aggErrorCount = 0;
+const aggStatusCodes: Record<number, number> = {};
 
 /**
  * Monitoring middleware that logs request metrics and resource usage.
@@ -63,6 +75,18 @@ export async function monitoringMiddleware(
     if (recentRequests.length > MAX_STORED_REQUESTS) {
       recentRequests.shift();
     }
+
+    // Update running aggregates (Welford for stable mean/stddev)
+    aggTotalRequests += 1;
+    const x = metrics.duration;
+    aggCount += 1;
+    const delta = x - aggMean;
+    aggMean += delta / aggCount;
+    const delta2 = x - aggMean;
+    aggM2 += delta * delta2;
+    if (x > aggMaxDuration) aggMaxDuration = x;
+    if (metrics.status >= 400) aggErrorCount += 1;
+    aggStatusCodes[metrics.status] = (aggStatusCodes[metrics.status] || 0) + 1;
 
     // Log slow requests (> 1000ms)
     if (duration > 1000) {
@@ -142,7 +166,17 @@ export function getMetricsSummary(limit = 100) {
 
   const latestMemory = requests[requests.length - 1]?.memory;
 
+  // Lifetime aggregates (since process start)
+  const lifetimeAvg = aggCount ? Math.round(aggMean * 100) / 100 : 0;
+  const lifetimeStd = aggCount > 1
+    ? Math.round(Math.sqrt(aggM2 / (aggCount - 1)) * 100) / 100
+    : 0;
+  const lifetimeErrorRate = aggTotalRequests
+    ? Math.round(aggErrorCount / aggTotalRequests * 100 * 100) / 100
+    : 0;
+
   return {
+    // Summary based on recent requests (last `limit`)
     totalRequests: requests.length,
     avgDuration: Math.round(avgDuration * 100) / 100,
     slowestRequest: {
@@ -153,6 +187,16 @@ export function getMetricsSummary(limit = 100) {
     errorRate: Math.round(errorRate * 100) / 100,
     statusCodes,
     memoryUsage: latestMemory,
+
+    // Lifetime summary (since process start)
+    lifetimeSummary: {
+      totalRequests: aggTotalRequests,
+      avgDuration: lifetimeAvg,
+      stddevDuration: lifetimeStd,
+      maxDuration: aggMaxDuration,
+      errorRate: lifetimeErrorRate,
+      statusCodes: { ...aggStatusCodes },
+    },
   };
 }
 

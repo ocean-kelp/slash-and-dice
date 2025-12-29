@@ -3,6 +3,7 @@
 // For auth provider setup, see auth-providers.ts
 
 import { isClient } from "./enviroments.ts";
+import { isDev } from "./enviroments.ts";
 
 /**
  * Throws an error if called from client-side code.
@@ -71,5 +72,16 @@ export const appConfig = {
   /** Admin secret for protected operations (migrations, etc.) */
   get adminSecret() {
     return getEnv("ADMIN_SECRET", false) || "dev-admin-secret-change-in-prod";
+  },
+  /** Maximum number of in-memory metrics to retain */
+  get metricsMaxRequests(): number {
+    // Use optional env var if provided, otherwise fall back to sensible defaults
+    const raw = getEnv("METRICS_MAX_REQUESTS", false);
+    if (raw) {
+      const n = Number(raw);
+      if (!Number.isNaN(n) && n > 0) return Math.floor(n);
+    }
+
+    return isDev() ? 100 : 100000;
   },
 };
