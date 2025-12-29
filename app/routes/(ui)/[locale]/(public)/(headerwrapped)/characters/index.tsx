@@ -7,8 +7,14 @@ import {
 import CharacterCard from "@/components/characters/CharacterCard.tsx";
 
 export const handler = defineRoute.handlers({
-  GET(_ctx) {
-    const characters = characterService.getPaginated({});
+  async GET(_ctx) {
+    const result = await characterService.getPaginated({});
+
+    const characters = result.items.map((c) => ({
+      name: c.name,
+      thumbnail: characterService.getThumbnail(c.name),
+      gemCost: c.price?.gem,
+    }));
 
     return {
       data: {
@@ -22,7 +28,9 @@ type Props = {
   characters: CharacterListItem[];
 };
 
-export default function CharactersPage({ data, state }: PageProps<Props, State>) {
+export default function CharactersPage(
+  { data, state }: PageProps<Props, State>,
+) {
   const t = state.t;
 
   return (

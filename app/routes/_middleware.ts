@@ -1,4 +1,6 @@
 import { define } from "@/utils.ts";
+import { monitoringMiddleware } from "@/middlewares/monitoring.ts";
+import type { Context } from "fresh";
 
 /**
  * Root middleware - applies to all routes
@@ -10,6 +12,12 @@ export const handler = define.middleware(async (ctx) => {
     "@/middlewares/auth/syncUser.ts"
   );
 
-  // Run the sync middleware
-  return await syncUserHandler(ctx);
+  // Wrap the syncUser middleware inside monitoringMiddleware so all
+  // requests pass through the monitoring layer and metrics are recorded.
+  const wrapperCtx = {
+    ...ctx,
+    next: () => syncUserHandler(ctx),
+  } as unknown as Context<unknown>;
+
+  return await monitoringMiddleware(ctx.req, wrapperCtx);
 });

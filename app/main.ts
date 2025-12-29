@@ -4,6 +4,7 @@ import { i18nPlugin } from "./custom-i18n/plugin.ts";
 import { LANGUAGES } from "./utilities/languages.ts";
 import { getEffectiveLocalesDir } from "./custom-i18n/locales-finder.ts";
 import { authProvidersMiddleware } from "./middlewares/auth/authProviders.ts";
+import { isDev } from "./utilities/enviroments.ts";
 
 export const app = new App<State>();
 
@@ -31,7 +32,7 @@ app.use(i18nPlugin({
   languages: LANGUAGES,
   defaultLanguage: "en",
   localesDir: effectiveLocalesDir,
-  isProduction: () => !import.meta.env?.DEV || import.meta.env?.VITE_SIMULATE_PROD === "true",
+  isProduction: () => !isDev() || import.meta.env?.VITE_SIMULATE_PROD === "true",
   fallback: {
     enabled: true,
     showIndicator: true,

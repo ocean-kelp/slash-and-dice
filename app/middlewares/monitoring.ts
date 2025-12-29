@@ -1,5 +1,7 @@
 import { Context } from "fresh";
 import { isClient } from "@/utilities/enviroments.ts";
+import { isDev } from "@/utilities/enviroments.ts";
+import { logger } from "@/utilities/logger.ts";
 
 interface RequestMetrics {
   method: string;
@@ -64,32 +66,45 @@ export async function monitoringMiddleware(
 
     // Log slow requests (> 1000ms)
     if (duration > 1000) {
-      console.warn(
-        `[SLOW REQUEST] ${metrics.method} ${metrics.path} - ${duration}ms`,
-      );
+      logger.warn({
+        tag: "SLOW REQUEST",
+        method: metrics.method,
+        path: metrics.path,
+        duration: `${duration}ms`,
+      });
     }
 
     // Log errors
     if (response.status >= 500) {
-      console.error(
-        `[ERROR] ${metrics.method} ${metrics.path} - Status ${response.status}`,
-      );
+      logger.error({
+        tag: "ERROR",
+        method: metrics.method,
+        path: metrics.path,
+        status: metrics.status,
+      });
     }
 
     // Log every request in development
-    if (Deno.env.get("DENO_ENV") !== "production") {
-      console.log(
-        `[${metrics.method}] ${metrics.path} - ${metrics.status} (${duration}ms)`,
-      );
+    if (isDev()) {
+      logger.debug({
+        tag: "REQ",
+        method: metrics.method,
+        path: metrics.path,
+        status: metrics.status,
+        duration: `${duration}ms`,
+      });
     }
 
     return response;
   } catch (error) {
     const duration = performance.now() - startTime;
-    console.error(
-      `[EXCEPTION] ${req.method} ${new URL(req.url).pathname} - ${duration}ms`,
+    logger.error({
+      tag: "EXCEPTION",
+      method: req.method,
+      path: new URL(req.url).pathname,
+      duration: `${duration}ms`,
       error,
-    );
+    });
     throw error;
   }
 }
