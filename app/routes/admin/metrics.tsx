@@ -46,7 +46,7 @@ export default function MetricsPage(
         </div>
 
         {/* Summary Cards */}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
           <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
             <div class="text-sm text-gray-400 mb-1">Total Requests</div>
             <div class="text-3xl font-bold text-white">
@@ -58,6 +58,18 @@ export default function MetricsPage(
             <div class="text-sm text-gray-400 mb-1">Avg Duration</div>
             <div class="text-3xl font-bold text-blue-400">
               {summary.avgDuration}ms
+            </div>
+          </div>
+
+          <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="text-sm text-gray-400 mb-1">RPS (1m)</div>
+            <div class="text-3xl font-bold text-green-400">{summary.rps}</div>
+          </div>
+
+          <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="text-sm text-gray-400 mb-1">Latency (P95 / P99)</div>
+            <div class="text-3xl font-bold text-yellow-400">
+              {summary.p95}ms / {summary.p99}ms
             </div>
           </div>
 
@@ -143,9 +155,43 @@ export default function MetricsPage(
                   {summary.memoryUsage.external} MB
                 </div>
               </div>
+              <div>
+                <div class="text-sm text-gray-400">RSS (process)</div>
+                <div class="text-2xl font-semibold text-purple-400">
+                  {summary.memoryUsage.rss ?? "N/A"} MB
+                </div>
+              </div>
             </div>
           </div>
         )}
+
+        {/* Memory metric explanations */}
+        <div class="bg-gray-800 rounded-lg p-4 border border-gray-700 mb-8">
+          <h3 class="text-lg font-semibold text-white mb-2">
+            What these memory numbers mean
+          </h3>
+          <p class="text-sm text-gray-400 mb-3">
+            All values are process-level and measure the running application's
+            memory usage (not total machine RAM).
+          </p>
+          <ul class="text-sm text-gray-300 list-disc ml-5 space-y-1">
+            <li>
+              <strong>Heap Used:</strong>{" "}
+              Memory actively used by the JS runtime (V8) to store objects and
+              data.
+            </li>
+            <li>
+              <strong>Heap Total:</strong>{" "}
+              Amount of heap memory reserved/committed by V8 for the process
+              (capacity V8 can use without asking the OS).
+            </li>
+            <li>
+              <strong>External:</strong>{" "}
+              Memory allocated outside V8 (native buffers, C/C++ extensions,
+              binaries). Adds to total process footprint.
+            </li>
+          </ul>
+        </div>
 
         {/* Slowest Request */}
         {summary.slowestRequest && (

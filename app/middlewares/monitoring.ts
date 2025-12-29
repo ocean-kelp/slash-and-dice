@@ -14,6 +14,7 @@ interface RequestMetrics {
     heapUsed: number;
     heapTotal: number;
     external: number;
+    rss?: number;
   };
 }
 
@@ -66,6 +67,10 @@ export async function monitoringMiddleware(
           heapUsed: Math.round(endMemory.heapUsed / 1024 / 1024 * 100) / 100, // MB
           heapTotal: Math.round(endMemory.heapTotal / 1024 / 1024 * 100) / 100, // MB
           external: Math.round(endMemory.external / 1024 / 1024 * 100) / 100, // MB
+          // rss might not be available in all runtimes; include if present
+          rss: typeof endMemory.rss === "number"
+            ? Math.round(endMemory.rss / 1024 / 1024 * 100) / 100
+            : undefined,
         }
         : undefined,
     };
@@ -166,6 +171,25 @@ export function getMetricsSummary(limit = 100) {
 
   const latestMemory = requests[requests.length - 1]?.memory;
 
+  // Compute percentile helpers (based on recent requests window)
+  function percentile(arr: number[], p: number) {
+    if (!arr.length) return 0;
+    const sorted = arr.slice().sort((a, b) => a - b);
+    const idx = Math.ceil(p * sorted.length) - 1;
+    return sorted[Math.max(0, Math.min(sorted.length - 1, idx))];
+  }
+
+  // RPS over last 60 seconds (using recentRequests timestamps)
+  const now = Date.now();
+  const last60sCount = requests.filter((r) => {
+    const t = new Date(r.timestamp).getTime();
+    return t >= now - 60_000;
+  }).length;
+  const rps = Math.round((last60sCount / 60) * 100) / 100;
+
+  const p95 = percentile(durations, 0.95);
+  const p99 = percentile(durations, 0.99);
+
   // Lifetime aggregates (since process start)
   const lifetimeAvg = aggCount ? Math.round(aggMean * 100) / 100 : 0;
   const lifetimeStd = aggCount > 1
@@ -197,6 +221,10 @@ export function getMetricsSummary(limit = 100) {
       errorRate: lifetimeErrorRate,
       statusCodes: { ...aggStatusCodes },
     },
+    // Additional computed metrics based on recent window
+    rps,
+    p95,
+    p99,
   };
 }
 
