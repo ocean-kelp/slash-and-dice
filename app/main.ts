@@ -31,6 +31,32 @@ app.use(i18nPlugin({
   languages: LANGUAGES,
   defaultLanguage: "en",
   localesDir: effectiveLocalesDir,
+  isProduction: () => !import.meta.env?.DEV || import.meta.env?.VITE_SIMULATE_PROD === "true",
+  fallback: {
+    enabled: true,
+    showIndicator: true,
+    indicatorFormat: (text, locale) => {
+      const langMap: Record<string, string> = {
+        "en": "EN",
+        "es": "ES",
+        "ja": "JA",
+        "ko": "KO",
+        "zh-Hans": "ZH-CN",
+        "zh-Hant": "ZH-TW",
+      };
+      const langCode = langMap[locale] || locale.toUpperCase();
+
+      // Return a compact, plain-text indicator that is safe to render
+      // anywhere without requiring HTML or `dangerouslySetInnerHTML`.
+      // Example: "Some text · (EN)"
+      return `${text} · (${langCode})`;
+    },
+    shouldShowIndicator: (text, _locale) => {
+      const wordCount = text.split(/\s+/).filter((w) => w).length;
+      const letterCount = text.replace(/\s/g, "").length;
+      return wordCount >= 4 && letterCount > 20;
+    },
+  },
 }));
 
 // Auth providers middleware - populates available OAuth providers in state

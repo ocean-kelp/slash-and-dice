@@ -3,8 +3,9 @@
   "tasks": {
     "check": "deno fmt --check . && deno lint . && deno check",
     "dev": "deno run --unstable-kv -A npm:vite",
+    "dev:prod": "VITE_SIMULATE_PROD=true deno run --unstable-kv -A npm:vite",
     "build": "vite build",
-    "start": "deno serve --unstable-kv -A _fresh/server.js",
+    "start": "deno serve --unstable-kv --env-file=.env -A _fresh/server.js",
     "update": "deno run -A -r jsr:@fresh/update .",
     "migrate": "deno run --unstable-kv -A db/migrations/run.ts"
   },

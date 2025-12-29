@@ -1,15 +1,11 @@
-import { define } from "@/utils.ts";
+import { define, State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import Logo from "@/components/header/Logo.tsx";
 
 export const handler = define.handlers({
   GET(ctx) {
-    const state = ctx.state;
-
     return {
       data: {
-        translationData: state.translationData ?? {},
         locale: ctx.params.locale,
       },
     };
@@ -17,12 +13,11 @@ export const handler = define.handlers({
 });
 
 type Props = {
-  translationData?: Record<string, unknown>;
   locale: string;
 };
 
-export default function TermsPage({ data }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
+export default function TermsPage({ data, state }: PageProps<Props, State>) {
+  const t = state.t;
   const { locale } = data;
 
   const title = t("common.legal.terms.title");

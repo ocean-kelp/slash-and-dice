@@ -88,6 +88,7 @@ class CharacterService {
     for (let i = 0; i < baseArray.length; i++) {
       const character = baseArray[i];
 
+      // Apply search filter
       if (searchTerm && !character.name.toLowerCase().includes(searchTerm)) {
         continue;
       }

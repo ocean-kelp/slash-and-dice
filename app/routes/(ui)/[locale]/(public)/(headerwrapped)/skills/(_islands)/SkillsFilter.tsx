@@ -1,13 +1,27 @@
 import { ActivationType, ElementType, SkillType } from "@/data/skills/types.ts";
 import { chapters } from "@/data/chapters/index.ts";
 import { useState } from "preact/hooks";
+import { translate, TranslationConfig } from "@/custom-i18n/translator.ts";
 
 interface SkillsFilterProps {
   currentParams: string;
+  translationData?: Record<string, unknown>;
+  translationConfig?: Omit<TranslationConfig, "fallbackKeys"> & {
+    fallbackKeys?: string[];
+  };
 }
 
-export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
+export default function SkillsFilter(
+  { currentParams, translationData = {}, translationConfig }: SkillsFilterProps,
+) {
   const params = new URLSearchParams(currentParams);
+  const config: TranslationConfig | undefined = translationConfig
+    ? {
+      ...translationConfig,
+      fallbackKeys: new Set(translationConfig.fallbackKeys ?? []),
+    }
+    : undefined;
+  const t = translate(translationData ?? {}, config);
   const [isOpen, setIsOpen] = useState(false);
   const [activationTypes, setActivationTypes] = useState<string[]>(
     params.getAll("activation") || [],
@@ -125,7 +139,9 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
         <div class="mt-2 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 p-6 space-y-4 animate-fade-in">
           {/* Chapter Filter */}
           <div>
-            <h3 class="text-sm font-semibold text-gray-400 mb-2">Chapter</h3>
+            <h3 class="text-sm font-semibold text-gray-400 mb-2">
+              {t("common.skills.chapter")}
+            </h3>
             <div class="flex flex-wrap gap-2">
               {chapters.map((chapter) => (
                 <button
@@ -148,7 +164,7 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
           {/* Activation Type Filter */}
           <div>
             <h3 class="text-sm font-semibold text-gray-400 mb-2">
-              Activation Type
+              {t("common.skills.activationType")}
             </h3>
             <div class="flex flex-wrap gap-2">
               {Object.values(ActivationType).map((type) => (
@@ -180,7 +196,7 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
           {/* Element Type Filter */}
           <div>
             <h3 class="text-sm font-semibold text-gray-400 mb-2">
-              Element Type
+              {t("common.skills.elementType")}
             </h3>
             <div class="flex flex-wrap gap-2">
               {Object.values(ElementType).map((type) => (
@@ -204,7 +220,7 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
           {/* Skill Type Filter */}
           <div>
             <h3 class="text-sm font-semibold text-gray-400 mb-2">
-              Skill Type
+              {t("common.skills.skillType")}
             </h3>
             <div class="flex flex-wrap gap-2">
               {Object.values(SkillType).map((type) => (
@@ -232,7 +248,7 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
               onClick={applyFilters}
               class="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
             >
-              Apply Filters
+              {t("common.skills.applyFilters")}
             </button>
             {hasActiveFilters && (
               <button
@@ -240,7 +256,7 @@ export default function SkillsFilter({ currentParams }: SkillsFilterProps) {
                 onClick={clearFilters}
                 class="px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-300 font-semibold rounded-lg transition-colors"
               >
-                Clear All
+                {t("common.skills.clearAll")}
               </button>
             )}
           </div>

@@ -1,19 +1,19 @@
-import { define } from "@/utils.ts";
+import { define, State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import type { AuthProvider } from "@/models/AuthProvider.ts";
 import LoginProviders from "@/islands/auth/LoginProviders.tsx";
 import Logo from "@/components/header/Logo.tsx";
 
 export const handler = define.handlers({
   GET(ctx) {
-    const state = ctx.state;
-
     return {
       data: {
-        translationData: state.translationData ?? {},
-        availableProviders: state.availableAuthProviders ?? [],
-        locale: ctx.params.locale,
+        translationData: ctx.state.translationData,
+        translationConfig: {
+          ...ctx.state.translationConfig,
+          fallbackKeys: Array.from(ctx.state.translationConfig?.fallbackKeys ?? []),
+        },
+        availableProviders: ctx.state.availableAuthProviders ?? [],
       },
     };
   },
@@ -21,13 +21,14 @@ export const handler = define.handlers({
 
 type Props = {
   translationData?: Record<string, unknown>;
+  translationConfig?: Record<string, unknown>;
   availableProviders?: AuthProvider[];
-  locale: string;
 };
 
-export default function LoginPage({ data }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
-  const { availableProviders = [], locale } = data;
+export default function LoginPage({ data, state }: PageProps<Props, State>) {
+  const t = state.t;
+  const { availableProviders = [], translationData, translationConfig } = data;
+  const locale = state.locale;
 
   const title = t("common.login.title");
   const subtitle = t("common.login.subtitle");
@@ -84,7 +85,8 @@ export default function LoginPage({ data }: PageProps<Props>) {
             {/* Login card with consent and providers */}
             <div class="bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700 overflow-hidden">
               <LoginProviders
-                translationData={data.translationData}
+                translationData={translationData}
+                translationConfig={translationConfig}
                 availableProviders={availableProviders}
                 locale={locale}
               />

@@ -1,6 +1,5 @@
-import { define as defineRoute } from "@/utils.ts";
+import { define as defineRoute, State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import { characterService } from "@/services/local/game/characterService.ts";
 import type { Character } from "@/data/characters/types.ts";
 
@@ -18,7 +17,6 @@ export const handler = defineRoute.handlers({
 
     return {
       data: {
-        translationData: ctx.state.translationData ?? {},
         character,
       },
     };
@@ -26,12 +24,11 @@ export const handler = defineRoute.handlers({
 });
 
 type Props = {
-  translationData?: Record<string, unknown>;
   character: Character;
 };
 
-export default function CharacterDetailPage({ data }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
+export default function CharacterDetailPage({ data, state }: PageProps<Props, State>) {
+  const t = state.t;
   const { character } = data;
 
   return (

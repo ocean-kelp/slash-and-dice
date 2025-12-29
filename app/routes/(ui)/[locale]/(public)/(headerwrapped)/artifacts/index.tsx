@@ -1,6 +1,5 @@
-import { define as defineRoute } from "@/utils.ts";
+import { define as defineRoute, State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import { getCookieServer } from "@/services/local/storage/cookies.ts";
 import { artifactService } from "@/services/local/game/artifactService.ts";
 import ArtifactCard from "@/components/artifacts/ArtifactCard.tsx";
@@ -51,7 +50,11 @@ export const handler = defineRoute.handlers({
 
     return {
       data: {
-        translationData: ctx.state.translationData ?? {},
+        translationData: ctx.state.translationData,
+        translationConfig: {
+          ...ctx.state.translationConfig,
+          fallbackKeys: Array.from(ctx.state.translationConfig?.fallbackKeys ?? []),
+        },
         artifacts: result.items,
         totalAllArtifacts: await artifactService.getTotalCount(),
         totalArtifacts: result.total,
@@ -68,6 +71,7 @@ export const handler = defineRoute.handlers({
 
 type Props = {
   translationData?: Record<string, unknown>;
+  translationConfig?: Record<string, unknown>;
   artifacts?: Artifact[];
   totalAllArtifacts?: number;
   totalArtifacts?: number;
@@ -79,8 +83,10 @@ type Props = {
   isRowLayout?: boolean;
 };
 
-export default function ArtifactsPage({ data, url }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
+export default function ArtifactsPage(
+  { data, url, state }: PageProps<Props, State>,
+) {
+  const t = state.t;
   const artifacts = data.artifacts ?? [];
   const totalAllArtifacts = data.totalAllArtifacts ?? 0;
   const totalArtifacts = data.totalArtifacts ?? 0;
@@ -216,6 +222,7 @@ export default function ArtifactsPage({ data, url }: PageProps<Props>) {
               <ArtifactsFilter
                 currentParams={searchParams}
                 translationData={data.translationData}
+                translationConfig={data.translationConfig}
               />
             </div>
             <div class="sm:w-auto">

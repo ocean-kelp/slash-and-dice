@@ -1,6 +1,5 @@
-import { define as defineRoute } from "@/utils.ts";
+import { define as defineRoute, State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import { skillService } from "@/services/local/game/skillService.ts";
 import type { Skill } from "@/data/skills/types.ts";
 import { chapters } from "@/data/chapters/index.ts";
@@ -17,7 +16,6 @@ export const handler = defineRoute.handlers({
 
     return {
       data: {
-        translationData: ctx.state.translationData ?? {},
         skill,
       },
     };
@@ -25,12 +23,11 @@ export const handler = defineRoute.handlers({
 });
 
 type Props = {
-  translationData?: Record<string, unknown>;
   skill?: Skill;
 };
 
-export default function SkillDetailPage({ data, url }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
+export default function SkillDetailPage({ data, url, state }: PageProps<Props, State>) {
+  const t = state.t;
   const skill = data.skill;
   const locale = url.pathname.split("/")[1] || "en";
 

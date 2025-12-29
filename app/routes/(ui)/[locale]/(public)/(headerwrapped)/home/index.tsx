@@ -1,27 +1,9 @@
-import { define as defineRoute } from "@/utils.ts";
+import { State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import { getFeatures } from "@/data/config/features.tsx";
 
-export const handler = defineRoute.handlers({
-  GET(ctx) {
-    const state = ctx.state;
-
-    return {
-      data: {
-        translationData: state.translationData ?? {},
-      },
-    };
-  },
-});
-
-type Props = {
-  translationData?: Record<string, unknown>;
-};
-
-export default function Home({ data }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
-
+export default function Home({ state }: PageProps<unknown, State>) {
+  const t = state.t;
   const title = t("common.home.title");
 
   return (

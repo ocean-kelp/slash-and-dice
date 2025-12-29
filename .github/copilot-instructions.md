@@ -143,9 +143,101 @@ const baseUrl = Deno.env.get("BETTER_AUTH_URL");
 
 ### Internationalization (i18n)
 
-- Use `@elsoul/fresh-i18n` for localization and follow the conventions in `docs/i18n/i18n-system.md`.
+- Use the custom i18n plugin for localization and follow the conventions in `docs/i18n/i18n-system.md`.
 
 - All user-facing strings MUST be added to the translation JSON files and NOT left as inline text in components. This keeps translations centralized and consistent across locales.
+
+- **Accessing translations in routes**: The i18n plugin provides a pre-configured `state.t` function. Routes access it via `state` from `PageProps<Data, State>`:
+
+```tsx
+import { State } from "@/utils.ts";
+import { PageProps } from "fresh";
+
+export default function MyRoute({ state }: PageProps<unknown, State>) {
+  const t = state.t;
+  const locale = state.locale; // Access current locale from state
+  const title = t("common.myRoute.title");
+  // ...
+}
+```
+
+- **No handler needed for translations**: Routes that only need translations don't require handlers. The i18n plugin middleware automatically provides `state.t` and `state.locale`.
+
+- **Handlers for other data**: If a route needs to fetch data, return that data. If the route also uses islands that need translations, include `translationData`:
+
+```tsx
+export const handler = defineRoute.handlers({
+  GET(ctx) {
+    const items = getItems();
+    return { 
+      data: { 
+        items,
+        translationData: ctx.state.translationData, // Only if islands need it
+      } 
+    };
+  },
+});
+
+export default function MyRoute({ data, state }: PageProps<{ items: Item[], translationData?: Record<string, unknown> }, State>) {
+  const t = state.t; // Translation function from state
+  const locale = state.locale; // Current locale from state
+  const { items, translationData } = data;
+  
+  return (
+    <div>
+      <h1>{t("common.title")}</h1>
+      <MyIsland translationData={translationData} />
+    </div>
+  );
+}
+```
+
+- **Islands need translation data and config**: Islands (client-side components) cannot access `state.t` directly. Pass both `translationData` and a serializable config from the route:
+
+```tsx
+// In route handler (when using islands):
+return {
+  data: {
+    items,
+    translationData: ctx.state.translationData, // Required for islands
+    translationConfig: {
+      ...ctx.state.translationConfig,
+      fallbackKeys: Array.from(ctx.state.translationConfig?.fallbackKeys ?? []), // Convert Set to Array
+    },
+  },
+};
+
+// In route component:
+const { translationData, translationConfig } = data;
+<MyIsland translationData={translationData} translationConfig={translationConfig} />
+
+// In island:
+import { translate, TranslationConfig } from "@/custom-i18n/translator.ts";
+
+export default function MyIsland({ 
+  translationData,
+  translationConfig,
+}: { 
+  translationData?: Record<string, unknown>;
+  translationConfig?: Omit<TranslationConfig, 'fallbackKeys'> & { fallbackKeys?: string[] };
+}) {
+  // Recreate the translate function with config
+  const config: TranslationConfig | undefined = translationConfig ? {
+    ...translationConfig,
+    fallbackKeys: new Set(translationConfig.fallbackKeys ?? []), // Convert Array back to Set
+  } : undefined;
+  
+  const t = translate(translationData ?? {}, config);
+  return <div>{t("common.key")}</div>;
+}
+```
+
+- **Key Points**:
+  - Routes: Use `state.t` and `state.locale` directly
+  - Islands: Need `translationData` AND `translationConfig` passed as props, use `translate()` function
+  - Handler: Convert `fallbackKeys` Set to Array for serialization when passing to islands
+  - Island: Convert `fallbackKeys` Array back to Set when creating translate function
+  - Never pass `locale` through handler data - use `state.locale` in component instead
 
 - **Use relative URLs for navigation within locale routes** - When linking between pages in the same locale context, use relative paths (e.g., `href="characters"`) instead of absolute paths with locale prefixes (e.g., `href={/${locale}/characters}`). Fresh's routing will automatically maintain the correct locale context. This prevents hardcoding locale paths and ensures proper locale persistence across navigation.
 
@@ -169,10 +261,10 @@ import { translate } from "@/utilities/languages.ts";
 
 export const handler = define.handlers({
   GET(ctx) {
-    console.log("ctx", ctx.state.translationData); // Access translation data directly
     return {
       data: {
         translationData: ctx.state.translationData,
+        translationConfig: ctx.state.translationConfig,
       },
     };
   },
@@ -182,9 +274,13 @@ export const handler = define.handlers({
 // route components. This ensures TypeScript knows the shape of `data` that
 // the handler returned and keeps server/handler contract explicit.
 import { PageProps } from "fresh";
+import { TranslationConfig } from "@/custom-i18n/translator.ts";
 
-export default function Home({ data }: PageProps<{ translationData?: Record<string, unknown> }>) {
-  const t = translate(data?.translationData ?? {});
+export default function Home({ data }: PageProps<{ 
+  translationData?: Record<string, unknown>, 
+  translationConfig?: TranslationConfig,
+}>) {
+  const t = translate(data?.translationData ?? {}, data?.translationConfig);
   return (
     <div>
       {t("common.home.title")} // Use full namespace.path format
@@ -196,13 +292,19 @@ export default function Home({ data }: PageProps<{ translationData?: Record<stri
 
 - Example usage in islands:
 
-Islands receive the translation data via props from the parent route/component. Then we can create a translator instance using `createTranslator` and use it to get translated strings. Same as routes.
+Islands receive the translation data via props from the parent route/component.
 
 ```tsx
-import { translate } from "@/utilities/languages.ts";
+import { translate, TranslationConfig } from "@/custom-i18n/translator.ts";
 
-export default function MyIsland({ translationData }) {
-  const t = translate(translationData);
+export default function MyIsland({ 
+  translationData, 
+  translationConfig,
+}: {
+  translationData: Record<string, unknown>;
+  translationConfig?: TranslationConfig;
+}) {
+  const t = translate(translationData, translationConfig);
   return (
     <div>
       {t("common.header.userOptions.openMenu")} // Always use full path with namespace

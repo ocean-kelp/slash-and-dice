@@ -1,17 +1,27 @@
 import { ArtifactType } from "@/data/artifacts/types.ts";
 import { chapters } from "@/data/chapters/index.ts";
 import { useState } from "preact/hooks";
-import { translate } from "@/custom-i18n/translator.ts";
+import { translate, TranslationConfig } from "@/custom-i18n/translator.ts";
 
 interface ArtifactsFilterProps {
   currentParams: string;
   translationData?: Record<string, unknown>;
+  translationConfig?: Omit<TranslationConfig, "fallbackKeys"> & {
+    fallbackKeys?: string[];
+  };
 }
 
 export default function ArtifactsFilter(
-  { currentParams, translationData = {} }: ArtifactsFilterProps,
+  { currentParams, translationData = {}, translationConfig }: ArtifactsFilterProps,
 ) {
-  const t = translate(translationData);
+  const config: TranslationConfig | undefined = translationConfig
+    ? {
+      ...translationConfig,
+      fallbackKeys: new Set(translationConfig.fallbackKeys ?? []),
+    }
+    : undefined;
+
+  const t = translate(translationData ?? {}, config);
   const params = new URLSearchParams(currentParams);
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,11 +1,89 @@
 import { join } from "@std/path";
 import { type Middleware } from "fresh";
 import type { State } from "../utils.ts";
+import { translate } from "./translator.ts";
+
+export interface FallbackConfig {
+  /**
+   * Enable fallback to default language when translations are missing.
+   * @default false
+   */
+  enabled?: boolean;
+  /**
+   * Show an indicator when displaying fallback content.
+   * @default false
+   */
+  showIndicator?: boolean;
+  /**
+   * Custom function to format the fallback text with indicator.
+   * @default (text, locale) => `${text} [${locale}]`
+   */
+  indicatorFormat?: (text: string, defaultLocale: string) => string;
+  /**
+   * Function to determine if a specific fallback text should show an indicator.
+   * Allows conditional indicator display based on text length or other criteria.
+   * If not provided, indicator will always show when showIndicator is enabled.
+   * @param text - The fallback text content
+   * @param locale - The default locale being used for fallback
+   * @returns true to show indicator, false to hide it
+   * @example
+   * shouldShowIndicator: (text, locale) => {
+   *   const wordCount = text.split(/\\s+/).filter(w => w).length;
+   *   const letterCount = text.replace(/\\s/g, '').length;
+   *   return wordCount >= 2 && letterCount > 10;
+   * }
+   */
+  shouldShowIndicator?: (text: string, locale: string) => boolean;
+  /**
+   * Apply fallback behavior in development mode too.
+   * If false (default), dev mode always shows [key] for visibility.
+   * @default false
+   */
+  applyOnDev?: boolean;
+}
 
 export interface I18nOptions {
   languages: string[];
   defaultLanguage: string;
   localesDir: string;
+  /**
+   * Custom function to determine if running in production.
+   * If not provided, uses Vite's import.meta.env.DEV and VITE_SIMULATE_PROD.
+   * Useful for custom deployment environments or testing scenarios.
+   * @example
+   * isProduction: () => !import.meta.env?.DEV || import.meta.env?.VITE_SIMULATE_PROD === "true",
+   * @default undefined
+   */
+  isProduction?: () => boolean;
+  /**
+   * Fallback configuration for missing translations.
+   *
+   * @property {boolean} [enabled=false] - Enable fallback to default language when translations are missing.
+   * @property {boolean} [showIndicator=false] - Show an indicator when displaying fallback content.
+   * @property {function} [indicatorFormat] - Custom function to format the fallback text with indicator. Default: `(text, locale) => ${text} [${locale}]`
+   * @property {function} [shouldShowIndicator] - Function to determine if indicator should be shown for specific text. If not provided, always shows indicator when enabled.
+   * @property {boolean} [applyOnDev=false] - Apply fallback behavior in development mode too. If false (default), dev mode always shows [key] for visibility.
+   *
+   * @example
+   * fallback: {
+   *   enabled: true,
+   *   showIndicator: true,
+   *   indicatorFormat: (text, locale) => `${text} · ${locale.toUpperCase()}`,
+   *   shouldShowIndicator: (text, locale) => {
+   *     const wordCount = text.split(/\\s+/).filter(w => w).length;
+   *     const letterCount = text.replace(/\\s/g, '').length;
+   *     return wordCount >= 2 && letterCount > 10;
+   *   },
+   *   applyOnDev: false
+   * }
+   */
+  fallback?: FallbackConfig;
+  /**
+   * If true, show translation keys [key] in production when no translation exists.
+   * Takes precedence over fallback - useful for identifying missing translations.
+   * @default false
+   */
+  showKeysInProd?: boolean;
 }
 
 async function readJsonFile(filePath: string): Promise<Record<string, string>> {
@@ -51,8 +129,24 @@ function getPreferredLanguage(
 }
 
 export const i18nPlugin = (
-  { languages, defaultLanguage, localesDir }: I18nOptions,
+  {
+    languages,
+    defaultLanguage,
+    localesDir,
+    isProduction,
+    fallback,
+    showKeysInProd = false,
+  }: I18nOptions,
 ): Middleware<State> => {
+  const fallbackConfig: FallbackConfig = {
+    enabled: fallback?.enabled ?? false,
+    showIndicator: fallback?.showIndicator ?? false,
+    indicatorFormat: fallback?.indicatorFormat ??
+      ((text: string, locale: string) => `${text} [${locale}]`),
+    shouldShowIndicator: fallback?.shouldShowIndicator,
+    applyOnDev: fallback?.applyOnDev ?? false,
+  };
+
   return async (ctx) => {
     // Final verification
     try {
@@ -113,12 +207,15 @@ export const i18nPlugin = (
       return flattened;
     }
 
-    const loadTranslation = async (namespace: string) => {
-      const filePath = join(
-        localesDir,
-        lang || defaultLanguage,
-        `${namespace}.json`,
-      );
+    const loadTranslation = async (
+      namespace: string,
+      targetData: Record<string, unknown>,
+      locale: string,
+      fallbackKeysSet: Set<string>,
+      isDefaultLanguage: boolean,
+      trackFallbacks: boolean,
+    ) => {
+      const filePath = join(localesDir, locale, `${namespace}.json`);
 
       const data = await readJsonFile(filePath);
       if (Object.keys(data).length > 0) {
@@ -126,21 +223,78 @@ export const i18nPlugin = (
 
         // Add namespace prefix to all flattened keys
         for (const [key, value] of Object.entries(flattenedData)) {
-          translationData[`${namespace}.${key}`] = value;
+          const fullKey = `${namespace}.${key}`;
+          const existedBefore = fullKey in targetData;
+
+          targetData[fullKey] = value;
+
+          // Track fallback keys inline during merge (only if fallback enabled)
+          if (trackFallbacks) {
+            if (isDefaultLanguage && !existedBefore) {
+              // This is a new key from default language - mark as fallback
+              fallbackKeysSet.add(fullKey);
+            } else if (!isDefaultLanguage && existedBefore) {
+              // Current language is overwriting a key - no longer fallback
+              fallbackKeysSet.delete(fullKey);
+            }
+          }
         }
       }
     };
 
-    // Load common translations and other namespaces
-    await loadTranslation("common");
-    await loadTranslation("error");
-    await loadTranslation("metadata");
+    const namespaces = [
+      "common",
+      "error",
+      "metadata",
+      ...pathSegments.slice(1),
+    ];
 
-    for (const segment of pathSegments.slice(1)) {
-      await loadTranslation(segment);
+    // Track which keys are using fallback (for indicator)
+    const fallbackKeys = new Set<string>();
+
+    // If fallback enabled and not default language, load default language first as base
+    if (fallbackConfig.enabled && lang !== defaultLanguage) {
+      for (const namespace of namespaces) {
+        await loadTranslation(
+          namespace,
+          translationData,
+          defaultLanguage,
+          fallbackKeys,
+          true,
+          true,
+        );
+      }
     }
 
+    // Load current language translations (overwrites defaults if any)
+    for (const namespace of namespaces) {
+      await loadTranslation(
+        namespace,
+        translationData,
+        lang || defaultLanguage,
+        fallbackKeys,
+        false,
+        fallbackConfig.enabled ?? false,
+      );
+    }
+
+    // Store translation data and config in state
     ctx.state.translationData = translationData;
+    ctx.state.locale = lang || defaultLanguage;
+
+    // Create pre-configured translate function and store in state
+    ctx.state.t = translate(translationData, {
+      locale: lang || defaultLanguage,
+      defaultLocale: defaultLanguage,
+      fallbackKeys: fallbackKeys,
+      showKeysInProd: showKeysInProd,
+      showFallbackIndicator: fallbackConfig.showIndicator &&
+        fallbackConfig.enabled,
+      fallbackIndicatorFormat: fallbackConfig.indicatorFormat,
+      shouldShowFallbackIndicator: fallbackConfig.shouldShowIndicator,
+      applyFallbackOnDev: fallbackConfig.applyOnDev,
+      isProduction: isProduction,
+    });
 
     const response = await ctx.next() as Response;
     return response;

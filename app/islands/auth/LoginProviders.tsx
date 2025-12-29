@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { translate } from "@/custom-i18n/translator.ts";
+import { translate, TranslationConfig } from "@/custom-i18n/translator.ts";
 import type { AuthProvider, AuthProviderId } from "@/models/AuthProvider.ts";
 import { needsChannelSelection } from "@/models/AuthProvider.ts";
 import { signInWithProvider } from "@/lib/auth-client.ts";
@@ -58,12 +58,16 @@ function getTextColor(providerId: AuthProviderId, disabled: boolean): string {
 
 type Props = {
   translationData?: Record<string, unknown>;
+  translationConfig?: Omit<TranslationConfig, "fallbackKeys"> & {
+    fallbackKeys?: string[];
+  };
   availableProviders?: AuthProvider[];
   locale: string;
 };
 
 export default function LoginProviders({
   translationData,
+  translationConfig,
   availableProviders = [],
   locale,
 }: Props) {
@@ -72,7 +76,16 @@ export default function LoginProviders({
     AuthProviderId | null
   >(null);
   const [isLoading, setIsLoading] = useState(false);
-  const t = translate(translationData ?? {});
+
+  // Recreate the translate function with config
+  const config: TranslationConfig | undefined = translationConfig
+    ? {
+      ...translationConfig,
+      fallbackKeys: new Set(translationConfig.fallbackKeys ?? []),
+    }
+    : undefined;
+
+  const t = translate(translationData ?? {}, config);
 
   const handleSignIn = async (provider: AuthProvider, channelId?: string) => {
     if (!consentGiven) return;

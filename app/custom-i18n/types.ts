@@ -1,7 +1,11 @@
+import type { TranslationConfig } from "./translator.ts";
+
 export interface TranslationState extends Record<string, unknown> {
   translationData: Record<string, unknown>;
+  translationConfig: TranslationConfig;
   path: string;
   locale: string;
+  t: (key: string) => string;
 }
 
 export interface FreshContext<State> {

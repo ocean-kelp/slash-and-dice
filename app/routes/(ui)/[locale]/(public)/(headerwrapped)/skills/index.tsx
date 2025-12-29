@@ -1,6 +1,5 @@
-import { define as defineRoute } from "@/utils.ts";
+import { define as defineRoute, State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import { getCookieServer } from "@/services/local/storage/cookies.ts";
 import { skillService } from "@/services/local/game/skillService.ts";
 import SkillCard from "@/components/skills/SkillCard.tsx";
@@ -57,7 +56,13 @@ export const handler = defineRoute.handlers({
 
     return {
       data: {
-        translationData: ctx.state.translationData ?? {},
+        translationData: ctx.state.translationData,
+        translationConfig: {
+          ...ctx.state.translationConfig,
+          fallbackKeys: Array.from(
+            ctx.state.translationConfig?.fallbackKeys ?? [],
+          ),
+        },
         skills: result.items,
         totalAllSkills: await skillService.getTotalCount(),
         totalSkills: result.total,
@@ -78,6 +83,7 @@ export const handler = defineRoute.handlers({
 
 type Props = {
   translationData?: Record<string, unknown>;
+  translationConfig?: Record<string, unknown>;
   skills?: Skill[];
   totalAllSkills?: number;
   totalSkills?: number;
@@ -93,8 +99,10 @@ type Props = {
   showDescriptions?: boolean;
 };
 
-export default function SkillsPage({ data, url }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
+export default function SkillsPage(
+  { data, url, state }: PageProps<Props, State>,
+) {
+  const t = state.t;
   const skills = data.skills ?? [];
   const totalAllSkills = data.totalAllSkills ?? 0;
   const totalSkills = data.totalSkills ?? 0;
@@ -146,33 +154,28 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
                 </div>
                 <div class="text-sm text-gray-500">
                   {totalSkills === totalAllSkills
-                    ? "Total Skills"
-                    : "Filtered Skills"}
-                </div>
-              </div>
-              <div class="text-center">
-                <div class="text-sm text-gray-500">
-                  Page {currentPage} of {totalPages}
+                    ? t("common.skills.totalSkills")
+                    : t("common.skills.filteredSkills")}
                 </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-orange-300">
                   {skills.filter((s) => s.activationType === "main").length}
                 </div>
-                <div class="text-sm text-gray-500">Main Skills (this page)</div>
+                <div class="text-sm text-gray-500">{t("common.skills.mainSkillsPage")}</div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-cyan-300">
                   {skills.filter((s) => s.activationType === "subskill")
                     .length}
                 </div>
-                <div class="text-sm text-gray-500">Subskills (this page)</div>
+                <div class="text-sm text-gray-500">{t("common.skills.subskillsPage")}</div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-green-300">
                   {skills.filter((s) => s.activationType === "buff").length}
                 </div>
-                <div class="text-sm text-gray-500">Buffs (this page)</div>
+                <div class="text-sm text-gray-500">{t("common.skills.buffsPage")}</div>
               </div>
             </div>
           </div>
@@ -196,7 +199,11 @@ export default function SkillsPage({ data, url }: PageProps<Props>) {
           {/* Filter and Sort Controls */}
           <div class="mb-8 flex flex-col sm:flex-row gap-4">
             <div class="flex-1">
-              <SkillsFilter currentParams={searchParams} />
+              <SkillsFilter
+                currentParams={searchParams}
+                translationData={data.translationData}
+                translationConfig={data.translationConfig}
+              />
             </div>
             <div class="w-full sm:w-auto">
               <SortDropdown

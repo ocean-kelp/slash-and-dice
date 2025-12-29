@@ -1,19 +1,17 @@
-import { define as defineRoute } from "@/utils.ts";
+import { define as defineRoute, State } from "@/utils.ts";
 import { PageProps } from "fresh";
-import { translate } from "@/custom-i18n/translator.ts";
 import {
   type CharacterListItem,
   characterService,
 } from "@/services/local/game/characterService.ts";
-import CharacterCard from "../../../../../../components/characters/CharacterCard.tsx";
+import CharacterCard from "@/components/characters/CharacterCard.tsx";
 
 export const handler = defineRoute.handlers({
-  GET(ctx) {
-    const characters = characterService.getAllCharacters();
+  GET(_ctx) {
+    const characters = characterService.getPaginated({});
 
     return {
       data: {
-        translationData: ctx.state.translationData ?? {},
         characters,
       },
     };
@@ -21,12 +19,11 @@ export const handler = defineRoute.handlers({
 });
 
 type Props = {
-  translationData?: Record<string, unknown>;
   characters: CharacterListItem[];
 };
 
-export default function CharactersPage({ data }: PageProps<Props>) {
-  const t = translate(data.translationData ?? {});
+export default function CharactersPage({ data, state }: PageProps<Props, State>) {
+  const t = state.t;
 
   return (
     <>
@@ -52,7 +49,7 @@ export default function CharactersPage({ data }: PageProps<Props>) {
               <CharacterCard
                 key={character.name}
                 character={character}
-                locale={data.translationData?.locale as string || "en"}
+                locale={state.locale}
               />
             ))}
           </div>
