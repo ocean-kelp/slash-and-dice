@@ -5,6 +5,7 @@ import { logger } from "@/utilities/logger.ts";
 import { appConfig } from "@/utilities/config.ts";
 
 interface RequestMetrics {
+  id?: number;
   method: string;
   path: string;
   duration: number;
@@ -20,6 +21,7 @@ interface RequestMetrics {
 
 // In-memory metrics store (last N requests)
 const recentRequests: RequestMetrics[] = [];
+let nextRequestId = 1;
 
 // Configure maximum stored requests from `appConfig` (server-side)
 const MAX_STORED_REQUESTS = appConfig.metricsMaxRequests;
@@ -57,6 +59,7 @@ export async function monitoringMiddleware(
     const endMemory = Deno.memoryUsage?.();
 
     const metrics: RequestMetrics = {
+      id: nextRequestId++,
       method: req.method,
       path: new URL(req.url).pathname,
       duration: Math.round(duration * 100) / 100, // Round to 2 decimals
@@ -233,4 +236,78 @@ export function getMetricsSummary(limit = 100) {
  */
 export function getRecentRequests(limit = 100) {
   return recentRequests.slice(-limit);
+}
+
+/**
+ * Return a compact summary for recent error requests.
+ * Each item contains `id`, `method`, `path`, `status`, `duration`, `timestamp`.
+ */
+export function getRecentErrorSummaries(limit = 100) {
+  // iterate from newest to oldest and pick errors
+  const out: Array<{
+    id: number;
+    method: string;
+    path: string;
+    status: number;
+    duration: number;
+    timestamp: string;
+  }> = [];
+
+  for (let i = recentRequests.length - 1; i >= 0 && out.length < limit; i--) {
+    const r = recentRequests[i];
+    if (r.status >= 400) {
+      out.push({
+        id: r.id ?? -1,
+        method: r.method,
+        path: r.path,
+        status: r.status,
+        duration: r.duration,
+        timestamp: r.timestamp,
+      });
+    }
+  }
+
+  return out;
+}
+
+/**
+ * Return full RequestMetrics by id or null if not found.
+ */
+export function getRequestById(id: number) {
+  if (typeof id !== "number" || Number.isNaN(id)) return null;
+  // linear scan (buffer expected small); could be optimized with map if needed
+  for (let i = recentRequests.length - 1; i >= 0; i--) {
+    const r = recentRequests[i];
+    if (r.id === id) return r;
+  }
+  return null;
+}
+
+// Cached summary for on-demand admin views. Cache is populated when
+// `getCachedMetrics` is called and refreshed only when TTL expires or
+// when explicitly forced. This prevents expensive recomputation on the
+// hot request path.
+let cachedSummary: {
+  value: ReturnType<typeof getMetricsSummary> | null;
+  ts: number;
+} = { value: null, ts: 0 };
+const SUMMARY_TTL = 5_000; // ms
+
+/**
+ * Return cached metrics summary. If `force` is true or cache is stale,
+ * recompute once and update cache.
+ */
+export function getCachedMetrics(limit = 100, force = false) {
+  const now = Date.now();
+  if (!force && cachedSummary.value && now - cachedSummary.ts < SUMMARY_TTL) {
+    return { summary: cachedSummary.value, lastRefresh: cachedSummary.ts };
+  }
+
+  const v = getMetricsSummary(limit);
+  cachedSummary = { value: v, ts: Date.now() };
+  return { summary: v, lastRefresh: cachedSummary.ts };
+}
+
+export function invalidateCachedMetrics() {
+  cachedSummary = { value: null, ts: 0 };
 }
