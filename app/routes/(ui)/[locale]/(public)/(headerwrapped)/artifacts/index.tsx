@@ -48,16 +48,30 @@ export const handler = defineRoute.handlers({
       sortBy,
     });
 
+    // Global stats (across all artifacts)
+    const rarity1Total = (await artifactService.getByRarity(1)).length;
+    const rarity2Total = (await artifactService.getByRarity(2)).length;
+    const rarity3Total = (await artifactService.getByRarity(3)).length;
+    const rarity4Total = (await artifactService.getByRarity(4)).length;
+    const cursedTotal = (await artifactService.getCursedArtifacts()).length;
+
     return {
       data: {
         translationData: ctx.state.translationData,
         translationConfig: {
           ...ctx.state.translationConfig,
-          fallbackKeys: Array.from(ctx.state.translationConfig?.fallbackKeys ?? []),
+          fallbackKeys: Array.from(
+            ctx.state.translationConfig?.fallbackKeys ?? [],
+          ),
         },
         artifacts: result.items,
         totalAllArtifacts: await artifactService.getTotalCount(),
         totalArtifacts: result.total,
+        rarity1Total,
+        rarity2Total,
+        rarity3Total,
+        rarity4Total,
+        cursedTotal,
         currentPage: result.page,
         totalPages: result.totalPages,
         searchParams: url.searchParams.toString(),
@@ -75,6 +89,11 @@ type Props = {
   artifacts?: Artifact[];
   totalAllArtifacts?: number;
   totalArtifacts?: number;
+  rarity1Total?: number;
+  rarity2Total?: number;
+  rarity3Total?: number;
+  rarity4Total?: number;
+  cursedTotal?: number;
   currentPage?: number;
   totalPages?: number;
   searchParams?: string;
@@ -90,6 +109,11 @@ export default function ArtifactsPage(
   const artifacts = data.artifacts ?? [];
   const totalAllArtifacts = data.totalAllArtifacts ?? 0;
   const totalArtifacts = data.totalArtifacts ?? 0;
+  const rarity1Total = data.rarity1Total ?? 0;
+  const rarity2Total = data.rarity2Total ?? 0;
+  const rarity3Total = data.rarity3Total ?? 0;
+  const rarity4Total = data.rarity4Total ?? 0;
+  const cursedTotal = data.cursedTotal ?? 0;
   const currentPage = data.currentPage ?? 1;
   const totalPages = data.totalPages ?? 1;
   const searchParams = data.searchParams ?? "";
@@ -110,13 +134,12 @@ export default function ArtifactsPage(
   const searchValue = urlObj.searchParams.get("search") || "";
 
   // Calculate statistics
-  const cursedCount = artifacts.filter((a) => a.cursedInfo !== undefined)
-    .length;
+  const cursedCount = cursedTotal;
   const rarityCount = {
-    1: artifacts.filter((a) => a.rarity === 1).length,
-    2: artifacts.filter((a) => a.rarity === 2).length,
-    3: artifacts.filter((a) => a.rarity === 3).length,
-    4: artifacts.filter((a) => a.rarity === 4).length,
+    1: rarity1Total,
+    2: rarity2Total,
+    3: rarity3Total,
+    4: rarity4Total,
   };
 
   return (
@@ -148,11 +171,6 @@ export default function ArtifactsPage(
                   {totalArtifacts === totalAllArtifacts
                     ? t("common.artifacts.totalArtifacts")
                     : t("common.artifacts.filteredArtifacts")}
-                </div>
-              </div>
-              <div class="text-center">
-                <div class="text-sm text-gray-500">
-                  Page {currentPage} of {totalPages}
                 </div>
               </div>
               <div class="text-center">

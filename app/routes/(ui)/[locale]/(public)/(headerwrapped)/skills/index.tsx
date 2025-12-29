@@ -2,6 +2,7 @@ import { define as defineRoute, State } from "@/utils.ts";
 import { PageProps } from "fresh";
 import { getCookieServer } from "@/services/local/storage/cookies.ts";
 import { skillService } from "@/services/local/game/skillService.ts";
+import { ActivationType } from "@/data/skills/types.ts";
 import SkillCard from "@/components/skills/SkillCard.tsx";
 import type { Skill } from "@/data/skills/types.ts";
 import SkillsFilter from "./(_islands)/SkillsFilter.tsx";
@@ -54,6 +55,15 @@ export const handler = defineRoute.handlers({
       sortBy,
     });
 
+    // Fetch total counts by activation type (across all skills)
+    const totalAllSkills = await skillService.getTotalCount();
+    const mainSkillsTotal =
+      (await skillService.getByActivationType(ActivationType.MAIN)).length;
+    const subskillsTotal =
+      (await skillService.getByActivationType(ActivationType.SUB)).length;
+    const buffsTotal =
+      (await skillService.getByActivationType(ActivationType.BUFF)).length;
+
     return {
       data: {
         translationData: ctx.state.translationData,
@@ -64,7 +74,7 @@ export const handler = defineRoute.handlers({
           ),
         },
         skills: result.items,
-        totalAllSkills: await skillService.getTotalCount(),
+        totalAllSkills,
         totalSkills: result.total,
         currentPage: result.page,
         totalPages: result.totalPages,
@@ -76,6 +86,9 @@ export const handler = defineRoute.handlers({
         selectedChapterIds: chapterIds.join(","),
         isRowLayout,
         showDescriptions,
+        mainSkillsTotal,
+        subskillsTotal,
+        buffsTotal,
       },
     };
   },
@@ -86,6 +99,9 @@ type Props = {
   translationConfig?: Record<string, unknown>;
   skills?: Skill[];
   totalAllSkills?: number;
+  mainSkillsTotal?: number;
+  subskillsTotal?: number;
+  buffsTotal?: number;
   totalSkills?: number;
   currentPage?: number;
   totalPages?: number;
@@ -105,6 +121,9 @@ export default function SkillsPage(
   const t = state.t;
   const skills = data.skills ?? [];
   const totalAllSkills = data.totalAllSkills ?? 0;
+  const mainSkillsTotal = data.mainSkillsTotal ?? 0;
+  const subskillsTotal = data.subskillsTotal ?? 0;
+  const buffsTotal = data.buffsTotal ?? 0;
   const totalSkills = data.totalSkills ?? 0;
   const currentPage = data.currentPage ?? 1;
   const totalPages = data.totalPages ?? 1;
@@ -160,22 +179,27 @@ export default function SkillsPage(
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-orange-300">
-                  {skills.filter((s) => s.activationType === "main").length}
+                  {mainSkillsTotal}
                 </div>
-                <div class="text-sm text-gray-500">{t("common.skills.mainSkillsPage")}</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.skills.mainSkillsTotal")}
+                </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-cyan-300">
-                  {skills.filter((s) => s.activationType === "subskill")
-                    .length}
+                  {subskillsTotal}
                 </div>
-                <div class="text-sm text-gray-500">{t("common.skills.subskillsPage")}</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.skills.subskillsTotal")}
+                </div>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-green-300">
-                  {skills.filter((s) => s.activationType === "buff").length}
+                  {buffsTotal}
                 </div>
-                <div class="text-sm text-gray-500">{t("common.skills.buffsPage")}</div>
+                <div class="text-sm text-gray-500">
+                  {t("common.skills.buffsTotal")}
+                </div>
               </div>
             </div>
           </div>
